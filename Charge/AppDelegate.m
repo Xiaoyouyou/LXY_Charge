@@ -80,8 +80,14 @@ static NSString *channel = @"Publish channel";
     }else
     {
         NSLog(@"没有网");
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接网络，请检查，WiFi或数据是否开启！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"未连接网络，请检查，WiFi或数据是否开启！" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击了确认按钮");
+        }];
+        [alert addAction:sure];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle: message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alertView show];
     }
 }
 
@@ -699,5 +705,17 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 //{
   //  NSLog(@"无网络连接，请设置网络");
 //}
+
+- (void)tencentDidLogin {
+    <#code#>
+}
+
+- (void)tencentDidNotLogin:(BOOL)cancelled {
+    <#code#>
+}
+
+- (void)tencentDidNotNetWork {
+    <#code#>
+}
 
 @end
