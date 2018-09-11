@@ -153,9 +153,9 @@ NO)
 #define TIMEFORMAT                      @"yyyy-MM-dd HH:mm:ss"
 #define TIMESTAMP                       @"yyyyMMddHHmmss"//时间戳格式
 
+#define XYScreenWidth [UIScreen mainScreen].bounds.size.width
+#define XYScreenHeight [UIScreen mainScreen].bounds.size.height
 
-#define XYScreenWidth                   [UIScreen mainScreen].bounds.size.width
-#define XYScreenHeight                  [UIScreen mainScreen].bounds.size.height
 #define TITLEBAT_HEIGHT                 64
 #define BOTTOMBAR_HEIGHT                49
 #define NAVIGATIONBAR_HEIGHT            44

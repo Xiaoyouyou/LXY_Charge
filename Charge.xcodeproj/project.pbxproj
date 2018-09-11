@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6401F5074D8CF40A598E84E8 /* libPods-Charge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A854C1C871D76831930C96 /* libPods-Charge.a */; };
+		75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */; };
+		75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */; };
 		850698CF1D054F650002D28B /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850698CE1D054F650002D28B /* back@2x.png */; };
 		850698D91D05626C0002D28B /* jiantou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850698D81D05626C0002D28B /* jiantou@2x.png */; };
 		850698DD1D0566280002D28B /* RecommendedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 850698DB1D0566280002D28B /* RecommendedViewController.m */; };
@@ -396,6 +398,10 @@
 
 /* Begin PBXFileReference section */
 		29A854C1C871D76831930C96 /* libPods-Charge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Charge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E26F992147706A0075EA98 /* DetailZhuangBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailZhuangBtnView.h; sourceTree = "<group>"; };
+		75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailZhuangBtnView.m; sourceTree = "<group>"; };
+		75E26F9C2147B0130075EA98 /* All_chargingSubModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = All_chargingSubModel.h; sourceTree = "<group>"; };
+		75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = All_chargingSubModel.m; sourceTree = "<group>"; };
 		850698CE1D054F650002D28B /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		850698D81D05626C0002D28B /* jiantou@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiantou@2x.png"; sourceTree = "<group>"; };
 		850698DA1D0566280002D28B /* RecommendedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedViewController.h; sourceTree = "<group>"; };
@@ -1305,6 +1311,8 @@
 				8518A7561E1C90CA00644A97 /* MyTrendModel.m */,
 				8547DC5A1E7A7BE800778E30 /* JuDianChargeModel.h */,
 				8547DC5B1E7A7BE800778E30 /* JuDianChargeModel.m */,
+				75E26F9C2147B0130075EA98 /* All_chargingSubModel.h */,
+				75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -1367,6 +1375,8 @@
 			isa = PBXGroup;
 			children = (
 				8529C79E1D24B26D00211D2F /* CATCurveProgressView */,
+				75E26F992147706A0075EA98 /* DetailZhuangBtnView.h */,
+				75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */,
 				85866FFF1D76C440005FDF79 /* MyTrendTableViewCell.h */,
 				858670001D76C440005FDF79 /* MyTrendTableViewCell.m */,
 				858670011D76C440005FDF79 /* MyTrendTableViewCell.xib */,
@@ -2330,6 +2340,7 @@
 				859C09E81D0805950002600D /* DetailZhuangWeiHeaderView.m in Sources */,
 				850698DD1D0566280002D28B /* RecommendedViewController.m in Sources */,
 				859FC9B61DDC295700D7C4B6 /* YuYueViewController.m in Sources */,
+				75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */,
 				8534BD5B1E0275C100823484 /* YuYueChargeModel.m in Sources */,
 				8529C7A11D24B26D00211D2F /* CATCurveProgressView.m in Sources */,
 				853E789F1E1DF0F200A037CB /* MJRefreshStateHeader.m in Sources */,
@@ -2353,6 +2364,7 @@
 				85D323561D0FD04100502185 /* QianMingViewController.m in Sources */,
 				85E6D9771DE98F3500306CDD /* PilesModel.m in Sources */,
 				8534BD5E1E02765300823484 /* ChargingSub.m in Sources */,
+				75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */,
 				85D955D01D067EDF00615182 /* SettingFooterView.m in Sources */,
 				853094941D139119006DFE97 /* NSDate+Helper.m in Sources */,
 				85A7E2B71D4C86B1002953EA /* QianMingTableViewCell.m in Sources */,

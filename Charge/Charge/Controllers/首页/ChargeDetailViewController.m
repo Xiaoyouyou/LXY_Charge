@@ -40,13 +40,16 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIView *bgView;
-@property (strong, nonatomic) IBOutlet UIView *backView;
+
+@property (weak, nonatomic) IBOutlet UIButton *backBtn;
+
 @property (strong, nonatomic) IBOutlet UIView *subView;
 @property (strong, nonatomic) IBOutlet UIButton *collectBtn;
 //数据模型
 @property (nonatomic, strong) ChargeDetalMes *ChargeDetal;//请求下来的总数据模型
 @property (nonatomic, strong) NSMutableArray *dataArray;//桩位模型数组
 @property (nonatomic, strong) NSMutableDictionary *dataDict;//详情模型字典
+@property (nonatomic, strong) NSMutableArray *all_chargingSub;//分段计时的数组模型
 
 //地图相关
 @property (strong,nonatomic) BMKLocationService *locService;
@@ -110,8 +113,10 @@
     //启动locationService
     [_locService startUserLocationService];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backClick)];
-    [self.backView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backClick)];
+//    [self.backView addGestureRecognizer:tap];
+    [_backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+    
     //按钮框
     [self creatDetailBtnKuang];
     
@@ -184,6 +189,15 @@
             [_dict setObject:_ChargeDetal.fastCount forKey:@"fastCount"];//快充
             [_dict setObject:_ChargeDetal.slowCount forKey:@"slowCount"];//慢充
             [_dict setObject:_ChargeDetal.id forKey:@"id"];//站点id
+        /*-----------------------------------------------*/
+         
+            if(_ChargeDetal.piles == NULL){
+                 MYLog(@"_ChargeDetal 的值为NULL = %@",_ChargeDetal.all_chargingSub);
+            }else{
+                self.all_chargingSub = [NSMutableArray arrayWithArray:_ChargeDetal.piles];
+                MYLog(@"all_chargingSub:%@",_ChargeDetal.all_chargingSub);
+            }
+        /*-----------------------------------------------*/
             
             if (_ChargeDetal.chargingSub == NULL) {
                 MYLog(@"_ChargeDetal 的值为NULL = %@",_ChargeDetal.chargingSub);
@@ -237,7 +251,7 @@
 
 -(void)creatSubVC
 {
-    //车位控制器
+    //桩位控制器
     ZhuangWeiMesViewController *ZhuangWeiMesVC = [[ZhuangWeiMesViewController alloc] init];
     ZhuangWeiMesVC.chargeDataModel = self.dataArray;//桩位控制器数据
     ZhuangWeiMesVC.dict = self.cheWeiDict;//桩的数量字典
@@ -252,6 +266,7 @@
     
     //详情控制器
     DetailZhuangWeiViewController *DetailZhuangWeiVC = [[DetailZhuangWeiViewController alloc]init];
+    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
     DetailZhuangWeiVC.chargeDeatlModel = self.dataDict;//详情控制器数据
     DetailZhuangWeiVC.view.frame = self.subView.frame;
     [self addChildViewController:DetailZhuangWeiVC];
@@ -552,7 +567,7 @@
         }
     } failure:^(NSError *error) {
         MYLog(@"%@",error);
-        [MBProgressHUD hideHUD];
+        [MBProgressHUD hideHUDForView:self.view];
         if (error) {
             [MBProgressHUD showError:@"网络连接失败"];
         }
@@ -565,5 +580,7 @@
     UINavigationController *nav = [[UINavigationController alloc] init];
     [nav addChildViewController:loginVC];
     [self presentViewController:nav animated:YES completion:nil];
+}
+- (IBAction)backBtn:(UIButton *)sender {
 }
 @end

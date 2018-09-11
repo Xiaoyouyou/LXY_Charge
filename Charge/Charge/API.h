@@ -11,7 +11,8 @@
 
 //183.234.61.201:8081/app  正式版
 //112.74.20.252 测试版
-
+#define XYScreenWidth [UIScreen mainScreen].bounds.size.width
+#define XYScreenHeight [UIScreen mainScreen].bounds.size.height
 
 //APPKey
 #define WeChat_appkey    @"wx99369c2484d2a152" //微信APPkey

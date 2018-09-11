@@ -8,6 +8,7 @@
 
 #import "DetailZhuangWeiViewController.h"
 #import "ZhuangWeiMesViewController.h"
+#import "DetailZhuangBtnView.h"
 #import "DetailZhuangWeiHeaderView.h"
 #import "DetailZhuangWeiTableViewCell.h"
 #import "XFunction.h"
@@ -16,6 +17,7 @@
 @interface DetailZhuangWeiViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     DetailZhuangWeiHeaderView *detailView;
+    DetailZhuangBtnView *btnView;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arraytitle;
@@ -70,13 +72,26 @@
         make.bottom.equalTo(self.view);
     }];
     
+    //tableview 中的 topview
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, 140)];
+    self.tableView.tableHeaderView = backView;
     detailView = [[DetailZhuangWeiHeaderView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, 90)];
     detailView.titleLab.text = self.name;
     detailView.FutitleLab.text = self.address;
     detailView.fastLab.text = [NSString stringWithFormat:@"快(%@)",_fastCount];
     detailView.slowLab.text = [NSString stringWithFormat:@"慢(%@)",_slowCount];
     detailView.diastaceLab.text = self.distances;
-    self.tableView.tableHeaderView = detailView;
+    [backView addSubview:detailView];
+    //tableview 中的 bottomView
+    btnView = [[DetailZhuangBtnView alloc] initWithFrame:CGRectMake(0, 97, XYScreenWidth, 36) count: self.all_chargingSub.count];
+     __weak typeof(self) weakSelf = self;
+    btnView.btnClickBlock = ^(UIButton *sender) {
+       MYLog(@"响应单击事件");
+                NSLog(@"sender:%ld",sender.tag);
+        [weakSelf setDataToCell:weakSelf.all_chargingSub[sender.tag]];
+        [weakSelf.tableView reloadData];
+    };
+    [backView addSubview:btnView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -190,5 +205,27 @@
     self.slowCount = [self.dataDict objectForKey:@"slowCount"];
     self.distances = [self.dataDict objectForKey:@"distance"];
 }
+
+
+-(void)setDataToCell:(NSDictionary *)dataSource
+{
+
+    self.chargeFee =[dataSource objectForKey:@"chargeCost"];
+    self.parkingFee = [dataSource objectForKey:@"parkingCharge"];
+    self.servesFee = [dataSource objectForKey:@"serviceCost"];
+    self.yuYueFee = [dataSource objectForKey:@"emptyCost"];
+    self.startTimes = [dataSource objectForKey:@"startTime"];
+    self.endTimes = [dataSource objectForKey:@"endTime"];
+    NSLog(@"%@",dataSource[@"address"]);
+//    self.name = [dataSource objectForKey:@"id"];
+//    self.address = [dataSource objectForKey:@"ruleId"];
+//    self.fastCount = [dataSource objectForKey:@"discountRate"];
+}
+
+//-(void)setPlist:(NSMutableArray *)plist{
+//    _plist = plist;
+//
+//}
+
 
 @end

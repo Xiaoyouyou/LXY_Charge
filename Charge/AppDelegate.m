@@ -707,15 +707,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 //}
 
 - (void)tencentDidLogin {
-    <#code#>
+    
 }
 
 - (void)tencentDidNotLogin:(BOOL)cancelled {
-    <#code#>
+    
 }
 
 - (void)tencentDidNotNetWork {
-    <#code#>
+    
 }
 
 @end

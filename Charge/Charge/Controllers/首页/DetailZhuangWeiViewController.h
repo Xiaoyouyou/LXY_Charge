@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "All_chargingSubModel.h"
 
 @interface DetailZhuangWeiViewController : UIViewController
+@property (nonatomic, strong) NSMutableArray *all_chargingSub;
 
 @property (nonatomic, strong) NSMutableDictionary *chargeDeatlModel;
 
