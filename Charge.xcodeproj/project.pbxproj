@@ -1092,8 +1092,8 @@
 				855A913F1E9CC6EF00C8DD35 /* UIViewController+KSGuid.m */,
 				859B99E11D1B7CD700F49097 /* UIImage-Extensions.h */,
 				859B99E21D1B7CD700F49097 /* UIImage-Extensions.m */,
-				853094921D139119006DFE97 /* NSDate+Helper.m */,
 				853094931D139119006DFE97 /* NSDate+Helper.h */,
+				853094921D139119006DFE97 /* NSDate+Helper.m */,
 				8582796E1D2E57C800E41745 /* UIView+Ext.h */,
 				8582796F1D2E57C800E41745 /* UIView+Ext.m */,
 				F0D10ECC1D029E8F00D85761 /* UIView+Extension.h */,
@@ -1135,9 +1135,9 @@
 				85E69F281D0E5918002D8AB5 /* WKAvoidKeyboardViewController.h */,
 				85E69F291D0E5918002D8AB5 /* WKAvoidKeyboardViewController.m */,
 				854DBCCA1D1CD729004EEC47 /* CoverBgBtn.h */,
+				854DBCCB1D1CD729004EEC47 /* CoverBgBtn.m */,
 				85A7E2B11D4C7F35002953EA /* MyTextView.h */,
 				85A7E2B21D4C7F35002953EA /* MyTextView.m */,
-				854DBCCB1D1CD729004EEC47 /* CoverBgBtn.m */,
 				8558D4491D3DD02100CB19FC /* YBMonitorNetWorkState.h */,
 				8558D44A1D3DD02100CB19FC /* YBMonitorNetWorkState.m */,
 				857F29CA1DF1580E0093A564 /* TipView.h */,
@@ -2044,6 +2044,7 @@
 				TargetAttributes = {
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = YC5P96R765;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2595,7 +2596,7 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YC5P96R765;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2676,7 +2677,7 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YC5P96R765;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

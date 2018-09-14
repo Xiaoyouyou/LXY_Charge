@@ -136,7 +136,7 @@
     
 }
 
-#pragma mark - 初始化
+#pragma mark - 初始化    点击地图上的电桩浮标，然后显示出来的充电桩详情界面
 -(void)initData
 {
     MYLog(@"查询充电站详情成功");
@@ -360,6 +360,8 @@
     }
 }
 
+
+//导航按钮的点击事件
 - (IBAction)daoHangAction:(id)sender {
 
     UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"您将导航至：%@",_ChargeDetal.address]message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -488,6 +490,8 @@
     }
 }
 
+
+//预约按钮的点击事件
 - (IBAction)yuYueAction:(id)sender {
     //查询用户是否余额
     NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
@@ -501,7 +505,8 @@
             UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"余额不足，请充值！" message:nil preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
+ /*-----------建议：点击确定之后，执行充值操作-------------------------*/
+                
             }];
   
             [alertVc addAction:sureAction];
@@ -547,6 +552,7 @@
                             return;
                         }
                         if ([responseObj[@"status"] intValue] == -1) {
+                            //经过判断是否有余额，是否登录，是否有可以预约的电桩判断之后，然后就跳转到预约选择界面
                             YuYueViewController *YuYueVC = [[YuYueViewController alloc] init];
                             YuYueVC.zhiLiuFreeCount  =   [_cheWeiDict objectForKey:@"fastCount"];
                             YuYueVC.jiaoLiuFreeCount = [_cheWeiDict objectForKey:@"slowCount"];

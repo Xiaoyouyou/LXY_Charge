@@ -53,22 +53,21 @@
 
 
 -(void)changePrice:(UIButton *)button{
-    
+   // button.selected = !button.selected;
     if (_btnStatus == nil){
         button.selected = YES;
         _btnStatus = button;
     }
     else if (_btnStatus !=nil && _btnStatus == button){
         button.selected = YES;
-        
+
     }
     else if (_btnStatus!= button && _btnStatus!=nil){
         _btnStatus.selected = NO;
         button.selected = YES;
         _btnStatus = button;
-        
+
     }
-    
     self.btnClickBlock(button);
     NSLog(@"点击的是:%ld",button.tag);
 }

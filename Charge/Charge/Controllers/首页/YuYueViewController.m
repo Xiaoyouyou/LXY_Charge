@@ -156,7 +156,7 @@ typedef enum {
         make.top.equalTo(FutitleLab.mas_bottom).offset(10);
         make.height.mas_equalTo(1);
     }];
-    
+/*-----------------------未知的代码  不知道干嘛的--------------------*/
     UIButton *sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
     [sureBtn setTitleColor:RGBA(27, 173, 149, 1) forState:UIControlStateNormal];
@@ -171,6 +171,7 @@ typedef enum {
         make.top.equalTo(lineView.mas_bottom);
         make.bottom.equalTo(bgView);
     }];
+/*-----------------------未知的代码  不知道干嘛的--------------------*/
 }
 
 -(void)jiaoLiuTap
@@ -209,7 +210,7 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
-
+/*-----------------------未知的代码  不知道干嘛的--------------------*/
 -(void)YuYuesureBtn
 {
     [UIView animateWithDuration:0.3 animations:^{
@@ -220,6 +221,8 @@ typedef enum {
         [self presentViewController:MyYuYueVC animated:YES completion:nil];
     }];
 }
+/*-----------------------未知的代码  不知道干嘛的--------------------*/
+
 
 
 - (IBAction)sureBtnAction:(id)sender {
@@ -268,6 +271,9 @@ typedef enum {
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         MYLog(@"stationId = %@",self.chargeID);
+       /* //发送预约逻辑：
+        调用 预约 接口，发请求给后台，后台返回一些充电桩的数据给app，比如是交流和直流的充电桩个数。然后app再发送一个socket请求给后台(此时传给后台的参数是什么)，后台去连接充电桩，然后充电桩返回最新状态给后台，比如是否可以连接，充电桩被使用等信息。后台拿到这些信息之后，再返回给app。
+        */
         [WMNetWork post:ReservationCharge parameters:parmas success:^(id responseObj) {
            MYLog(@"yuyueresponseObj = %@",responseObj);
             if ([responseObj[@"status"] intValue] == 0) {
@@ -275,6 +281,8 @@ typedef enum {
                 [[Singleton sharedInstance] socketConnectHost];
                 //延时0.5秒
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    
                     if ([Singleton sharedInstance].isLink) {
                         
                         NSMutableString *chargeCost = [[NSMutableString  alloc] initWithString:@"000000"];
@@ -290,7 +298,7 @@ typedef enum {
                           [[Singleton sharedInstance] yuYueChargeNum:responseObj[@"pileId"] cost:chargeCost];
                         //预约的充电桩号
                         NSString *strCharge = responseObj[@"pileId"];
-                        
+                        MYLog(@"预约的充电桩号strCharge = %@",strCharge);
                         //预约消息回复
                         [Singleton  sharedInstance].YuYueChargeStatusMesBlock = ^(NSString *chargeStr){
                        

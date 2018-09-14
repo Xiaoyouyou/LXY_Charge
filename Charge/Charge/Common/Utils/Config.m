@@ -161,6 +161,7 @@ NSString *const ThirdLoginType = @"ThirdLoginType";//第三方登陆状态
     
 }
 
+//获取
 +(NSString*)getMobile
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

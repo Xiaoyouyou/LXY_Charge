@@ -532,7 +532,7 @@
     }
 }
 
-//开启电桩
+//开始充电
 -(void)startChargingWithChargeNum:(NSString *)ChargeNum
 {
    NSString *brStr = @"\r\n";//换行符
@@ -565,6 +565,7 @@
 -(void)yuYueChargeNum:(NSString *)ChargeNum cost:(NSString *)cost
 {
     NSString *brStr = @"\r\n";//换行符
+    //拼接参数
     NSString *checkString = [NSString stringWithFormat:@"MM%@%@000000%@10%@",ChargeNum,[Config getMobile],cost,brStr];
     MYLog(@"checkString = %@",checkString);
     NSData   *dataStream  = [checkString dataUsingEncoding:NSUTF8StringEncoding];
