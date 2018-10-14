@@ -15,7 +15,7 @@
 #import "CityModel.h"
 #import "WMNetWork.h"
 #import "MJExtension.h"
-
+#import "UserGuideViewController.h"
 
 @interface MessageCentreViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -102,7 +102,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self creatUI];
-    arrayTitle = @[@"系统通知",@"我的动态"];
+    arrayTitle = @[@"我的动态",@"系统通知",@"用户指南",@"联系客服"];
 
     
 }
@@ -169,14 +169,37 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        
-        SystemNoticeViewController *systemVC = [[SystemNoticeViewController alloc] init];
-        [self.navigationController pushViewController:systemVC animated:YES];
+        //我的动态
+        MyTrendViewController *myTrendVC = [[MyTrendViewController alloc] init];
+        [self.navigationController pushViewController:myTrendVC animated:YES];
         
     }else if (indexPath.section == 0 && indexPath.row == 1)
     {
-        MyTrendViewController *myTrendVC = [[MyTrendViewController alloc] init];
-        [self.navigationController pushViewController:myTrendVC animated:YES];
+       //系统通知
+        SystemNoticeViewController *systemVC = [[SystemNoticeViewController alloc] init];
+        [self.navigationController pushViewController:systemVC animated:YES];
+    }
+    if (indexPath.row == 2) {
+        //用户指南   webView界面
+        UserGuideViewController *userVC = [[UserGuideViewController alloc] init];
+        [self.navigationController pushViewController:userVC animated:YES];
+        
+    }else if (indexPath.row == 3)
+    {
+        //联系客服
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"4001688050" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4001688050"]];
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+        }];
+        
+        [alertVc addAction:cancelAction];
+        [alertVc addAction:sureAction];
+        [self presentViewController:alertVc animated:YES completion:nil];
     }
 }
 

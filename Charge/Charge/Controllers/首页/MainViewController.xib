@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -71,10 +71,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lO-oB-fdj" userLabel="refresh">
-                    <rect key="frame" x="15" y="554" width="39" height="39"/>
+                    <rect key="frame" x="15" y="502" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="39" id="9Qy-as-R1e"/>
-                        <constraint firstAttribute="height" constant="39" id="FoE-7L-tKm"/>
+                        <constraint firstAttribute="width" constant="30" id="9Qy-as-R1e"/>
+                        <constraint firstAttribute="height" constant="30" id="FoE-7L-tKm"/>
                     </constraints>
                     <state key="normal" backgroundImage="refresh1.png"/>
                     <connections>
@@ -82,17 +82,17 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ref1.png" translatesAutoresizingMaskIntoConstraints="NO" id="TYO-3U-sa8">
-                    <rect key="frame" x="15" y="554" width="39" height="39"/>
+                    <rect key="frame" x="15" y="502" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="39" id="e0g-zx-1kt"/>
-                        <constraint firstAttribute="width" constant="39" id="mmk-rU-HZO"/>
+                        <constraint firstAttribute="height" constant="30" id="e0g-zx-1kt"/>
+                        <constraint firstAttribute="width" constant="30" id="mmk-rU-HZO"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAi-VF-hXl" userLabel="location">
-                    <rect key="frame" x="15" y="603" width="39" height="39"/>
+                    <rect key="frame" x="15" y="542" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="39" id="4yE-gO-02P"/>
-                        <constraint firstAttribute="height" constant="39" id="Rfi-0P-TlG"/>
+                        <constraint firstAttribute="width" constant="30" id="4yE-gO-02P"/>
+                        <constraint firstAttribute="height" constant="30" id="Rfi-0P-TlG"/>
                     </constraints>
                     <state key="normal" backgroundImage="location.png"/>
                     <connections>
@@ -100,21 +100,21 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fuc-fd-41x" userLabel="kefu">
-                    <rect key="frame" x="321" y="603" width="39" height="39"/>
+                    <rect key="frame" x="330" y="582" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="39" id="2Oh-gU-ZY7"/>
-                        <constraint firstAttribute="height" constant="39" id="uLv-VN-WuW"/>
+                        <constraint firstAttribute="width" constant="30" id="2Oh-gU-ZY7"/>
+                        <constraint firstAttribute="height" constant="30" id="uLv-VN-WuW"/>
                     </constraints>
-                    <state key="normal" image="kefus.png"/>
+                    <state key="normal" image="mine_select_orange"/>
                     <connections>
                         <action selector="keFuBtnAction:" destination="-1" eventType="touchUpInside" id="QBJ-BV-Jv7"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fb7-rk-z9E">
-                    <rect key="frame" x="321" y="554" width="39" height="39"/>
+                    <rect key="frame" x="15" y="582" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="39" id="3Vq-xv-M7m"/>
-                        <constraint firstAttribute="height" constant="39" id="NZA-7k-9We"/>
+                        <constraint firstAttribute="width" constant="30" id="3Vq-xv-M7m"/>
+                        <constraint firstAttribute="height" constant="30" id="NZA-7k-9We"/>
                     </constraints>
                     <state key="normal" image="news.png"/>
                     <connections>
@@ -127,17 +127,17 @@
                 <constraint firstAttribute="trailing" secondItem="fuc-fd-41x" secondAttribute="trailing" constant="15" id="0xe-ec-W5j"/>
                 <constraint firstItem="TYO-3U-sa8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="1Jk-t6-vCB"/>
                 <constraint firstItem="BZ7-TX-JM2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1ji-ey-AgL"/>
+                <constraint firstItem="fb7-rk-z9E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="2oJ-Lp-ToB"/>
                 <constraint firstAttribute="bottom" secondItem="BZ7-TX-JM2" secondAttribute="bottom" id="3ZU-nb-xKa"/>
                 <constraint firstItem="BZ7-TX-JM2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8bR-7y-Zjd"/>
-                <constraint firstAttribute="trailing" secondItem="fb7-rk-z9E" secondAttribute="trailing" constant="15" id="B0t-1G-jcS"/>
                 <constraint firstItem="AAi-VF-hXl" firstAttribute="top" secondItem="8lO-oB-fdj" secondAttribute="bottom" constant="10" id="BYp-Os-M4a"/>
-                <constraint firstItem="fuc-fd-41x" firstAttribute="top" secondItem="fb7-rk-z9E" secondAttribute="bottom" constant="10" id="EOf-Iw-HCS"/>
-                <constraint firstAttribute="bottom" secondItem="fuc-fd-41x" secondAttribute="bottom" constant="25" id="W6n-kx-SZ0"/>
-                <constraint firstItem="AAi-VF-hXl" firstAttribute="top" secondItem="TYO-3U-sa8" secondAttribute="bottom" constant="10" id="bg2-fp-hPM"/>
-                <constraint firstAttribute="bottom" secondItem="AAi-VF-hXl" secondAttribute="bottom" constant="25" id="emi-Nt-ktf"/>
+                <constraint firstAttribute="bottom" secondItem="fuc-fd-41x" secondAttribute="bottom" constant="55" id="W6n-kx-SZ0"/>
+                <constraint firstAttribute="bottom" secondItem="fb7-rk-z9E" secondAttribute="bottom" constant="55" id="gkZ-TQ-svQ"/>
                 <constraint firstAttribute="trailing" secondItem="BZ7-TX-JM2" secondAttribute="trailing" id="ilm-AI-ruq"/>
+                <constraint firstItem="AAi-VF-hXl" firstAttribute="top" secondItem="TYO-3U-sa8" secondAttribute="bottom" constant="10" id="kEJ-Pv-TzX"/>
                 <constraint firstAttribute="bottom" secondItem="fvD-s9-aaG" secondAttribute="bottom" constant="45" id="lc3-8W-phk"/>
                 <constraint firstItem="fvD-s9-aaG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="m73-3E-N3G"/>
+                <constraint firstItem="fb7-rk-z9E" firstAttribute="top" secondItem="AAi-VF-hXl" secondAttribute="bottom" constant="10" id="xIc-FB-cMv"/>
                 <constraint firstItem="8lO-oB-fdj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="xbv-qu-nX3"/>
                 <constraint firstItem="AAi-VF-hXl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="zCw-Fa-EFx"/>
             </constraints>
@@ -147,16 +147,11 @@
     </objects>
     <resources>
         <image name="button.png" width="130" height="48"/>
-        <image name="kefus.png" width="39" height="39"/>
         <image name="location.png" width="39" height="39"/>
+        <image name="mine_select_orange" width="24" height="24"/>
         <image name="news.png" width="39" height="39"/>
         <image name="ref1.png" width="39" height="39"/>
         <image name="refresh1.png" width="39" height="39"/>
         <image name="scan.png" width="25" height="23"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

@@ -39,14 +39,15 @@
     
     [self.view addSubview:nav];
     
+    CGFloat statusH = [UIApplication sharedApplication].statusBarFrame.size.height + 44;
     [nav mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(64);
+        make.height.mas_equalTo(statusH);
     }];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, XYScreenWidth, XYScreenHeight-64) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, statusH, XYScreenWidth, XYScreenHeight-64) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

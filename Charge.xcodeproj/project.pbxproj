@@ -1539,8 +1539,8 @@
 		850EE4971D016FDD00B59D3F /* 消息 */ = {
 			isa = PBXGroup;
 			children = (
-				8598A0E91D88F3ED00A81403 /* MessageCentreViewController.m */,
 				8598A0EA1D88F3ED00A81403 /* MessageCentreViewController.h */,
+				8598A0E91D88F3ED00A81403 /* MessageCentreViewController.m */,
 			);
 			path = "消息";
 			sourceTree = "<group>";
@@ -2044,7 +2044,8 @@
 				TargetAttributes = {
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = YC5P96R765;
+						DevelopmentTeam = G8H5MHKS76;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2596,7 +2597,8 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = YC5P96R765;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = G8H5MHKS76;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2664,7 +2666,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a2bc56ca-92a5-4c45-9b0d-f485cd4c48a2";
+				PROVISIONING_PROFILE_SPECIFIER = Charge_lxy_DelevopePP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2677,7 +2680,8 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = YC5P96R765;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2746,6 +2750,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

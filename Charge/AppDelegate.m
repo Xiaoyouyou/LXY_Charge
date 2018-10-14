@@ -319,13 +319,16 @@ static NSString *channel = @"Publish channel";
        // Start the long-running task and return immediately.
        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
        // Do the work associated with the task, preferably in chunks.
-       NSTimeInterval timeRemain = 0;
+      __block NSTimeInterval timeRemain = 0;
          do{
         [NSThread sleepForTimeInterval:5];
          if (bgTask!= UIBackgroundTaskInvalid) {
+             // 如果没到10分钟，也可以主动关闭后台任务，但这需要在主线程中执行，否则会出错
+             dispatch_async(dispatch_get_main_queue(), ^{
                 timeRemain = [application backgroundTimeRemaining];
               //  NSLog(@"Time remaining: %f",timeRemain);
-             }
+             });
+            }
         }while(bgTask!= UIBackgroundTaskInvalid && timeRemain > 0);
         // 如果改为timeRemain > 5*60,表示后台运行5分钟
         // 如果没到10分钟，也可以主动关闭后台任务，但这需要在主线程中执行，否则会出错

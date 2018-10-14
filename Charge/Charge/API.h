@@ -13,6 +13,7 @@
 //112.74.20.252 测试版
 #define XYScreenWidth [UIScreen mainScreen].bounds.size.width
 #define XYScreenHeight [UIScreen mainScreen].bounds.size.height
+#define StatusBarH  [UIApplication sharedApplication].statusBarFrame.size.height
 
 //APPKey
 #define WeChat_appkey    @"wx99369c2484d2a152" //微信APPkey
@@ -51,7 +52,7 @@
 #define CheckStationDetail @"http://183.234.61.201:8081/app/phone/stationDetail.action"  //查询充电站详情
 #define CheckZhouBianCharge @"http://183.234.61.201:8081/app/phone/recommendList.action"  //查询周边电桩
 #define ReservationInfoCharge @"http://183.234.61.201:8081/app/phone/reservationInfo.action"  //查看预约信息
-#define ReservationCharge @"http://120.79.244.192:8080/app/xg.jsp#/reserve.action"  //预约电桩
+#define ReservationCharge @"http://120.79.244.192:8080/app/phone/reserve.action"  //预约电桩
 #define CancelCharge @"http://183.234.61.201:8081/app/phone/cancelReservation.action"  //取消预约
 #define OutOfLogin @"http://183.234.61.201:8081/app/phone/logout.action"  //退出登陆
 #define ChargingLog @"http://183.234.61.201:8081/app/phone/chargingLog.action"  //我的动态

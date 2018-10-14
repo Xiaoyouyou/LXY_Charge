@@ -67,6 +67,8 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
 
 @implementation LoginViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -184,8 +186,8 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
 {
     leftView = [[adminLeftView alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
     leftView.imageName = @"admin";
-    
-    account = [[UITextField alloc] initWithFrame:CGRectMake(15, 80, XYScreenWidth-30, 44)];
+    NSLog(@"%f",StatusBarH);
+    account = [[UITextField alloc] initWithFrame:CGRectMake(15, StatusBarH + 60, XYScreenWidth-30, 44)];
     account.leftView = leftView;
     account.placeholder = @"请输入手机号码";
     account.delegate = self;
@@ -204,7 +206,7 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
     leftView = [[adminLeftView alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
     leftView.imageName = @"mima";
     
-    mima = [[UITextField alloc] initWithFrame:CGRectMake(15, 80+15+44, XYScreenWidth-30, 44)];
+    mima = [[UITextField alloc] initWithFrame:CGRectMake(15, StatusBarH + 60 + 15 + 44, XYScreenWidth-30, 44)];
     mima.leftView = leftView;
     mima.delegate = self;
     mima.placeholder = @"请输入登录密码";

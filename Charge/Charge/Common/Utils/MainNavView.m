@@ -96,14 +96,14 @@
     }];
     
     [leftTapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(20);
+        make.top.equalTo(self).offset([UIApplication sharedApplication].statusBarFrame.size.height);
         make.left.equalTo(self);
         make.bottom.equalTo(self);
         make.width.mas_equalTo(44);
     }];
     
     [showLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(20);
+        make.top.equalTo(self).offset([UIApplication sharedApplication].statusBarFrame.size.height);
         make.centerX.equalTo(self);
         make.centerY.equalTo(leftImageView);
     }];
@@ -114,7 +114,7 @@
     }];
     
     [rightTapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(20);
+        make.top.equalTo(self).offset([UIApplication sharedApplication].statusBarFrame.size.height);
         make.right.equalTo(self);
         make.bottom.equalTo(self);
         make.width.mas_equalTo(44);

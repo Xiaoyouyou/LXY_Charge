@@ -56,7 +56,7 @@
     UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 45)];
     view1.backgroundColor = [UIColor whiteColor];
     
-    phoneNum = [[UITextField alloc] initWithFrame:CGRectMake(15, 80, XYScreenWidth-30, 45)];
+    phoneNum = [[UITextField alloc] initWithFrame:CGRectMake(15, StatusBarH + 60, XYScreenWidth-30, 45)];
     phoneNum.placeholder = @"请输入绑定手机号";
     phoneNum.leftView = view1;
     phoneNum.leftViewMode = UITextFieldViewModeAlways;

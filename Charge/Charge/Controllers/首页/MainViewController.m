@@ -311,7 +311,7 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(64);
+        make.height.mas_equalTo([UIApplication sharedApplication].statusBarFrame.size.height + 44);
     }];
 }
 
@@ -439,7 +439,7 @@
                                              //百度地图
                                              if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
                                                  
-                                                 NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:终点&mode=driving",[Config getCurrentLocation].latitude , [Config getCurrentLocation].longitude, desCoordinate.latitude,  desCoordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
+                                                NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:终点&mode=driving",[Config getCurrentLocation].latitude , [Config getCurrentLocation].longitude, desCoordinate.latitude,  desCoordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
                                                  [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlString]];
                                              }else
                                              {
@@ -1199,6 +1199,7 @@
     [self.navigationController pushViewController:ChangePay animated:YES];
 }
 
+//客服 按钮 -----将要变成 我的 按钮
 - (IBAction)keFuBtnAction:(id)sender {
     //初始化客服控制器
     KeFuViewController *kefuVC = [[KeFuViewController alloc]init];
