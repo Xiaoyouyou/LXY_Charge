@@ -24,6 +24,7 @@
 #import "Config.h"
 
 @interface RecommendedViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @property (strong, nonatomic) IBOutlet UILabel *cityChooseLab;//城市选择
 @property (strong, nonatomic) IBOutlet UITextField *intPutMuDiDi;
@@ -146,6 +147,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.topView.frame = CGRectMake(StatusBarH + 5, 0, XYScreenWidth, XYScreenHeight);
     // Do any additional setup after loading the view from its nib.
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

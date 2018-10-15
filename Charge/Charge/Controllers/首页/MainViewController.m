@@ -60,6 +60,8 @@
 #import "JuDianQiPaoBMKAnnotation.h"
 #import "AlertLoginView.h"
 #import <ImageIO/ImageIO.h>
+/*-----------罗小友-------------*/
+#import "MeViewController.h"
 
 #define leftWidth (230)
 
@@ -296,14 +298,14 @@
 -(void)creatNav
 {
     //初始化自定义nav
-    MainNavView *navView = [[MainNavView alloc] initWithFrame:CGRectZero title:@"桩者" leftImgae:@"caidan@2x.png" rightImage:@"search@2x.png"];
+    MainNavView *navView = [[MainNavView alloc] initWithFrame:CGRectZero title:@"桩者" leftImgae:@"search@2x.png" rightImage:@"caidan@2x.png"];
     navView.leftBlock = ^{
-        //个人中心按钮
-        [self PersonActionClick:nil];
-    };
-    navView.rightBlock = ^{
         //周边推荐事件
         [self zhouBianTapAction];
+    };
+    navView.rightBlock = ^{
+        //个人中心按钮
+        [self PersonActionClick:nil];      
     };
     [self.view addSubview:navView];
     
@@ -751,6 +753,7 @@
     }
 }
 
+// 搜索按 钮点击事件
 - (void)zhouBianTapAction
 {
     RecommendedViewController *recommendedVC = [[RecommendedViewController alloc] init];
@@ -1202,8 +1205,11 @@
 //客服 按钮 -----将要变成 我的 按钮
 - (IBAction)keFuBtnAction:(id)sender {
     //初始化客服控制器
-    KeFuViewController *kefuVC = [[KeFuViewController alloc]init];
+    #import "MeViewController.h"
+    MeViewController *kefuVC = [[MeViewController alloc]init];
     [self.navigationController pushViewController:kefuVC animated:YES];
+//    KeFuViewController *kefuVC = [[KeFuViewController alloc]init];
+//    [self.navigationController pushViewController:kefuVC animated:YES];
 //    coverView = [[UIView alloc] init];
 //    coverView.backgroundColor = [UIColor blackColor];
 //    coverView.alpha = 0.6;

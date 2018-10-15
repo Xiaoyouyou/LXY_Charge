@@ -9,6 +9,7 @@
 #import "MainNavView.h"
 #import "Masonry.h"
 #import "XFunction.h"
+#import "API.h"
 
 @interface MainNavView ()
 {
@@ -92,18 +93,18 @@
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-11);
         make.left.equalTo(self).offset(15);
-        make.size.mas_equalTo(CGSizeMake(22,15));
+        make.size.mas_equalTo(CGSizeMake(22,22));
     }];
     
     [leftTapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset([UIApplication sharedApplication].statusBarFrame.size.height);
+        make.top.equalTo(self).offset(StatusBarH);
         make.left.equalTo(self);
         make.bottom.equalTo(self);
         make.width.mas_equalTo(44);
     }];
     
     [showLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset([UIApplication sharedApplication].statusBarFrame.size.height);
+        make.top.equalTo(self).offset(StatusBarH);
         make.centerX.equalTo(self);
         make.centerY.equalTo(leftImageView);
     }];
@@ -114,7 +115,7 @@
     }];
     
     [rightTapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset([UIApplication sharedApplication].statusBarFrame.size.height);
+        make.top.equalTo(self).offset(StatusBarH);
         make.right.equalTo(self);
         make.bottom.equalTo(self);
         make.width.mas_equalTo(44);

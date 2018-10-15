@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6401F5074D8CF40A598E84E8 /* libPods-Charge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A854C1C871D76831930C96 /* libPods-Charge.a */; };
+		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
+		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
 		75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */; };
 		75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */; };
 		850698CF1D054F650002D28B /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850698CE1D054F650002D28B /* back@2x.png */; };
@@ -398,6 +400,11 @@
 
 /* Begin PBXFileReference section */
 		29A854C1C871D76831930C96 /* libPods-Charge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Charge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BCDA1C217316A600AC2F73 /* MeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
+		75BCDA1D217316A600AC2F73 /* MeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
+		75BCDA222173488300AC2F73 /* MeVcWithMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeVcWithMineView.h; sourceTree = "<group>"; };
+		75BCDA232173488300AC2F73 /* MeVcWithMineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeVcWithMineView.m; sourceTree = "<group>"; };
+		75BCDA262173938000AC2F73 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		75E26F992147706A0075EA98 /* DetailZhuangBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailZhuangBtnView.h; sourceTree = "<group>"; };
 		75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailZhuangBtnView.m; sourceTree = "<group>"; };
 		75E26F9C2147B0130075EA98 /* All_chargingSubModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = All_chargingSubModel.h; sourceTree = "<group>"; };
@@ -994,9 +1001,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75BCDA212173482D00AC2F73 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+				75BCDA222173488300AC2F73 /* MeVcWithMineView.h */,
+				75BCDA232173488300AC2F73 /* MeVcWithMineView.m */,
+			);
+			path = "我的";
+			sourceTree = "<group>";
+		};
+		75BCDA2521734C1F00AC2F73 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+				75BCDA1C217316A600AC2F73 /* MeViewController.h */,
+				75BCDA1D217316A600AC2F73 /* MeViewController.m */,
+			);
+			path = "我的";
+			sourceTree = "<group>";
+		};
 		850EE41D1D01387600B59D3F = {
 			isa = PBXGroup;
 			children = (
+				75BCDA262173938000AC2F73 /* PrefixHeader.pch */,
 				850EE4281D01387600B59D3F /* Charge */,
 				850EE4421D01387600B59D3F /* ChargeTests */,
 				850EE44D1D01387600B59D3F /* ChargeUITests */,
@@ -1168,6 +1194,7 @@
 		850EE46B1D0154C900B59D3F /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
+				75BCDA2521734C1F00AC2F73 /* 我的 */,
 				8515827F1D220FD8009E8F52 /* PersonMessageViewController.h */,
 				851582801D220FD8009E8F52 /* PersonMessageViewController.m */,
 				853054D91D0527590013E308 /* KeFuViewController.h */,
@@ -1332,6 +1359,7 @@
 		850EE4721D0154C900B59D3F /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
+				75BCDA212173482D00AC2F73 /* 我的 */,
 				858279711D2E57D100E41745 /* PersonSlideView.h */,
 				858279721D2E57D100E41745 /* PersonSlideView.m */,
 				85D955CE1D067EDF00615182 /* SettingFooterView.h */,
@@ -2349,6 +2377,7 @@
 				859B99E31D1B7CD700F49097 /* UIImage-Extensions.m in Sources */,
 				85D955C71D0671D600615182 /* MyReservationViewController.m in Sources */,
 				8591FF7D1D125408003084C3 /* WMNetWork.m in Sources */,
+				75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */,
 				853E38061D4A09EC00F55655 /* InsetsTextField.m in Sources */,
 				8541BC0B1D2B676D00213246 /* QiPaoBMKPointAnnotation.m in Sources */,
 				8508009C1D6AE0BE0050950D /* ChangeKey2ViewController.m in Sources */,
@@ -2406,6 +2435,7 @@
 				857F01971DDC4AAF00169FA8 /* MyYuYueViewController.m in Sources */,
 				855A91401E9CC6EF00C8DD35 /* UIViewController+KSGuid.m in Sources */,
 				8598A0EB1D88F3ED00A81403 /* MessageCentreViewController.m in Sources */,
+				75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */,
 				850C04DC1E8B909800F14836 /* BindingPhoneViewController.m in Sources */,
 				853E789E1E1DF0F200A037CB /* MJRefreshNormalHeader.m in Sources */,
 				856349311D0D4C7700535714 /* YinXiaoTableViewCell.m in Sources */,
@@ -2615,6 +2645,8 @@
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/QQ/TencentOpenApi_IOS_Bundle.bundle",
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/QQ",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = Charge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2698,6 +2730,8 @@
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/QQ/TencentOpenApi_IOS_Bundle.bundle",
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/QQ",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = Charge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -15,6 +15,9 @@
 #define XYScreenHeight [UIScreen mainScreen].bounds.size.height
 #define StatusBarH  [UIApplication sharedApplication].statusBarFrame.size.height
 
+//RGB color
+#define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
 //APPKey
 #define WeChat_appkey    @"wx99369c2484d2a152" //微信APPkey
 #define BaiDuMap_appkey  @"DDOXVg1C3et2vlrZwzSvwLlhHPCQkcsh" //百度APPkey
