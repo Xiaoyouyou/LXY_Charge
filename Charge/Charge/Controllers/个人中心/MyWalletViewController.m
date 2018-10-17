@@ -78,7 +78,7 @@
     //初始化自定义nav
     NavView *nav = [[NavView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) title:@"我的钱包" rightTitle:@"明细"];
     nav.backBlock = ^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     };
     nav.rightBlock = ^{
         [self mingXi];

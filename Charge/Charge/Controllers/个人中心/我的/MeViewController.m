@@ -12,7 +12,10 @@
 #import "SettingViewController.h"
 #import "API.h"
 #import "MeVcWithMineView.h"
-
+#import "MyWalletViewController.h"
+#import "MyCollectViewController.h"
+#import "PersonMessageViewController.h"
+#import "MyCarViewController.h"
 
 
 @interface MeViewController ()
@@ -82,6 +85,9 @@
     
     self.topView = [[UIView alloc] init];
     [self.view addSubview:self.topView];
+    self.topView.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMYMessage)];
+    [self.topView addGestureRecognizer:tap];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nav.mas_bottom).offset(0);
         make.left.equalTo(self.view);
@@ -191,12 +197,42 @@
         btn.frame = CGRectMake(x, y, w, h);
         [self.bottomView addSubview:btn];
     }
-    
-   
 }
+//
+////积分
+//    ScoreViewController *scoreVC = [[ScoreViewController alloc] init];
+//    // KeFuViewController *kefuVC = [[KeFuViewController alloc]init];
+//    [self.navigationController pushViewController:scoreVC animated:YES];
+////设置
+//    SettingViewController *settingVC = [[SettingViewController alloc] init];
+//    [self.navigationController pushViewController:settingVC animated:YES];
+
+
 
 -(void)someFunction:(UIButton *)sender{
+    if(sender.tag == 0){
+        MyWalletViewController *MyWalletVC = [[MyWalletViewController alloc]init];
+        [self.navigationController pushViewController:MyWalletVC animated:YES];
+    }else if (sender.tag == 1){
+        MyCollectViewController *MyCollectVC = [[MyCollectViewController alloc] init];
+        [self.navigationController pushViewController:MyCollectVC animated:YES];
+    }else if (sender.tag == 2){
+        
+    }else if (sender.tag == 3){
+        MyCarViewController * carVc = [[MyCarViewController alloc] init];
+        [self.navigationController pushViewController:carVc animated:YES];
+    }else if (sender.tag == 4){
+        
+    }else if (sender.tag == 5){
+        
+    }
     NSLog(@"%ld",sender.tag);
+}
+
+-(void)gotoMYMessage{
+    //个人信息
+      PersonMessageViewController *personVC = [[PersonMessageViewController alloc] init];
+        [self.navigationController pushViewController:personVC animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

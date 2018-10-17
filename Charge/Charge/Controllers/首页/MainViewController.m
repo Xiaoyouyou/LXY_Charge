@@ -912,34 +912,39 @@
 }
 
 #pragma mark -- 个人中心代理方法
+//预约
 - (void)yuYueClick
 {
     MyReservationViewController *MyReservationVC = [[MyReservationViewController alloc]init];
     [self.navigationController pushViewController:MyReservationVC animated:YES];
 }
+//钱包
 - (void)qianBaoClick
 {
     MyWalletViewController *MyWalletVC = [[MyWalletViewController alloc]init];
     [self.navigationController pushViewController:MyWalletVC animated:YES];
 }
+//积分
 - (void)keFuClick
 {
     ScoreViewController *scoreVC = [[ScoreViewController alloc] init];
    // KeFuViewController *kefuVC = [[KeFuViewController alloc]init];
     [self.navigationController pushViewController:scoreVC animated:YES];
 }
+//收藏
 - (void)shouChangClick
 {
     MyCollectViewController *MyCollectVC = [[MyCollectViewController alloc] init];
     [self.navigationController pushViewController:MyCollectVC animated:YES];
     
 }
+//设置
 - (void)settingClick
 {
     SettingViewController *settingVC = [[SettingViewController alloc] init];
     [self.navigationController pushViewController:settingVC animated:YES];
 }
-
+//个人信息
 - (void)headerClick
 {
     PersonMessageViewController *personVC = [[PersonMessageViewController alloc] init];

@@ -31,6 +31,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
+        
         self.backgroundColor = [UIColor whiteColor];
         showLab = [[UILabel alloc] init];
         showLab.text = title;

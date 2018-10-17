@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyAddCarViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chargeCar1.png" translatesAutoresizingMaskIntoConstraints="NO" id="kUc-pO-Udl">
+                    <rect key="frame" x="0.0" y="70" width="375" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="Xfd-X4-pIe"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mv-L1-gCy">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                    <subviews>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Td-oC-uu1">
+                            <rect key="frame" x="20" y="36" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="NWL-ow-oeS"/>
+                                <constraint firstAttribute="height" constant="25" id="U3J-pm-eCx"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="9Td-oC-uu1" firstAttribute="leading" secondItem="3mv-L1-gCy" secondAttribute="leading" constant="20" id="1vq-RB-p62"/>
+                        <constraint firstAttribute="height" constant="70" id="do1-7S-skJ"/>
+                        <constraint firstAttribute="bottom" secondItem="9Td-oC-uu1" secondAttribute="bottom" constant="9" id="oAj-g3-j0g"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GB3-z3-t1l">
+                    <rect key="frame" x="10" y="230" width="42" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="IkN-U7-zxn"/>
+                        <constraint firstAttribute="height" constant="30" id="fxb-TU-pPC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edy-XP-PRW">
+                    <rect key="frame" x="26" y="271" width="339" height="2"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="dyJ-Ld-gbk"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车牌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpY-Fl-S1w">
+                    <rect key="frame" x="10" y="273" width="42" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="b95-3V-5oT"/>
+                        <constraint firstAttribute="height" constant="30" id="wdL-7o-aaT"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入车型" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jiO-Jt-Ve7">
+                    <rect key="frame" x="62" y="220" width="200" height="49"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="thQ-fQ-CG5"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-2N-x7p">
+                    <rect key="frame" x="62" y="273" width="200" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVM-yN-tDQ">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
+                            <state key="normal" title="选择车牌所在地"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="aVM-yN-tDQ" secondAttribute="trailing" id="5nN-Gv-yAX"/>
+                        <constraint firstAttribute="height" constant="30" id="5ts-vD-72r"/>
+                        <constraint firstItem="aVM-yN-tDQ" firstAttribute="leading" secondItem="fVB-2N-x7p" secondAttribute="leading" id="7Tb-D4-evr"/>
+                        <constraint firstAttribute="width" constant="200" id="I1U-I2-L7g"/>
+                        <constraint firstAttribute="bottom" secondItem="aVM-yN-tDQ" secondAttribute="bottom" id="UeQ-xC-psJ"/>
+                        <constraint firstItem="aVM-yN-tDQ" firstAttribute="top" secondItem="fVB-2N-x7p" secondAttribute="top" id="eKj-6T-eQm"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EmB-eD-oPo">
+                    <rect key="frame" x="0.0" y="303" width="375" height="2"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="Dar-oc-TQQ"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YlG-wx-eHw">
+                    <rect key="frame" x="262" y="220" width="113" height="49"/>
+                    <state key="normal" title="请选择车型"/>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入车牌号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IqF-Fm-L6l">
+                    <rect key="frame" x="262" y="273" width="103" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注：根据车型充电接口，匹配充电桩，推荐行驶里程内充电桩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE8-oK-w5m">
+                    <rect key="frame" x="10" y="325" width="355" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="2gM-em-1OE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.90588235294117647" green="0.47058823529411764" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTL-7w-cM4">
+                    <rect key="frame" x="40" y="502" width="295" height="45"/>
+                    <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="RNp-KS-hW9"/>
+                    </constraints>
+                    <state key="normal" title="确认"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="edy-XP-PRW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" constant="10" id="0Rl-g4-JOU"/>
+                <constraint firstAttribute="trailing" secondItem="EmB-eD-oPo" secondAttribute="trailing" id="55W-6B-2dY"/>
+                <constraint firstAttribute="trailing" secondItem="YlG-wx-eHw" secondAttribute="trailing" id="5sE-IE-UHp"/>
+                <constraint firstItem="BE8-oK-w5m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="6Me-qe-hLy"/>
+                <constraint firstItem="YlG-wx-eHw" firstAttribute="leading" secondItem="jiO-Jt-Ve7" secondAttribute="trailing" id="8mY-Ky-eXQ"/>
+                <constraint firstAttribute="trailing" secondItem="kUc-pO-Udl" secondAttribute="trailing" id="8nT-I8-CPY"/>
+                <constraint firstItem="GB3-z3-t1l" firstAttribute="top" secondItem="kUc-pO-Udl" secondAttribute="bottom" constant="10" id="8s8-Q6-zKG"/>
+                <constraint firstItem="IqF-Fm-L6l" firstAttribute="leading" secondItem="fVB-2N-x7p" secondAttribute="trailing" id="9UT-vb-cBW"/>
+                <constraint firstAttribute="bottom" secondItem="gTL-7w-cM4" secondAttribute="bottom" constant="120" id="Abo-cS-yYH"/>
+                <constraint firstAttribute="trailing" secondItem="IqF-Fm-L6l" secondAttribute="trailing" constant="10" id="B1P-VX-VAs"/>
+                <constraint firstItem="kUc-pO-Udl" firstAttribute="top" secondItem="3mv-L1-gCy" secondAttribute="bottom" id="Chc-Ll-J3z"/>
+                <constraint firstItem="jiO-Jt-Ve7" firstAttribute="leading" secondItem="GB3-z3-t1l" secondAttribute="trailing" constant="10" id="DPQ-96-nr9"/>
+                <constraint firstItem="fVB-2N-x7p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="62" id="HQd-hm-vgc"/>
+                <constraint firstItem="edy-XP-PRW" firstAttribute="top" secondItem="jiO-Jt-Ve7" secondAttribute="bottom" constant="2" id="OHt-9g-uSm"/>
+                <constraint firstAttribute="trailing" secondItem="edy-XP-PRW" secondAttribute="trailing" constant="10" id="OpB-0q-K8W"/>
+                <constraint firstItem="OpY-Fl-S1w" firstAttribute="top" secondItem="edy-XP-PRW" secondAttribute="bottom" id="Qgj-kF-Za5"/>
+                <constraint firstItem="OpY-Fl-S1w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Qmc-Ue-s5j"/>
+                <constraint firstItem="kUc-pO-Udl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TEY-Re-kIK"/>
+                <constraint firstItem="EmB-eD-oPo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TOl-hk-BIF"/>
+                <constraint firstItem="jiO-Jt-Ve7" firstAttribute="top" secondItem="kUc-pO-Udl" secondAttribute="bottom" id="UB0-L1-LvZ"/>
+                <constraint firstItem="GB3-z3-t1l" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="WHp-yk-bQz"/>
+                <constraint firstItem="GB3-z3-t1l" firstAttribute="centerY" secondItem="jiO-Jt-Ve7" secondAttribute="centerY" id="YMz-w6-b7U"/>
+                <constraint firstItem="IqF-Fm-L6l" firstAttribute="top" secondItem="edy-XP-PRW" secondAttribute="bottom" id="ZZc-dK-Snf"/>
+                <constraint firstItem="3mv-L1-gCy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dWs-f1-6UO"/>
+                <constraint firstItem="3mv-L1-gCy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fOb-xD-70i"/>
+                <constraint firstItem="gTL-7w-cM4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="g9M-aU-QK8"/>
+                <constraint firstItem="edy-XP-PRW" firstAttribute="top" secondItem="YlG-wx-eHw" secondAttribute="bottom" constant="2" id="nV2-85-XuV"/>
+                <constraint firstItem="BE8-oK-w5m" firstAttribute="top" secondItem="EmB-eD-oPo" secondAttribute="bottom" constant="20" id="oRE-Dz-dXI"/>
+                <constraint firstItem="fVB-2N-x7p" firstAttribute="top" secondItem="edy-XP-PRW" secondAttribute="bottom" id="qGD-Bj-yeU"/>
+                <constraint firstAttribute="trailing" secondItem="gTL-7w-cM4" secondAttribute="trailing" constant="40" id="sJM-Nn-uiK"/>
+                <constraint firstItem="EmB-eD-oPo" firstAttribute="top" secondItem="OpY-Fl-S1w" secondAttribute="bottom" id="vEd-E9-hvv"/>
+                <constraint firstItem="OpY-Fl-S1w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="vtl-g7-bG8"/>
+                <constraint firstAttribute="trailing" secondItem="BE8-oK-w5m" secondAttribute="trailing" constant="10" id="w6q-y2-zMq"/>
+                <constraint firstItem="YlG-wx-eHw" firstAttribute="top" secondItem="kUc-pO-Udl" secondAttribute="bottom" id="wgu-gK-2Ru"/>
+                <constraint firstAttribute="trailing" secondItem="3mv-L1-gCy" secondAttribute="trailing" id="xCf-Fh-H8f"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back.png" width="20" height="20"/>
+        <image name="chargeCar1.png" width="640" height="1136"/>
+    </resources>
+</document>

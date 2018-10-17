@@ -22,6 +22,7 @@
     UIView *rightTapView;//右边的手势按钮
     
     UIButton *rightBtn;
+    UIButton *rightBtn1;
 }
 
 @end
@@ -32,7 +33,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
         showLab = [[UILabel alloc] init];
         showLab.text = title;
 //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:16];
@@ -81,7 +82,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
         showLab = [[UILabel alloc] init];
         showLab.text = title;
 //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:15];
@@ -141,7 +142,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
-        self.backgroundColor = [UIColor whiteColor];
+       self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
         showLab = [[UILabel alloc] init];
         showLab.text = title;
         //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:15];
@@ -195,6 +196,67 @@
     return self;
 }
 
+//左边图片返回按钮 右边文字按钮
+- (id)initWithFrame:(CGRect)frame title:(NSString *)title leftImgae:(NSString *)leftImage rightButton:(NSString *)rightStr
+{
+    if (self = [super initWithFrame:frame]) {
+        //标题
+        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+        showLab = [[UILabel alloc] init];
+        showLab.text = title;
+        //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:15];
+        showLab.font = [UIFont systemFontOfSize:16];
+        showLab.textColor = [UIColor blackColor];
+        showLab.textAlignment = NSTextAlignmentCenter;
+        [showLab sizeToFit];
+        [self addSubview:showLab];
+        
+        //线
+        lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor blackColor];
+        lineView.alpha = 0.3;
+        [self addSubview:lineView];
+        
+        //左边的图片
+        imageView = [[UIImageView alloc] init];
+        [imageView sizeToFit];
+        imageView.image = [UIImage imageNamed:leftImage];
+        
+        [self addSubview:imageView];
+        
+        //tapView
+        tapView = [[UIView alloc] init];
+        [self addSubview:tapView];
+        
+        //返回手势
+        UITapGestureRecognizer *tap = [[[UITapGestureRecognizer alloc] init]initWithTarget:self action:@selector(back)];
+        [tapView addGestureRecognizer:tap];
+        
+        //右边的btn
+        rightBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [rightBtn1 setTitle:rightStr forState:UIControlStateNormal];
+        rightBtn1.titleLabel.font = [UIFont systemFontOfSize:14];
+        [rightBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                    [rightBtn1 addTarget:self action:@selector(rightTapViewAction) forControlEvents:UIControlEventTouchDown];
+        [self addSubview:rightBtn1];
+        
+        
+//        //rightTapView
+//        rightTapView = [[UIView alloc] init];
+//        [self addSubview:rightTapView];
+//
+//        //右边按钮手势
+//        UITapGestureRecognizer *RightTap = [[[UITapGestureRecognizer alloc] init]initWithTarget:self action:@selector(rightTapViewAction)];
+//        [rightTapView addGestureRecognizer:RightTap];
+        
+        [self MakeMasonry];
+        [self setRightBtnMasonry];
+        
+    }
+    return self;
+}
+
+
 
 -(void)MakeMasonry
 {
@@ -241,7 +303,14 @@
         make.bottom.equalTo(self);
         make.width.mas_equalTo(44);
     }];
-    
+ 
+    [rightBtn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        //        make.centerY.equalTo(showLab);
+        make.right.equalTo(self.mas_right).offset(-15);
+        make.bottom.equalTo(self.mas_bottom).offset(0);
+        make.height.mas_equalTo(44);
+        make.width.mas_equalTo(65);
+    }];
 }
 
 
@@ -258,6 +327,7 @@
         make.bottom.equalTo(self);
         make.width.mas_equalTo(44);
     }];
+   
 
 }
 

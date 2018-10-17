@@ -18,6 +18,8 @@
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title rightTitle:(NSString *)rightTitle;//设置右边按钮初始化
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title leftImgae:(NSString *)leftImage rightImage:(NSString *)rightImage;//设置左边按钮，右边按钮
 
+- (id)initWithFrame:(CGRect)frame title:(NSString *)title leftImgae:(NSString *)leftImage rightButton:(NSString *)rightStr;
+
 -(void)setRightBtnMasonry;//设置右边按钮约束
 
 

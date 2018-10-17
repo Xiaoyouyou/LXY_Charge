@@ -10,8 +10,11 @@
 		6401F5074D8CF40A598E84E8 /* libPods-Charge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A854C1C871D76831930C96 /* libPods-Charge.a */; };
 		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
 		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
+		75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA662174D4B400AC2F73 /* MyCarViewController.m */; };
 		75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */; };
 		75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */; };
+		75FDA57521778D98004A70E1 /* MyAddCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FDA57321778D98004A70E1 /* MyAddCarViewController.m */; };
+		75FDA57621778D98004A70E1 /* MyAddCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */; };
 		850698CF1D054F650002D28B /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850698CE1D054F650002D28B /* back@2x.png */; };
 		850698D91D05626C0002D28B /* jiantou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850698D81D05626C0002D28B /* jiantou@2x.png */; };
 		850698DD1D0566280002D28B /* RecommendedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 850698DB1D0566280002D28B /* RecommendedViewController.m */; };
@@ -405,10 +408,15 @@
 		75BCDA222173488300AC2F73 /* MeVcWithMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeVcWithMineView.h; sourceTree = "<group>"; };
 		75BCDA232173488300AC2F73 /* MeVcWithMineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeVcWithMineView.m; sourceTree = "<group>"; };
 		75BCDA262173938000AC2F73 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		75BCDA652174D4B400AC2F73 /* MyCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCarViewController.h; sourceTree = "<group>"; };
+		75BCDA662174D4B400AC2F73 /* MyCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCarViewController.m; sourceTree = "<group>"; };
 		75E26F992147706A0075EA98 /* DetailZhuangBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailZhuangBtnView.h; sourceTree = "<group>"; };
 		75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailZhuangBtnView.m; sourceTree = "<group>"; };
 		75E26F9C2147B0130075EA98 /* All_chargingSubModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = All_chargingSubModel.h; sourceTree = "<group>"; };
 		75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = All_chargingSubModel.m; sourceTree = "<group>"; };
+		75FDA57221778D98004A70E1 /* MyAddCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAddCarViewController.h; sourceTree = "<group>"; };
+		75FDA57321778D98004A70E1 /* MyAddCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAddCarViewController.m; sourceTree = "<group>"; };
+		75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAddCarViewController.xib; sourceTree = "<group>"; };
 		850698CE1D054F650002D28B /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		850698D81D05626C0002D28B /* jiantou@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiantou@2x.png"; sourceTree = "<group>"; };
 		850698DA1D0566280002D28B /* RecommendedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedViewController.h; sourceTree = "<group>"; };
@@ -1015,6 +1023,11 @@
 			children = (
 				75BCDA1C217316A600AC2F73 /* MeViewController.h */,
 				75BCDA1D217316A600AC2F73 /* MeViewController.m */,
+				75BCDA652174D4B400AC2F73 /* MyCarViewController.h */,
+				75BCDA662174D4B400AC2F73 /* MyCarViewController.m */,
+				75FDA57221778D98004A70E1 /* MyAddCarViewController.h */,
+				75FDA57321778D98004A70E1 /* MyAddCarViewController.m */,
+				75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -2244,6 +2257,7 @@
 				8587C05E1D17CC8400AA0918 /* QRCodeScanLine@2x.png in Resources */,
 				85C630981E97302E0039D755 /* caidan@2x.png in Resources */,
 				85C630AF1E97302E0039D755 /* search.png in Resources */,
+				75FDA57621778D98004A70E1 /* MyAddCarViewController.xib in Resources */,
 				F0F3123C1D045CE40088BCC6 /* shouchang@2x.png in Resources */,
 				85E12C301D6AA18A00187A36 /* chargeCar@2x.png in Resources */,
 				8506DE951E2C64600033B60F /* alplay@2x.png in Resources */,
@@ -2348,6 +2362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8529C7AC1D24F0C000211D2F /* YuYueTableFooterView.m in Sources */,
+				75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */,
 				85E6D9741DE983A400306CDD /* ChargeDetalMes.m in Sources */,
 				856349391D0D54B900535714 /* LoginViewController.m in Sources */,
 				853E78981E1DF0F200A037CB /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -2401,6 +2416,7 @@
 				85A7E2B71D4C86B1002953EA /* QianMingTableViewCell.m in Sources */,
 				8534981F1D83ECE1008222FB /* Singleton.m in Sources */,
 				856526511D3350220034F574 /* ChangePassWordViewController.m in Sources */,
+				75FDA57521778D98004A70E1 /* MyAddCarViewController.m in Sources */,
 				857F79D91D2F7AC2003812CD /* ChuZhiViewController.m in Sources */,
 				8529C7A81D24EB7300211D2F /* YuYueTableViewCell.m in Sources */,
 				853E78A31E1DF0F200A037CB /* UIScrollView+MJExtension.m in Sources */,
@@ -2698,8 +2714,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a2bc56ca-92a5-4c45-9b0d-f485cd4c48a2";
-				PROVISIONING_PROFILE_SPECIFIER = Charge_lxy_DelevopePP;
+				PROVISIONING_PROFILE = "181afbfa-d97c-4045-b3c7-fbe03a5bb74d";
+				PROVISIONING_PROFILE_SPECIFIER = Charge_LXY_Text_PP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2713,7 +2729,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = G8H5MHKS76;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2783,8 +2799,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "181afbfa-d97c-4045-b3c7-fbe03a5bb74d";
+				PROVISIONING_PROFILE_SPECIFIER = Charge_LXY_Text_PP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

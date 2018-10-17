@@ -128,7 +128,7 @@
     //初始化nav
     NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"我的收藏"];
     nav.backBlock = ^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     };
     
     [self.view addSubview:nav];
