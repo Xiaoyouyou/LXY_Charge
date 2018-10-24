@@ -14,8 +14,10 @@
 
 //#define Host_PORT 3005
 //#define Host_IP @"10.0.0.5"
-#define Host_IP @"183.234.61.201"
+//#define Host_IP @"183.234.61.201"
 //#define Host_IP @"192.168.1.107"
+#define Host_IP @"192.168.5.10"
+
 #define Host_PORT 3005
 //#define Host_PORT 1026
 #define RepeatsCountS 30
@@ -76,8 +78,8 @@
     
     clientSocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *err;
-    [clientSocket connectToHost:Host_IP onPort:Host_PORT withTimeout:1 error:&err];
-        
+  BOOL isSuccess =  [clientSocket connectToHost:Host_IP onPort:Host_PORT withTimeout:1 error:&err];
+    MYLog(@"socket是否连接成功:%d",isSuccess);
     if (!err || [err isEqual:@"null"]) {
         MYLog(@"err = %@",err);
     }
@@ -148,7 +150,7 @@
            self.YuYueChargeStatusMesBlock(chargeStr);
         }
     }
-    NSString *str1 = @"AABB0002020D0A";
+    NSString *str1 = @"AABB0700020D0A";
     if ([text rangeOfString:str1].location != NSNotFound) {
         MYLog(@"这个字符串中有AABB0002020D0A");
         MYLog(@"text = %@%@",text,@"\r\n");
@@ -538,6 +540,7 @@
    NSString *brStr = @"\r\n";//换行符
    NSString *startString = [NSString stringWithFormat:@"MM%@%@00000000000001%@",ChargeNum,[Config getMobile],brStr];//开启电桩指令
    NSData   *dataStream  = [startString dataUsingEncoding:NSUTF8StringEncoding];
+    
    [clientSocket writeData:dataStream withTimeout:-1 tag:1];
 }
 
@@ -556,8 +559,14 @@
 -(void)checkChargeStatusWithChargeNum:(NSString *)ChargeNum
 {
     NSString *brStr = @"\r\n";//换行符
-    NSString *checkString = [NSString stringWithFormat:@"MM%@%@00000000000007%@",ChargeNum,[Config getMobile],brStr];
+   NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
+    NSString *str1 = [NSString stringWithFormat:@"%@%@",@"03",strAscll1];
+    NSString *str2 = [RsaUtil encryptString:str1 publicKey:@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDRC7JFsEdbatU1a59gF0juUyXzOoPwE3Gfa2NZd6B0yq/MudU+HKN+5bBk698A25cPIeQO/aHl9tMUCB2df0cXVZnAEijGB6It6LP4vz6KhKZBZD8bHXrb4OqrddoKrkWZtyZOVQBtq/GawEjGqRsIC8Y1l5XRjBandByK+U7ZlQIDAQAB"];
+    NSString * strAscll2 = [XStringUtil ascllString:str2];
+    NSString *checkString = [NSString stringWithFormat:@"AABB6001%@",strAscll2];
+    
     NSData   *dataStream  = [checkString dataUsingEncoding:NSUTF8StringEncoding];
+//    Byte *bytes = [dataStream bytes];
     [clientSocket writeData:dataStream withTimeout:-1 tag:1];
 }
 

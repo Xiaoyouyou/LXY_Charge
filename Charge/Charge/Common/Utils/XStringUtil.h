@@ -63,5 +63,10 @@
 + (NSString *)transform:(NSString *)chinese;
 //MD5加密
 + (NSString *)stringToMD5:(NSString *)str;
+//
++(NSString *)returnHexadecimalString:(NSString *)hexadecimalString;
+//字符转ascll
++(NSString *)ascllString:(NSString *)str;
 
++(NSString *)ascllStr:(NSString *)str;
 @end

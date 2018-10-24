@@ -1280,11 +1280,12 @@
                 MYLog(@"length = %lu",(unsigned long)resultAsString.length);
                 
                 //二维码是24位数字
-                if (resultAsString.length == 18) {
-                    
+                //if (resultAsString.length == 18) {
+                   if (YES) {
                     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
                     parmas[@"qrCode"] = resultAsString;//扫描结果10
                     parmas[@"token"] = [Config getToken];
+//                       parmas[@"token"] = @"WG1mEQUUGqlnyvDz";
                     MYLog(@"token = %@",[Config getToken]);
                     
                     [WMNetWork get:ScanQrCode parameters:parmas success:^(id responseObj) {
@@ -1296,8 +1297,8 @@
                             //                            [MBProgressHUD hideHUD];
                             OpenChangeViewController *openVC = [[OpenChangeViewController alloc] init];
                             
-                            NSString *equStr = responseObj[@"equipmentNum"];
-                            // NSString *equStr = resultAsString;
+//                            NSString *equStr = responseObj[@"equipmentNum"];
+                             NSString *equStr = resultAsString;
                             
                             NSString *chargingStr = responseObj[@"stationName"];
                             openVC.equipmentNum = equStr;

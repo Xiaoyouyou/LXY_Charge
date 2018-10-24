@@ -123,7 +123,9 @@
         }else
         {
             //发送检测状状态的指令
-            [[Singleton sharedInstance] checkChargeStatusWithChargeNum:self.chargeingNum];//发送检测充电桩、
+            [[Singleton sharedInstance] checkChargeStatusWithChargeNum:self.chargeingNum];
+            //发送检测充电桩、
+         
         }
     });
     

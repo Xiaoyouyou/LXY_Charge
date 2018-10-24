@@ -377,4 +377,92 @@
      */
     return saveResult;
 }
+
+
+
+
+//计算方法
++(NSString *)returnHexadecimalString:(NSString *)hexadecimalString{
+    NSString *string = [[NSString alloc]initWithFormat:@"%@", hexadecimalString];
+    NSString *aSting = [string substringWithRange:NSMakeRange(0, 2)];
+    NSString *bSting = [string substringWithRange:NSMakeRange(2, string.length - 2)];
+    int sum = 0;
+    for (int i = 0; i < bSting.length - 1; i +=2) {
+        NSString * str = [bSting substringWithRange:NSMakeRange(i, 2)];
+        int abc = [self numberWithHexString:str];
+        sum += abc;
+        NSLog(@"sum:%d",sum);
+    }
+    NSLog(@"sum^_^:%d",sum);
+    int ret = sum & 0xff;
+    NSLog(@"ret:%d",ret);
+    NSString * checkCode = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",ret]];
+    NSLog(@"checkCode:%@",checkCode);
+    NSString *returnString = [[NSString alloc] initWithFormat:@"%@%@%@",aSting,bSting,checkCode];
+    NSLog(@"returnString:%@",returnString);
+    return returnString;
+    
+}
+
+//十六进制字符串转为10进制整数
++(int)numberWithHexString:(NSString *)hexString{
+    const char *hexChar = [hexString cStringUsingEncoding:NSUTF8StringEncoding];
+    int hexNumber;
+    sscanf(hexChar, "%x", &hexNumber);
+    return hexNumber;
+}
+
+////字符串转ASCll
++(NSString *)ascllString:(NSString *)str{
+//    NSString *str0 = @"0123456789ABCDEF";
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+//    NSUInteger len = [str length];
+//    for(NSUInteger i=0; i<len; i++)
+//    {
+//        [array addObject:[NSNumber numberWithChar:[str0 characterAtIndex:i]]];
+//    }
+//    NSMutableString *str1 = [NSMutableString string];
+    NSData *data = [str  dataUsingEncoding:NSUTF8StringEncoding]; // UTF-8编码
+//   NSString *str1 =  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSMutableString *result = [NSMutableString string];
+    const char *bytes = [data bytes];
+    for (int i = 0; i < [data length]; i++) {
+        [result appendFormat:@"%02hhx", (unsigned char)bytes[i]];
+        
+    }
+    NSLog(@"result:%ld", result.length);
+    NSInteger a = result.length;
+    if (result.length < 64) {
+        NSLog(@"%ld", (64 -result.length));
+        for (int i = 0; i < (64 - a); i++) {
+            [result appendString:[NSString stringWithFormat:@"%@",@"0"]];
+           NSLog(@"result:%d", i);
+        }
+    }
+    NSLog(@"%ld",result.length);
+    
+    return [result uppercaseString];
+}
+
+
+
+////字符串转ASCll
++(NSString *)ascllStr:(NSString *)str{
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+//    NSUInteger len = [str length];
+//    for(NSUInteger i=0; i<len; i++)
+//    {
+//        [array addObject:[NSNumber numberWithChar:[str characterAtIndex:i]]];
+//    }
+    NSMutableString *str2 = [NSMutableString string];
+    for (int i = 0; i < str.length; i++) {
+        NSString * str1 = [NSString stringWithFormat:@"%hu",[str characterAtIndex:i]];
+        [str2 appendString:str1];
+    }
+    
+    return str2;
+}
+
+
+
 @end

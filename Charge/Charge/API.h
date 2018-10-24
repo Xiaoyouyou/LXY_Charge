@@ -28,7 +28,8 @@
 #define QQappid   @"1105836079" //QQ登陆APPID
 
 //APP api
-#define Login_Host @"http://183.234.61.201:8081/app/phone/login.action" //登陆
+//#define Login_Host @"http://183.234.61.201:8081/app/phone/login.action" //登陆
+#define Login_Host @"http://192.168.5.10:8080/app/phone/login.action" //登陆
 #define Reg_Host   @"http://183.234.61.201:8081/app/phone/reg.action"//注册
 #define UpdateAvatars @"http://183.234.61.201:8081/app/phone/uploadFile" //更新头像
 #define WeChatPayHost @"http://183.234.61.201:8081/app/phone/balanceRecharge.action" //微信支付
@@ -37,10 +38,11 @@
 #define ChangePassWord  @"http://183.234.61.201:8081/app/phone/updatePassword.action" //更改密码
 #define GetPerMes  @"http://183.234.61.201:8081/app/phone/userInfo.action" //获取用户信息
 #define UpdateBase @"http://183.234.61.201:8081/app/phone/updateBase.action" //修改用户信息
-#define GetBalance @"http://183.234.61.201:8081/app/phone/getBalance.action" //获取用户余额
+#define GetBalance @"http://192.168.5.10:8080/app/phone/getBalance.action" //获取用户余额
 #define UpdateMobile @"http://183.234.61.201:8081/app/phone/updateMobile.action" //更换手机号
 #define CheckPassWord @"http://183.234.61.201:8081/app/phone/checkPassword.action"//修改密码校验密码接口
-#define ScanQrCode @"http://183.234.61.201:8081/app/phone/scanQrCode.action"  //扫码获取充电桩信息
+//#define ScanQrCode @"http://183.234.61.201:8081/app/phone/scanQrCode.action"  //扫码获取充电桩信息
+#define ScanQrCode @"http://192.168.5.10:8080/app/phone/scanQrCode.action"  //扫码获取充电桩信息
 #define RecommendList @"http://183.234.61.201:8081/app/phone/recommendList.action"  //获取周边推荐充电站列表
 #define Collect @"http://183.234.61.201:8081/app/phone/collect.action"  //收藏充电站
 #define CancelCollect @"http://183.234.61.201:8081/app/phone/cancelCollect.action"  //取消收藏充电站

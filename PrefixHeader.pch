@@ -11,6 +11,10 @@
 
 #ifdef __OBJC__
 #import "API.h"
+#import "RsaUtil.h"
+#import "Singleton.h"
+#import "Config.h"
+#import "XStringUtil.h"
 
 #endif
 
