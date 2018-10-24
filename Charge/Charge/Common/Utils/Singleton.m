@@ -11,16 +11,18 @@
 #import "XFunction.h"
 #import "XStringUtil.h"
 #import "Config.h"
+#import <iconv.h>
 
 //#define Host_PORT 3005
 //#define Host_IP @"10.0.0.5"
 //#define Host_IP @"183.234.61.201"
 //#define Host_IP @"192.168.1.107"
-#define Host_IP @"192.168.5.10"
+#define Host_IP @"192.168.5.2"
 
 #define Host_PORT 3005
 //#define Host_PORT 1026
 #define RepeatsCountS 30
+#define Public @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDRC7JFsEdbatU1a59gF0juUyXzOoPwE3Gfa2NZd6B0yq/MudU+HKN+5bBk698A25cPIeQO/aHl9tMUCB2df0cXVZnAEijGB6It6LP4vz6KhKZBZD8bHXrb4OqrddoKrkWZtyZOVQBtq/GawEjGqRsIC8Y1l5XRjBandByK+U7ZlQIDAQAB"
 
 @interface Singleton ()<GCDAsyncSocketDelegate>
 {
@@ -130,27 +132,142 @@
     [clientSocket readDataWithTimeout:- 1 tag:0];
 }
 
+- (NSString *)cleanUTF8:(NSData *)dat {
+    NSData *data = [NSData dataWithData:dat]; // UTF-8编码
+    //   NSString *str1 =  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSMutableString *result = [NSMutableString string];
+    const char *bytes = [data bytes];
+    for (int i = 0; i < [data length]; i++) {
+        [result appendFormat:@"%02hhx", (unsigned char)bytes[i]];
+        
+    }
+    NSLog(@"result:%ld", result.length);
+    return result;
+    
+}
+  
+
 // 收到消息 //为了能时刻接收到socket的消息，在长连接方法中进行读取数据
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     
-    [clientSocket readDataWithTimeout:-1 tag:0];//-1无穷大
-    NSString *text = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    MYLog(@"收到消息 = %@",text);
+ 
     
-
-    NSString *str = @"not find";
-    if ([text rangeOfString:str].location != NSNotFound) {
-        MYLog(@"这个字符串中有not find");
-        NSString *chargeStr = @"充电桩掉线";
-        if (self.ChargeStatusMesBlock) {
-            self.ChargeStatusMesBlock(chargeStr);
+    [clientSocket readDataWithTimeout:-1 tag:0];//-1无穷大
+    NSString *text = [self cleanUTF8:data];
+   
+//    NSString *text = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    MYLog(@"收到消息 = %@",text);
+    NSString *str = [text substringWithRange:NSMakeRange(4, 2)];
+    
+//后台确认开启充电指令
+    if ([str isEqualToString:@"01"]) {
+        MYLog(@"收到开启充电确认指令");
+        NSString *status = [text substringWithRange:NSMakeRange(6, 2)];
+        if (self.StartChargeBlock) {
+            self.StartChargeBlock(status);
+        }
+//        //桩ID
+//        NSString *ID = [text substringWithRange:NSMakeRange(2, 18)];
+//        MYLog(@"id = %@",ID);
+//        //手机号
+//        NSString *phoneNum = [text substringWithRange:NSMakeRange(20, 11)];
+//        MYLog(@"phoneNum = %@",phoneNum);
+        
+    }
+        
+        if ([str isEqualToString:@"02"]) {
+            MYLog(@"收到关闭充电确认指令");
+            NSString *status = [text substringWithRange:NSMakeRange(6, 2)];
+            if (self.StopChargingMesBlock) {
+                self.StopChargingMesBlock(status);
+            }
         }
         
-        if (self.YuYueChargeStatusMesBlock) {
-           self.YuYueChargeStatusMesBlock(chargeStr);
+        
+    
+//状态检测回复
+    if ([str isEqualToString:@"03"]) {
+        MYLog(@"收到状态检测回复指令");
+         NSString *status = [text substringWithRange:NSMakeRange(6, 2)];
+        //     NSString *status =  [text substringWithRange:NSMakeRange(37, 12)];
+        MYLog(@"status = %@",status);
+        /*************************************/
+        if ([status isEqualToString:@"00"]) {
+            MYLog(@"状态空闲");
+            NSString *chargeStr = @"状态空闲";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket   短连接
+            return;
+        }else if([status isEqualToString:@"01"])
+        {
+            MYLog(@"准备开始充电");
+            NSString *chargeStr = @"准备开始充电";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket
+            return;
+        }else if([status isEqualToString:@"02"])
+        {
+            MYLog(@"充电中");
+            NSString *chargeStr = @"充电中";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket
+            return;
+        }else if ([status isEqualToString:@"03"])
+        {
+            MYLog(@"充电结束");
+            NSString *chargeStr = @"充电结束";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket
+            return;
+        }else if ([status isEqualToString:@"04"])
+        {
+            MYLog(@"启动失败");
+            NSString *chargeStr = @"启动失败";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket
+            return;
+        }else if ([status isEqualToString:@"05"])
+        {
+            MYLog(@"预约状态");
+            NSString *chargeStr = @"预约状态";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket
+            return;
+        }else if ([status isEqualToString:@"06"])
+        {
+            MYLog(@"故障状态");
+            NSString *chargeStr = @"故障状态";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket
+            return;
+        }else if ([status isEqualToString:@"10"])
+        {
+            MYLog(@"断连");
+            NSString *chargeStr = @"断连";
+            if (self.ChargeStatusMesBlock) {
+                self.ChargeStatusMesBlock(chargeStr);
+            }
+            [self cutOffSocket];//切断socket
+            return;
         }
     }
-    NSString *str1 = @"AABB0700020D0A";
+  
+    
+    NSString *str1 = @"AABB0E00020D0A";
     if ([text rangeOfString:str1].location != NSNotFound) {
         MYLog(@"这个字符串中有AABB0002020D0A");
         MYLog(@"text = %@%@",text,@"\r\n");
@@ -159,326 +276,366 @@
         MYLog(@"回复心跳");
         [self heartConnect:newText];
     }
-        NSArray *b = [text componentsSeparatedByString:@"MM"];
-        MYLog(@"%@",b);
-        NSMutableArray *tempArray = [NSMutableArray array];
-        
-        for (int i = 0; i < b.count; i++) {
-            NSString *tempStr = b[i];
-            if ([tempStr isEqualToString:@""]) {
-                
-            }else
-            {
-                [tempArray addObject:[NSString stringWithFormat:@"MM%@",b[i]]];
-            }
-        }
-        
-        for (int i = 0; i < tempArray.count; i++) {
-            NSString *tempStr = tempArray[i];
-            
-          if (tempStr.length > 45) {
-          //  if (tempStr.length > 51) {
-    
-                NSString *str = tempArray[i];
-                NSString *newStr = [str substringWithRange:NSMakeRange(0, 45)];
-           //   NSString *newStr = [str substringWithRange:NSMakeRange(0, 51)];
-//              NSString *newStr1 = [str substringWithRange:NSMakeRange(43, str.length - 43)];
-                [tempArray removeObjectAtIndex:i];
-                [tempArray addObject:newStr];
-//                [tempArray addObject:newStr1];
-            }
+
+//    NSString *str = @"not find";
+//    if ([text rangeOfString:str].location != NSNotFound) {
+//        MYLog(@"这个字符串中有not find");
+//        NSString *chargeStr = @"充电桩掉线";
+//        if (self.ChargeStatusMesBlock) {
+//            self.ChargeStatusMesBlock(chargeStr);
 //        }
-        
-        MYLog(@"tempArray = %@",tempArray);
-        
-        for (int i = 0; i <tempArray.count; i++) {
-            NSString *text = tempArray[i];
-
-           if (text.length == 45) {
-//            if (text.length == 51) {
+//
+//        if (self.YuYueChargeStatusMesBlock) {
+//           self.YuYueChargeStatusMesBlock(chargeStr);
+//        }
+//    }
     
-                NSString *str = [text substringFromIndex:43];
-            //  NSString *str = [text substringFromIndex:49];
-                MYLog(@"str = %@",str);
-                
-                if ([str isEqualToString:@"08"]) {//用户余额不足停止充电指令
-                    MYLog(@"收到后台发送用户余额不足停止充电指令");
-                    //消费 金额
-                    NSString *payMoney = [text substringWithRange:NSMakeRange(31, 6)];
-                    MYLog(@"payMoney = %@",payMoney);
-                    //已充电量
-                    // NSString *power = [text substringWithRange:NSMakeRange(40, 6)];
-                    NSString *power = [text substringWithRange:NSMakeRange(37, 6)];
-                    MYLog(@"power = %@",power);
-                    
-                    NSString *temp = nil;
-                    for(int i =0; i < [power length]; i++)
-                    {
-                        temp = [power substringWithRange:NSMakeRange(i, 1)];
-                        if ([temp isEqualToString:@"0"]) {
-                            
-                        }else
-                        {
-                            NSString *powerNum = [power substringWithRange:NSMakeRange(i, [power length] - i)];
-                            MYLog(@"powerNum = %@",powerNum);
-                            NSString *charging = [NSString stringWithFormat:@"%.2f",[powerNum floatValue]/100];
-                            MYLog(@"powerNum = %@",charging);
-                            //保存电量
-                            [Config saveCurrentPower:[NSString stringWithFormat:@"%@kwh",charging]];
-                            MYLog(@"getCurrentPower = %@",[Config getCurrentPower]);
-                            break;
-                        }
-                    }
-                    
-                    NSString *temps = nil;
-                    for(int i =0; i < [payMoney length]; i++)
-                    {
-                        temps = [payMoney substringWithRange:NSMakeRange(i, 1)];
-                        
-                        if ([temps isEqualToString:@"0"]) {
-                            
-                        }else
-                        {
-                            NSString *pays = [payMoney substringWithRange:NSMakeRange(i, [payMoney length] - i)];
-                            MYLog(@"payMoney = %@",pays);
-                            NSString *pay = [NSString stringWithFormat:@"%.2f",[pays floatValue]/100];
-                            MYLog(@"payMoney = %@",pay);
-                            //保存电费
-                            [Config saveChargePay:[NSString stringWithFormat:@"%@￥",pay]];
-                            
-                            MYLog(@"getChargePay = %@",[Config getChargePay]);
-                            break;
-                        }
-                    }
-                    NSString *chargeStr = @"用户余额不足,停止充电！";
-                    if (self.MoneyNoEnoughMesBlock) {
-                        self.MoneyNoEnoughMesBlock(chargeStr);
-                    }
-                }
+    //=======================================================//
+   
+    //=======================================================//
+    
+    
+//        NSArray *b = [text componentsSeparatedByString:@"MM"];
+//        MYLog(@"%@",b);
+//        NSMutableArray *tempArray = [NSMutableArray array];
+////
+//        for (int i = 0; i < b.count; i++) {
+//            NSString *tempStr = b[i];
+//            if ([tempStr isEqualToString:@""]) {
+//
+//            }else
+//            {
+//                [tempArray addObject:[NSString stringWithFormat:@"MM%@",b[i]]];
+//            }
+//        }
+    
+//=======================================================//
+        
+//        for (int i = 0; i < tempArray.count; i++) {
+//            NSString *tempStr = tempArray[i];
+//            //判断返回数据有多少位   注释掉  以防以后还要用
+//          if (tempStr.length >8) {
+//            if (tempStr.length > 51) {
 
-                if ([str isEqualToString:@"02"]) {//后台确认开启充电指令
-                    MYLog(@"收到开启充电确认指令");
-                    
-                    if (self.StartChargeBlock) {
-                        self.StartChargeBlock(text);
-                    }
-                    //桩ID
-                    NSString *ID = [text substringWithRange:NSMakeRange(2, 18)];
-                    MYLog(@"id = %@",ID);
-                    //手机号
-                    NSString *phoneNum = [text substringWithRange:NSMakeRange(20, 11)];
-                    MYLog(@"phoneNum = %@",phoneNum);
-     
-                }
-                
-                if ([str isEqualToString:@"03"]) {//后台发送充电金额，电量信息
-                    MYLog(@"收到后台发送电量信息指令");
-                    
-                    //消费 金额
-                    NSString *payMoney = [text substringWithRange:NSMakeRange(31, 6)];
-                    MYLog(@"payMoney = %@",payMoney);
-                    //已充电量
-                    NSString *power = [text substringWithRange:NSMakeRange(37, 6)];
-                    MYLog(@"power = %@",power);
-                    
-                    NSString *temp = nil;
-                    for(int i =0; i < [power length]; i++)
-                    {
-                        temp = [power substringWithRange:NSMakeRange(i, 1)];
-                        if ([temp isEqualToString:@"0"]) {
-                            
-                        }else
-                        {
-                            NSString *powerNum = [power substringWithRange:NSMakeRange(i, [power length] - i)];
-                            MYLog(@"powerNum = %@",powerNum);
-                            NSString *charging = [NSString stringWithFormat:@"%.2f",[powerNum floatValue]/100];
-                            MYLog(@"powerNum除于100 = %@",charging);
-                            //保存电量
-                            [Config saveCurrentPower:[NSString stringWithFormat:@"%@kwh",charging]];
-                            break;
-                        }
-                    }
-                    
-                    NSString *temps = nil;
-                    for(int i =0; i < [payMoney length]; i++)
-                    {
-                        temps = [payMoney substringWithRange:NSMakeRange(i, 1)];
-                        if ([temps isEqualToString:@"0"]) {
-                            
-                        }else
-                        {
-                            NSString *pays = [payMoney substringWithRange:NSMakeRange(i, [payMoney length] - i)];
-                            MYLog(@"payMoney = %@",pays);
-                            NSString *pay = [NSString stringWithFormat:@"%.2f",[pays floatValue]/100];
-                            MYLog(@"payMoney除于100 = %@",pay);
-                            //保存电费
-                            [Config saveChargePay:[NSString stringWithFormat:@"%@￥",pay]];
-                            break;
-                        }
-                    }
-                    
-                    if (self.StartReceiveMesBlock) {
-                        self.StartReceiveMesBlock(text);
-                    }
-                    
-                }
-                
-                if ([str isEqualToString:@"06"]) {//后台主动停止充电
-                    MYLog(@"收到后台主动停止充电确认指令");
-                    
-                    //消费 金额
-                    NSString *payMoney = [text substringWithRange:NSMakeRange(31, 6)];
-                    MYLog(@"payMoney = %@",payMoney);
-                    //已充电量
-                    NSString *power = [text substringWithRange:NSMakeRange(37, 6)];
-                    MYLog(@"power = %@",power);
-                    
-                    NSString *temp = nil;
-                    for(int i =0; i < [power length]; i++)
-                    {
-                        temp = [power substringWithRange:NSMakeRange(i, 1)];
-                        if ([temp isEqualToString:@"0"]) {
-                            
-                        }else
-                        {
-                            NSString *powerNum = [power substringWithRange:NSMakeRange(i, [power length] - i)];
-                            MYLog(@"powerNum = %@",powerNum);
-                            NSString *charging = [NSString stringWithFormat:@"%.2f",[powerNum floatValue]/100];
-                            MYLog(@"powerNum = %@",charging);
-                            //保存电量
-                            [Config saveCurrentPower:[NSString stringWithFormat:@"%@kwh",charging]];
-                            MYLog(@"getCurrentPower = %@",[Config getCurrentPower]);
-                            break;
-                        }
-                    }
-                    
-                    NSString *temps = nil;
-                    for(int i =0; i < [payMoney length]; i++)
-                    {
-                        temps = [payMoney substringWithRange:NSMakeRange(i, 1)];
-                        if ([temps isEqualToString:@"0"]) {
-                            
-                        }else
-                        {
-                            NSString *pays = [payMoney substringWithRange:NSMakeRange(i, [payMoney length] - i)];
-                            MYLog(@"payMoney = %@",pays);
-                            NSString *pay = [NSString stringWithFormat:@"%.2f",[pays floatValue]/100];
-                            MYLog(@"payMoney = %@",pay);
-                            //保存电费
-                            [Config saveChargePay:[NSString stringWithFormat:@"%@￥",pay]];
-                            
-                            MYLog(@"getChargePay = %@",[Config getChargePay]);
-                            break;
-                       }
-                    }
-                        if (self.StopChargingMesBlock) {
-                            self.StopChargingMesBlock(text);
-                        }
-                    
-       }
-                if ([str isEqualToString:@"07"]) {//状态检测回复
-                    MYLog(@"收到状态检测回复指令");
-                    NSString *status = [text substringWithRange:NSMakeRange(31, 12)];
-            //     NSString *status =  [text substringWithRange:NSMakeRange(37, 12)];
-                    MYLog(@"status = %@",status);
-                    if ([status isEqualToString:@"000000000000"]) {
-                        MYLog(@"状态正常");
-                        NSString *chargeStr = @"状态正常";
-                        if (self.ChargeStatusMesBlock) {
-                            self.ChargeStatusMesBlock(chargeStr);
-                        }
-                        [self cutOffSocket];//切断socket   短连接
-                        return;
-                    }else if([status isEqualToString:@"999999999999"])
-                    {
-                        MYLog(@"充电桩故障");
-                        NSString *chargeStr = @"充电桩故障";
-                        if (self.ChargeStatusMesBlock) {
-                            self.ChargeStatusMesBlock(chargeStr);
-                        }
-                        [self cutOffSocket];//切断socket
-                        return;
-                    }else if([status isEqualToString:@"999998999998"])
-                    {
-                        MYLog(@"充电桩正在使用");
-                        NSString *chargeStr = @"充电桩正在使用";
-                        if (self.ChargeStatusMesBlock) {
-                            self.ChargeStatusMesBlock(chargeStr);
-                        }
-                        [self cutOffSocket];//切断socket
-                        return;
-                    }else if ([status isEqualToString:@"999997999997"])
-                    {
-                       MYLog(@"充电桩预约中");
-                       NSString *chargeStr = @"充电桩被预约";
-                        if (self.ChargeStatusMesBlock) {
-                            self.ChargeStatusMesBlock(chargeStr);
-                        }
-                        [self cutOffSocket];//切断socket
-                        return;
-                    }
-                    }
-                
-                if ([str isEqualToString:@"10"]) {
-                    MYLog(@"收到预约回复指令");
-                    NSString *status = [text substringWithRange:NSMakeRange(31, 12)];
-                    if ([status isEqualToString:@"000000000000"]) {
-                        MYLog(@"状态正常");
-                        NSString *chargeStr = @"状态正常";
-                        if (self.YuYueChargeStatusMesBlock) {
-                            self.YuYueChargeStatusMesBlock(chargeStr);
-                        }
-                        [self cutOffSocket];//切断socket   短连接
-                        return;
-                    }
-                    if ([status isEqualToString:@"999997999997"])
-                    {
-                    MYLog(@"充电桩预约中");
-                    NSString *chargeStr = @"充电桩被预约";
-                    if (self.YuYueChargeStatusMesBlock) {
-                        self.YuYueChargeStatusMesBlock(chargeStr);
-                    }
-                    [self cutOffSocket];//切断socket
-                    return;
-                    }
-                
-                    if([status isEqualToString:@"999998999998"])
-                    {
-                    MYLog(@"充电桩正在使用");
-                    NSString *chargeStr = @"充电桩正在使用";
-                    if (self.YuYueChargeStatusMesBlock) {
-                        self.YuYueChargeStatusMesBlock(chargeStr);
-                    }
-                    [self cutOffSocket];//切断socket
-                    return;
-                    }
-                    
-                    if([status isEqualToString:@"999999999999"])
-                    {
-                    MYLog(@"充电桩故障");
-                    NSString *chargeStr = @"充电桩故障";
-                    if (self.YuYueChargeStatusMesBlock) {
-                        self.YuYueChargeStatusMesBlock(chargeStr);
-                    }
-                    [self cutOffSocket];//切断socket
-                    return;
-                   }
-                }
-                    if ([str isEqualToString:@"11"]) {
-                        MYLog(@"收到取消预约回复指令");
-                        NSString *chargeStr = @"收到取消预约回复指令";
-                        if (self.CancelYuYueChargeStatusMesBlock) {
-                            self.CancelYuYueChargeStatusMesBlock(chargeStr);
-                        }
-                        [self cutOffSocket];//切断socket
-                        return;
-                    }
-            }else
-            {
-                MYLog(@"接收到的不是操作指令");
-            }
-        }
-    }
+//                NSString *str = tempArray[i];
+//                NSString *newStr = [str substringWithRange:NSMakeRange(0, 8)];
+////              NSString *newStr = [str substringWithRange:NSMakeRange(0, 51)];
+////            NSString *newStr1 = [str substringWithRange:NSMakeRange(43, str.length - 43)];
+//                [tempArray removeObjectAtIndex:i];
+//                [tempArray addObject:newStr];
+//                [tempArray addObject:newStr1];
+//            }
+//        }
+    //=======================================================//
+//        MYLog(@"tempArray = %@",tempArray);
+  //=======================================================//
+//        for (int i = 0; i <tempArray.count; i++) {
+//            NSString *text = tempArray[i];
+
+//           if (text.length == 45) {
+////            if (text.length == 51) {
+//
+//                NSString *str = [text substringFromIndex:43];
+            //  NSString *str = [text substringFromIndex:49];
+//                MYLog(@"str = %@",str);
+            
+//                if ([str isEqualToString:@"08"]) {//用户余额不足停止充电指令
+//                    MYLog(@"收到后台发送用户余额不足停止充电指令");
+//                    //消费 金额
+//                    NSString *payMoney = [text substringWithRange:NSMakeRange(31, 6)];
+//                    MYLog(@"payMoney = %@",payMoney);
+//                    //已充电量
+//                    // NSString *power = [text substringWithRange:NSMakeRange(40, 6)];
+//                    NSString *power = [text substringWithRange:NSMakeRange(37, 6)];
+//                    MYLog(@"power = %@",power);
+//
+//                    NSString *temp = nil;
+//                    /*************************************/
+//                    for(int i =0; i < [power length]; i++)
+//                    {
+//                        temp = [power substringWithRange:NSMakeRange(i, 1)];
+//                        if ([temp isEqualToString:@"0"]) {
+//
+//                        }else
+//                        {
+//                            NSString *powerNum = [power substringWithRange:NSMakeRange(i, [power length] - i)];
+//                            MYLog(@"powerNum = %@",powerNum);
+//                            NSString *charging = [NSString stringWithFormat:@"%.2f",[powerNum floatValue]/100];
+//                            MYLog(@"powerNum = %@",charging);
+//                            //保存电量
+//                            [Config saveCurrentPower:[NSString stringWithFormat:@"%@kwh",charging]];
+//                            MYLog(@"getCurrentPower = %@",[Config getCurrentPower]);
+//                            break;
+//                        }
+//                    }
+//                    /*************************************/
+//                    NSString *temps = nil;
+//                    for(int i =0; i < [payMoney length]; i++)
+//                    {
+//                        temps = [payMoney substringWithRange:NSMakeRange(i, 1)];
+//
+//                        if ([temps isEqualToString:@"0"]) {
+//
+//                        }else
+//                        {
+//                            NSString *pays = [payMoney substringWithRange:NSMakeRange(i, [payMoney length] - i)];
+//                            MYLog(@"payMoney = %@",pays);
+//                            NSString *pay = [NSString stringWithFormat:@"%.2f",[pays floatValue]/100];
+//                            MYLog(@"payMoney = %@",pay);
+//                            //保存电费
+//                            [Config saveChargePay:[NSString stringWithFormat:@"%@￥",pay]];
+//
+//                            MYLog(@"getChargePay = %@",[Config getChargePay]);
+//                            break;
+//                        }
+//                    }
+    //=======================================================//
+//                    NSString *chargeStr = @"用户余额不足,停止充电！";
+//                    if (self.MoneyNoEnoughMesBlock) {
+//                        self.MoneyNoEnoughMesBlock(chargeStr);
+//                    }
+    //=======================================================//
+//                }
+/*************************************/
+//                if ([str isEqualToString:@"02"]) {//后台确认开启充电指令
+//                    MYLog(@"收到开启充电确认指令");
+//
+//                    if (self.StartChargeBlock) {
+//                        self.StartChargeBlock(text);
+//                    }
+//                    //桩ID
+//                    NSString *ID = [text substringWithRange:NSMakeRange(2, 18)];
+//                    MYLog(@"id = %@",ID);
+//                    //手机号
+//                    NSString *phoneNum = [text substringWithRange:NSMakeRange(20, 11)];
+//                    MYLog(@"phoneNum = %@",phoneNum);
+//
+//                }
+       //=======================================================//
+//                if ([str isEqualToString:@"03"]) {//后台发送充电金额，电量信息
+//                    MYLog(@"收到后台发送电量信息指令");
+//
+//                    //消费 金额
+//                    NSString *payMoney = [text substringWithRange:NSMakeRange(31, 6)];
+//                    MYLog(@"payMoney = %@",payMoney);
+//                    //已充电量
+//                    NSString *power = [text substringWithRange:NSMakeRange(37, 6)];
+//                    MYLog(@"power = %@",power);
+//
+//                    NSString *temp = nil;
+//                    /*************************************/
+//                    for(int i =0; i < [power length]; i++)
+//                    {
+//                        temp = [power substringWithRange:NSMakeRange(i, 1)];
+//                        if ([temp isEqualToString:@"0"]) {
+//
+//                        }else
+//                        {
+//                            NSString *powerNum = [power substringWithRange:NSMakeRange(i, [power length] - i)];
+//                            MYLog(@"powerNum = %@",powerNum);
+//                            NSString *charging = [NSString stringWithFormat:@"%.2f",[powerNum floatValue]/100];
+//                            MYLog(@"powerNum除于100 = %@",charging);
+//                            //保存电量
+//                            [Config saveCurrentPower:[NSString stringWithFormat:@"%@kwh",charging]];
+//                            break;
+//                        }
+//                    }
+//                    /*************************************/
+//                    NSString *temps = nil;
+//                    for(int i =0; i < [payMoney length]; i++)
+//                    {
+//                        temps = [payMoney substringWithRange:NSMakeRange(i, 1)];
+//                        if ([temps isEqualToString:@"0"]) {
+//
+//                        }else
+//                        {
+//                            NSString *pays = [payMoney substringWithRange:NSMakeRange(i, [payMoney length] - i)];
+//                            MYLog(@"payMoney = %@",pays);
+//                            NSString *pay = [NSString stringWithFormat:@"%.2f",[pays floatValue]/100];
+//                            MYLog(@"payMoney除于100 = %@",pay);
+//                            //保存电费
+//                            [Config saveChargePay:[NSString stringWithFormat:@"%@￥",pay]];
+//                            break;
+//                        }
+//                    }
+//                    /*************************************/
+//                    if (self.StartReceiveMesBlock) {
+//                        self.StartReceiveMesBlock(text);
+//                    }
+//
+//                }
+//  /*************************************/
+//                if ([str isEqualToString:@"06"]) {//后台主动停止充电
+//                    MYLog(@"收到后台主动停止充电确认指令");
+//
+//                    //消费 金额
+//                    NSString *payMoney = [text substringWithRange:NSMakeRange(31, 6)];
+//                    MYLog(@"payMoney = %@",payMoney);
+//                    //已充电量
+//                    NSString *power = [text substringWithRange:NSMakeRange(37, 6)];
+//                    MYLog(@"power = %@",power);
+//                    /*************************************/
+//                    NSString *temp = nil;
+//                    for(int i =0; i < [power length]; i++)
+//                    {
+//                        temp = [power substringWithRange:NSMakeRange(i, 1)];
+//                        if ([temp isEqualToString:@"0"]) {
+//
+//                        }else
+//                        {
+//                            NSString *powerNum = [power substringWithRange:NSMakeRange(i, [power length] - i)];
+//                            MYLog(@"powerNum = %@",powerNum);
+//                            NSString *charging = [NSString stringWithFormat:@"%.2f",[powerNum floatValue]/100];
+//                            MYLog(@"powerNum = %@",charging);
+//                            //保存电量
+//                            [Config saveCurrentPower:[NSString stringWithFormat:@"%@kwh",charging]];
+//                            MYLog(@"getCurrentPower = %@",[Config getCurrentPower]);
+//                            break;
+//                        }
+//                    }
+//                    /*************************************/
+//                    NSString *temps = nil;
+//                    for(int i =0; i < [payMoney length]; i++)
+//                    {
+//                        temps = [payMoney substringWithRange:NSMakeRange(i, 1)];
+//                        if ([temps isEqualToString:@"0"]) {
+//
+//                        }else
+//                        {
+//                            NSString *pays = [payMoney substringWithRange:NSMakeRange(i, [payMoney length] - i)];
+//                            MYLog(@"payMoney = %@",pays);
+//                            NSString *pay = [NSString stringWithFormat:@"%.2f",[pays floatValue]/100];
+//                            MYLog(@"payMoney = %@",pay);
+//                            //保存电费
+//                            [Config saveChargePay:[NSString stringWithFormat:@"%@￥",pay]];
+//
+//                            MYLog(@"getChargePay = %@",[Config getChargePay]);
+//                            break;
+//                       }
+//                    }
+//                    /*************************************/
+//                        if (self.StopChargingMesBlock) {
+//                            self.StopChargingMesBlock(text);
+//                        }
+//
+//       }
+    /*************************************/
+//                if ([str isEqualToString:@"07"]) {//状态检测回复
+//                    MYLog(@"收到状态检测回复指令");
+//                    NSString *status = [text substringWithRange:NSMakeRange(31, 12)];
+//            //     NSString *status =  [text substringWithRange:NSMakeRange(37, 12)];
+//                    MYLog(@"status = %@",status);
+//                    /*************************************/
+//                    if ([status isEqualToString:@"000000000000"]) {
+//                        MYLog(@"状态正常");
+//                        NSString *chargeStr = @"状态正常";
+//                        if (self.ChargeStatusMesBlock) {
+//                            self.ChargeStatusMesBlock(chargeStr);
+//                        }
+//                        [self cutOffSocket];//切断socket   短连接
+//                        return;
+//                    }else if([status isEqualToString:@"999999999999"])
+//                    {
+//                        MYLog(@"充电桩故障");
+//                        NSString *chargeStr = @"充电桩故障";
+//                        if (self.ChargeStatusMesBlock) {
+//                            self.ChargeStatusMesBlock(chargeStr);
+//                        }
+//                        [self cutOffSocket];//切断socket
+//                        return;
+//                    }else if([status isEqualToString:@"999998999998"])
+//                    {
+//                        MYLog(@"充电桩正在使用");
+//                        NSString *chargeStr = @"充电桩正在使用";
+//                        if (self.ChargeStatusMesBlock) {
+//                            self.ChargeStatusMesBlock(chargeStr);
+//                        }
+//                        [self cutOffSocket];//切断socket
+//                        return;
+//                    }else if ([status isEqualToString:@"999997999997"])
+//                    {
+//                       MYLog(@"充电桩预约中");
+//                       NSString *chargeStr = @"充电桩被预约";
+//                        if (self.ChargeStatusMesBlock) {
+//                            self.ChargeStatusMesBlock(chargeStr);
+//                        }
+//                        [self cutOffSocket];//切断socket
+//                        return;
+//                    }
+//                }
+                /*************************************/
+//                if ([str isEqualToString:@"10"]) {
+//                    MYLog(@"收到预约回复指令");
+//                    NSString *status = [text substringWithRange:NSMakeRange(31, 12)];
+//                    if ([status isEqualToString:@"000000000000"]) {
+//                        MYLog(@"状态正常");
+//                        NSString *chargeStr = @"状态正常";
+//                        if (self.YuYueChargeStatusMesBlock) {
+//                            self.YuYueChargeStatusMesBlock(chargeStr);
+//                        }
+//                        [self cutOffSocket];//切断socket   短连接
+//                        return;
+//                    }
+//                    /*************************************/
+//                    if ([status isEqualToString:@"999997999997"])
+//                    {
+//                    MYLog(@"充电桩预约中");
+//                    NSString *chargeStr = @"充电桩被预约";
+//                    if (self.YuYueChargeStatusMesBlock) {
+//                        self.YuYueChargeStatusMesBlock(chargeStr);
+//                        }
+//                    [self cutOffSocket];//切断socket
+//                    return;
+//                    }
+//                /*************************************/
+//                    if([status isEqualToString:@"999998999998"])
+//                    {
+//                    MYLog(@"充电桩正在使用");
+//                    NSString *chargeStr = @"充电桩正在使用";
+//                    if (self.YuYueChargeStatusMesBlock) {
+//                        self.YuYueChargeStatusMesBlock(chargeStr);
+//                        }
+//                    [self cutOffSocket];//切断socket
+//                    return;
+//                    }
+//                    /*************************************/
+//                    if([status isEqualToString:@"999999999999"])
+//                    {
+//                    MYLog(@"充电桩故障");
+//                    NSString *chargeStr = @"充电桩故障";
+//                    if (self.YuYueChargeStatusMesBlock) {
+//                        self.YuYueChargeStatusMesBlock(chargeStr);
+//                        }
+//                    [self cutOffSocket];//切断socket
+//                    return;
+//                   }
+//                }
+               /*************************************/
+//                if ([str isEqualToString:@"11"]) {
+//                    MYLog(@"收到取消预约回复指令");
+//                    NSString *chargeStr = @"收到取消预约回复指令";
+//                    if (self.CancelYuYueChargeStatusMesBlock) {
+//                        self.CancelYuYueChargeStatusMesBlock(chargeStr);
+//                        }
+//                    [self cutOffSocket];//切断socket
+//                    return;
+//                }
+            
+            
+            
+            //和上面判断是否等于45是一组的
+            
+//            }else
+//            {
+//                MYLog(@"接收到的不是操作指令");
+//            }
+            
+             //------------和上面的第二个for循环是一伙的--------------//
+            
+//        }
+             //------------和上面的第一个for循环是一伙的--------------//
+//    }
+
 }
 
 // 切断socket
@@ -537,10 +694,14 @@
 //开始充电
 -(void)startChargingWithChargeNum:(NSString *)ChargeNum
 {
-   NSString *brStr = @"\r\n";//换行符
-   NSString *startString = [NSString stringWithFormat:@"MM%@%@00000000000001%@",ChargeNum,[Config getMobile],brStr];//开启电桩指令
+    NSString *brStr = @"\r\n";//换行符
+    NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
+    NSString *str1 = [NSString stringWithFormat:@"%@%@%@",@"01",strAscll1,[Config getMobile]];
+    NSString *str2 = [RsaUtil encryptString:str1 publicKey:Public];
+    NSString * strAscll2 = [XStringUtil ascllString:str2];
+    NSString *startString = [NSString stringWithFormat:@"AABB6001%@",strAscll2];
+//   NSString *startString = [NSString stringWithFormat:@"MM%@%@00000000000001%@",ChargeNum,[Config getMobile],brStr];//开启电桩指令
    NSData   *dataStream  = [startString dataUsingEncoding:NSUTF8StringEncoding];
-    
    [clientSocket writeData:dataStream withTimeout:-1 tag:1];
 }
 
@@ -549,19 +710,25 @@
 {
    MYLog(@"停止充电");
    NSString *brStr = @"\r\n";//换行符
-   NSString *stopString = [NSString stringWithFormat:@"MM%@%@00000000000005%@",ChargeNum,[Config getMobile],brStr];
-   MYLog(@"停止充电指令 = %@",stopString);
-   NSData   *dataStream  = [stopString dataUsingEncoding:NSUTF8StringEncoding];
-   [clientSocket writeData:dataStream withTimeout:-1 tag:1];
+    
+    NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
+    NSString *str1 = [NSString stringWithFormat:@"%@%@%@",@"02",strAscll1,[Config getMobile]];
+    NSString *str2 = [RsaUtil encryptString:str1 publicKey:Public];
+    NSString * strAscll2 = [XStringUtil ascllString:str2];
+    NSString *stopString = [NSString stringWithFormat:@"AABB6001%@",strAscll2];
+//    NSString *stopString = [NSString stringWithFormat:@"MM%@%@00000000000005%@",ChargeNum,[Config getMobile],brStr];
+    MYLog(@"停止充电指令 = %@",stopString);
+    NSData   *dataStream  = [stopString dataUsingEncoding:NSUTF8StringEncoding];
+    [clientSocket writeData:dataStream withTimeout:-1 tag:1];
 }
 
 //查询充电桩状
 -(void)checkChargeStatusWithChargeNum:(NSString *)ChargeNum
 {
     NSString *brStr = @"\r\n";//换行符
-   NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
+    NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
     NSString *str1 = [NSString stringWithFormat:@"%@%@",@"03",strAscll1];
-    NSString *str2 = [RsaUtil encryptString:str1 publicKey:@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDRC7JFsEdbatU1a59gF0juUyXzOoPwE3Gfa2NZd6B0yq/MudU+HKN+5bBk698A25cPIeQO/aHl9tMUCB2df0cXVZnAEijGB6It6LP4vz6KhKZBZD8bHXrb4OqrddoKrkWZtyZOVQBtq/GawEjGqRsIC8Y1l5XRjBandByK+U7ZlQIDAQAB"];
+    NSString *str2 = [RsaUtil encryptString:str1 publicKey:Public];
     NSString * strAscll2 = [XStringUtil ascllString:str2];
     NSString *checkString = [NSString stringWithFormat:@"AABB6001%@",strAscll2];
     

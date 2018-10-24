@@ -850,13 +850,13 @@
     }else
     {
         //判断是否在充电状态
-        if ([Config getUseCharge]) {
-            ChargeingsViewController *chargeingVC = [[ChargeingsViewController alloc]init];
-            [self.navigationController pushViewController:chargeingVC animated:YES];
-        }else
-        {
+//        if ([Config getUseCharge]) {
+//            ChargeingsViewController *chargeingVC = [[ChargeingsViewController alloc]init];
+//            [self.navigationController pushViewController:chargeingVC animated:YES];
+//        }else
+//        {
             [self saoMaAction];
-        }
+//        }
         
     }
 }
@@ -1258,11 +1258,11 @@
     MYLog(@"扫码状态界面的用户id获取情况 = %@",[Config getOwnID]);
     if ([Config getOwnID]) {
         //判断是否是充电状态
-        if ([Config getUseCharge]) {
-            //提示：请结束当前充电
-            [MBProgressHUD showError:@"正在充电,请先结束充电!"];
-        }else
-        {
+//        if ([Config getUseCharge]) {
+//            //提示：请结束当前充电
+//            [MBProgressHUD showError:@"正在充电,请先结束充电!"];
+//        }else
+//        {
             static dispatch_once_t onceToken;
             
             dispatch_once(&onceToken, ^{
@@ -1423,7 +1423,7 @@
             }];
             
             [self.navigationController pushViewController:readerVc animated:YES];
-        }
+//        }
     }else
     {
         [self loginShow];//登陆界面

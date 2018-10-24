@@ -137,8 +137,8 @@
         [self.checkTimer invalidate];
         self.checkTimer = nil;
             
-    if ([chargeStr isEqualToString:@"充电桩掉线"]) {
-        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"此充电桩不能用" preferredStyle:UIAlertControllerStyleAlert];
+    if ([chargeStr isEqualToString:@"断连"]) {
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"此充电桩和后台断链，目前不可用" preferredStyle:UIAlertControllerStyleAlert];
             
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
@@ -151,16 +151,16 @@
         [self presentViewController:alertVc animated:YES completion:nil];
         }
             
-        if ([chargeStr isEqualToString:@"状态正常"]) {
+        if ([chargeStr isEqualToString:@"状态空闲"]) {
             self.chargeStatus = chargeStr;
                 
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [[Singleton sharedInstance] socketConnectHost];//连接socket
                 });
-            }else if ([chargeStr isEqualToString:@"充电桩故障"])
-            {
+        }else if ([chargeStr isEqualToString:@"启动失败"])
+        {
                 self.chargeStatus = chargeStr;
-                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩故障" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩启动失败" preferredStyle:UIAlertControllerStyleAlert];
                 
                 UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -169,17 +169,17 @@
                 [alertVc addAction:sureAction];
                 [self presentViewController:alertVc animated:YES completion:nil];
                 
-            }else if ([chargeStr isEqualToString:@"充电桩正在使用"])
+            }else if ([chargeStr isEqualToString:@"充电中"])
             {
                 self.chargeStatus = chargeStr;
-                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩正在使用" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩正在被使用" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }];
                 
                 [alertVc addAction:sureAction];
                 [self presentViewController:alertVc animated:YES completion:nil];
-          }else if ([chargeStr isEqualToString:@"充电桩被预约"])
+          }else if ([chargeStr isEqualToString:@"预约状态"])
           {
               self.chargeStatus = chargeStr;
               UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩被预约" preferredStyle:UIAlertControllerStyleAlert];
@@ -191,6 +191,18 @@
               [alertVc addAction:sureAction];
               [self presentViewController:alertVc animated:YES completion:nil];
           
+          }else if ([chargeStr isEqualToString:@"准备开始充电"])
+          {
+              self.chargeStatus = chargeStr;
+              UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"准备开始充电" preferredStyle:UIAlertControllerStyleAlert];
+              
+              UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                  [self.navigationController popToRootViewControllerAnimated:YES];
+              }];
+              
+              [alertVc addAction:sureAction];
+              [self presentViewController:alertVc animated:YES completion:nil];
+              
           }else
           {
               UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩异常状态" preferredStyle:UIAlertControllerStyleAlert];
@@ -294,6 +306,7 @@
     [[Singleton sharedInstance] cutOffSocket];//主动断开socket
 }
 
+//开始充电按钮
 - (IBAction)startChageClick:(id)sender {
     MYLog(@"点击了开始充电");
     //如果在预约别的桩，要先取消预约，才能充电。
@@ -355,7 +368,7 @@
                 time = OUTP_TIME;
                 //初始化超时时间
                 self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
-                
+//--------开始充电------------------------------------------------//
                 //进入充电步揍
                 [[Singleton sharedInstance] startChargingWithChargeNum:self.chargeingNum];//开始充电
                 
@@ -368,6 +381,28 @@
                 {
       
                     MYLog(@"返回的充电确认充电指令text = %@",text);
+                if ([text isEqualToString:@"01"]) {
+//                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"开启充电成功" preferredStyle:UIAlertControllerStyleAlert];
+//                        
+//                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//                            [self.navigationController popToRootViewControllerAnimated:YES];
+//                        }];
+//                        
+//                        [alertVc addAction:sureAction];
+//                        [self presentViewController:alertVc animated:YES completion:nil];
+                    }else if ([text isEqualToString:@"00"]){
+                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"开启充电失败" preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                            [self.navigationController popToRootViewControllerAnimated:YES];
+                        }];
+                        
+                        [alertVc addAction:sureAction];
+                        [self presentViewController:alertVc animated:YES completion:nil];
+                    }
+                    
+                    
+                    
                     [self.timer invalidate];
                     self.timer = nil;
                     if (self.chargeVC == nil) {

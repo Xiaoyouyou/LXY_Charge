@@ -16,6 +16,7 @@
 		75E58AE1217B8C8E00BA2BF2 /* MyCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */; };
 		75E58AE2217B8C8E00BA2BF2 /* MyCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */; };
 		75F1C38A217F3C0100577B46 /* RsaUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C389217F3C0100577B46 /* RsaUtil.m */; };
+		75F1C39821808CF300577B46 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F1C39721808CF300577B46 /* libiconv.tbd */; };
 		75FDA57521778D98004A70E1 /* MyAddCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FDA57321778D98004A70E1 /* MyAddCarViewController.m */; };
 		75FDA57621778D98004A70E1 /* MyAddCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */; };
 		850698CF1D054F650002D28B /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850698CE1D054F650002D28B /* back@2x.png */; };
@@ -422,6 +423,7 @@
 		75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCarTableViewCell.xib; sourceTree = "<group>"; };
 		75F1C388217F3C0100577B46 /* RsaUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RsaUtil.h; sourceTree = "<group>"; };
 		75F1C389217F3C0100577B46 /* RsaUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RsaUtil.m; sourceTree = "<group>"; };
+		75F1C39721808CF300577B46 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		75FDA57221778D98004A70E1 /* MyAddCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAddCarViewController.h; sourceTree = "<group>"; };
 		75FDA57321778D98004A70E1 /* MyAddCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAddCarViewController.m; sourceTree = "<group>"; };
 		75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAddCarViewController.xib; sourceTree = "<group>"; };
@@ -955,6 +957,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75F1C39821808CF300577B46 /* libiconv.tbd in Frameworks */,
 				85BA182E1E8CECAB00FB63D7 /* TencentOpenAPI.framework in Frameworks */,
 				8594585E1E665CB3007BB59F /* AddressBookUI.framework in Frameworks */,
 				852437DF1E49666F00678821 /* RichAPM.framework in Frameworks */,
@@ -1984,6 +1987,7 @@
 		900AB28FF0A0ABD8FC737EF1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75F1C39721808CF300577B46 /* libiconv.tbd */,
 				85BA18341E8CF6C500FB63D7 /* TencentOpenApi_IOS_Bundle.bundle */,
 				85BA182D1E8CECAB00FB63D7 /* TencentOpenAPI.framework */,
 				8595E6C51E652B2800E0C5B1 /* AddressBookUI.framework */,

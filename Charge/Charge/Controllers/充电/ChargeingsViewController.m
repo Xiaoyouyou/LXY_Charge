@@ -437,7 +437,7 @@
          timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
         [timer fire];
         [MBProgressHUD showMessage:@"正在结束充电"];
-        [[Singleton sharedInstance] stopChargingWithChargeNum:self.chargeingNum];//停止充电
+        [[Singleton sharedInstance] stopChargingWithChargeNum:@"1122334455667777"];//停止充电self.chargeingNum
         
     }];
     
