@@ -24,7 +24,6 @@
 #import "YBMonitorNetWorkState.h"
 #import "QRCodeReader.h"
 #import "XFunction.h"
-#import "MJExtension.h"
 #import "MBProgressHUD+MJ.h"
 #import "AdvertisementView.h"
 #import "MBProgressHUD.h"
@@ -62,6 +61,8 @@
 #import <ImageIO/ImageIO.h>
 /*-----------罗小友-------------*/
 #import "MeViewController.h"
+#import "ScreeningViewController.h"
+
 
 #define leftWidth (230)
 
@@ -110,6 +111,8 @@
 @property (nonatomic, strong) NSMutableArray *juDianChargingMess;//聚电桩数组
 @property (nonatomic, strong) NSMutableArray *totalChargeArray;//总充电转数组
 @property (strong, nonatomic) IBOutlet UIButton *refreshBtnPro;//刷新按钮属性
+
+@property (nonatomic, strong) UIView *screen;
 
 
 - (IBAction)locationActionClick:(id)sender;
@@ -192,7 +195,11 @@
     self.qiPaoArray = [NSMutableArray array];
     self.JuDianqiPaoArray = [NSMutableArray array];
     self.totalChargeArray = [NSMutableArray array];
-    
+    UIView *screen = [[UIView alloc]init];
+    self.screen = screen;
+    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight);
+    screen.backgroundColor = [UIColor redColor];
+//    [self.navigationController addChildViewController:screen];
     // Do any additional setup after loading the view from its nib.
     //初始化地图
     [self initMapView];
@@ -305,7 +312,7 @@
     };
     navView.rightBlock = ^{
         //个人中心按钮
-        [self PersonActionClick:nil];      
+        [self PersonActionClick:nil];
     };
     [self.view addSubview:navView];
     
@@ -380,7 +387,7 @@
                             
                              for (QiPaoBMKPointAnnotation *pointAnnotation in self.qiPaoArray) {
                                  if (pointAnnotation == view.annotation) {
-                            
+                            //跳转到桩位详情页
                                     ChargeDetailViewController *chargeVCc = [[ChargeDetailViewController alloc] init];
                                     chargeVCc.id = pointAnnotation.id;
                                     [self presentViewController:chargeVCc animated:YES completion:nil];
@@ -775,41 +782,48 @@
     
 }
 
-#pragma mark - 个人中心按钮
+#pragma mark - 右边的排序按钮中心按钮
+BOOL btnStatus = YES;
 - (IBAction)PersonActionClick:(id)sender {
-        if ([Config getOwnID]) {
-            //侧滑view
-            _leftView = [[PersonSlideView alloc]initWithFrame:CGRectMake(-leftWidth-5, 0, leftWidth, XYScreenHeight) superView:self.view];
-            _leftView.delegate = self;
-            
-            [self.view addSubview:_leftView];
-            [_leftView handle:^(NSInteger indexRow) {
-                MYLog(@"%d",(int)indexRow);
-            }];
-            [_leftView leftViewShow:YES];
-            
-        }else
-        {
-            [self loginShow];
-        }
+//        if ([Config getOwnID]) {
+//            //侧滑view
+//            _leftView = [[PersonSlideView alloc]initWithFrame:CGRectMake(-leftWidth-5, 0, leftWidth, XYScreenHeight) superView:self.view];
+//            _leftView.delegate = self;
+//
+//            [self.view addSubview:_leftView];
+//            [_leftView handle:^(NSInteger indexRow) {
+//                MYLog(@"%d",(int)indexRow);
+//            }];
+//            [_leftView leftViewShow:YES];
+//
+//        }else
+//        {
+//            [self loginShow];
+//        }
+  
+//    [self.navigationController addChildViewController:screen];
+    
+    if (btnStatus == YES) {
+        [self.view addSubview:self.screen];
+        btnStatus = NO;
+    }else{
+        [self.screen removeFromSuperview];
+        btnStatus = YES;
+    }
 }
 #pragma mark -- 消息按钮
 
 - (IBAction)MessageActionClick:(id)sender {
-    
-    AlertLoginView *alertVC = [[AlertLoginView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
-    [alertVC awakeFromNib];
-    
-    if ([Config getOwnID]) {
+//    LoginViewController *loginVC = [[LoginViewController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] init];
+//    [nav addChildViewController:loginVC];
+//    [self presentViewController:nav animated:YES completion:nil];
+//    AlertLoginView *alertVC = [[AlertLoginView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
+//    [alertVC awakeFromNib];
+
         MessageCentreViewController *messageVC = [[MessageCentreViewController alloc] init];
         [self.navigationController pushViewController:messageVC animated:YES];
-    }else
-    {
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] init];
-        [nav addChildViewController:loginVC];
-        [self presentViewController:nav animated:YES completion:nil];
-    }
+    
 }
 
 -(void)bgViewClick
@@ -915,8 +929,16 @@
 //预约
 - (void)yuYueClick
 {
-    MyReservationViewController *MyReservationVC = [[MyReservationViewController alloc]init];
-    [self.navigationController pushViewController:MyReservationVC animated:YES];
+    if ([Config getOwnID] == nil || [Config getToken] == nil) {
+        LoginViewController *login = [[LoginViewController alloc] init];
+        [self presentViewController:login animated:YES completion:nil];
+    }else{
+        MyReservationViewController *MyReservationVC = [[MyReservationViewController alloc]init];
+        [self.navigationController pushViewController:MyReservationVC animated:YES];
+    }
+    
+    
+  
 }
 //钱包
 - (void)qianBaoClick

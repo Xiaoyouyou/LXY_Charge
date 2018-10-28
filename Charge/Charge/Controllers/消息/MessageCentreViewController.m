@@ -16,6 +16,8 @@
 #import "WMNetWork.h"
 #import "MJExtension.h"
 #import "UserGuideViewController.h"
+#import "LoginViewController.h"
+
 
 @interface MessageCentreViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -93,6 +95,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if ([Config getOwnID] == nil) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self presentViewController:loginVC animated:YES completion:nil];
+    }
 }
 
 

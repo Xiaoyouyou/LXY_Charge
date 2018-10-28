@@ -24,6 +24,7 @@
 #import "Masonry.h"
 #import "NavView.h"
 
+#import "LoginViewController.h"
 @interface MyCollectViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -172,6 +173,10 @@
         //   MYLog(@"collectResponseObj = %@",responseObj);
         //异常登陆
         if ([responseObj[@"status"] intValue] == 401) {
+            
+//            LoginViewController *login = [[LoginViewController alloc] init];
+//            [self.navigationController pushViewController:login animated:YES];
+            
             [Config removeOwnID];//移除ID
             [Config removeUseName];//移除用户名字
             //退出登陆时通知主控制器收起左滑界面

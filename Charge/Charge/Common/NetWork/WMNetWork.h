@@ -11,9 +11,9 @@
 
 @interface WMNetWork : NSObject
 
-+(void)post:(NSString*)url parameters:(NSMutableDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure;
++(void)post:(NSString*)url parameters:(NSDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure;
 
-+(void)get:(NSString*)url parameters:(NSMutableDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure;
++(void)get:(NSString*)url parameters:(NSDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure;
 
 
 @end

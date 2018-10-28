@@ -10,7 +10,7 @@
 
 @implementation WMNetWork
 
-+(void)post:(NSString*)url parameters:(NSMutableDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
++(void)post:(NSString*)url parameters:(NSDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
 {
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     //设置超时时间
@@ -37,7 +37,7 @@
     
 }
 
-+(void)get:(NSString*)url parameters:(NSMutableDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
++(void)get:(NSString*)url parameters:(NSDictionary*)parameters success:(void(^)(id responseObj))success failure:(void(^)(NSError *error))failure
 {
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     //设置超时时间

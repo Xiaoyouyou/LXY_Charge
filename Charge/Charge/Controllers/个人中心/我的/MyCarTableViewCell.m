@@ -17,6 +17,13 @@
     // Initialization code
 }
 
+-(void)setListModel:(MyCarListModel *)listModel{
+    [self.chargeIamge sd_setImageWithURL:[NSURL URLWithString:listModel.img]];
+    self.CarModels.text = listModel.pattern;
+    self.CarNumber.text = listModel.plate_number;
+    self.CarChargeType.text = listModel.brand;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

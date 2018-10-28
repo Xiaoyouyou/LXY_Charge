@@ -32,6 +32,10 @@
 #import <MapKit/MapKit.h>
 #import <AddressBook/AddressBook.h>
 #import "CLLocation+YCLocation.h"
+
+
+#import "ChargeNumberModel1.h"
+#import "ChargeNumberModel2.h"
 //#import <CoreLocation/CoreLocation.h>
 
 @interface ChargeDetailViewController ()<BMKLocationServiceDelegate>
@@ -72,6 +76,12 @@
 
 @property (nonatomic, strong) CLLocation *location;
 
+//装列表的数组
+@property (nonatomic, strong) NSMutableArray *array;
+@property (nonatomic, strong) NSMutableArray *A;
+@property (nonatomic, strong) NSMutableArray *B;
+@property (nonatomic, strong) NSMutableArray *zhuangID;
+
 
 
 - (IBAction)collectBtnAction:(UIButton *)sender;
@@ -84,6 +94,33 @@
 
 #pragma mark - 百度地图位置更新代理方法
 
+-(NSMutableArray *)array{
+    if(!_array){
+        _array = [NSMutableArray array];
+    }
+    return _array;
+}
+
+-(NSMutableArray *)A{
+    if(!_A){
+        _A = [NSMutableArray array];
+    }
+    return _A;
+}
+
+-(NSMutableArray *)B{
+    if(!_B){
+        _B = [NSMutableArray array];
+    }
+    return _B;
+}
+
+-(NSMutableArray *)zhuangID{
+    if(!_zhuangID){
+        _zhuangID = [NSMutableArray array];
+    }
+    return _zhuangID;
+}
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
@@ -116,7 +153,8 @@
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backClick)];
 //    [self.backView addGestureRecognizer:tap];
     [_backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
-    
+    //加载桩列表数据
+    [self loadZhuangWeiNumber];
     //按钮框
     [self creatDetailBtnKuang];
     
@@ -135,6 +173,40 @@
     [_dict setObject:self.distanceStr forKey:@"distance"];//距离
     
 }
+#pragma arguments  加载桩位个数数据
+-(void)loadZhuangWeiNumber{
+    
+    if (self.id == nil) {
+        return ;
+    }
+    NSDictionary *parames = @{
+                              @"stationId" : self.id
+                              };
+    [WMNetWork get:Chargenumber parameters:parames success:^(id responseObj) {
+        NSLog(@"responseObj:%@",responseObj);
+        self.array = [NSMutableArray arrayWithObject:responseObj[@"piles"]][0];
+//        for (int i = 0; i < self.array.count; i++) {
+//            NSArray *arr = self.array[i];
+            for (NSDictionary *dict in self.array) {
+                NSMutableArray *arr1 = [NSMutableArray arrayWithObject:dict[@"cdqList"]][0];
+                NSMutableArray *arr2 = [NSMutableArray arrayWithObject:dict[@"cdzCode"]][0];
+                [self.zhuangID addObject:arr2];
+//                for (NSArray *array3 in arr1) {
+                
+                        ChargeNumberModel1 *model1 = [ChargeNumberModel1 objectWithKeyValues:arr1[0]];
+                        [self.A addObject:model1];
+                    
+                        ChargeNumberModel2 *model2 = [ChargeNumberModel2 objectWithKeyValues:arr1[1]];
+                        [self.B addObject:model2];                    
+                }
+//            }
+//        }
+//        NSArray *array = self.array[0];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 #pragma mark - 初始化    点击地图上的电桩浮标，然后显示出来的充电桩详情界面
 -(void)initData
@@ -145,8 +217,8 @@
     NSString *currentDate = [dateFormatter stringFromDate:[NSDate date]];
     
     NSMutableDictionary *parames1 = [NSMutableDictionary dictionary];
-    parames1[@"id"] = self.id;
-    parames1[@"currTime"] = currentDate;
+    parames1[@"stationId"] = self.id;
+//    parames1[@"currTime"] = currentDate;
     parames1[@"userId"] = [Config getOwnID];
     MYLog(@"selfid = %@",self.id);
     
@@ -165,55 +237,71 @@
             if (self.tipview) {
                 self.tipview.alpha = 0;
             }
+//            {
+//                result =     {
+//                    acCount = 0;
+//                    address = "\U5e7f\U4e1c\U7701\U5e7f\U5dde\U5e02\U5927\U677e\U5c97\U505c\U8f66\U573a";
+//                    dcCount = 27;
+//                    isCollected = 0;
+//                    latitude = "23.280026";
+//                    longitude = "113.246371";
+//                    name = "\U767d\U4e91\U6c5f\U9ad8\U7ad9";
+//                    stationId = 7de026ea82e54d7f93dd28bfeebaec03;
+//                };
+//                status = 0;
+//            }
+
             
             _ChargeDetal = [ChargeDetalMes objectWithKeyValues:responseObj[@"result"]];
             //充电站经纬度
             self.endLatitude = [_ChargeDetal.latitude doubleValue];
             self.endLongitude = [_ChargeDetal.longitude doubleValue];
         
-            NSMutableArray *array = [PilesModel objectArrayWithKeyValuesArray:_ChargeDetal.piles];
+//            NSMutableArray *array = [PilesModel objectArrayWithKeyValuesArray:_ChargeDetal.piles];
             //初始化数组
-            self.dataArray = [NSMutableArray arrayWithArray:array];
+//            self.dataArray = [NSMutableArray arrayWithArray:array];
             //桩位数据字典
             _cheWeiDict = [NSMutableDictionary dictionary];
-            [_cheWeiDict setObject:_ChargeDetal.fastCount forKey:@"fastCount"];//快充
-            [_cheWeiDict setObject:_ChargeDetal.slowCount forKey:@"slowCount"];//慢充
-            
+//            [_cheWeiDict setObject:_ChargeDetal.fastCount forKey:@"fastCount"];//快充
+//            [_cheWeiDict setObject:_ChargeDetal.slowCount forKey:@"slowCount"];//慢充
+//
             //初始化字典
             _dict = [NSMutableDictionary dictionary];
             [_dict setObject:_ChargeDetal.name forKey:@"name"];//充电站点名字
             [_dict setObject:_ChargeDetal.address forKey:@"address"];//充电站点地址
             [_dict setObject:_ChargeDetal.latitude forKey:@"latitude"];//站点经度
             [_dict setObject:_ChargeDetal.longitude forKey:@"longitude"];//站点纬度
-            [_dict setObject:_ChargeDetal.chargingId forKey:@"chargingId"];//计费规则id
-            [_dict setObject:_ChargeDetal.fastCount forKey:@"fastCount"];//快充
-            [_dict setObject:_ChargeDetal.slowCount forKey:@"slowCount"];//慢充
-            [_dict setObject:_ChargeDetal.id forKey:@"id"];//站点id
+//            [_dict setObject:_ChargeDetal.chargingId forKey:@"chargingId"];//计费规则id
+//            [_dict setObject:_ChargeDetal.fastCount forKey:@"fastCount"];//快充
+//            [_dict setObject:_ChargeDetal.slowCount forKey:@"slowCount"];//慢充
+            [_dict setObject:_ChargeDetal.dcCount forKey:@"dcCount"];//zhi充
+            [_dict setObject:_ChargeDetal.acCount forKey:@"acCount"];//jiao充
+            [_dict setObject:_ChargeDetal.stationId forKey:@"id"];//站点id
         /*-----------------------------------------------*/
          
-            if(_ChargeDetal.piles == NULL){
-                 MYLog(@"_ChargeDetal 的值为NULL = %@",_ChargeDetal.all_chargingSub);
-            }else{
-                self.all_chargingSub = [NSMutableArray arrayWithArray:_ChargeDetal.piles];
-                MYLog(@"all_chargingSub:%@",_ChargeDetal.all_chargingSub);
-            }
+//            if(_ChargeDetal.piles == NULL){
+//                 MYLog(@"_ChargeDetal 的值为NULL = %@",_ChargeDetal.all_chargingSub);
+//            }else{
+//                self.all_chargingSub = [NSMutableArray arrayWithArray:_ChargeDetal.piles];
+//                MYLog(@"all_chargingSub:%@",_ChargeDetal.all_chargingSub);
+//            }
         /*-----------------------------------------------*/
             
-            if (_ChargeDetal.chargingSub == NULL) {
-                MYLog(@"_ChargeDetal 的值为NULL = %@",_ChargeDetal.chargingSub);
-            }else
-            {
-                [_dict setObject:_ChargeDetal.chargingSub.chargeCost forKey:@"chargeCost"];//电费价格
-                [_dict setObject:_ChargeDetal.chargingSub.discountRate forKey:@"discountRate"];//折扣率
-                [_dict setObject:_ChargeDetal.chargingSub.emptyCost forKey:@"emptyCost"];//预约费
-                [_dict setObject:_ChargeDetal.chargingSub.endTime forKey:@"endTime"];//结束时间
-                [_dict setObject:_ChargeDetal.chargingSub.parkingCharge forKey:@"parkingCharge"];//停车费
-                [_dict setObject:_ChargeDetal.chargingSub.serviceCost forKey:@"serviceCost"];//服务费
-                [_dict setObject:_ChargeDetal.chargingSub.startTime forKey:@"startTime"];//起始时间
-                
-                self.dataDict = _dict;
-            }
-            
+//            if (_ChargeDetal.chargingSub == NULL) {
+//                MYLog(@"_ChargeDetal 的值为NULL = %@",_ChargeDetal.chargingSub);
+//            }else
+//            {
+//                [_dict setObject:_ChargeDetal.chargingSub.chargeCost forKey:@"chargeCost"];//电费价格
+//                [_dict setObject:_ChargeDetal.chargingSub.discountRate forKey:@"discountRate"];//折扣率
+//                [_dict setObject:_ChargeDetal.chargingSub.emptyCost forKey:@"emptyCost"];//预约费
+//                [_dict setObject:_ChargeDetal.chargingSub.endTime forKey:@"endTime"];//结束时间
+//                [_dict setObject:_ChargeDetal.chargingSub.parkingCharge forKey:@"parkingCharge"];//停车费
+//                [_dict setObject:_ChargeDetal.chargingSub.serviceCost forKey:@"serviceCost"];//服务费
+//                [_dict setObject:_ChargeDetal.chargingSub.startTime forKey:@"startTime"];//起始时间
+//
+//                self.dataDict = _dict;
+//            }
+             self.dataDict = _dict;
             //计算距离
             [self jiSuanDistance];
             //创建子控制器
@@ -253,8 +341,11 @@
 {
     //桩位控制器
     ZhuangWeiMesViewController *ZhuangWeiMesVC = [[ZhuangWeiMesViewController alloc] init];
-    ZhuangWeiMesVC.chargeDataModel = self.dataArray;//桩位控制器数据
-    ZhuangWeiMesVC.dict = self.cheWeiDict;//桩的数量字典
+    ZhuangWeiMesVC.chargeNumber = self.array;//桩位控制器数据
+    ZhuangWeiMesVC.zhuangA = self.A;
+    ZhuangWeiMesVC.zhzuangB = self.B;
+    ZhuangWeiMesVC.zhuangID = self.zhuangID;
+  //  ZhuangWeiMesVC.dict = self.cheWeiDict;//桩的数量字典
     
     ZhuangWeiMesVC.view.frame = self.subView.frame;
     [self addChildViewController:ZhuangWeiMesVC];
@@ -266,7 +357,8 @@
     
     //详情控制器
     DetailZhuangWeiViewController *DetailZhuangWeiVC = [[DetailZhuangWeiViewController alloc]init];
-    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
+    DetailZhuangWeiVC.id = self.id;
+//    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
     DetailZhuangWeiVC.chargeDeatlModel = self.dataDict;//详情控制器数据
     DetailZhuangWeiVC.view.frame = self.subView.frame;
     [self addChildViewController:DetailZhuangWeiVC];

@@ -580,9 +580,10 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
           if ([userInfo.checkCharging isEqualToString:@"1"]) {
               //通知首页加载继续充电
               [[NSNotificationCenter defaultCenter] postNotificationName:CheckChargingNotis object:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
           }
           
-          [self dismissViewControllerAnimated:YES completion:nil];
+         
       });
       
       }else if([responseObj[@"status"] intValue] == -1)

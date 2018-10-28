@@ -8,6 +8,7 @@
 
 #import "ZhuangWeiMesViewController.h"
 #import "DetailZhuangWeiViewTableViewCell.h"
+#import "ChargeNumberCell.h"
 #import "ZhuangWeiHeaderView.h"
 #import "XFunction.h"
 #import "PilesModel.h"
@@ -35,25 +36,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _j = 0;
-    
-    //遍历数据数组获取空闲的充电桩
-    for (int i = 0; i<self.dataArray.count; i++) {
-       PilesModel *pileMes =  self.dataArray[i];
-    if ([pileMes.status isEqualToString:@"1"]) {
-        _j++;
-        }
-    }
-    
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    _zhuangWei = [[ZhuangWeiHeaderView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, 62)];
-    _zhuangWei.zhiliu = self.zhiliu;
-    _zhuangWei.jiaoliu = self.jiaoliu;
-    _zhuangWei.total = self.total;
-    _zhuangWei.free = [NSString stringWithFormat:@"空闲：%ld",(long)_j];
-    
-    [self.view addSubview:_zhuangWei];
-    
+//    _j = 0;
+//
+//    //遍历数据数组获取空闲的充电桩
+//    for (int i = 0; i<self.dataArray.count; i++) {
+//       PilesModel *pileMes =  self.dataArray[i];
+//    if ([pileMes.status isEqualToString:@"1"]) {
+//        _j++;
+//        }
+//    }
+//
+//    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//    _zhuangWei = [[ZhuangWeiHeaderView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, 62)];
+//    _zhuangWei.zhiliu = self.zhiliu;
+//    _zhuangWei.jiaoliu = self.jiaoliu;
+//    _zhuangWei.total = self.total;
+//    _zhuangWei.free = [NSString stringWithFormat:@"空闲：%ld",(long)_j];
+//
+//    [self.view addSubview:_zhuangWei];
+//
+    NSLog(@"%@",self.zhuangID);
     [self creatUI];
 
 }
@@ -64,16 +66,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:self.tableView];
-    
+    self.tableView.rowHeight = 120;
+    [self.tableView registerNib:[UINib nibWithNibName:@"ChargeNumberCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ChargeNumberCell"];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-
-        make.top.equalTo(_zhuangWei.mas_bottom).offset(10);
+        make.top.equalTo(self.view);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
-        
     }];
 }
 
@@ -84,9 +85,9 @@
 
 #pragma mark - UITableView代理方法
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 50;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -97,7 +98,7 @@
 //设置每个区有多少行共有多少行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+    return self.chargeNumber.count;
 }
 
 //响应点击事件
@@ -108,48 +109,53 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdetifier = @"ListsCells";
-    DetailZhuangWeiViewTableViewCell *listcell = [tableView dequeueReusableCellWithIdentifier:cellIdetifier];
+    ChargeNumberCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChargeNumberCell" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    static NSString *cellIdetifier = @"ListsCells";
+//    DetailZhuangWeiViewTableViewCell *listcell = [tableView dequeueReusableCellWithIdentifier:cellIdetifier];
+//
+//    if (listcell == nil) {
+//        UINib *nib = [UINib nibWithNibName:@"DetailZhuangWeiViewTableViewCell" bundle:nil];
+//        [tableView registerNib:nib forCellReuseIdentifier:cellIdetifier];
+//        listcell = [tableView dequeueReusableCellWithIdentifier:cellIdetifier];
+//    }
+//
+    cell.model1 = self.zhuangA[indexPath.row];
+    cell.model2 = self.zhzuangB[indexPath.row];
+    cell.ZhuangID.text = [NSString stringWithFormat:@"%@",self.zhuangID[indexPath.row]];
+//    PilesModel *pileMes =  self.dataArray[indexPath.row];
+//    listcell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    listcell.zhuangNum.text = pileMes.name;
+//    if ([pileMes.type isEqualToString:@"0"]) {
+//        listcell.status.image = [UIImage imageNamed:@"mans.png"];
+//        listcell.types.text = @"慢";
+//
+//    }else if ([pileMes.type isEqualToString:@"1"])
+//    {
+//        listcell.status.image = [UIImage imageNamed:@"kuais@2x.png"];
+//        listcell.types.text = @"快";
+//    }
+//
+//    if ([pileMes.status isEqualToString:@"1"]) {
+//        listcell.statusImage.image = [UIImage imageNamed:@"free@2x.png"];
+//    }else if ([pileMes.status isEqualToString:@"3"])
+//    {
+//        listcell.statusImage.image = [UIImage imageNamed:@"zhanYong@2x.png"];
+//    }else if([pileMes.status isEqualToString:@"2"])
+//    {
+//        listcell.statusImage.image = [UIImage imageNamed:@"faults@2x.png"];
+//    }else if([pileMes.status isEqualToString:@"4"])
+//    {
+//        listcell.statusImage.image = [UIImage imageNamed:@"YuYues@2x.png"];
+//    }else if([pileMes.status isEqualToString:@"5"])
+//    {
+//        listcell.statusImage.image = [UIImage imageNamed:@"OutsLine@2x.png"];
+//    }else if([pileMes.status isEqualToString:@"0"])
+//    {
+//        listcell.statusImage.image = [UIImage imageNamed:@"stop@2x.png"];
+//    }
 
-    if (listcell == nil) {
-        UINib *nib = [UINib nibWithNibName:@"DetailZhuangWeiViewTableViewCell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:cellIdetifier];
-        listcell = [tableView dequeueReusableCellWithIdentifier:cellIdetifier];
-    }
- 
-    PilesModel *pileMes =  self.dataArray[indexPath.row];
-    listcell.selectionStyle = UITableViewCellSelectionStyleNone;
-    listcell.zhuangNum.text = pileMes.name;
-    if ([pileMes.type isEqualToString:@"0"]) {
-        listcell.status.image = [UIImage imageNamed:@"mans.png"];
-        listcell.types.text = @"慢";
-        
-    }else if ([pileMes.type isEqualToString:@"1"])
-    {
-        listcell.status.image = [UIImage imageNamed:@"kuais@2x.png"];
-        listcell.types.text = @"快";
-    }
-    
-    if ([pileMes.status isEqualToString:@"1"]) {
-        listcell.statusImage.image = [UIImage imageNamed:@"free@2x.png"];
-    }else if ([pileMes.status isEqualToString:@"3"])
-    {
-        listcell.statusImage.image = [UIImage imageNamed:@"zhanYong@2x.png"];
-    }else if([pileMes.status isEqualToString:@"2"])
-    {
-        listcell.statusImage.image = [UIImage imageNamed:@"faults@2x.png"];
-    }else if([pileMes.status isEqualToString:@"4"])
-    {
-        listcell.statusImage.image = [UIImage imageNamed:@"YuYues@2x.png"];
-    }else if([pileMes.status isEqualToString:@"5"])
-    {
-        listcell.statusImage.image = [UIImage imageNamed:@"OutsLine@2x.png"];
-    }else if([pileMes.status isEqualToString:@"0"])
-    {
-        listcell.statusImage.image = [UIImage imageNamed:@"stop@2x.png"];
-    }
-
-    return listcell;
+    return cell;
 }
 
 ////tableView间距处理代理方法
@@ -163,11 +169,11 @@
     return 0.1;
 }
 
--(void)setChargeDataModel:(NSArray *)chargeDataModel
-{
-    _chargeDataModel = chargeDataModel;
-    self.dataArray = chargeDataModel;
-}
+//-(void)setChargeDataModel:(NSArray *)chargeDataModel
+//{
+//    _chargeDataModel = chargeDataModel;
+//    self.dataArray = chargeDataModel;
+//}
 
 #pragma mark - set方法
 

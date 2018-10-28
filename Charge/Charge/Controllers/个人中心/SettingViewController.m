@@ -86,9 +86,13 @@
             UIAlertAction *sureAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                 
                   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                NSMutableDictionary *parmaes = [NSMutableDictionary dictionary];
-                parmaes[@"userId"] = [Config getOwnID];
-                
+//                NSMutableDictionary *parmaes = [NSMutableDictionary dictionary];
+//
+                [Config getOwnID];
+//                parmaes[@"userId"] = [Config getOwnID];
+                NSDictionary *parmaes = @{
+                                        @"userId" : [Config getOwnID]
+                                        };
                 [WMNetWork post:OutOfLogin parameters:parmaes success:^(id responseObj) {
                     MYLog(@"responseObj = %@",responseObj);
                     if ([responseObj[@"status"] intValue] == 0) {

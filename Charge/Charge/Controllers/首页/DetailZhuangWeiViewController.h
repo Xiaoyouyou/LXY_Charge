@@ -11,7 +11,7 @@
 
 @interface DetailZhuangWeiViewController : UIViewController
 @property (nonatomic, strong) NSMutableArray *all_chargingSub;
-
+@property(nonatomic, strong) NSString *id;//充电站的id
 @property (nonatomic, strong) NSMutableDictionary *chargeDeatlModel;
 
 @end

@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyCarListModel.h"
 
 @interface MyCarTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *chargeIamge;
 @property (strong, nonatomic) IBOutlet UILabel *CarModels;
 @property (strong, nonatomic) IBOutlet UILabel *CarNumber;
 @property (strong, nonatomic) IBOutlet UILabel *CarChargeType;
-
+@property (nonatomic ,strong)MyCarListModel *listModel;
 
 +(instancetype)creatMyCarCell;
 @end

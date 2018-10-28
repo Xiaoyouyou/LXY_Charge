@@ -50,6 +50,10 @@
     _FutitleLab.textColor = RGBA(132, 133, 134, 1);
     [self addSubview:_FutitleLab];
     
+    //添加一个导航按钮
+    
+    
+    
     _diastaceLab = [[UILabel alloc] init];
     _diastaceLab.font = [UIFont systemFontOfSize:13];
     _diastaceLab.text = @"600m";
@@ -69,14 +73,14 @@
     
     _fastLab = [[UILabel alloc] init];
     _fastLab.font = [UIFont systemFontOfSize:13];
-    _fastLab.text = @"快(2)";
+    _fastLab.text = @"交流(2)";
     [_fastLab sizeToFit];
     _fastLab.textColor = RGBA(132, 133, 134, 1);
     [self addSubview:_fastLab];
     
     _slowLab = [[UILabel alloc] init];
     _slowLab.font = [UIFont systemFontOfSize:13];
-    _slowLab.text = @"慢(2)";
+    _slowLab.text = @"直流(2)";
     [_slowLab sizeToFit];
     _slowLab.textColor = RGBA(132, 133, 134, 1);
     [self addSubview:_slowLab];
@@ -113,7 +117,7 @@
     [_diastaceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(self.mas_right).offset(-15);
-        make.centerY.equalTo(_titleLab);
+        make.centerY.equalTo(self);
         
     }];
 

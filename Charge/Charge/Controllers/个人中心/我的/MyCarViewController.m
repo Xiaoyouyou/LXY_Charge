@@ -11,15 +11,26 @@
 #import "MyCarTableViewCell.h"
 #import "NavView.h"
 #import "Masonry.h"
+
+#import "MyCarListModel.h"
+
 #define StatusH [UIApplication sharedApplication].statusBarFrame.size.height + 44
 @interface MyCarViewController ()<UITableViewDelegate,UITableViewDataSource
 >
 @property (nonatomic ,strong)UITableView *tableView;
 @property (nonatomic ,strong)NSMutableDictionary *dict;
 @property (nonatomic ,strong)NSArray *array;
+@property (nonatomic ,strong)NSMutableArray *dataSource;
 @end
 
 @implementation MyCarViewController
+
+-(NSMutableArray *)dataSource{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,7 +39,32 @@
     [self addNavigationBar];
     //添加tableView
     [self addtableView];
+    [self addDataSource];
    
+}
+
+//添加数据
+-(void)addDataSource{
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    [parame setValue:[Config getOwnID] forKey:@"userId"];
+//    [parame setValue:@"" forKey:@""];
+    [WMNetWork get:ChargeMyCareList parameters:parame success:^(id responseObj) {
+//
+        if ([responseObj[@"status"] isEqualToString:@"0"]) {
+            NSMutableArray *muarr = [NSMutableArray objectArrayWithKeyValuesArray:responseObj[@"result"]];
+            for (NSDictionary *dict in muarr ) {
+                MyCarListModel *carListModel = [MyCarListModel objectWithKeyValues:dict];
+                [self.dataSource addObject:carListModel];
+            }
+            [self.tableView reloadData];
+        }else if([responseObj[@"status"] isEqualToString:@"-1"]){
+            [MBProgressHUD show:responseObj[@"result"] icon:nil view:self.view];
+        }
+      
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 -(void)addNavigationBar{
@@ -54,11 +90,13 @@
 
 -(void)addtableView{
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,StatusH, XYScreenWidth, XYScreenHeight) style:UITableViewStylePlain];
+    
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.autoresizingMask = YES;
-    tableView.rowHeight = 80;
+    tableView.rowHeight = 110;
     [self.view addSubview:tableView];
+    self.tableView = tableView;
 //    [tableView registerNib:[UINib nibWithNibName:@"MyCarTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MyCarCell"];
     
 }
@@ -71,11 +109,13 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     //    return self.array.count;
-     return 10;
+     return self.dataSource.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MyCarTableViewCell *cell = [MyCarTableViewCell creatMyCarCell];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.listModel = self.dataSource[indexPath.row];
     return cell;
 }
 

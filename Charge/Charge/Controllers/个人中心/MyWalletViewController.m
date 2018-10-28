@@ -35,7 +35,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
     NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
     paramers[@"userId"] = [Config getOwnID];
     NSLog(@"getOwnID = %@",[Config getOwnID]);
