@@ -48,6 +48,7 @@
 @property (strong, nonatomic) IBOutlet UIView *backView;
 @property (strong, nonatomic) IBOutlet UIButton *endChrgeingBtn;
 @property (nonatomic, retain)  NSTimer *Timer; // 充电时间定时器
+@property (nonatomic, retain)  NSTimer *chargeTimer; // 获取电量定时器
 
 @property (strong, nonatomic) IBOutlet UILabel *costMoney;//消费金额
 @property (strong, nonatomic) IBOutlet UILabel *chargedAmount;//已充电量
@@ -249,9 +250,9 @@
             MYLog(@"getChargePaygetChargePay%@",[Config getChargePay]);
             MYLog(@"getCurrentPowergetCurrentPower%@",[Config getCurrentPower]);
             
-            self.ChangePay.payMoneyStr = [Config getChargePay];
+            self.ChangePay.payMoneyStr = [Config getCurrentPower];
          
-            self.ChangePay.powersStr = [Config getCurrentPower];
+            self.ChangePay.powersStr =  [Config getChargePay];
     
             self.ChangePay.chargeTimeStr = self.chargeTime.text;
             
@@ -327,6 +328,7 @@
                   self.chargedAmount.text = [NSString stringWithFormat:@"%@kwh",charging];
                   //保存电量
                   [Config saveCurrentPower:[NSString stringWithFormat:@"%@kwh",charging]];
+               
                    break;
               }
           }
@@ -393,9 +395,84 @@
     self.Timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeAdd) userInfo:nil repeats:YES];
     [self.Timer fire];
     
+    self.chargeTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(checkUpChargeMessage) userInfo:nil repeats:YES];
+    [self.chargeTimer fire];
+    
     //增加异常登录通知
   //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yiChangLogin) name:YiChangLogin object:nil];
 }
+
+
+-(void)checkUpChargeMessage{
+    NSDictionary *paramer = @{
+                              @"userId":[Config getOwnID]
+                              };
+    [WMNetWork get:ChargeMessge parameters:paramer success:^(id responseObj) {
+        NSString *str1 = responseObj[@"chargInfo"][@"spendMoney"];
+         NSString *str2 = responseObj[@"chargInfo"][@"electric"];
+        self.costMoney.text = [NSString stringWithFormat:@"%.3f￥",str1.floatValue];//消费金额
+        self.chargedAmount.text = [NSString stringWithFormat:@"%.3fkwh",str2.floatValue];//已充电量
+        
+        [Config saveCurrentPower:[NSString stringWithFormat:@"%.3f￥",str2.floatValue]];
+        //保存电量
+        [Config saveChargePay: [NSString stringWithFormat:@"%.3fkwh",str1.floatValue]];//保存电费
+        
+        if(![responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
+            [MBProgressHUD showSuccess:@"充电已经结束"];
+            //充电之后的结算
+            self.costMoney.text = [NSString stringWithFormat:@"%.3f￥",str1.floatValue];//消费金额
+            self.chargedAmount.text = [NSString stringWithFormat:@"%.3fkwh",str2.floatValue];//已充电量
+            
+            [Config saveCurrentPower:[NSString stringWithFormat:@"%.3f￥",str2.floatValue]];
+            //保存电量
+            [Config saveChargePay: [NSString stringWithFormat:@"%.3fkwh",str1.floatValue]];//保存电费
+            //结束充电通知 修改首页扫码充电按钮文字
+            [[NSNotificationCenter defaultCenter] postNotificationName:EndChargeingMessage object:nil];
+            //跳转到结算界面
+            //---------------------------------------------------------//
+            if (self.ChangePay == nil) {
+                self.ChangePay = [[ChangePayViewController alloc] init];
+                
+                if ([Config getChargePay] == NULL) {
+                    self.ChangePay.payMoneyStr =@"0￥";
+                }else
+                {
+                    self.ChangePay.payMoneyStr = [Config getChargePay];
+                }
+                
+                if ([Config getCurrentPower] == NULL) {
+                    self.ChangePay.powersStr =@"0kwh";
+                }else
+                {
+                    self.ChangePay.powersStr = [Config getCurrentPower];
+                }
+                
+                self.ChangePay.chargeTimeStr = self.chargeTime.text;
+                
+                
+                if (self.MoneyNoEnoughTipStr == nil) {
+                    self.ChangePay.alertTitle = @"";
+                }else
+                {
+                    self.ChangePay.alertTitle = @"提示：余额不足，自动停止充电并结算!";
+                }
+                NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:self.ChangePay.chargeTimeStr,@"time",self.MoneyNoEnoughTipStr,@"unenoughMoney", nil];
+                //如果self.navigationController为null 通知首页推出结算界面 否则在当前页面推出结算界面
+                if (self.navigationController == NULL) {
+                    //通知首页推出结算界面
+                    [[NSNotificationCenter defaultCenter] postNotificationName:JiTingChargeNot object:nil userInfo:dict];
+                }else
+                {
+                    [self.navigationController pushViewController:self.ChangePay animated:YES];
+                }
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -406,6 +483,10 @@
     //超时定时器销毁
     [timer invalidate];
     timer = nil;
+    
+    
+    [self.chargeTimer invalidate];//时间停止  超时定时器销毁
+    self.chargeTimer = nil;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
@@ -436,8 +517,9 @@
         //初始化超时时间
          timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
         [timer fire];
-        [MBProgressHUD showMessage:@"正在结束充电"];
-        [[Singleton sharedInstance] stopChargingWithChargeNum:@"1122334455667777"];//停止充电self.chargeingNum
+        [MBProgressHUD showSuccess:@"正在结束充电"];
+//        [[Singleton sharedInstance] startReconectBlcok];
+        [[Singleton sharedInstance] stopChargingWithChargeNum:self.chargeingNum];//停止充电
         
     }];
     
@@ -544,90 +626,108 @@
 -(void)abnormalStopCharge
 {
     [Singleton sharedInstance].StopChargingMesBlock = ^(NSString *text){
+        
+        //text:aabb05001 406001290 20181028-22-23-43 20181028-22-25-55
+        NSString *status = [text substringWithRange:NSMakeRange(4, 4)];
+        NSString *status2 = [text substringWithRange:NSMakeRange(4, 2)];
+        if([status isEqualToString:@"0201"]){
+            [MBProgressHUD showMessage:@"正在结束充电,请稍后" toView:self.view];
+        }else if([status isEqualToString:@"0200"]){
+            [MBProgressHUD showSuccess:@"结束充电失败"];
+            [[Singleton sharedInstance] cutOffSocket];
+        }
+        if([status2 isEqualToString:@"05"]){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if (self.ChangePay == nil) {
+                
+                //存充电状态:0.代表结束充电
+                [Config saveUseCharge:@"0"];
+                MYLog(@"getUseCharge = %@",[Config getUseCharge]);
+                
+                //充电计时器销毁
+                [self.Timer invalidate];//时间停止
+                self.Timer = nil;
+                mySeconds = 0;
+                
+                //超时定时器销毁
+                [timer invalidate];
+                timer = nil;
+                
+                //结束充电通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:EndChargeingMessage object:nil];
+                
+                //跳转到结算界面
+                
+                
+ //---------------------------------------------------------//
+//                self.ChangePay = [[ChangePayViewController alloc] init];
+//
+//
+//                if ([Config getChargePay] == NULL) {
+//                    self.ChangePay.payMoneyStr =@"0￥";
+//                }else
+//                {
+//                    self.ChangePay.payMoneyStr = [Config getChargePay];
+//                }
+//
+//                if ([Config getCurrentPower] == NULL) {
+//                    self.ChangePay.powersStr =@"0kwh";
+//                }else
+//                {
+//                    self.ChangePay.powersStr = [Config getCurrentPower];
+//                }
+//
+//                self.ChangePay.chargeTimeStr = self.chargeTime.text;
+//
+//
+//                if (self.MoneyNoEnoughTipStr == nil) {
+//                    self.ChangePay.alertTitle = @"";
+//                }else
+//                {
+//                    self.ChangePay.alertTitle = @"提示：余额不足，自动停止充电并结算!";
+//                }
+//
+//                NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:self.ChangePay.chargeTimeStr,@"time",self.MoneyNoEnoughTipStr,@"unenoughMoney", nil];
+//
+//                //如果self.navigationController为null 通知首页推出结算界面 否则在当前页面推出结算界面
+//                if (self.navigationController == NULL) {
+//                    //通知首页推出结算界面
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:JiTingChargeNot object:nil userInfo:dict];
+//
+//                }else
+//                {
+//                    [self.navigationController pushViewController:self.ChangePay animated:YES];
+//                }
+//
+                [self checkUpChargeMessage];
+                //移除当前时间
+                [Config removeCurrentDate];
+                //移除电量和电费
+                [Config removeChargePay];
+                [Config removeCurrentPower];
+                //移除充电桩号
+                [Config removeChargeNum];
+                //移除用户充电状态
+                [Config removeUseCharge];
+                //移除充电状态
+                [Config removeUseCharge];
+                //存正常结束充电标志位为1
+                [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
+                
+                
+                //   [self.navigationController pushViewController:self.ChangePay animated:YES];
+                NSLog(@"navigationController = %@",self.navigationController);
+                //断开socket
+                 [MBProgressHUD showSuccess:@"结束充电成功"];
+                [[Singleton sharedInstance] cutOffSocket];
+            }
+        }
         //结束充电
-        [MBProgressHUD hideHUD];
         MYLog(@"接收到的结束充电指令text = %@",text);
         
-        //断开socket
-        [[Singleton sharedInstance] cutOffSocket];
-        
-        if (self.ChangePay == nil) {
-        
-        //存充电状态:0.代表结束充电
-        [Config saveUseCharge:@"0"];
-        MYLog(@"getUseCharge = %@",[Config getUseCharge]);
-        
-        //充电计时器销毁
-        [self.Timer invalidate];//时间停止
-        self.Timer = nil;
-        mySeconds = 0;
-        
-        //超时定时器销毁
-        [timer invalidate];
-        timer = nil;
-        
-        //结束充电通知
-        [[NSNotificationCenter defaultCenter] postNotificationName:EndChargeingMessage object:nil];
-        
-        //跳转到结算界面
-         
-        self.ChangePay = [[ChangePayViewController alloc] init];
-            
-            if ([Config getChargePay] == NULL) {
-                self.ChangePay.payMoneyStr =@"0￥";
-            }else
-            {
-              self.ChangePay.payMoneyStr = [Config getChargePay];
-            }
-            
-            if ([Config getCurrentPower] == NULL) {
-                 self.ChangePay.powersStr =@"0kwh";
-            }else
-            {
-                self.ChangePay.powersStr = [Config getCurrentPower];
-            }
 
-        self.ChangePay.chargeTimeStr = self.chargeTime.text;
-            
         
-        if (self.MoneyNoEnoughTipStr == nil) {
-            self.ChangePay.alertTitle = @"";
-        }else
-        {
-            self.ChangePay.alertTitle = @"提示：余额不足，自动停止充电并结算!";
-        }
-         
-        NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:self.ChangePay.chargeTimeStr,@"time",self.MoneyNoEnoughTipStr,@"unenoughMoney", nil];
-        
-        //如果self.navigationController为null 通知首页推出结算界面 否则在当前页面推出结算界面
-        if (self.navigationController == NULL) {
-                //通知首页推出结算界面
-            [[NSNotificationCenter defaultCenter] postNotificationName:JiTingChargeNot object:nil userInfo:dict];
-                
-        }else
-        {
-                [self.navigationController pushViewController:self.ChangePay animated:YES];
-        }
-            
-        //移除当前时间
-        [Config removeCurrentDate];
-        //移除电量和电费
-        [Config removeChargePay];
-        [Config removeCurrentPower];
-        //移除充电桩号
-        [Config removeChargeNum];
-        //移除用户充电状态
-        [Config removeUseCharge];
-        //移除充电状态
-        [Config removeUseCharge];
-        //存正常结束充电标志位为1
-        [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
-
- 
-     //   [self.navigationController pushViewController:self.ChangePay animated:YES];
-        NSLog(@"navigationController = %@",self.navigationController);
-        
-        }
+       
     };
 //}];
 }

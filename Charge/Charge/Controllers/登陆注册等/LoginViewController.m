@@ -158,10 +158,11 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [MBProgressHUD showSuccess:@"登录成功"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [self dismissViewControllerAnimated:YES completion:nil];
-            });
+            [self dismissViewControllerAnimated:YES completion:nil];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                
+//            
+//            });
             
         });
 
@@ -580,10 +581,8 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
           if ([userInfo.checkCharging isEqualToString:@"1"]) {
               //通知首页加载继续充电
               [[NSNotificationCenter defaultCenter] postNotificationName:CheckChargingNotis object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
           }
-          
-         
+           [self dismissViewControllerAnimated:YES completion:nil];
       });
       
       }else if([responseObj[@"status"] intValue] == -1)

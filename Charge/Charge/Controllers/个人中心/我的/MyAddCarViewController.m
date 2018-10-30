@@ -134,7 +134,7 @@
     [self.pamaer setValue:[Config getOwnID] forKey:@"userId"];
     NSLog(@"%@",self.pamaer);
 //    [self.pamaer setValue:@"" forKey:@"userId"];
-    [WMNetWork post:ChargeAddMyCare parameters:nil success:^(id responseObj) {
+    [WMNetWork post:ChargeAddMyCare parameters:self.pamaer success:^(id responseObj) {
         if([responseObj[@"status"] isEqualToString:@"0"]){
             [MBProgressHUD showSuccess:@"添加车辆成功"];
         }else if ([responseObj[@"status"] isEqualToString:@"1"]){
@@ -188,9 +188,9 @@
         [self.pamaer setValue:@"个人" forKey:@"type"];
     }];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"公司" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self.carType setTitle:@"公司" forState:UIControlStateNormal];
-        [self.pamaer setValue:@"公司" forKey:@"type"];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"企业" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self.carType setTitle:@"企业" forState:UIControlStateNormal];
+        [self.pamaer setValue:@"企业" forKey:@"type"];
     }];
     
     [alertVc addAction:cancelAction];
@@ -211,11 +211,14 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.tag == 123) {
-        [self.pamaer setValue:textField.text forKey:@"brand"];
+        NSString *str = [NSString stringWithFormat:@"%@",textField.text];
+        [self.pamaer setValue:str forKey:@"brand"];
     }else if (textField.tag == 124){
-        [self.pamaer setValue:textField.text forKey:@"pattern"];
+        NSString *str = [NSString stringWithFormat:@"%@",textField.text];
+        [self.pamaer setValue:str forKey:@"pattern"];
     }else if (textField.tag == 125){
-        [self.pamaer setValue:textField.text forKey:@"plateNumber"];
+        NSString *str = [NSString stringWithFormat:@"%@",textField.text];
+        [self.pamaer setValue:str forKey:@"plateNumber"];
     }
     NSLog(@"----%@",textField.text);
 }

@@ -16,6 +16,8 @@
 		757BA8322184761C00D4B6FE /* ChargeNumberModel2.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA8312184761C00D4B6FE /* ChargeNumberModel2.m */; };
 		757BA83621854C5000D4B6FE /* ChargeNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA83421854C5000D4B6FE /* ChargeNumberCell.m */; };
 		757BA83721854C5000D4B6FE /* ChargeNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BA83521854C5000D4B6FE /* ChargeNumberCell.xib */; };
+		757BA85021872FC900D4B6FE /* meme.png in Resources */ = {isa = PBXBuildFile; fileRef = 757BA84F21872FC800D4B6FE /* meme.png */; };
+		757BA8532187547400D4B6FE /* ChargeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA8522187547400D4B6FE /* ChargeMessageViewController.m */; };
 		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
 		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
 		75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA662174D4B400AC2F73 /* MyCarViewController.m */; };
@@ -432,6 +434,9 @@
 		757BA83321854C5000D4B6FE /* ChargeNumberCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeNumberCell.h; sourceTree = "<group>"; };
 		757BA83421854C5000D4B6FE /* ChargeNumberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeNumberCell.m; sourceTree = "<group>"; };
 		757BA83521854C5000D4B6FE /* ChargeNumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChargeNumberCell.xib; sourceTree = "<group>"; };
+		757BA84F21872FC800D4B6FE /* meme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meme.png; sourceTree = "<group>"; };
+		757BA8512187547400D4B6FE /* ChargeMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeMessageViewController.h; sourceTree = "<group>"; };
+		757BA8522187547400D4B6FE /* ChargeMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeMessageViewController.m; sourceTree = "<group>"; };
 		75BCDA1C217316A600AC2F73 /* MeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		75BCDA1D217316A600AC2F73 /* MeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		75BCDA222173488300AC2F73 /* MeVcWithMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeVcWithMineView.h; sourceTree = "<group>"; };
@@ -1094,6 +1099,8 @@
 				75E58ADE217B8C8E00BA2BF2 /* MyCarTableViewCell.h */,
 				75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */,
 				75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */,
+				757BA8512187547400D4B6FE /* ChargeMessageViewController.h */,
+				757BA8522187547400D4B6FE /* ChargeMessageViewController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1570,6 +1577,7 @@
 				85C630751E97302E0039D755 /* 导航栏切图 */,
 				857FD66B1E9DF17A00D4E000 /* 引导页 */,
 				852EB5F11EA0BC1A00C5FE42 /* refreshBtn */,
+				757BA84F21872FC800D4B6FE /* meme.png */,
 				8591FF811D12AB1E003084C3 /* heiquan@2x.png */,
 				75F1C3A92182022E00577B46 /* addMyCar.png */,
 				852409001EA491E600E71529 /* 666.gif */,
@@ -2232,6 +2240,7 @@
 				857F29D41DF15F560093A564 /* NoneYuYue@2x.png in Resources */,
 				85E69F601D0E9CB3002D8AB5 /* quan1@2x.png in Resources */,
 				8586D9671E9F293800D061EE /* close@3x.png in Resources */,
+				757BA85021872FC900D4B6FE /* meme.png in Resources */,
 				857FD6821E9E00A500D4E000 /* 03@2x.png in Resources */,
 				852EB6011EA0BC8F00C5FE42 /* ref6@2x.png in Resources */,
 				85D955E51D06C75D00615182 /* HeaderImageTableViewCell.xib in Resources */,
@@ -2481,6 +2490,7 @@
 				859C09E81D0805950002600D /* DetailZhuangWeiHeaderView.m in Sources */,
 				850698DD1D0566280002D28B /* RecommendedViewController.m in Sources */,
 				859FC9B61DDC295700D7C4B6 /* YuYueViewController.m in Sources */,
+				757BA8532187547400D4B6FE /* ChargeMessageViewController.m in Sources */,
 				75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */,
 				8534BD5B1E0275C100823484 /* YuYueChargeModel.m in Sources */,
 				8529C7A11D24B26D00211D2F /* CATCurveProgressView.m in Sources */,
@@ -2820,7 +2830,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "181afbfa-d97c-4045-b3c7-fbe03a5bb74d";
+				PROVISIONING_PROFILE = "1e581d90-54eb-4df8-9370-29fc3770dac0";
 				PROVISIONING_PROFILE_SPECIFIER = Charge_LXY_Text_PP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2905,7 +2915,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "181afbfa-d97c-4045-b3c7-fbe03a5bb74d";
+				PROVISIONING_PROFILE = "1e581d90-54eb-4df8-9370-29fc3770dac0";
 				PROVISIONING_PROFILE_SPECIFIER = Charge_LXY_Text_PP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

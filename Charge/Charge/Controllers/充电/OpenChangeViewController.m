@@ -137,8 +137,8 @@
         [self.checkTimer invalidate];
         self.checkTimer = nil;
             
-    if ([chargeStr isEqualToString:@"断连"]) {
-        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"此充电桩和后台断链，目前不可用" preferredStyle:UIAlertControllerStyleAlert];
+    if ([chargeStr isEqualToString:@"10"] || [chargeStr isEqualToString:@"04"] || [chargeStr isEqualToString:@"05"] || [chargeStr isEqualToString:@"06"]) {
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"此充电桩有故障，目前不可用" preferredStyle:UIAlertControllerStyleAlert];
             
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
@@ -151,69 +151,24 @@
         [self presentViewController:alertVc animated:YES completion:nil];
         }
             
-        if ([chargeStr isEqualToString:@"状态空闲"]) {
+        if ([chargeStr isEqualToString:@"01"] || [chargeStr isEqualToString:@"02"] || [chargeStr isEqualToString:@"03"]) {
             self.chargeStatus = chargeStr;
-                
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[Singleton sharedInstance] socketConnectHost];//连接socket
-                });
-        }else if ([chargeStr isEqualToString:@"启动失败"])
+            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩被占用" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
+            
+            [alertVc addAction:sureAction];
+            [self presentViewController:alertVc animated:YES completion:nil];
+        }else if ([chargeStr isEqualToString:@"00"])
         {
-                self.chargeStatus = chargeStr;
-                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩启动失败" preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                }];
-                
-                [alertVc addAction:sureAction];
-                [self presentViewController:alertVc animated:YES completion:nil];
-                
-            }else if ([chargeStr isEqualToString:@"充电中"])
-            {
-                self.chargeStatus = chargeStr;
-                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩正在被使用" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                }];
-                
-                [alertVc addAction:sureAction];
-                [self presentViewController:alertVc animated:YES completion:nil];
-          }else if ([chargeStr isEqualToString:@"预约状态"])
-          {
-              self.chargeStatus = chargeStr;
-              UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩被预约" preferredStyle:UIAlertControllerStyleAlert];
-              
-              UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                  [self.navigationController popToRootViewControllerAnimated:YES];
-              }];
-              
-              [alertVc addAction:sureAction];
-              [self presentViewController:alertVc animated:YES completion:nil];
-          
-          }else if ([chargeStr isEqualToString:@"准备开始充电"])
-          {
-              self.chargeStatus = chargeStr;
-              UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"准备开始充电" preferredStyle:UIAlertControllerStyleAlert];
-              
-              UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                  [self.navigationController popToRootViewControllerAnimated:YES];
-              }];
-              
-              [alertVc addAction:sureAction];
-              [self presentViewController:alertVc animated:YES completion:nil];
-              
-          }else
-          {
-              UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"充电桩异常状态" preferredStyle:UIAlertControllerStyleAlert];
-              
-              UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                  [self.navigationController popToRootViewControllerAnimated:YES];
-              }];
-              
-              [alertVc addAction:sureAction];
-              [self presentViewController:alertVc animated:YES completion:nil];
-          }
+            self.chargeStatus = chargeStr;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[Singleton sharedInstance] socketConnectHost];//连接socket
+            });
+            [MBProgressHUD showSuccess:@"和后台连接成功"];
+        }
      };
     
     //检测电桩超时失败回调
@@ -306,7 +261,7 @@
     [[Singleton sharedInstance] cutOffSocket];//主动断开socket
 }
 
-//开始充电按钮
+//开启电桩按钮
 - (IBAction)startChageClick:(id)sender {
     MYLog(@"点击了开始充电");
     //如果在预约别的桩，要先取消预约，才能充电。
@@ -330,6 +285,7 @@
     NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
     paramers[@"userId"] = [Config getOwnID];
     [MBProgressHUD showMessage:@"" toView:self.view];
+    
     [WMNetWork post:GetBalance parameters:paramers success:^(id responseObj) {
         
         MYLog(@"responseObj = %@",responseObj);
@@ -367,7 +323,7 @@
                 //设置超时时间
                 time = OUTP_TIME;
                 //初始化超时时间
-                self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
 //--------开始充电------------------------------------------------//
                 //进入充电步揍
                 [[Singleton sharedInstance] startChargingWithChargeNum:self.chargeingNum];//开始充电
@@ -379,9 +335,23 @@
                 
                 [Singleton sharedInstance].StartChargeBlock = ^(NSString *text)
                 {
+                NSString *status = [text substringWithRange:NSMakeRange(4, 4)];
+                if ([status isEqualToString:@"0101"]) {
+                        [MBProgressHUD showMessage:@"正在初始化充电桩，请您耐心等待" toView:self.view];
+                }else if ([status isEqualToString:@"0100"]){
+                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"开启充电失败" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }];
+                    
+                    [alertVc addAction:sureAction];
+                    [self presentViewController:alertVc animated:YES completion:nil];
+                }
       
-                    MYLog(@"返回的充电确认充电指令text = %@",text);
-                if ([text isEqualToString:@"01"]) {
+                MYLog(@"返回的充电确认充电指令text = %@",text);
+                if ([status isEqualToString:@"0601"]) {
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
 //                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"开启充电成功" preferredStyle:UIAlertControllerStyleAlert];
 //                        
 //                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -390,26 +360,12 @@
 //                        
 //                        [alertVc addAction:sureAction];
 //                        [self presentViewController:alertVc animated:YES completion:nil];
-                    }else if ([text isEqualToString:@"00"]){
-                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"开启充电失败" preferredStyle:UIAlertControllerStyleAlert];
-                        
-                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                            [self.navigationController popToRootViewControllerAnimated:YES];
-                        }];
-                        
-                        [alertVc addAction:sureAction];
-                        [self presentViewController:alertVc animated:YES completion:nil];
-                    }
                     
-                    
-                    
-                    [self.timer invalidate];
-                    self.timer = nil;
                     if (self.chargeVC == nil) {
-                        
+     //-----------------------------------------------------------------//
                         self.chargeVC = [[ChargeingsViewController alloc] init];
-                        //self.chargeVC.chargeingNum = self.chargeingNum;//赋值充电桩桩号
-                          [MBProgressHUD hideHUDForView:self.view];
+                        //                        self.chargeVC.chargeingNum = self.chargeingNum;//赋值充电桩桩号
+                        [MBProgressHUD hideHUDForView:self.view];
                         //获取本地时间，并保存开始充电时间
                         NSDate *currentDate = [NSDate date];
                         [Config saveCurrentDate:currentDate];
@@ -432,9 +388,25 @@
                                 self.isUpdateLocation =0;
                             }
                         }
-
-                    }
-                };
+                        [self.timer invalidate];
+                        self.timer = nil;
+                        //断开连接
+//                        [[Singleton sharedInstance] cutOffSocket];
+                    }else if ([status isEqualToString:@"0600"]){
+                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"初始化充电桩失败,请再试一遍" preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                            [self.navigationController popToRootViewControllerAnimated:YES];
+                        }];
+                        
+                        [alertVc addAction:sureAction];
+                        [self presentViewController:alertVc animated:YES completion:nil];
+                        [[Singleton sharedInstance] cutOffSocket];
+                     }
+                    
+                   }
+               
+            };
                 
             }else
             {

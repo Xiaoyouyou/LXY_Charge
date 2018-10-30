@@ -311,8 +311,8 @@
         [self zhouBianTapAction];
     };
     navView.rightBlock = ^{
-        //个人中心按钮
-        [self PersonActionClick:nil];
+        //首页右边的按钮
+//        [self PersonActionClick:nil];
     };
     [self.view addSubview:navView];
     
@@ -611,120 +611,131 @@
     MYLog(@"检测充电状态");
     //如果用户登陆过就检查上次充电状态
     MYLog(@"检测充电状态getMobile = %@",[Config getMobile]);
-    if ([Config getMobile]) {
-        MYLog(@"[Config getNormalEndChargingFlag] = %@",[Config getNormalEndChargingFlag]);
-        if ([[Config getNormalEndChargingFlag] isEqualToString:@"0"]) {
-        
-            [MBProgressHUD showMessage:@"加载上次未结束充电状态" toView:self.view];
-            //参数
-            NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
-            paramers[@"mobile"] = [Config getMobile];//传参数用户手机号
-            //网络请求
-            [WMNetWork post:CheckLastChargingState parameters:paramers success:^(id responseObj) {
-                MYLog(@"%@",responseObj);
-                if ([responseObj[@"status"] intValue] == 0) {
-                    //请求数据成功
-                    MYLog(@"responseObj = %@",responseObj);
-            
-                    ChargingMessageModel *chargeMes = [ChargingMessageModel objectWithKeyValues:responseObj[@"result"]];
-                    MYLog(@"pile_id = %@\n,charging_fee = %@\n,charging_power = %@\n,start_time = %@\n,charging_status = %@\n,end_time = %@\n",chargeMes.pile_id,chargeMes.charging_fee,chargeMes.charging_power,chargeMes.start_time,chargeMes.charging_status,chargeMes.end_time);
-                    
-                    if (chargeMes.pile_id == NULL && chargeMes.charging_power == NULL && chargeMes.start_time == NULL && chargeMes.charging_status == NULL) {
-                        MYLog(@"服务器断开了,充电结束");
-                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器断开了,充电结束." message:nil preferredStyle:UIAlertControllerStyleAlert];
+    if([Config getOwnID] == nil){
+        return ;
+    }
+    NSDictionary *par = @{
+                          @"userId" : [Config getOwnID]
+                          };
+    [WMNetWork get:ChargeMessge parameters:par success:^(id responseObj) {
+        if([responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
+            NSLog(@"9---");
+                if ([Config getMobile]) {
+                    MYLog(@"[Config getNormalEndChargingFlag] = %@",[Config getNormalEndChargingFlag]);
+//
+//                }
+//            if ([[Config getNormalEndChargingFlag] isEqualToString:@"0"]) {
+                
+                [MBProgressHUD showMessage:@"加载上次未结束充电状态" toView:self.view];
+                //参数
+                NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
+                paramers[@"mobile"] = [Config getMobile];//传参数用户手机号
+                //网络请求
+                [WMNetWork post:CheckLastChargingState parameters:paramers success:^(id responseObj) {
+                    MYLog(@"%@",responseObj);
+                    if ([responseObj[@"status"] intValue] == 0) {
+                        //请求数据成功
+                        MYLog(@"responseObj = %@",responseObj);
                         
-                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                        ChargingMessageModel *chargeMes = [ChargingMessageModel objectWithKeyValues:responseObj[@"result"]];
+                        MYLog(@"pile_id = %@\n,charging_fee = %@\n,charging_power = %@\n,start_time = %@\n,charging_status = %@\n,end_time = %@\n",chargeMes.pile_id,chargeMes.charging_fee,chargeMes.charging_power,chargeMes.start_time,chargeMes.charging_status,chargeMes.end_time);
+                        
+                        if (chargeMes.pile_id == NULL && chargeMes.charging_power == NULL && chargeMes.start_time == NULL && chargeMes.charging_status == NULL) {
+                            MYLog(@"服务器断开了,充电结束");
+                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器断开了,充电结束." message:nil preferredStyle:UIAlertControllerStyleAlert];
                             
-                            [Config removeChargePay];//移除电费
-                            [Config removeChargeNum];//移除充电桩号
-                            [Config removeCurrentPower];//移除当前电量
-                            [Config removeCurrentDate];//移除当前时间
-                            //存充电状态:0.代表结束充电
-                            [Config saveUseCharge:@"0"];
+                            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                                
+                                [Config removeChargePay];//移除电费
+                                [Config removeChargeNum];//移除充电桩号
+                                [Config removeCurrentPower];//移除当前电量
+                                [Config removeCurrentDate];//移除当前时间
+                                //存充电状态:0.代表结束充电
+                                [Config saveUseCharge:@"0"];
+                                //存正常结束充电标志位为1
+                                [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
+                                
+                            }];
+                            
+                            [alertVc addAction:sureAction];
+                            
+                            [self presentViewController:alertVc animated:YES completion:nil];
                             //存正常结束充电标志位为1
                             [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
-                            
-                        }];
+                            return ;
+                        }
                         
-                        [alertVc addAction:sureAction];
-
-                        [self presentViewController:alertVc animated:YES completion:nil];
-                        //存正常结束充电标志位为1
-                        [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
-                        return ;
-                    }
-                    
-                    if ([chargeMes.charging_status isEqualToString:@"1"]) {
-                        //连接SCOKET
-                        [[Singleton sharedInstance] socketConnectHost];//连接socket
-                        //延时3秒
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                           [MBProgressHUD hideHUDForView:self.view animated:YES];
-                          
-                            if ([Singleton sharedInstance].isLink) {
-                            
-                                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-                                
-                                NSDate *startDate = [dateFormatter dateFromString:chargeMes.start_time];
-                                
-                                NSDate *currentDate = [NSDate date];
-                                
-                                NSString *value = [XStringUtil dateTimeDifferenceWithStartTimes:startDate endTime:currentDate];
-                                //赋值计时器初始值
-                                mySeconds = [value intValue];
-                                NSString *tmphh = [NSString stringWithFormat:@"%d",mySeconds/3600];
-                                if ([tmphh length] == 1)
-                                {
-                                    tmphh = [NSString stringWithFormat:@"0%@",tmphh];
-                                }
-                                NSString *tmpmm = [NSString stringWithFormat:@"%d",(mySeconds/60)%60];
-                                if ([tmpmm length] == 1)
-                                {
-                                    tmpmm = [NSString stringWithFormat:@"0%@",tmpmm];
-                                }
-                                NSString *tmpss = [NSString stringWithFormat:@"%d",mySeconds%60];
-                                if ([tmpss length] == 1)
-                                {
-                                    tmpss = [NSString stringWithFormat:@"0%@",tmpss];
-                                }
-                                //跳转界面
-                                ChargeingsViewController *chargeingVC = [[ChargeingsViewController alloc]init];
-                                //赋值电量
-                                
-                                //赋值电费
-                    
-//                              //保存充电开始时间
-                                [Config saveCurrentDate:startDate];
-                                MYLog(@"startDate = %@",startDate);
-                                MYLog(@"getCurrentDate = %@",[Config getCurrentDate]);
-                                //保存当前充电桩桩号
-                                [Config saveChargeNum:chargeMes.pile_id];
-                                //发送继续充电指令
-                                [[Singleton sharedInstance] continueCharging];
-                             
-                                [self.navigationController pushViewController:chargeingVC animated:YES];
-                            }else
-                            {
-                                MYLog(@"socket连接失败");
+                        if ([chargeMes.charging_status isEqualToString:@"1"]) {
+                            //连接SCOKET
+                            [[Singleton sharedInstance] socketConnectHost];//连接socket
+                            //延时3秒
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器连接失败,请重试！" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                                    [self checkChargeing];
-                                }];
                                 
-                                [alertVc addAction:sureAction];
-                                [self presentViewController:alertVc animated:YES completion:nil];
-                            }
-                        });
-                    }else if([chargeMes.charging_status isEqualToString:@"2"])
-                    {
-                        MYLog(@"充电结束");
-                        //延时3秒
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-                       
+                                if ([Singleton sharedInstance].isLink) {
+                                    
+                                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                                    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                                    
+                                    NSDate *startDate = [dateFormatter dateFromString:chargeMes.start_time];
+                                    
+                                    NSDate *currentDate = [NSDate date];
+                                    
+                                    NSString *value = [XStringUtil dateTimeDifferenceWithStartTimes:startDate endTime:currentDate];
+                                    //赋值计时器初始值
+                                    mySeconds = [value intValue];
+                                    NSString *tmphh = [NSString stringWithFormat:@"%d",mySeconds/3600];
+                                    if ([tmphh length] == 1)
+                                    {
+                                        tmphh = [NSString stringWithFormat:@"0%@",tmphh];
+                                    }
+                                    NSString *tmpmm = [NSString stringWithFormat:@"%d",(mySeconds/60)%60];
+                                    if ([tmpmm length] == 1)
+                                    {
+                                        tmpmm = [NSString stringWithFormat:@"0%@",tmpmm];
+                                    }
+                                    NSString *tmpss = [NSString stringWithFormat:@"%d",mySeconds%60];
+                                    if ([tmpss length] == 1)
+                                    {
+                                        tmpss = [NSString stringWithFormat:@"0%@",tmpss];
+                                    }
+                                    //跳转界面
+                                    ChargeingsViewController *chargeingVC = [[ChargeingsViewController alloc]init];
+                                    //赋值电量
+                                    
+                                    //赋值电费
+                                    
+                                    //                              //保存充电开始时间
+                                    [Config saveCurrentDate:startDate];
+                                    MYLog(@"startDate = %@",startDate);
+                                    MYLog(@"getCurrentDate = %@",[Config getCurrentDate]);
+                                    //保存当前充电桩桩号
+                                    [Config saveChargeNum:chargeMes.pile_id];
+                                    //发送继续充电指令
+                                    [[Singleton sharedInstance] continueCharging];
+                                    
+                                    [self.navigationController pushViewController:chargeingVC animated:YES];
+                                }else
+                                {
+                                    MYLog(@"socket连接失败");
+                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器连接失败,请重试！" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                                        [self checkChargeing];
+                                    }];
+                                    
+                                    [alertVc addAction:sureAction];
+                                    [self presentViewController:alertVc animated:YES completion:nil];
+                                }
+                            });
+                        }else if([chargeMes.charging_status isEqualToString:@"2"])
+                        {
+                            MYLog(@"充电结束");
+                            //延时3秒
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                
                                 MYLog(@"start_time = %@,end_time = %@",chargeMes.start_time,chargeMes.end_time);
                                 //计算充电时长
                                 NSString *chargeTime = [XStringUtil dateTimeDifferenceWithStartTime:chargeMes.start_time endTime:chargeMes.end_time];
@@ -736,28 +747,36 @@
                                 ChangePayVC.chargeTimeStr =  [NSString stringWithFormat:@"%@",chargeTime];//充电时间
                                 ChangePayVC.alertTitle = @"";
                                 [self.navigationController pushViewController:ChangePayVC animated:YES];
-                        });
+                            });
+                        }
+                    }else
+                    {
+                        //请求数据失败
+                        MYLog(@"没有上次充电状态");
                     }
-                }else
-                {
-                    //请求数据失败
-                    MYLog(@"没有上次充电状态");
-                }
-            } failure:^(NSError *error) {
-                  MYLog(@"%@",error);
-                  [MBProgressHUD hideHUD];
-                if (error) {
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"网络超时,退出APP重试!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                    }];
-                
-                    [alertVc addAction:sureAction];
-                    [self presentViewController:alertVc animated:YES completion:nil];
-                }
-            }];
+                } failure:^(NSError *error) {
+                    MYLog(@"%@",error);
+                    [MBProgressHUD hideHUD];
+                    if (error) {
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"网络超时,退出APP重试!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                        }];
+                        
+                        [alertVc addAction:sureAction];
+                        [self presentViewController:alertVc animated:YES completion:nil];
+                    }
+                }];
+            }
+          
+        }else{
+           NSLog(@"9---");
         }
-    }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
 }
 
 // 搜索按 钮点击事件
@@ -1307,6 +1326,7 @@ BOOL btnStatus = YES;
                     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
                     parmas[@"qrCode"] = resultAsString;//扫描结果10
                     parmas[@"token"] = [Config getToken];
+                    [Config saveChargeNum:resultAsString];
 //                       parmas[@"token"] = @"WG1mEQUUGqlnyvDz";
                     MYLog(@"token = %@",[Config getToken]);
                     

@@ -17,7 +17,7 @@
 //#define Host_IP @"10.0.0.5"
 //#define Host_IP @"183.234.61.201"
 //#define Host_IP @"192.168.1.107"
-#define Host_IP @"192.168.5.2"
+#define Host_IP @"192.168.5.10"
 
 #define Host_PORT 3005
 //#define Host_PORT 1026
@@ -150,11 +150,15 @@
 // 收到消息 //为了能时刻接收到socket的消息，在长连接方法中进行读取数据
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     
- 
-    
-    [clientSocket readDataWithTimeout:-1 tag:0];//-1无穷大
     NSString *text = [self cleanUTF8:data];
+    NSString *a = [text substringWithRange:NSMakeRange(0, 8)];
+    if([a isEqualToString:@"00000000"] && a.length > 8){
+        text = [text substringFromIndex:8];
+    }
+    [clientSocket readDataWithTimeout:-1 tag:0];//-1无穷大
+    
    
+    
 //    NSString *text = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     MYLog(@"收到消息 = %@",text);
     NSString *str = [text substringWithRange:NSMakeRange(4, 2)];
@@ -162,9 +166,9 @@
 //后台确认开启充电指令
     if ([str isEqualToString:@"01"]) {
         MYLog(@"收到开启充电确认指令");
-        NSString *status = [text substringWithRange:NSMakeRange(6, 2)];
+//        NSString *status = [text substringWithRange:NSMakeRange(4, 4)];
         if (self.StartChargeBlock) {
-            self.StartChargeBlock(status);
+            self.StartChargeBlock(text);
         }
 //        //桩ID
 //        NSString *ID = [text substringWithRange:NSMakeRange(2, 18)];
@@ -177,9 +181,9 @@
         
         if ([str isEqualToString:@"02"]) {
             MYLog(@"收到关闭充电确认指令");
-            NSString *status = [text substringWithRange:NSMakeRange(6, 2)];
+//            NSString *status = [text substringWithRange:NSMakeRange(4, 4)];
             if (self.StopChargingMesBlock) {
-                self.StopChargingMesBlock(status);
+                self.StopChargingMesBlock(text);
             }
         }
         
@@ -191,81 +195,30 @@
          NSString *status = [text substringWithRange:NSMakeRange(6, 2)];
         //     NSString *status =  [text substringWithRange:NSMakeRange(37, 12)];
         MYLog(@"status = %@",status);
-        /*************************************/
-        if ([status isEqualToString:@"00"]) {
-            MYLog(@"状态空闲");
-            NSString *chargeStr = @"状态空闲";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket   短连接
-            return;
-        }else if([status isEqualToString:@"01"])
-        {
-            MYLog(@"准备开始充电");
-            NSString *chargeStr = @"准备开始充电";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket
-            return;
-        }else if([status isEqualToString:@"02"])
-        {
-            MYLog(@"充电中");
-            NSString *chargeStr = @"充电中";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket
-            return;
-        }else if ([status isEqualToString:@"03"])
-        {
-            MYLog(@"充电结束");
-            NSString *chargeStr = @"充电结束";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket
-            return;
-        }else if ([status isEqualToString:@"04"])
-        {
-            MYLog(@"启动失败");
-            NSString *chargeStr = @"启动失败";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket
-            return;
-        }else if ([status isEqualToString:@"05"])
-        {
-            MYLog(@"预约状态");
-            NSString *chargeStr = @"预约状态";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket
-            return;
-        }else if ([status isEqualToString:@"06"])
-        {
-            MYLog(@"故障状态");
-            NSString *chargeStr = @"故障状态";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket
-            return;
-        }else if ([status isEqualToString:@"10"])
-        {
-            MYLog(@"断连");
-            NSString *chargeStr = @"断连";
-            if (self.ChargeStatusMesBlock) {
-                self.ChargeStatusMesBlock(chargeStr);
-            }
-            [self cutOffSocket];//切断socket
-            return;
+        if (self.ChargeStatusMesBlock) {
+            self.ChargeStatusMesBlock(status);
         }
+        /*************************************/
     }
   
+//点击结束充电之后，服务器的第二次返回
+    if ([str isEqualToString:@"05"]) {
+        
+        //保存电费
+        //                            [Config saveChargePay:[NSString stringWithFormat:@"%@￥",pay]];
+        MYLog(@"充电完毕，后台推送的关于结束时间，金额等信息");
+        if (self.StopChargingMesBlock) {
+            self.StopChargingMesBlock(text);
+        }
+    }
+//点击开起电桩之后，服务器的第二次返回
+    if ([str isEqualToString:@"06"]) {
+        MYLog(@"后台返回的关于桩是否启动成功的回调");
+       
+            if (self.StartChargeBlock) {
+                self.StartChargeBlock(text);
+            }
+    }
     
     NSString *str1 = @"AABB0E00020D0A";
     if ([text rangeOfString:str1].location != NSNotFound) {

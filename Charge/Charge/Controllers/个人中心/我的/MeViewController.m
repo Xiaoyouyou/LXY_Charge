@@ -16,7 +16,7 @@
 #import "MyCollectViewController.h"
 #import "PersonMessageViewController.h"
 #import "MyCarViewController.h"
-
+#import "ChargeMessageViewController.h"
 
 @interface MeViewController ()
 //导航
@@ -28,7 +28,7 @@
 //bottomView
 @property (nonatomic ,strong)UIView *bottomView;
 @property (nonatomic ,strong)NSArray *topTitleArr;
-@property (nonatomic ,strong)NSArray *bottomTitleArr;
+@property (nonatomic ,strong)NSMutableArray *bottomTitleArr;
 @property (nonatomic ,strong)NSArray *btnFunction;
 @end
 
@@ -41,9 +41,9 @@
     return _topTitleArr;
 };
 
--(NSArray *)bottomTitleArr{
+-(NSMutableArray *)bottomTitleArr{
     if(!_bottomTitleArr){
-        _bottomTitleArr = @[@"无穷多钱",@"10000分"];
+        _bottomTitleArr = [NSMutableArray array];
     }
     return _bottomTitleArr;
 };
@@ -68,11 +68,30 @@
     //添加导航条和站位view
     [self addNavigationBar];
     //添加子view
-    [self addSomeSubViews];
+    //加载余额
+    [self loadbalance];
 }
+
+-(void)loadbalance{
+    if ([Config getOwnID] == nil) {
+        return;
+    }
+    NSDictionary *paramer = @{
+                              @"userId" : [Config getOwnID]
+                              };
+    [WMNetWork get:GetBalance parameters:paramer success:^(id responseObj) {
+        [self.bottomTitleArr addObject:responseObj[@"balance"]];
+        [self.bottomTitleArr addObject:@"暂无"];
+        [self addSomeSubViews:self.bottomTitleArr];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
  //添加导航条和添加子view条
 -(void)addNavigationBar{
-    self.nav = [[NavView alloc] initWithFrame:CGRectZero title:@"我的" leftImgae:@"back@2x.png" rightImage:@"setting@2x.png"];
+    self.nav = [[NavView alloc] initWithFrame:CGRectZero title:@"我的" leftImgae:@"back@2x.png" rightImage:@"set_gray.png"];
     __weak typeof(self) weakSelf = self;
     self.nav.backBlock = ^{
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
@@ -126,7 +145,7 @@
     
 }
 
--(void)addSomeSubViews{
+-(void)addSomeSubViews:(NSMutableArray *)arr{
     
     /*---------top----------*/
     UIImageView *userIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pic2"] highlightedImage:[UIImage imageNamed:@"pic2"]];
@@ -170,7 +189,7 @@
          CGFloat w = XYScreenWidth / count;
          CGFloat y = 0;
          CGFloat h = 60;
-        MeVcWithMineView *backView = [[MeVcWithMineView alloc] initWithFrame:CGRectMake(x, y, w, h) TopTitle:self.topTitleArr[i] BottomTitle:self.bottomTitleArr[i]];
+        MeVcWithMineView *backView = [[MeVcWithMineView alloc] initWithFrame:CGRectMake(x, y, w, h) TopTitle:self.topTitleArr[i] BottomTitle:arr[i]];
         userLevel.font = [UIFont systemFontOfSize:12];
         userLevel.text = @"我是至尊VIP";
         userLevel.textAlignment = NSTextAlignmentCenter;
@@ -230,7 +249,8 @@
         MyCarViewController * carVc = [[MyCarViewController alloc] init];
         [self.navigationController pushViewController:carVc animated:YES];
     }else if (sender.tag == 4){
-        
+        ChargeMessageViewController *message = [[ChargeMessageViewController alloc]init];
+        [self.navigationController pushViewController:message animated:YES];
     }else if (sender.tag == 5){
         
     }

@@ -33,6 +33,7 @@
         //标题
         
         self.backgroundColor = [UIColor whiteColor];
+//         RGBA(30, 151, 126, 1.0);
         showLab = [[UILabel alloc] init];
         showLab.text = title;
         //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:15];
@@ -93,8 +94,8 @@
     
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-11);
-        make.left.equalTo(self).offset(15);
-        make.size.mas_equalTo(CGSizeMake(22,22));
+        make.left.equalTo(self).offset(8);
+        make.size.mas_equalTo(CGSizeMake(22,20));
     }];
     
     [leftTapView mas_makeConstraints:^(MASConstraintMaker *make) {

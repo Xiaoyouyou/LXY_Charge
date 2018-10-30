@@ -35,7 +35,7 @@
     self.navigationController.navigationBarHidden = YES;
     
     //初始化自定义nav
-    NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"我的签名"];
+    NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"我的签名" rightTitle:@"保存"];
     [nav setRightBtnMasonry];
     nav.backBlock = ^{
         [self.navigationController popViewControllerAnimated:YES];
@@ -88,7 +88,8 @@
     } failure:^(NSError *error) {
         NSLog(@"error = %@",error);
         [MBProgressHUD hideHUD];
-        [MBProgressHUD show:@"网络连接超时" icon:nil view:self.view];
+        [MBProgressHUD show:@"网络连接超时,保存失败" icon:nil view:self.view];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

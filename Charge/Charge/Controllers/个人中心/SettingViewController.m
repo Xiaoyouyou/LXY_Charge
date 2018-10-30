@@ -45,7 +45,7 @@
     //初始化自定义nav
     NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"设置"];
     nav.backBlock = ^{
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     };
     
     [self.view addSubview:nav];

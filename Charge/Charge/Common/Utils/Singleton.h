@@ -33,6 +33,7 @@ return sharedInstance; \
 @property (nonatomic, copy) void (^CancelYuYueChargeStatusMesBlock)(NSString *);//后台返回预约充电桩状态结果
 @property (nonatomic, copy) void (^MoneyNoEnoughMesBlock)(NSString *);//后台返回用户余额不足停止充电指令结果
 
+@property (nonatomic, copy) void (^InitFailBlock)(NSString *);//后台返回电桩初始化失败指令结果
 
 
 + (Singleton *)sharedInstance; //创建单例
