@@ -1251,9 +1251,14 @@ BOOL btnStatus = YES;
 //客服 按钮 -----将要变成 我的 按钮
 - (IBAction)keFuBtnAction:(id)sender {
     //初始化客服控制器
-    #import "MeViewController.h"
-    MeViewController *kefuVC = [[MeViewController alloc]init];
-    [self.navigationController pushViewController:kefuVC animated:YES];
+    if ([Config getToken]) {
+        MeViewController *kefuVC = [[MeViewController alloc]init];
+        [self.navigationController pushViewController:kefuVC animated:YES];
+    }else{
+        LoginViewController *login = [[LoginViewController alloc] init];
+        [self presentViewController:login animated:YES completion:nil];
+    }
+   
 //    KeFuViewController *kefuVC = [[KeFuViewController alloc]init];
 //    [self.navigationController pushViewController:kefuVC animated:YES];
 //    coverView = [[UIView alloc] init];

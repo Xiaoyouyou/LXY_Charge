@@ -17,7 +17,10 @@
 		757BA83621854C5000D4B6FE /* ChargeNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA83421854C5000D4B6FE /* ChargeNumberCell.m */; };
 		757BA83721854C5000D4B6FE /* ChargeNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BA83521854C5000D4B6FE /* ChargeNumberCell.xib */; };
 		757BA85021872FC900D4B6FE /* meme.png in Resources */ = {isa = PBXBuildFile; fileRef = 757BA84F21872FC800D4B6FE /* meme.png */; };
-		757BA8532187547400D4B6FE /* ChargeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA8522187547400D4B6FE /* ChargeMessageViewController.m */; };
+		757BA865218886C500D4B6FE /* ChargeMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA862218886C500D4B6FE /* ChargeMessageViewController.m */; };
+		757BA869218886E800D4B6FE /* ChargeMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA867218886E800D4B6FE /* ChargeMessageTableViewCell.m */; };
+		757BA86A218886E800D4B6FE /* ChargeMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BA868218886E800D4B6FE /* ChargeMessageTableViewCell.xib */; };
+		757BA86D2188945200D4B6FE /* ChargeMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA86C2188945200D4B6FE /* ChargeMessageModel.m */; };
 		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
 		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
 		75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA662174D4B400AC2F73 /* MyCarViewController.m */; };
@@ -435,8 +438,13 @@
 		757BA83421854C5000D4B6FE /* ChargeNumberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeNumberCell.m; sourceTree = "<group>"; };
 		757BA83521854C5000D4B6FE /* ChargeNumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChargeNumberCell.xib; sourceTree = "<group>"; };
 		757BA84F21872FC800D4B6FE /* meme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meme.png; sourceTree = "<group>"; };
-		757BA8512187547400D4B6FE /* ChargeMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeMessageViewController.h; sourceTree = "<group>"; };
-		757BA8522187547400D4B6FE /* ChargeMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeMessageViewController.m; sourceTree = "<group>"; };
+		757BA862218886C500D4B6FE /* ChargeMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChargeMessageViewController.m; sourceTree = "<group>"; };
+		757BA863218886C500D4B6FE /* ChargeMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChargeMessageViewController.h; sourceTree = "<group>"; };
+		757BA866218886E800D4B6FE /* ChargeMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeMessageTableViewCell.h; sourceTree = "<group>"; };
+		757BA867218886E800D4B6FE /* ChargeMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeMessageTableViewCell.m; sourceTree = "<group>"; };
+		757BA868218886E800D4B6FE /* ChargeMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChargeMessageTableViewCell.xib; sourceTree = "<group>"; };
+		757BA86B2188945200D4B6FE /* ChargeMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeMessageModel.h; sourceTree = "<group>"; };
+		757BA86C2188945200D4B6FE /* ChargeMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeMessageModel.m; sourceTree = "<group>"; };
 		75BCDA1C217316A600AC2F73 /* MeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		75BCDA1D217316A600AC2F73 /* MeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		75BCDA222173488300AC2F73 /* MeVcWithMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeVcWithMineView.h; sourceTree = "<group>"; };
@@ -1077,6 +1085,27 @@
 			path = "Charge/Charge/Views/充电计费规则详情";
 			sourceTree = SOURCE_ROOT;
 		};
+		757BA861218886C500D4B6FE /* 充电记录 */ = {
+			isa = PBXGroup;
+			children = (
+				757BA863218886C500D4B6FE /* ChargeMessageViewController.h */,
+				757BA862218886C500D4B6FE /* ChargeMessageViewController.m */,
+				757BA866218886E800D4B6FE /* ChargeMessageTableViewCell.h */,
+				757BA867218886E800D4B6FE /* ChargeMessageTableViewCell.m */,
+				757BA868218886E800D4B6FE /* ChargeMessageTableViewCell.xib */,
+				757BA86B2188945200D4B6FE /* ChargeMessageModel.h */,
+				757BA86C2188945200D4B6FE /* ChargeMessageModel.m */,
+			);
+			path = "充电记录";
+			sourceTree = "<group>";
+		};
+		757BA864218886C500D4B6FE /* 我的发票 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "我的发票";
+			sourceTree = "<group>";
+		};
 		75BCDA212173482D00AC2F73 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1089,6 +1118,8 @@
 		75BCDA2521734C1F00AC2F73 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				757BA861218886C500D4B6FE /* 充电记录 */,
+				757BA864218886C500D4B6FE /* 我的发票 */,
 				75BCDA1C217316A600AC2F73 /* MeViewController.h */,
 				75BCDA1D217316A600AC2F73 /* MeViewController.m */,
 				75FDA57221778D98004A70E1 /* MyAddCarViewController.h */,
@@ -1099,8 +1130,6 @@
 				75E58ADE217B8C8E00BA2BF2 /* MyCarTableViewCell.h */,
 				75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */,
 				75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */,
-				757BA8512187547400D4B6FE /* ChargeMessageViewController.h */,
-				757BA8522187547400D4B6FE /* ChargeMessageViewController.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -2297,6 +2326,7 @@
 				859C09F41D0815310002600D /* AccountSafeHeaderView.xib in Resources */,
 				851582881D221A9D009E8F52 /* CarAuthenticateViewController.xib in Resources */,
 				853E78A01E1DF0F200A037CB /* MJRefresh.bundle in Resources */,
+				757BA86A218886E800D4B6FE /* ChargeMessageTableViewCell.xib in Resources */,
 				853763011E9B2C2600623ABC /* news.png in Resources */,
 				859C09F61D0816FB0002600D /* weixins@2x.png in Resources */,
 				85C630A91E97302E0039D755 /* refresh4.png in Resources */,
@@ -2490,13 +2520,13 @@
 				859C09E81D0805950002600D /* DetailZhuangWeiHeaderView.m in Sources */,
 				850698DD1D0566280002D28B /* RecommendedViewController.m in Sources */,
 				859FC9B61DDC295700D7C4B6 /* YuYueViewController.m in Sources */,
-				757BA8532187547400D4B6FE /* ChargeMessageViewController.m in Sources */,
 				75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */,
 				8534BD5B1E0275C100823484 /* YuYueChargeModel.m in Sources */,
 				8529C7A11D24B26D00211D2F /* CATCurveProgressView.m in Sources */,
 				853E789F1E1DF0F200A037CB /* MJRefreshStateHeader.m in Sources */,
 				859B99E31D1B7CD700F49097 /* UIImage-Extensions.m in Sources */,
 				85D955C71D0671D600615182 /* MyReservationViewController.m in Sources */,
+				757BA86D2188945200D4B6FE /* ChargeMessageModel.m in Sources */,
 				8591FF7D1D125408003084C3 /* WMNetWork.m in Sources */,
 				75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */,
 				853E38061D4A09EC00F55655 /* InsetsTextField.m in Sources */,
@@ -2560,6 +2590,7 @@
 				853E78971E1DF0F200A037CB /* MJRefreshAutoGifFooter.m in Sources */,
 				853E78921E1DF0F200A037CB /* MJRefreshAutoFooter.m in Sources */,
 				8529C7A41D24BF9D00211D2F /* CountLabel.m in Sources */,
+				757BA865218886C500D4B6FE /* ChargeMessageViewController.m in Sources */,
 				853B5E8E1D742380001548E6 /* ChargePointMesModel.m in Sources */,
 				857F01971DDC4AAF00169FA8 /* MyYuYueViewController.m in Sources */,
 				855A91401E9CC6EF00C8DD35 /* UIViewController+KSGuid.m in Sources */,
@@ -2615,6 +2646,7 @@
 				853E789A1E1DF0F200A037CB /* MJRefreshBackGifFooter.m in Sources */,
 				8541BC081D2B5ABB00213246 /* QiPaoBMKAnnotationView.m in Sources */,
 				85866FFE1D76C3E7005FDF79 /* MyTrendViewController.m in Sources */,
+				757BA869218886E800D4B6FE /* ChargeMessageTableViewCell.m in Sources */,
 				853E78991E1DF0F200A037CB /* MJRefreshAutoStateFooter.m in Sources */,
 				85E69F2A1D0E5918002D8AB5 /* WKAvoidKeyboardViewController.m in Sources */,
 				851582821D220FD8009E8F52 /* PersonMessageViewController.m in Sources */,

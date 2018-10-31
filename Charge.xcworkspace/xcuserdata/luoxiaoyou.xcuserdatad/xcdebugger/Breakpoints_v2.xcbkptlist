@@ -90,12 +90,12 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "562517935.4373569"
+                  timestampString = "562601892.203011"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "420">
+                  offsetFromSymbolStart = "408">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -105,7 +105,7 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "562517935.439369"
+                  timestampString = "562601892.205129"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
@@ -120,7 +120,7 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "562517935.4413429"
+                  timestampString = "562601892.207055"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
@@ -137,7 +137,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
-            timestampString = "562517935.21858"
+            timestampString = "562601891.876775"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1090"
@@ -153,7 +153,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
-            timestampString = "562517935.218803"
+            timestampString = "562601891.876895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1100"
@@ -265,7 +265,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Charge/Charge/Common/Utils/Singleton.m"
-            timestampString = "562517935.220101"
+            timestampString = "562601891.877205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
@@ -281,7 +281,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
-            timestampString = "562517935.220291"
+            timestampString = "562601891.87727"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1149"
@@ -495,6 +495,38 @@
             startingLineNumber = "412"
             endingLineNumber = "412"
             landmarkName = "-checkUpChargeMessage"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Charge/Charge/Controllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/&#x6211;&#x7684;/ChargeMessageViewController.m"
+            timestampString = "562595017.362937"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-loadChargeMessageList"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Charge/Charge/Controllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/&#x6211;&#x7684;/ChargeMessageViewController.m"
+            timestampString = "562595017.379436"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "-loadChargeMessageList"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -21,7 +21,7 @@
 
 #define Host_PORT 3005
 //#define Host_PORT 1026
-#define RepeatsCountS 30
+#define RepeatsCountS 90
 #define Public @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDRC7JFsEdbatU1a59gF0juUyXzOoPwE3Gfa2NZd6B0yq/MudU+HKN+5bBk698A25cPIeQO/aHl9tMUCB2df0cXVZnAEijGB6It6LP4vz6KhKZBZD8bHXrb4OqrddoKrkWZtyZOVQBtq/GawEjGqRsIC8Y1l5XRjBandByK+U7ZlQIDAQAB"
 
 @interface Singleton ()<GCDAsyncSocketDelegate>
