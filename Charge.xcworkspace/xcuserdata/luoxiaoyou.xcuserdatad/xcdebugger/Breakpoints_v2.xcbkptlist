@@ -90,12 +90,12 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "562601892.203011"
+                  timestampString = "562696926.258341"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "408">
+                  offsetFromSymbolStart = "434">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -105,12 +105,12 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "562601892.205129"
+                  timestampString = "562696926.260771"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
                   endingLineNumber = "62"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "54">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -120,12 +120,12 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "562601892.207055"
+                  timestampString = "562696926.267271"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -137,11 +137,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
-            timestampString = "562601891.876775"
+            timestampString = "562696926.051711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1090"
-            endingLineNumber = "1090"
+            startingLineNumber = "1091"
+            endingLineNumber = "1091"
             landmarkName = "-checkChargingS"
             landmarkType = "7">
          </BreakpointContent>
@@ -153,11 +153,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
-            timestampString = "562601891.876895"
+            timestampString = "562696926.051771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1100"
-            endingLineNumber = "1100"
+            startingLineNumber = "1101"
+            endingLineNumber = "1101"
             landmarkName = "-checkChargingS"
             landmarkType = "7">
          </BreakpointContent>
@@ -281,11 +281,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
-            timestampString = "562601891.87727"
+            timestampString = "562696926.051942"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1149"
-            endingLineNumber = "1149"
+            startingLineNumber = "1150"
+            endingLineNumber = "1150"
             landmarkName = "-checkChargingS"
             landmarkType = "7">
          </BreakpointContent>

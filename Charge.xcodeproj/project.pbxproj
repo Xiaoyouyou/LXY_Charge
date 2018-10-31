@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6401F5074D8CF40A598E84E8 /* libPods-Charge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A854C1C871D76831930C96 /* libPods-Charge.a */; };
+		756C788C2189EC5E00276E9F /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756C788B2189EC5E00276E9F /* ChooseView.m */; };
 		757BA82321840E5B00D4B6FE /* ChargeInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA82221840E5B00D4B6FE /* ChargeInfoTableViewController.m */; };
 		757BA8282184112F00D4B6FE /* ChargeInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA8262184112F00D4B6FE /* ChargeInfoTableViewCell.m */; };
 		757BA8292184112F00D4B6FE /* ChargeInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BA8272184112F00D4B6FE /* ChargeInfoTableViewCell.xib */; };
@@ -423,6 +424,8 @@
 
 /* Begin PBXFileReference section */
 		29A854C1C871D76831930C96 /* libPods-Charge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Charge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		756C788A2189EC5E00276E9F /* ChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
+		756C788B2189EC5E00276E9F /* ChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
 		757BA82121840E5B00D4B6FE /* ChargeInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeInfoTableViewController.h; sourceTree = "<group>"; };
 		757BA82221840E5B00D4B6FE /* ChargeInfoTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeInfoTableViewController.m; sourceTree = "<group>"; };
 		757BA8252184112F00D4B6FE /* ChargeInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -1419,6 +1422,8 @@
 				85866FF51D76B7E5005FDF79 /* SystemNoticeViewController.m */,
 				85866FFC1D76C3E7005FDF79 /* MyTrendViewController.h */,
 				85866FFD1D76C3E7005FDF79 /* MyTrendViewController.m */,
+				756C788A2189EC5E00276E9F /* ChooseView.h */,
+				756C788B2189EC5E00276E9F /* ChooseView.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -2569,6 +2574,7 @@
 				85ADBBA51E6D51D9007B6400 /* ChuZiViewController.m in Sources */,
 				757BA83621854C5000D4B6FE /* ChargeNumberCell.m in Sources */,
 				757BA82C218415BC00D4B6FE /* ChargeInfoModel.m in Sources */,
+				756C788C2189EC5E00276E9F /* ChooseView.m in Sources */,
 				85D323501D0FA76100502185 /* RegisterRightView.m in Sources */,
 				85675B5E1D6A9AFF006B62E8 /* heartView.m in Sources */,
 				853B2C8A1DF7F0D100CBAF4F /* ZhouBianChargeModel.m in Sources */,

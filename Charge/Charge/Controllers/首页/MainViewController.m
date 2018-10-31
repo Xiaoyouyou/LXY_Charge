@@ -62,6 +62,7 @@
 /*-----------罗小友-------------*/
 #import "MeViewController.h"
 #import "ScreeningViewController.h"
+#import "ChooseView.h"
 
 
 #define leftWidth (230)
@@ -195,10 +196,10 @@
     self.qiPaoArray = [NSMutableArray array];
     self.JuDianqiPaoArray = [NSMutableArray array];
     self.totalChargeArray = [NSMutableArray array];
-    UIView *screen = [[UIView alloc]init];
+    ChooseView *screen = [[ChooseView alloc]initWithFrame:CGRectZero];
     self.screen = screen;
     screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight);
-    screen.backgroundColor = [UIColor redColor];
+    screen.backgroundColor = [UIColor whiteColor];
 //    [self.navigationController addChildViewController:screen];
     // Do any additional setup after loading the view from its nib.
     //初始化地图
@@ -312,7 +313,7 @@
     };
     navView.rightBlock = ^{
         //首页右边的按钮
-//        [self PersonActionClick:nil];
+        [self PersonActionClick:nil];
     };
     [self.view addSubview:navView];
     
@@ -801,7 +802,7 @@
     
 }
 
-#pragma mark - 右边的排序按钮中心按钮
+#pragma mark - 右边的排序按钮 中心按钮
 BOOL btnStatus = YES;
 - (IBAction)PersonActionClick:(id)sender {
 //        if ([Config getOwnID]) {
