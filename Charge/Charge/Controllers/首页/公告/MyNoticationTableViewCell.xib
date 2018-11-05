@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="122" id="KGk-i7-Jjw" customClass="MyNoticationTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="122"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="121.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="08N-FX-sXd">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="121.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周琦勇夺大号三双" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRB-uA-aQc">
+                        <rect key="frame" x="80.5" y="11" width="139" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="HQc-xp-0no"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="莫雷下课" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPy-gS-6bX">
+                        <rect key="frame" x="119.5" y="32" width="61.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="iby-Hn-xJd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.60000413659999996" green="0.5999925733" blue="0.60000044109999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="官萨干撒不打算交的哈克鲁赛德按时打算了鸡蛋安徽开始都懒得拉的哈萨克拉十大期间破电脑 请大家打算可拉伸的按安排搜集大声道" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCU-Ep-x4Z">
+                        <rect key="frame" x="40" y="50" width="220" height="50"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018-11-21 12:21:03" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i2-Zx-qlh">
+                        <rect key="frame" x="190" y="100" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="seV-wb-NRh"/>
+                            <constraint firstAttribute="width" constant="100" id="ywN-sq-U9h"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.60000413659999996" green="0.5999925733" blue="0.60000044109999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="08N-FX-sXd" secondAttribute="trailing" id="0DY-aP-jCS"/>
+                    <constraint firstItem="08N-FX-sXd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2KD-gm-M2D"/>
+                    <constraint firstItem="ZCU-Ep-x4Z" firstAttribute="top" secondItem="JPy-gS-6bX" secondAttribute="bottom" id="ELI-FW-xss"/>
+                    <constraint firstAttribute="trailing" secondItem="1i2-Zx-qlh" secondAttribute="trailing" constant="10" id="F7e-G2-FkY"/>
+                    <constraint firstAttribute="bottom" secondItem="08N-FX-sXd" secondAttribute="bottom" id="HyE-00-pb3"/>
+                    <constraint firstAttribute="trailing" secondItem="ZCU-Ep-x4Z" secondAttribute="trailing" constant="40" id="Odb-QU-Rqj"/>
+                    <constraint firstItem="JPy-gS-6bX" firstAttribute="top" secondItem="cRB-uA-aQc" secondAttribute="bottom" id="OeI-mu-kMz"/>
+                    <constraint firstItem="08N-FX-sXd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Snz-9P-yTh"/>
+                    <constraint firstItem="1i2-Zx-qlh" firstAttribute="top" secondItem="ZCU-Ep-x4Z" secondAttribute="bottom" id="T2x-SM-RCO"/>
+                    <constraint firstAttribute="bottom" secondItem="1i2-Zx-qlh" secondAttribute="bottom" id="Yvz-M8-beD"/>
+                    <constraint firstItem="ZCU-Ep-x4Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="h5L-yM-dJ0"/>
+                    <constraint firstItem="cRB-uA-aQc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="lYB-kJ-LJz"/>
+                    <constraint firstItem="cRB-uA-aQc" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="qn4-lQ-1L5"/>
+                    <constraint firstItem="JPy-gS-6bX" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="wu3-Io-NOo"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="backView" destination="08N-FX-sXd" id="PDe-jj-RwE"/>
+                <outlet property="content" destination="ZCU-Ep-x4Z" id="OhQ-Fj-lcB"/>
+                <outlet property="subTitle" destination="JPy-gS-6bX" id="oUu-vQ-lLb"/>
+                <outlet property="time" destination="1i2-Zx-qlh" id="FmK-Xx-XTC"/>
+                <outlet property="title" destination="cRB-uA-aQc" id="yWH-8p-1fK"/>
+            </connections>
+            <point key="canvasLocation" x="24" y="93"/>
+        </tableViewCell>
+    </objects>
+</document>

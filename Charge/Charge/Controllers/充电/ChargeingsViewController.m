@@ -410,22 +410,22 @@
     [WMNetWork get:ChargeMessge parameters:paramer success:^(id responseObj) {
         NSString *str1 = responseObj[@"chargInfo"][@"spendMoney"];
          NSString *str2 = responseObj[@"chargInfo"][@"electric"];
-        self.costMoney.text = [NSString stringWithFormat:@"%.3f￥",str1.floatValue];//消费金额
-        self.chargedAmount.text = [NSString stringWithFormat:@"%.3fkwh",str2.floatValue];//已充电量
+        self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",str1.floatValue];//消费金额
+        self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",str2.floatValue];//已充电量
         
-        [Config saveCurrentPower:[NSString stringWithFormat:@"%.3f￥",str2.floatValue]];
+        [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",str2.floatValue]];
         //保存电量
-        [Config saveChargePay: [NSString stringWithFormat:@"%.3fkwh",str1.floatValue]];//保存电费
+        [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",str1.floatValue]];//保存电费
         
         if(![responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
             [MBProgressHUD showSuccess:@"充电已经结束"];
             //充电之后的结算
-            self.costMoney.text = [NSString stringWithFormat:@"%.3f￥",str1.floatValue];//消费金额
-            self.chargedAmount.text = [NSString stringWithFormat:@"%.3fkwh",str2.floatValue];//已充电量
+            self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",str1.floatValue];//消费金额
+            self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",str2.floatValue];//已充电量
             
-            [Config saveCurrentPower:[NSString stringWithFormat:@"%.3f￥",str2.floatValue]];
+            [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",str2.floatValue]];
             //保存电量
-            [Config saveChargePay: [NSString stringWithFormat:@"%.3fkwh",str1.floatValue]];//保存电费
+            [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",str1.floatValue]];//保存电费
             //结束充电通知 修改首页扫码充电按钮文字
             [[NSNotificationCenter defaultCenter] postNotificationName:EndChargeingMessage object:nil];
             //跳转到结算界面
@@ -518,7 +518,7 @@
          timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
         [timer fire];
         [MBProgressHUD showSuccess:@"正在结束充电"];
-//        [[Singleton sharedInstance] startReconectBlcok];
+        [[Singleton sharedInstance] startReconectBlcok];
         [[Singleton sharedInstance] stopChargingWithChargeNum:self.chargeingNum];//停止充电
         
     }];

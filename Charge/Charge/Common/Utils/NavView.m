@@ -33,7 +33,8 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
-        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+//        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+        self.backgroundColor = [UIColor whiteColor];
         showLab = [[UILabel alloc] init];
         showLab.text = title;
 //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:16];
@@ -82,7 +83,8 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
-        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+//        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+        self.backgroundColor = [UIColor whiteColor];
         showLab = [[UILabel alloc] init];
         showLab.text = title;
 //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:15];
@@ -142,7 +144,8 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
-       self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+//       self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+        self.backgroundColor = [UIColor whiteColor];
         showLab = [[UILabel alloc] init];
         showLab.text = title;
         //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:15];
@@ -201,7 +204,8 @@
 {
     if (self = [super initWithFrame:frame]) {
         //标题
-        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+//        self.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+        self.backgroundColor = [UIColor whiteColor];
         showLab = [[UILabel alloc] init];
         showLab.text = title;
         //        showLab.font = [UIFont fontWithName:@"Helvetica Bold" size:15];

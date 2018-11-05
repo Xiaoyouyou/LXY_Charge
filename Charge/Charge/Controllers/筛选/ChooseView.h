@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^DaohangClick)(NSString *a ,NSString *b);
 @interface ChooseView : UIView
 -(instancetype)initWithFrame:(CGRect)frame;
+@property (nonatomic ,strong)DaohangClick daohang;
 @end

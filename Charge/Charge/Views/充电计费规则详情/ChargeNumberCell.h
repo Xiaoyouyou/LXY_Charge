@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ChargeNumberModel1.h"
-#import "ChargeNumberModel2.h"
+@class ChargeNumberModel1;
+@class ChargeNumberModel2;
 @interface ChargeNumberCell : UITableViewCell
 
 @property (strong, nonatomic) ChargeNumberModel1 *model1;

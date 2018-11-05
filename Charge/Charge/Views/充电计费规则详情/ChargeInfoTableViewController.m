@@ -39,7 +39,8 @@
     self.tableView = tableView;
     [self.view addSubview:tableView];
     UIView *views = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, StatusBarH + 44)];
-    views.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+//    views.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+    views.backgroundColor = [UIColor whiteColor];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(10, StatusBarH, 50, 44);
     [btn setImage:[UIImage imageNamed:@"back@2x.png"] forState:UIControlStateNormal];

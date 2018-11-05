@@ -120,7 +120,7 @@
 - (IBAction)PersonActionClick:(id)sender;
 - (IBAction)MessageActionClick:(id)sender;
 - (IBAction)refreshBtnAction:(id)sender;//界面气泡点刷新
-- (IBAction)keFuBtnAction:(id)sender;//客服按钮
+- (IBAction)keFuBtnAction:(id)sender;//wode 按钮
 - (IBAction)btnClick:(id)sender;
 
 
@@ -198,8 +198,11 @@
     self.totalChargeArray = [NSMutableArray array];
     ChooseView *screen = [[ChooseView alloc]initWithFrame:CGRectZero];
     self.screen = screen;
-    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight);
+    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight - 320);
     screen.backgroundColor = [UIColor whiteColor];
+    screen.daohang = ^(NSString *a, NSString *b) {
+        [self dahangLA:a andLO:b];
+    };
 //    [self.navigationController addChildViewController:screen];
     // Do any additional setup after loading the view from its nib.
     //初始化地图
@@ -358,7 +361,7 @@
     [self.view addSubview:BgView];
 }
 
-#pragma mark -- 地图代理方法
+#pragma mark -- 地图代理方法  点击气泡
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view
 {
         MYLog(@"气泡点击了");
@@ -802,6 +805,62 @@
     
 }
 
+-(void)dahangLA:(NSString *)a andLO:(NSString *)b{
+    
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"您将导航至：%@",_ChargeDetal.address]message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //百度坐标转高德坐标
+    CLLocation *desLocation = [[CLLocation alloc] initWithLatitude:a.doubleValue longitude:b.doubleValue];
+    CLLocationCoordinate2D desCoordinate =  [desLocation locationMarsFromBaidu].coordinate;
+    
+    UIAlertAction *GaoDeAction = [UIAlertAction actionWithTitle:@"苹果地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //苹果导航
+        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+        //目的地的位置
+        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:desCoordinate addressDictionary:nil]];
+        toLocation.name = _ChargeDetal.address;
+        
+        NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
+        //打开苹果自身地图应用，并呈现特定的item
+        [MKMapItem openMapsWithItems:@[currentLocation,toLocation] launchOptions:options];
+    }];
+    
+    UIAlertAction *BaiDulAction = [UIAlertAction actionWithTitle:@"百度地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //百度地图
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://"]]) {
+            
+            NSString *urlString = [[NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:终点&mode=driving",[Config getCurrentLocation].latitude , [Config getCurrentLocation].longitude,a.doubleValue,b.doubleValue] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlString]];
+        }else
+        {
+            [MBProgressHUD showError:@"您还没有安装百度地图APP"];
+        }
+    }];
+    
+    UIAlertAction *gaoDeAction = [UIAlertAction actionWithTitle:@"高德地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //高德地图
+        CLLocation *desLocation = [[CLLocation alloc] initWithLatitude:a.doubleValue longitude:b.doubleValue];
+        CLLocationCoordinate2D desCoordinate =  [desLocation locationMarsFromBaidu].coordinate;
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
+            
+            NSString *urlString = [[NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=%@&lat=%f&lon=%f&dev=0&style=2",@"导航功能",@"nav123456",desCoordinate.latitude,desCoordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:urlString]];
+        }else
+        {
+            [MBProgressHUD showError:@"您还没有安装高德地图APP"];
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    [alertVc addAction:GaoDeAction];
+    [alertVc addAction:BaiDulAction];
+    [alertVc addAction:gaoDeAction];
+    [alertVc addAction:cancelAction];
+    
+    [self presentViewController:alertVc animated:YES completion:nil];
+}
+
 #pragma mark - 右边的排序按钮 中心按钮
 BOOL btnStatus = YES;
 - (IBAction)PersonActionClick:(id)sender {
@@ -823,6 +882,10 @@ BOOL btnStatus = YES;
   
 //    [self.navigationController addChildViewController:screen];
     
+    
+    
+    
+    
     if (btnStatus == YES) {
         [self.view addSubview:self.screen];
         btnStatus = NO;
@@ -834,16 +897,15 @@ BOOL btnStatus = YES;
 #pragma mark -- 消息按钮
 
 - (IBAction)MessageActionClick:(id)sender {
-//    LoginViewController *loginVC = [[LoginViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] init];
-//    [nav addChildViewController:loginVC];
-//    [self presentViewController:nav animated:YES completion:nil];
-//    AlertLoginView *alertVC = [[AlertLoginView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
-//    [alertVC awakeFromNib];
-
+    if ([Config getOwnID] == nil || [Config getToken] == nil) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] init];
+        [nav addChildViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }else{
         MessageCentreViewController *messageVC = [[MessageCentreViewController alloc] init];
         [self.navigationController pushViewController:messageVC animated:YES];
-    
+    }
 }
 
 -(void)bgViewClick
@@ -1249,15 +1311,17 @@ BOOL btnStatus = YES;
     [self.navigationController pushViewController:ChangePay animated:YES];
 }
 
-//客服 按钮 -----将要变成 我的 按钮
+// 我的 按钮
 - (IBAction)keFuBtnAction:(id)sender {
     //初始化客服控制器
-    if ([Config getToken]) {
+        if ([Config getOwnID] == nil || [Config getToken] == nil) {
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] init];
+            [nav addChildViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:nil];
+        }else{
         MeViewController *kefuVC = [[MeViewController alloc]init];
         [self.navigationController pushViewController:kefuVC animated:YES];
-    }else{
-        LoginViewController *login = [[LoginViewController alloc] init];
-        [self presentViewController:login animated:YES completion:nil];
     }
    
 //    KeFuViewController *kefuVC = [[KeFuViewController alloc]init];

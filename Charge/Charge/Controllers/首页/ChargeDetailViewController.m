@@ -159,7 +159,7 @@
     [self creatDetailBtnKuang];
     
     //加载数据
-    [self initData];
+//    [self initData];
 }
 
 #pragma mark - action
@@ -199,6 +199,8 @@
                         ChargeNumberModel2 *model2 = [ChargeNumberModel2 objectWithKeyValues:arr1[1]];
                         [self.B addObject:model2];                    
                 }
+        
+            [self initData];
 //            }
 //        }
 //        NSArray *array = self.array[0];
@@ -305,7 +307,7 @@
             //计算距离
             [self jiSuanDistance];
             //创建子控制器
-            [self creatSubVC];
+            [self creatZhuangWei];
             //判断是否收藏
             if ([_ChargeDetal.isCollected isEqualToString:@"0"]) {
                 _collectBtn.selected = NO;
@@ -320,7 +322,7 @@
         if (error) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             //创建子控制器
-            [self creatSubVC];
+            [self creatZhuangWei];
             
             UIImage *image = [UIImage imageNamed:@"NoneNetwork@2x.png"];
             NSString *str = @"您好，请检查网络";
@@ -337,15 +339,20 @@
     }];
 }
 
--(void)creatSubVC
-{
+//详细信息view
+//-(void)creatSubVC
+//{
+//
+//}
+//桩位View
+-(void)creatZhuangWei{
     //桩位控制器
     ZhuangWeiMesViewController *ZhuangWeiMesVC = [[ZhuangWeiMesViewController alloc] init];
     ZhuangWeiMesVC.chargeNumber = self.array;//桩位控制器数据
     ZhuangWeiMesVC.zhuangA = self.A;
     ZhuangWeiMesVC.zhzuangB = self.B;
     ZhuangWeiMesVC.zhuangID = self.zhuangID;
-  //  ZhuangWeiMesVC.dict = self.cheWeiDict;//桩的数量字典
+    //  ZhuangWeiMesVC.dict = self.cheWeiDict;//桩的数量字典
     
     ZhuangWeiMesVC.view.frame = self.subView.frame;
     [self addChildViewController:ZhuangWeiMesVC];
@@ -355,10 +362,12 @@
         make.edges.equalTo(self.subView);
     }];
     
+    
+    
     //详情控制器
     DetailZhuangWeiViewController *DetailZhuangWeiVC = [[DetailZhuangWeiViewController alloc]init];
     DetailZhuangWeiVC.id = self.id;
-//    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
+    //    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
     DetailZhuangWeiVC.chargeDeatlModel = self.dataDict;//详情控制器数据
     DetailZhuangWeiVC.view.frame = self.subView.frame;
     [self addChildViewController:DetailZhuangWeiVC];
@@ -511,7 +520,7 @@
 }
 
 - (void)cheWeiAction{
-    
+  
     [UIView animateWithDuration:0.5 // 动画时长
                           delay:0.0 // 动画延迟
          usingSpringWithDamping:0.5// 类似弹簧振动效果 0~1
@@ -521,15 +530,16 @@
                          view1.frame =CGRectMake(XYScreenWidth/2+15, 7, XYScreenWidth/2 -30, 30);
                      } completion:^(BOOL finished) {
                      }];
-    ZhuangWeiMesViewController *ZhuangWeiVC = self.childViewControllers[0];
     DetailZhuangWeiViewController *DetailVC = self.childViewControllers[1];
-
+    ZhuangWeiMesViewController *ZhuangWeiVC = self.childViewControllers[0];
+    
     [ZhuangWeiVC.view removeFromSuperview];
     [self.view addSubview:DetailVC.view];
     
     [DetailVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.subView);
     }];
+    
     //如过待加载的数据为null，则显示网络错误
     if (self.dict.count == 0 && self.dataArray.count == 0) {
         UIImage *image = [UIImage imageNamed:@"NoneNetwork@2x.png"];
@@ -557,16 +567,18 @@
                          view1.frame = CGRectMake(15, 7, XYScreenWidth/2-30, 30);
                      } completion:^(BOOL finished) {
                      }];
-    DetailZhuangWeiViewController *DetailVC = self.childViewControllers[0];
-    ZhuangWeiMesViewController *ZhuangWeiVC = self.childViewControllers[1];
+   
+    ZhuangWeiMesViewController *ZhuangWeiVC = self.childViewControllers[0];
+    DetailZhuangWeiViewController *DetailVC = self.childViewControllers[1];
     
-    [ZhuangWeiVC.view removeFromSuperview];
-    [self.view addSubview:DetailVC.view];
+    [DetailVC.view removeFromSuperview];
+    [self.view addSubview:ZhuangWeiVC.view];
     
-    [DetailVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    [ZhuangWeiVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.subView);
     }];
-
+    
+    
     //如过待加载的数据为null，则显示网络错误
     if (self.dict.count == 0 && self.dataArray.count == 0) {
         UIImage *image = [UIImage imageNamed:@"NoneNetwork@2x.png"];
@@ -574,10 +586,10 @@
         self.tipview  = [[TipView alloc] initWithFrame:CGRectZero image:image andshowText:str];
         self.tipview.alpha = 1;
         [self.tipview SetCenterMasonry];
-        [DetailVC.view addSubview:self.tipview];
+        [ZhuangWeiVC.view addSubview:self.tipview];
         
         [self.tipview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(DetailVC.view);
+            make.edges.equalTo(ZhuangWeiVC.view);
         }];
     }
 }

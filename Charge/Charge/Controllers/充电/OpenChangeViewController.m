@@ -107,7 +107,7 @@
     [[Singleton sharedInstance] socketConnectHost];//连接socket
     [MBProgressHUD showMessage:@"正在检测充电桩状态" toView:self.view];
     //延时2秒
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //如果连接成功才发送检测充电桩状态
         if ([Singleton sharedInstance].isLink == 0) {
             //socket连接失败，请重试，返回上一级界面
@@ -176,10 +176,11 @@
     MYLog(@"%@",str);
     [MBProgressHUD hideHUDForView:self.view];
         
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"soket连接失败" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"socket连接失败,是否重新连接" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[Singleton sharedInstance] socketConnectHost];//连接socket
+//        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
     
     [alertVc addAction:sureAction];
@@ -391,7 +392,7 @@
                         [self.timer invalidate];
                         self.timer = nil;
                         //断开连接
-//                        [[Singleton sharedInstance] cutOffSocket];
+                        [[Singleton sharedInstance] cutOffSocket];
                     }else if ([status isEqualToString:@"0600"]){
                         UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"初始化充电桩失败,请再试一遍" preferredStyle:UIAlertControllerStyleAlert];
                         

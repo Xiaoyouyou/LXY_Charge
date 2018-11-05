@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6401F5074D8CF40A598E84E8 /* libPods-Charge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A854C1C871D76831930C96 /* libPods-Charge.a */; };
+		755EA29D218B55880062345F /* ChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA29B218B55880062345F /* ChooseTableViewCell.m */; };
+		755EA29E218B55880062345F /* ChooseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755EA29C218B55880062345F /* ChooseTableViewCell.xib */; };
+		755EA2A1218B55980062345F /* ChooseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA2A0218B55980062345F /* ChooseModel.m */; };
 		756C788C2189EC5E00276E9F /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756C788B2189EC5E00276E9F /* ChooseView.m */; };
 		757BA82321840E5B00D4B6FE /* ChargeInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA82221840E5B00D4B6FE /* ChargeInfoTableViewController.m */; };
 		757BA8282184112F00D4B6FE /* ChargeInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA8262184112F00D4B6FE /* ChargeInfoTableViewCell.m */; };
@@ -25,6 +28,10 @@
 		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
 		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
 		75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA662174D4B400AC2F73 /* MyCarViewController.m */; };
+		75DC38E7218F1DF000F94A51 /* MyTrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC38E6218F1DF000F94A51 /* MyTrendViewController.m */; };
+		75DC38EB218F1E1F00F94A51 /* MyNoticationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC38E9218F1E1F00F94A51 /* MyNoticationTableViewCell.m */; };
+		75DC38EC218F1E1F00F94A51 /* MyNoticationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75DC38EA218F1E1F00F94A51 /* MyNoticationTableViewCell.xib */; };
+		75DC38EF218F230800F94A51 /* MyNoticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC38EE218F230800F94A51 /* MyNoticationModel.m */; };
 		75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */; };
 		75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */; };
 		75E58AE1217B8C8E00BA2BF2 /* MyCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */; };
@@ -34,6 +41,12 @@
 		75F1C39C2180CD1500577B46 /* ScreeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C39B2180CD1500577B46 /* ScreeningViewController.m */; };
 		75F1C3A82181EB8100577B46 /* MyCarListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C3A72181EB8100577B46 /* MyCarListModel.m */; };
 		75F1C3AA2182022E00577B46 /* addMyCar.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F1C3A92182022E00577B46 /* addMyCar.png */; };
+		75F51827218DEEDE00B467F7 /* left_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51823218DEEDD00B467F7 /* left_red.png */; };
+		75F51828218DEEDE00B467F7 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51824218DEEDD00B467F7 /* green.png */; };
+		75F51829218DEEDE00B467F7 /* left_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51825218DEEDD00B467F7 /* left_green.png */; };
+		75F5182A218DEEDE00B467F7 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51826218DEEDD00B467F7 /* red.png */; };
+		75F89A1E218D38D700B1DFFB /* MeInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F89A1C218D38D700B1DFFB /* MeInvoiceViewController.m */; };
+		75F89A1F218D38D700B1DFFB /* MeInvoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F89A1D218D38D700B1DFFB /* MeInvoiceViewController.xib */; };
 		75FDA57521778D98004A70E1 /* MyAddCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FDA57321778D98004A70E1 /* MyAddCarViewController.m */; };
 		75FDA57621778D98004A70E1 /* MyAddCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */; };
 		850698CF1D054F650002D28B /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 850698CE1D054F650002D28B /* back@2x.png */; };
@@ -236,7 +249,6 @@
 		85866FF61D76B7E5005FDF79 /* SystemNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85866FF51D76B7E5005FDF79 /* SystemNoticeViewController.m */; };
 		85866FFA1D76B97F005FDF79 /* SystemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85866FF81D76B97F005FDF79 /* SystemTableViewCell.m */; };
 		85866FFB1D76B97F005FDF79 /* SystemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85866FF91D76B97F005FDF79 /* SystemTableViewCell.xib */; };
-		85866FFE1D76C3E7005FDF79 /* MyTrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85866FFD1D76C3E7005FDF79 /* MyTrendViewController.m */; };
 		858670021D76C440005FDF79 /* MyTrendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 858670001D76C440005FDF79 /* MyTrendTableViewCell.m */; };
 		858670031D76C440005FDF79 /* MyTrendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 858670011D76C440005FDF79 /* MyTrendTableViewCell.xib */; };
 		8586D9661E9F293800D061EE /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8586D9641E9F293700D061EE /* close@2x.png */; };
@@ -424,6 +436,11 @@
 
 /* Begin PBXFileReference section */
 		29A854C1C871D76831930C96 /* libPods-Charge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Charge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		755EA29A218B55880062345F /* ChooseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseTableViewCell.h; sourceTree = "<group>"; };
+		755EA29B218B55880062345F /* ChooseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseTableViewCell.m; sourceTree = "<group>"; };
+		755EA29C218B55880062345F /* ChooseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTableViewCell.xib; sourceTree = "<group>"; };
+		755EA29F218B55980062345F /* ChooseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseModel.h; sourceTree = "<group>"; };
+		755EA2A0218B55980062345F /* ChooseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseModel.m; sourceTree = "<group>"; };
 		756C788A2189EC5E00276E9F /* ChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
 		756C788B2189EC5E00276E9F /* ChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
 		757BA82121840E5B00D4B6FE /* ChargeInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeInfoTableViewController.h; sourceTree = "<group>"; };
@@ -455,6 +472,13 @@
 		75BCDA262173938000AC2F73 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		75BCDA652174D4B400AC2F73 /* MyCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCarViewController.h; sourceTree = "<group>"; };
 		75BCDA662174D4B400AC2F73 /* MyCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCarViewController.m; sourceTree = "<group>"; };
+		75DC38E5218F1DF000F94A51 /* MyTrendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrendViewController.h; sourceTree = "<group>"; };
+		75DC38E6218F1DF000F94A51 /* MyTrendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrendViewController.m; sourceTree = "<group>"; };
+		75DC38E8218F1E1F00F94A51 /* MyNoticationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNoticationTableViewCell.h; sourceTree = "<group>"; };
+		75DC38E9218F1E1F00F94A51 /* MyNoticationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNoticationTableViewCell.m; sourceTree = "<group>"; };
+		75DC38EA218F1E1F00F94A51 /* MyNoticationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyNoticationTableViewCell.xib; sourceTree = "<group>"; };
+		75DC38ED218F230800F94A51 /* MyNoticationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNoticationModel.h; sourceTree = "<group>"; };
+		75DC38EE218F230800F94A51 /* MyNoticationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNoticationModel.m; sourceTree = "<group>"; };
 		75E26F992147706A0075EA98 /* DetailZhuangBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailZhuangBtnView.h; sourceTree = "<group>"; };
 		75E26F9A2147706A0075EA98 /* DetailZhuangBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailZhuangBtnView.m; sourceTree = "<group>"; };
 		75E26F9C2147B0130075EA98 /* All_chargingSubModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = All_chargingSubModel.h; sourceTree = "<group>"; };
@@ -470,6 +494,13 @@
 		75F1C3A62181EB8100577B46 /* MyCarListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCarListModel.h; sourceTree = "<group>"; };
 		75F1C3A72181EB8100577B46 /* MyCarListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCarListModel.m; sourceTree = "<group>"; };
 		75F1C3A92182022E00577B46 /* addMyCar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addMyCar.png; sourceTree = "<group>"; };
+		75F51823218DEEDD00B467F7 /* left_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_red.png; sourceTree = "<group>"; };
+		75F51824218DEEDD00B467F7 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		75F51825218DEEDD00B467F7 /* left_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_green.png; sourceTree = "<group>"; };
+		75F51826218DEEDD00B467F7 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		75F89A1B218D38D700B1DFFB /* MeInvoiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeInvoiceViewController.h; sourceTree = "<group>"; };
+		75F89A1C218D38D700B1DFFB /* MeInvoiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeInvoiceViewController.m; sourceTree = "<group>"; };
+		75F89A1D218D38D700B1DFFB /* MeInvoiceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeInvoiceViewController.xib; sourceTree = "<group>"; };
 		75FDA57221778D98004A70E1 /* MyAddCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAddCarViewController.h; sourceTree = "<group>"; };
 		75FDA57321778D98004A70E1 /* MyAddCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAddCarViewController.m; sourceTree = "<group>"; };
 		75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAddCarViewController.xib; sourceTree = "<group>"; };
@@ -766,8 +797,6 @@
 		85866FF71D76B97F005FDF79 /* SystemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemTableViewCell.h; sourceTree = "<group>"; };
 		85866FF81D76B97F005FDF79 /* SystemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemTableViewCell.m; sourceTree = "<group>"; };
 		85866FF91D76B97F005FDF79 /* SystemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemTableViewCell.xib; sourceTree = "<group>"; };
-		85866FFC1D76C3E7005FDF79 /* MyTrendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrendViewController.h; sourceTree = "<group>"; };
-		85866FFD1D76C3E7005FDF79 /* MyTrendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrendViewController.m; sourceTree = "<group>"; };
 		85866FFF1D76C440005FDF79 /* MyTrendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrendTableViewCell.h; sourceTree = "<group>"; };
 		858670001D76C440005FDF79 /* MyTrendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrendTableViewCell.m; sourceTree = "<group>"; };
 		858670011D76C440005FDF79 /* MyTrendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTrendTableViewCell.xib; sourceTree = "<group>"; };
@@ -1105,6 +1134,9 @@
 		757BA864218886C500D4B6FE /* 我的发票 */ = {
 			isa = PBXGroup;
 			children = (
+				75F89A1B218D38D700B1DFFB /* MeInvoiceViewController.h */,
+				75F89A1C218D38D700B1DFFB /* MeInvoiceViewController.m */,
+				75F89A1D218D38D700B1DFFB /* MeInvoiceViewController.xib */,
 			);
 			path = "我的发票";
 			sourceTree = "<group>";
@@ -1137,11 +1169,32 @@
 			path = "我的";
 			sourceTree = "<group>";
 		};
+		75DC38E4218F1DF000F94A51 /* 公告 */ = {
+			isa = PBXGroup;
+			children = (
+				75DC38E5218F1DF000F94A51 /* MyTrendViewController.h */,
+				75DC38E6218F1DF000F94A51 /* MyTrendViewController.m */,
+				75DC38E8218F1E1F00F94A51 /* MyNoticationTableViewCell.h */,
+				75DC38E9218F1E1F00F94A51 /* MyNoticationTableViewCell.m */,
+				75DC38EA218F1E1F00F94A51 /* MyNoticationTableViewCell.xib */,
+				75DC38ED218F230800F94A51 /* MyNoticationModel.h */,
+				75DC38EE218F230800F94A51 /* MyNoticationModel.m */,
+			);
+			path = "公告";
+			sourceTree = "<group>";
+		};
 		75F1C3992180CCC300577B46 /* 筛选 */ = {
 			isa = PBXGroup;
 			children = (
 				75F1C39A2180CD1500577B46 /* ScreeningViewController.h */,
 				75F1C39B2180CD1500577B46 /* ScreeningViewController.m */,
+				756C788A2189EC5E00276E9F /* ChooseView.h */,
+				756C788B2189EC5E00276E9F /* ChooseView.m */,
+				755EA29A218B55880062345F /* ChooseTableViewCell.h */,
+				755EA29B218B55880062345F /* ChooseTableViewCell.m */,
+				755EA29C218B55880062345F /* ChooseTableViewCell.xib */,
+				755EA29F218B55980062345F /* ChooseModel.h */,
+				755EA2A0218B55980062345F /* ChooseModel.m */,
 			);
 			path = "筛选";
 			sourceTree = "<group>";
@@ -1156,10 +1209,22 @@
 			path = "Charge/Charge/Models/我的车辆";
 			sourceTree = SOURCE_ROOT;
 		};
+		75F51822218DEEDD00B467F7 /* 图标 */ = {
+			isa = PBXGroup;
+			children = (
+				75F51823218DEEDD00B467F7 /* left_red.png */,
+				75F51824218DEEDD00B467F7 /* green.png */,
+				75F51825218DEEDD00B467F7 /* left_green.png */,
+				75F51826218DEEDD00B467F7 /* red.png */,
+			);
+			path = "图标";
+			sourceTree = "<group>";
+		};
 		850EE41D1D01387600B59D3F = {
 			isa = PBXGroup;
 			children = (
 				75BCDA262173938000AC2F73 /* PrefixHeader.pch */,
+				75F51822218DEEDD00B467F7 /* 图标 */,
 				850EE4281D01387600B59D3F /* Charge */,
 				850EE4421D01387600B59D3F /* ChargeTests */,
 				850EE44D1D01387600B59D3F /* ChargeUITests */,
@@ -1394,6 +1459,7 @@
 		850EE46C1D0154C900B59D3F /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				75DC38E4218F1DF000F94A51 /* 公告 */,
 				859FC9B31DDC295700D7C4B6 /* YuYueViewController.h */,
 				859FC9B41DDC295700D7C4B6 /* YuYueViewController.m */,
 				859FC9B51DDC295700D7C4B6 /* YuYueViewController.xib */,
@@ -1420,10 +1486,6 @@
 				854E3D631D361CC30097EEC7 /* PositionCityViewController.xib */,
 				85866FF41D76B7E5005FDF79 /* SystemNoticeViewController.h */,
 				85866FF51D76B7E5005FDF79 /* SystemNoticeViewController.m */,
-				85866FFC1D76C3E7005FDF79 /* MyTrendViewController.h */,
-				85866FFD1D76C3E7005FDF79 /* MyTrendViewController.m */,
-				756C788A2189EC5E00276E9F /* ChooseView.h */,
-				756C788B2189EC5E00276E9F /* ChooseView.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -2269,6 +2331,7 @@
 				757BA8292184112F00D4B6FE /* ChargeInfoTableViewCell.xib in Resources */,
 				8506DE971E2C64640033B60F /* chongZhi@2x.png in Resources */,
 				8529C7AE1D24F0D600211D2F /* YuYueTableFooterView.xib in Resources */,
+				75F89A1F218D38D700B1DFFB /* MeInvoiceViewController.xib in Resources */,
 				8547DC6B1E7A953500778E30 /* judianqipao@3x.png in Resources */,
 				85C6309F1E97302E0039D755 /* location@3x.png in Resources */,
 				857F29D41DF15F560093A564 /* NoneYuYue@2x.png in Resources */,
@@ -2302,6 +2365,7 @@
 				852EB5ED1EA0B7D600C5FE42 /* guize@2x.png in Resources */,
 				85E69F641D0E9CD2002D8AB5 /* mima@2x.png in Resources */,
 				850698E71D0571E20002D28B /* kuais@2x.png in Resources */,
+				75F51829218DEEDE00B467F7 /* left_green.png in Resources */,
 				852EB5EE1EA0B7D600C5FE42 /* guize@3x.png in Resources */,
 				850698E91D05737D0002D28B /* mans@2x.png in Resources */,
 				8529C7A91D24EB7300211D2F /* YuYueTableViewCell.xib in Resources */,
@@ -2310,6 +2374,7 @@
 				850EE4A01D01794700B59D3F /* dingwei@2x.png in Resources */,
 				85640E971E5C435D002C366D /* fault@3x.png in Resources */,
 				85A41C461D66E42800E981CD /* payIcon@2x.png in Resources */,
+				75F51828218DEEDE00B467F7 /* green.png in Resources */,
 				853763021E9B2C2600623ABC /* news@2x.png in Resources */,
 				8584AAE31E5D1C2400F31721 /* stop@2x.png in Resources */,
 				859C09CA1D07E7240002600D /* ChargeDetailViewController.xib in Resources */,
@@ -2378,6 +2443,7 @@
 				8563493C1D0D55F100535714 /* caricon@2x.png in Resources */,
 				85640E9B1E5C435D002C366D /* YuYues@2x.png in Resources */,
 				857FD6811E9E00A500D4E000 /* 02@3x.png in Resources */,
+				75F51827218DEEDE00B467F7 /* left_red.png in Resources */,
 				85394C481D1938570063D16C /* cor2.png in Resources */,
 				85C630A51E97302E0039D755 /* refresh2@3x.png in Resources */,
 				85992AB71EA6F8CA002B3E08 /* kefus@3x.png in Resources */,
@@ -2407,6 +2473,7 @@
 				8567BFC71EA9ADA800397871 /* jifencaidan@3x.png in Resources */,
 				85D955BC1D06647E00615182 /* fanweis@2x.png in Resources */,
 				853B5E8B1D73D9B0001548E6 /* collectRed@2x.png in Resources */,
+				755EA29E218B55880062345F /* ChooseTableViewCell.xib in Resources */,
 				8567BFC51EA9ADA300397871 /* jifencaidan@2x.png in Resources */,
 				853B5E891D73D9AD001548E6 /* collectGray@2x.png in Resources */,
 				854DBCCE1D1D131A004EEC47 /* costIcon@2x.png in Resources */,
@@ -2422,6 +2489,7 @@
 				85E2560E1DFA546D0085BAC8 /* choose@2x.png in Resources */,
 				85866FFB1D76B97F005FDF79 /* SystemTableViewCell.xib in Resources */,
 				857FD67E1E9E00A500D4E000 /* 01@2x.png in Resources */,
+				75F5182A218DEEDE00B467F7 /* red.png in Resources */,
 				85E12C341D6AAC5600187A36 /* bgView2s@2x.png in Resources */,
 				85A7E2B81D4C86B1002953EA /* QianMingTableViewCell.xib in Resources */,
 				852EB5FE1EA0BC1A00C5FE42 /* ref7@2x.png in Resources */,
@@ -2448,6 +2516,7 @@
 				85A41C3C1D66B36A00E981CD /* greenBack@2x.png in Resources */,
 				856349321D0D4C7700535714 /* YinXiaoTableViewCell.xib in Resources */,
 				8592F5681E78F21F0047A92D /* sns_weixin_icon@2x.png in Resources */,
+				75DC38EC218F1E1F00F94A51 /* MyNoticationTableViewCell.xib in Resources */,
 				85C6309D1E97302E0039D755 /* location.png in Resources */,
 				859C09D61D07F99C0002600D /* logos@2x.png in Resources */,
 				85C630AB1E97302E0039D755 /* refresh4@3x.png in Resources */,
@@ -2502,6 +2571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8529C7AC1D24F0C000211D2F /* YuYueTableFooterView.m in Sources */,
+				75DC38EB218F1E1F00F94A51 /* MyNoticationTableViewCell.m in Sources */,
 				75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */,
 				85E6D9741DE983A400306CDD /* ChargeDetalMes.m in Sources */,
 				856349391D0D54B900535714 /* LoginViewController.m in Sources */,
@@ -2527,6 +2597,8 @@
 				859FC9B61DDC295700D7C4B6 /* YuYueViewController.m in Sources */,
 				75E26F9B2147706A0075EA98 /* DetailZhuangBtnView.m in Sources */,
 				8534BD5B1E0275C100823484 /* YuYueChargeModel.m in Sources */,
+				75DC38E7218F1DF000F94A51 /* MyTrendViewController.m in Sources */,
+				755EA2A1218B55980062345F /* ChooseModel.m in Sources */,
 				8529C7A11D24B26D00211D2F /* CATCurveProgressView.m in Sources */,
 				853E789F1E1DF0F200A037CB /* MJRefreshStateHeader.m in Sources */,
 				859B99E31D1B7CD700F49097 /* UIImage-Extensions.m in Sources */,
@@ -2568,6 +2640,7 @@
 				853E789D1E1DF0F200A037CB /* MJRefreshGifHeader.m in Sources */,
 				858670021D76C440005FDF79 /* MyTrendTableViewCell.m in Sources */,
 				85D955E41D06C75D00615182 /* HeaderImageTableViewCell.m in Sources */,
+				75F89A1E218D38D700B1DFFB /* MeInvoiceViewController.m in Sources */,
 				859C09F21D0815230002600D /* AccountSafeHeaderView.m in Sources */,
 				853E78961E1DF0F200A037CB /* MJRefreshHeader.m in Sources */,
 				850EE42E1D01387600B59D3F /* AppDelegate.m in Sources */,
@@ -2604,6 +2677,7 @@
 				75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */,
 				850C04DC1E8B909800F14836 /* BindingPhoneViewController.m in Sources */,
 				853E789E1E1DF0F200A037CB /* MJRefreshNormalHeader.m in Sources */,
+				75DC38EF218F230800F94A51 /* MyNoticationModel.m in Sources */,
 				856349311D0D4C7700535714 /* YinXiaoTableViewCell.m in Sources */,
 				853E789C1E1DF0F200A037CB /* MJRefreshBackStateFooter.m in Sources */,
 				85866FFA1D76B97F005FDF79 /* SystemTableViewCell.m in Sources */,
@@ -2636,6 +2710,7 @@
 				856349401D0D566D00535714 /* RegisterViewController.m in Sources */,
 				858279701D2E57C800E41745 /* UIView+Ext.m in Sources */,
 				853763061E9B512600623ABC /* AdvertisementView.m in Sources */,
+				755EA29D218B55880062345F /* ChooseTableViewCell.m in Sources */,
 				8559B01A1D20D34E002EEA54 /* PhoneNumViewController.m in Sources */,
 				85E87FF81D07C02700F794A4 /* KeFuHeaderView.m in Sources */,
 				85D955CC1D0679BD00615182 /* SettingViewController.m in Sources */,
@@ -2651,7 +2726,6 @@
 				85D955D41D069D8400615182 /* MyCollectViewController.m in Sources */,
 				853E789A1E1DF0F200A037CB /* MJRefreshBackGifFooter.m in Sources */,
 				8541BC081D2B5ABB00213246 /* QiPaoBMKAnnotationView.m in Sources */,
-				85866FFE1D76C3E7005FDF79 /* MyTrendViewController.m in Sources */,
 				757BA869218886E800D4B6FE /* ChargeMessageTableViewCell.m in Sources */,
 				853E78991E1DF0F200A037CB /* MJRefreshAutoStateFooter.m in Sources */,
 				85E69F2A1D0E5918002D8AB5 /* WKAvoidKeyboardViewController.m in Sources */,

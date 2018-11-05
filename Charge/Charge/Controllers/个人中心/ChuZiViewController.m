@@ -104,7 +104,7 @@ typedef enum{
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(64);
+        make.height.mas_equalTo(StatusBarH + 44);
     }];
     
     self.view.backgroundColor = RGBA(235, 236, 237, 1);
@@ -470,7 +470,7 @@ typedef enum{
     
     NSString *tempStr = @"";
     if (self.ChooseMonetyType == 0) {
-        tempStr = @"10";
+        tempStr = @"0.01";
     }else if (self.ChooseMonetyType == 1)
     {
         tempStr = @"50";

@@ -68,7 +68,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:self.tableView];
-    self.tableView.rowHeight = 120;
+    self.tableView.rowHeight = 100;
     [self.tableView registerNib:[UINib nibWithNibName:@"ChargeNumberCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ChargeNumberCell"];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);

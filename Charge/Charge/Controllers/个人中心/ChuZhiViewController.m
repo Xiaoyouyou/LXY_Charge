@@ -342,8 +342,8 @@ typedef enum{
     NSLog(@"Config getOwnID = %@",[Config getOwnID]);
     NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
     paramers[@"userId"] = [Config getOwnID];
-//    paramers[@"totalAmount"] = moneyTextField.text;
-    paramers[@"totalAmount"] = @"0.01";
+    paramers[@"totalAmount"] = moneyTextField.text;
+//    paramers[@"totalAmount"] = @"0.01";
     
     [WMNetWork post:Alipays parameters:paramers success:^(id responseObj) {
         NSLog(@"responseObj = %@",responseObj);

@@ -289,73 +289,73 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
         make.height.mas_equalTo(38);
     }];
     
-//    //描述lab
-    desLab = [[UILabel alloc] init];
-    desLab.text = @"使用第三方账号登陆";
-    [desLab sizeToFit];
-    desLab.textAlignment = NSTextAlignmentCenter;
-    desLab.textColor = [UIColor blackColor];
-    desLab.font = [UIFont systemFontOfSize:15];
-    [self.view addSubview:desLab];
-    
-    [desLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(loginBtn.mas_bottom).offset(50);
-        make.centerX.equalTo(self.view);
-    }];
-    
-    
-    //微信登陆按钮
-    weChatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [weChatBtn setBackgroundImage:[UIImage imageNamed:@"sns_weixin_icon@2x"] forState:UIControlStateNormal];
-    [weChatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [weChatBtn addTarget:self action:@selector(weChatAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:weChatBtn];
-    
-    [weChatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(desLab.mas_bottom).offset(30);
-        make.centerX.equalTo(self.view).offset(-40);
-    }];
-
-    //微信lab
-    weChatLoginLab = [[UILabel alloc] init];
-    weChatLoginLab.text = @"微信登陆";
-    [weChatLoginLab sizeToFit];
-    weChatLoginLab.textAlignment = NSTextAlignmentCenter;
-    weChatLoginLab.textColor = [UIColor blackColor];
-    weChatLoginLab.font = [UIFont systemFontOfSize:12];
-    [self.view addSubview:weChatLoginLab];
-    
-    [weChatLoginLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weChatBtn.mas_bottom).offset(10);
-        make.centerX.equalTo(weChatBtn);
-    }];
-    
-    
-    //qq登陆按钮
-    QqLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [QqLoginBtn setBackgroundImage:[UIImage imageNamed:@"sns_qqfriends_icon@2x"] forState:UIControlStateNormal];
-    [QqLoginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [QqLoginBtn addTarget:self action:@selector(QqLoginBtn) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:QqLoginBtn];
-    
-    [QqLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(desLab.mas_bottom).offset(30);
-        make.centerX.equalTo(self.view).offset(40);
-    }];
-    
-    //QQ lab
-    QqLoginLab = [[UILabel alloc] init];
-    QqLoginLab.text = @"QQ登陆";
-    [QqLoginLab sizeToFit];
-    QqLoginLab.textAlignment = NSTextAlignmentCenter;
-    QqLoginLab.textColor = [UIColor blackColor];
-    QqLoginLab.font = [UIFont systemFontOfSize:12];
-    [self.view addSubview:QqLoginLab];
-    
-    [QqLoginLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(QqLoginBtn.mas_bottom).offset(10);
-        make.centerX.equalTo(QqLoginBtn);
-    }];
+////    //描述lab
+//    desLab = [[UILabel alloc] init];
+//    desLab.text = @"使用第三方账号登陆";
+//    [desLab sizeToFit];
+//    desLab.textAlignment = NSTextAlignmentCenter;
+//    desLab.textColor = [UIColor blackColor];
+//    desLab.font = [UIFont systemFontOfSize:15];
+//    [self.view addSubview:desLab];
+//
+//    [desLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(loginBtn.mas_bottom).offset(50);
+//        make.centerX.equalTo(self.view);
+//    }];
+//
+//
+//    //微信登陆按钮
+//    weChatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [weChatBtn setBackgroundImage:[UIImage imageNamed:@"sns_weixin_icon@2x"] forState:UIControlStateNormal];
+//    [weChatBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [weChatBtn addTarget:self action:@selector(weChatAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:weChatBtn];
+//
+//    [weChatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(desLab.mas_bottom).offset(30);
+//        make.centerX.equalTo(self.view).offset(-40);
+//    }];
+//
+//    //微信lab
+//    weChatLoginLab = [[UILabel alloc] init];
+//    weChatLoginLab.text = @"微信登陆";
+//    [weChatLoginLab sizeToFit];
+//    weChatLoginLab.textAlignment = NSTextAlignmentCenter;
+//    weChatLoginLab.textColor = [UIColor blackColor];
+//    weChatLoginLab.font = [UIFont systemFontOfSize:12];
+//    [self.view addSubview:weChatLoginLab];
+//
+//    [weChatLoginLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(weChatBtn.mas_bottom).offset(10);
+//        make.centerX.equalTo(weChatBtn);
+//    }];
+//
+//
+//    //qq登陆按钮
+//    QqLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [QqLoginBtn setBackgroundImage:[UIImage imageNamed:@"sns_qqfriends_icon@2x"] forState:UIControlStateNormal];
+//    [QqLoginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [QqLoginBtn addTarget:self action:@selector(QqLoginBtn) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:QqLoginBtn];
+//
+//    [QqLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(desLab.mas_bottom).offset(30);
+//        make.centerX.equalTo(self.view).offset(40);
+//    }];
+//
+//    //QQ lab
+//    QqLoginLab = [[UILabel alloc] init];
+//    QqLoginLab.text = @"QQ登陆";
+//    [QqLoginLab sizeToFit];
+//    QqLoginLab.textAlignment = NSTextAlignmentCenter;
+//    QqLoginLab.textColor = [UIColor blackColor];
+//    QqLoginLab.font = [UIFont systemFontOfSize:12];
+//    [self.view addSubview:QqLoginLab];
+//
+//    [QqLoginLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(QqLoginBtn.mas_bottom).offset(10);
+//        make.centerX.equalTo(QqLoginBtn);
+//    }];
     
 }
 

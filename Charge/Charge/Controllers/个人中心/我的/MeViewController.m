@@ -17,6 +17,7 @@
 #import "PersonMessageViewController.h"
 #import "MyCarViewController.h"
 #import "ChargeMessageViewController.h"
+#import "MeInvoiceViewController.h"
 
 @interface MeViewController ()
 //导航
@@ -56,10 +57,12 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if ([Config getOwnID] == nil || [Config getToken] == nil) {
-        LoginViewController *loginVC = [[LoginViewController alloc] init];
-        [self presentViewController:loginVC animated:YES completion:nil];
-    }
+//    if ([Config getOwnID] == nil || [Config getToken] == nil) {
+//        LoginViewController *loginVC = [[LoginViewController alloc] init];
+//        UINavigationController *nav = [[UINavigationController alloc] init];
+//        [nav addChildViewController:loginVC];
+//        [self presentViewController:nav animated:YES completion:nil];
+//    }
 }
 
 - (void)viewDidLoad {
@@ -244,7 +247,8 @@
         MyCollectViewController *MyCollectVC = [[MyCollectViewController alloc] init];
         [self.navigationController pushViewController:MyCollectVC animated:YES];
     }else if (sender.tag == 2){
-        
+        MeInvoiceViewController *invoice = [[MeInvoiceViewController alloc] init];
+        [self.navigationController pushViewController:invoice animated:YES];
     }else if (sender.tag == 3){
         MyCarViewController * carVc = [[MyCarViewController alloc] init];
         [self.navigationController pushViewController:carVc animated:YES];

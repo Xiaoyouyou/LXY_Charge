@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNa-ZY-Yn9">
-                    <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="70" width="375" height="44"/>
                     <color key="backgroundColor" red="0.90588235294117647" green="0.90980392156862744" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="hsy-HR-Per"/>
@@ -55,7 +55,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kz1-WI-vYT">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充电站详情" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S57-2H-s5F">
                             <rect key="frame" x="121.5" y="17.5" width="133" height="35"/>
@@ -76,7 +76,7 @@
                             <state key="normal" image="back.png"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxB-dx-v3i">
-                            <rect key="frame" x="340" y="27" width="30" height="32"/>
+                            <rect key="frame" x="340" y="33" width="30" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="V2K-om-iYy"/>
                                 <constraint firstAttribute="width" constant="30" id="shH-Aq-D1y"/>
@@ -92,6 +92,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="nxB-dx-v3i" secondAttribute="trailing" constant="5" id="2Uc-Uy-QMU"/>
                         <constraint firstItem="RGW-WG-tc4" firstAttribute="top" secondItem="Kz1-WI-vYT" secondAttribute="top" constant="20" id="8r0-4s-fWQ"/>
+                        <constraint firstAttribute="height" constant="70" id="90A-5R-bGx"/>
                         <constraint firstItem="S57-2H-s5F" firstAttribute="centerY" secondItem="RGW-WG-tc4" secondAttribute="centerY" id="FxD-Sg-b1K"/>
                         <constraint firstItem="S57-2H-s5F" firstAttribute="centerX" secondItem="Kz1-WI-vYT" secondAttribute="centerX" id="PYS-9j-dmA"/>
                         <constraint firstAttribute="bottom" secondItem="nxB-dx-v3i" secondAttribute="bottom" constant="5" id="nLk-HD-NmP"/>
@@ -99,7 +100,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFJ-aW-sB1" userLabel="subView">
-                    <rect key="frame" x="0.0" y="108" width="375" height="499"/>
+                    <rect key="frame" x="0.0" y="114" width="375" height="493"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
@@ -117,7 +118,6 @@
                 <constraint firstItem="Kz1-WI-vYT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hcD-EE-dBt"/>
                 <constraint firstAttribute="trailing" secondItem="8Ou-qL-CPY" secondAttribute="trailing" id="hgE-R9-Mmz"/>
                 <constraint firstItem="sFJ-aW-sB1" firstAttribute="top" secondItem="YNa-ZY-Yn9" secondAttribute="bottom" id="kJq-Ls-iGC"/>
-                <constraint firstItem="YNa-ZY-Yn9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="nbA-JG-kVl"/>
                 <constraint firstItem="YNa-ZY-Yn9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qOT-2s-NQQ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

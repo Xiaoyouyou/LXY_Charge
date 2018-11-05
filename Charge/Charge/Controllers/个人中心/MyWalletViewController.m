@@ -89,7 +89,7 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(64);
+        make.height.mas_equalTo(StatusBarH + 44);
     }];
 
     //初始化圆角

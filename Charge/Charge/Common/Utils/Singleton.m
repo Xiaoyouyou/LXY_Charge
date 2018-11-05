@@ -17,7 +17,7 @@
 //#define Host_IP @"10.0.0.5"
 //#define Host_IP @"183.234.61.201"
 //#define Host_IP @"192.168.1.107"
-#define Host_IP @"192.168.5.10"
+#define Host_IP @"47.107.14.253"
 
 #define Host_PORT 3005
 //#define Host_PORT 1026
