@@ -36,6 +36,8 @@
 		75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */; };
 		75E58AE1217B8C8E00BA2BF2 /* MyCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */; };
 		75E58AE2217B8C8E00BA2BF2 /* MyCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */; };
+		75ED636921932B67008BDA79 /* ShaixuanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED636821932B67008BDA79 /* ShaixuanView.m */; };
+		75ED636B21932B77008BDA79 /* ShaixuanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75ED636A21932B77008BDA79 /* ShaixuanView.xib */; };
 		75F1C38A217F3C0100577B46 /* RsaUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C389217F3C0100577B46 /* RsaUtil.m */; };
 		75F1C39821808CF300577B46 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F1C39721808CF300577B46 /* libiconv.tbd */; };
 		75F1C39C2180CD1500577B46 /* ScreeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C39B2180CD1500577B46 /* ScreeningViewController.m */; };
@@ -486,6 +488,9 @@
 		75E58ADE217B8C8E00BA2BF2 /* MyCarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCarTableViewCell.h; sourceTree = "<group>"; };
 		75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCarTableViewCell.m; sourceTree = "<group>"; };
 		75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCarTableViewCell.xib; sourceTree = "<group>"; };
+		75ED636721932B67008BDA79 /* ShaixuanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaixuanView.h; sourceTree = "<group>"; };
+		75ED636821932B67008BDA79 /* ShaixuanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaixuanView.m; sourceTree = "<group>"; };
+		75ED636A21932B77008BDA79 /* ShaixuanView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShaixuanView.xib; sourceTree = "<group>"; };
 		75F1C388217F3C0100577B46 /* RsaUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RsaUtil.h; sourceTree = "<group>"; };
 		75F1C389217F3C0100577B46 /* RsaUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RsaUtil.m; sourceTree = "<group>"; };
 		75F1C39721808CF300577B46 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -1190,6 +1195,9 @@
 				75F1C39B2180CD1500577B46 /* ScreeningViewController.m */,
 				756C788A2189EC5E00276E9F /* ChooseView.h */,
 				756C788B2189EC5E00276E9F /* ChooseView.m */,
+				75ED636721932B67008BDA79 /* ShaixuanView.h */,
+				75ED636821932B67008BDA79 /* ShaixuanView.m */,
+				75ED636A21932B77008BDA79 /* ShaixuanView.xib */,
 				755EA29A218B55880062345F /* ChooseTableViewCell.h */,
 				755EA29B218B55880062345F /* ChooseTableViewCell.m */,
 				755EA29C218B55880062345F /* ChooseTableViewCell.xib */,
@@ -2435,6 +2443,7 @@
 				850698E51D056F410002D28B /* SearchChargeTableViewCell.xib in Resources */,
 				85394C491D1938570063D16C /* cor3.png in Resources */,
 				85C630A11E97302E0039D755 /* refresh1@2x.png in Resources */,
+				75ED636B21932B77008BDA79 /* ShaixuanView.xib in Resources */,
 				85A41C421D66B69000E981CD /* zhanHao@2x.png in Resources */,
 				85C630B01E97302E0039D755 /* search@2x.png in Resources */,
 				85C630AE1E97302E0039D755 /* scan@3x.png in Resources */,
@@ -2719,6 +2728,7 @@
 				85E256141DFAA05F0085BAC8 /* NavView.m in Sources */,
 				8567BFC21EA9A5AD00397871 /* JiFenTableViewCell.m in Sources */,
 				8547DC671E7A843F00778E30 /* MainViewController.m in Sources */,
+				75ED636921932B67008BDA79 /* ShaixuanView.m in Sources */,
 				858D90371D792F04003B3E97 /* AppAgreementViewController.m in Sources */,
 				8587C05F1D17CC8400AA0918 /* QRCodeReader.m in Sources */,
 				859C09E41D0804E90002600D /* DetailZhuangWeiViewController.m in Sources */,

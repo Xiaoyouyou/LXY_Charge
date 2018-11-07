@@ -9,6 +9,7 @@
 #import "ChooseView.h"
 #import "ChooseModel.h"
 #import "ChooseTableViewCell.h"
+#import "ShaixuanView.h"
 
 @interface ChooseView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UIScrollView *scroll;
@@ -18,6 +19,8 @@
 @property (nonatomic ,strong)NSMutableArray *dataSource;
 //状态按钮
 @property (nonatomic,strong) UIButton *selectedBtn;
+//筛选界面
+@property (nonatomic,strong) ShaixuanView *views;
 @end
 
 @implementation ChooseView
@@ -79,8 +82,16 @@
     NSLog(@"点击了按钮--%ld",button.tag);
     if (button.tag == 0) {
         [self loadDataSource:@"0"];
+        if( self.views){
+            [self.views removeFromSuperview];
+            self.views = nil;
+        }
     }else if (button.tag == 1) {
         [self loadDataSource:@"1"];
+        if( self.views){
+            [self.views removeFromSuperview];
+            self.views = nil;
+        }
     }else if (button.tag == 2){
         //弹框 然后选择条件
         [self addChooseViewInThisView];
@@ -132,8 +143,19 @@
 
 //添加筛选界面到这个view上
 -(void)addChooseViewInThisView{
-    UIView *views = [[UIView alloc] initWithFrame:CGRectMake(0, 44, XYScreenWidth, 200)];
-    views.backgroundColor = [UIColor redColor];
-    [self addSubview:views];
+    if(self.views == nil){
+        self.views = [[ShaixuanView alloc] initWithFrame:CGRectMake(0, 88, XYScreenWidth, 200)];
+        __weak typeof(self) weakSelf = self;
+        self.views.cancelBlock = ^{
+            [weakSelf.views removeFromSuperview];
+            weakSelf.views = nil;
+        };
+        self.views.chooseBlock = ^(NSDictionary *type) {
+            NSLog(@"%@",type);
+            NSLog(@"请求数据啊");
+        };
+        [self.scroll addSubview:self.views];
+    }
+   
 }
 @end
