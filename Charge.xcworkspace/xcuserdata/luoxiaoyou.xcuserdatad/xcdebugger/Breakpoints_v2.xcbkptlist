@@ -90,7 +90,7 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "563039907.151063"
+                  timestampString = "563292359.994607"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
@@ -105,7 +105,7 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "563039907.153429"
+                  timestampString = "563292359.996812"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
@@ -120,7 +120,7 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "563039907.157914"
+                  timestampString = "563292359.9991471"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
@@ -319,22 +319,6 @@
             startingLineNumber = "191"
             endingLineNumber = "191"
             landmarkName = "-loadDataSource"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Charge/Charge/Controllers/&#x7b5b;&#x9009;/ChooseView.m"
-            timestampString = "563039925.910985"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "-addChooseViewInThisView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

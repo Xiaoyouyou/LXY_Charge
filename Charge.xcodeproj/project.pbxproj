@@ -11,7 +11,6 @@
 		755EA29D218B55880062345F /* ChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA29B218B55880062345F /* ChooseTableViewCell.m */; };
 		755EA29E218B55880062345F /* ChooseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755EA29C218B55880062345F /* ChooseTableViewCell.xib */; };
 		755EA2A1218B55980062345F /* ChooseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA2A0218B55980062345F /* ChooseModel.m */; };
-		756C788C2189EC5E00276E9F /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756C788B2189EC5E00276E9F /* ChooseView.m */; };
 		757BA82321840E5B00D4B6FE /* ChargeInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA82221840E5B00D4B6FE /* ChargeInfoTableViewController.m */; };
 		757BA8282184112F00D4B6FE /* ChargeInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA8262184112F00D4B6FE /* ChargeInfoTableViewCell.m */; };
 		757BA8292184112F00D4B6FE /* ChargeInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BA8272184112F00D4B6FE /* ChargeInfoTableViewCell.xib */; };
@@ -36,6 +35,7 @@
 		75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */; };
 		75E58AE1217B8C8E00BA2BF2 /* MyCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */; };
 		75E58AE2217B8C8E00BA2BF2 /* MyCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */; };
+		75ED636621932914008BDA79 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED636521932914008BDA79 /* ChooseView.m */; };
 		75F1C38A217F3C0100577B46 /* RsaUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C389217F3C0100577B46 /* RsaUtil.m */; };
 		75F1C39821808CF300577B46 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F1C39721808CF300577B46 /* libiconv.tbd */; };
 		75F1C39C2180CD1500577B46 /* ScreeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C39B2180CD1500577B46 /* ScreeningViewController.m */; };
@@ -441,8 +441,6 @@
 		755EA29C218B55880062345F /* ChooseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTableViewCell.xib; sourceTree = "<group>"; };
 		755EA29F218B55980062345F /* ChooseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseModel.h; sourceTree = "<group>"; };
 		755EA2A0218B55980062345F /* ChooseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseModel.m; sourceTree = "<group>"; };
-		756C788A2189EC5E00276E9F /* ChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
-		756C788B2189EC5E00276E9F /* ChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
 		757BA82121840E5B00D4B6FE /* ChargeInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeInfoTableViewController.h; sourceTree = "<group>"; };
 		757BA82221840E5B00D4B6FE /* ChargeInfoTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeInfoTableViewController.m; sourceTree = "<group>"; };
 		757BA8252184112F00D4B6FE /* ChargeInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -486,6 +484,8 @@
 		75E58ADE217B8C8E00BA2BF2 /* MyCarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCarTableViewCell.h; sourceTree = "<group>"; };
 		75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCarTableViewCell.m; sourceTree = "<group>"; };
 		75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCarTableViewCell.xib; sourceTree = "<group>"; };
+		75ED636421932914008BDA79 /* ChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
+		75ED636521932914008BDA79 /* ChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
 		75F1C388217F3C0100577B46 /* RsaUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RsaUtil.h; sourceTree = "<group>"; };
 		75F1C389217F3C0100577B46 /* RsaUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RsaUtil.m; sourceTree = "<group>"; };
 		75F1C39721808CF300577B46 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -1188,13 +1188,13 @@
 			children = (
 				75F1C39A2180CD1500577B46 /* ScreeningViewController.h */,
 				75F1C39B2180CD1500577B46 /* ScreeningViewController.m */,
-				756C788A2189EC5E00276E9F /* ChooseView.h */,
-				756C788B2189EC5E00276E9F /* ChooseView.m */,
 				755EA29A218B55880062345F /* ChooseTableViewCell.h */,
 				755EA29B218B55880062345F /* ChooseTableViewCell.m */,
 				755EA29C218B55880062345F /* ChooseTableViewCell.xib */,
 				755EA29F218B55980062345F /* ChooseModel.h */,
 				755EA2A0218B55980062345F /* ChooseModel.m */,
+				75ED636421932914008BDA79 /* ChooseView.h */,
+				75ED636521932914008BDA79 /* ChooseView.m */,
 			);
 			path = "筛选";
 			sourceTree = "<group>";
@@ -2640,6 +2640,7 @@
 				853E789D1E1DF0F200A037CB /* MJRefreshGifHeader.m in Sources */,
 				858670021D76C440005FDF79 /* MyTrendTableViewCell.m in Sources */,
 				85D955E41D06C75D00615182 /* HeaderImageTableViewCell.m in Sources */,
+				75ED636621932914008BDA79 /* ChooseView.m in Sources */,
 				75F89A1E218D38D700B1DFFB /* MeInvoiceViewController.m in Sources */,
 				859C09F21D0815230002600D /* AccountSafeHeaderView.m in Sources */,
 				853E78961E1DF0F200A037CB /* MJRefreshHeader.m in Sources */,
@@ -2647,7 +2648,6 @@
 				85ADBBA51E6D51D9007B6400 /* ChuZiViewController.m in Sources */,
 				757BA83621854C5000D4B6FE /* ChargeNumberCell.m in Sources */,
 				757BA82C218415BC00D4B6FE /* ChargeInfoModel.m in Sources */,
-				756C788C2189EC5E00276E9F /* ChooseView.m in Sources */,
 				85D323501D0FA76100502185 /* RegisterRightView.m in Sources */,
 				85675B5E1D6A9AFF006B62E8 /* heartView.m in Sources */,
 				853B2C8A1DF7F0D100CBAF4F /* ZhouBianChargeModel.m in Sources */,
