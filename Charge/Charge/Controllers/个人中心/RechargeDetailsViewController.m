@@ -162,7 +162,7 @@ typedef enum {
                 [self.tipview mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(self.view);
                     make.right.equalTo(self.view);
-                    make.top.equalTo(self.view).offset(64);
+                    make.top.equalTo(self.view).offset(44 + StatusBarH);
                     make.bottom.equalTo(self.view);
                 }];
                 return ;

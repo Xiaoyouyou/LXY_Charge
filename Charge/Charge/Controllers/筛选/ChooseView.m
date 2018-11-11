@@ -42,6 +42,7 @@
 //创建子view
 -(void)addSubViews:(CGRect)frame{
     UIView *topBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, 44)];
+    topBackView.backgroundColor = [UIColor whiteColor];
     NSArray *btnTitle = @[@"距离最近",@"价格最低",@"筛选"];
     for (int i = 0; i < btnTitle.count; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -57,12 +58,12 @@
     [self addSubview:topBackView];
     //添加tableView
     //添加tableView
-    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0,44, XYScreenWidth, XYScreenHeight - 44)];
+    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0,44, XYScreenWidth, 450)];
     self.scroll = scroll;
     scroll.backgroundColor = RGB_COLOR(109, 109, 109, 1.0);
     [self addSubview:scroll];
     
-    UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 6, XYScreenWidth, XYScreenHeight) style:UITableViewStylePlain];
+    UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 6, XYScreenWidth, 450) style:UITableViewStylePlain];
     [table registerNib:[UINib nibWithNibName:@"ChooseTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"chooseCell"];
     self.tableView = table;
     table.delegate = self;
@@ -71,6 +72,16 @@
    
 }
 -(void)chooseType:(UIButton *)button{
+//    NSDictionary *paramer = @{
+//                              //                                  @"province" : [Config get]//手机位置所在省
+//                              //                                   @"city" :  [Config ],    //手机位置所在市
+//                              //                                  @"longitude": //手机位置经度 数字类型
+//                              //                                  @"latitude": //手机位置纬度 数字类型
+//                              //                                  @"state":        //充电站状态，传00查可用站，不传或传其他字符查所有
+//                              @"priceOrderby":@0//是否根据价格排序，传0根据距离近远排序，传1根据价格低高排序。
+//                              //                                  @"acFlag":      //交流直流标志，传1查含有直流的充电站，传0查交流充电站，不传查所有
+//                              };
+     NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
     if (button!= self.selectedBtn) {
         self.selectedBtn.selected = NO;
         button.selected = YES;
@@ -81,13 +92,15 @@
     
     NSLog(@"点击了按钮--%ld",button.tag);
     if (button.tag == 0) {
-        [self loadDataSource:@"0"];
+         [paramer setValue:@"0" forKey:@"priceOrderby"];
+        [self loadDataSource:paramer];
         if( self.views){
             [self.views removeFromSuperview];
             self.views = nil;
         }
     }else if (button.tag == 1) {
-        [self loadDataSource:@"1"];
+        [paramer setValue:@"1" forKey:@"priceOrderby"];
+        [self loadDataSource:paramer];
         if( self.views){
             [self.views removeFromSuperview];
             self.views = nil;
@@ -98,17 +111,17 @@
     }
 }
 
--(void)loadDataSource:(NSString *)priceOrderby{
+-(void)loadDataSource:(NSMutableDictionary *)paramer{
     //发送默认排序请求
-    NSDictionary *paramer = @{
-                              //                                  @"province" : [Config get]//手机位置所在省
-                              //                                   @"city" :  [Config ],    //手机位置所在市
-                              //                                  @"longitude": //手机位置经度 数字类型
-                              //                                  @"latitude": //手机位置纬度 数字类型
-                              //                                  @"state":        //充电站状态，传00查可用站，不传或传其他字符查所有
-                              @"priceOrderby":@0//是否根据价格排序，传0根据距离近远排序，传1根据价格低高排序。
-                              //                                  @"acFlag":      //交流直流标志，传1查含有直流的充电站，传0查交流充电站，不传查所有
-                              };
+//    NSDictionary *paramer = @{
+//                              //                                  @"province" : [Config get]//手机位置所在省
+//                              //                                   @"city" :  [Config ],    //手机位置所在市
+//                              //                                  @"longitude": //手机位置经度 数字类型
+//                              //                                  @"latitude": //手机位置纬度 数字类型
+//                              //                                  @"state":        //充电站状态，传00查可用站，不传或传其他字符查所有
+//                              @"priceOrderby":@0//是否根据价格排序，传0根据距离近远排序，传1根据价格低高排序。
+//                              //                                  @"acFlag":      //交流直流标志，传1查含有直流的充电站，传0查交流充电站，不传查所有
+//                              };
     [WMNetWork get:ChargeChooseList
         parameters:paramer success:^(id responseObj) {
             NSLog(@"%@",responseObj);
@@ -151,6 +164,28 @@
             weakSelf.views = nil;
         };
         self.views.chooseBlock = ^(NSDictionary *type) {
+            NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+  
+//  @{
+//                                      //                                  @"province" : [Config get]//手机位置所在省
+//                                      //                                   @"city" :  [Config ],    //手机位置所在市
+//                                      //                                  @"longitude": //手机位置经度 数字类型
+//                                      //                                  @"latitude": //手机位置纬度 数字类型
+//                                      //                                  @"state":        //充电站状态，传00查可用站，不传或传其他字符查所有
+//                                      @"priceOrderby":@0//是否根据价格排序，传0根据距离近远排序，传1根据价格低高排序。
+//                                      //                                  @"acFlag":      //交流直流标志，传1查含有直流的充电站，传0查交流充电站，不传查所有
+//                                      };
+            [paramer setValue:@"00" forKey:@"state"];
+            if (([type objectForKey:@"0"] == nil && [type objectForKey:@"1"] == nil) || ([type objectForKey:@"0"] && [type objectForKey:@"1"]) ) {
+                [paramer setValue:@"" forKey:@"acFlag"];
+            }else if([type objectForKey:@"0"]){
+                [paramer setValue:@"0" forKey:@"acFlag"];
+            }else{
+                [paramer setValue:@"1" forKey:@"acFlag"];
+            }
+            [weakSelf loadDataSource:paramer];
+            [weakSelf.views removeFromSuperview];
+            weakSelf.views = nil;
             NSLog(@"%@",type);
             NSLog(@"请求数据啊");
         };

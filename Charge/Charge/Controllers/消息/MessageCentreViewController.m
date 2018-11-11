@@ -108,7 +108,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self creatUI];
-    arrayTitle = @[@"公告",@"系统通知",@"用户指南",@"联系客服"];
+    arrayTitle = @[@"系统通知",@"用户指南",@"联系客服"];
 
     
 }
@@ -174,23 +174,24 @@
 //响应点击事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        //我的动态
-        MyTrendViewController *myTrendVC = [[MyTrendViewController alloc] init];
-        [self.navigationController pushViewController:myTrendVC animated:YES];
-        
-    }else if (indexPath.section == 0 && indexPath.row == 1)
+//    if (indexPath.section == 0 && indexPath.row == 0) {
+//        //公告
+//        MyTrendViewController *myTrendVC = [[MyTrendViewController alloc] init];
+//        [self.navigationController pushViewController:myTrendVC animated:YES];
+//
+//    }else
+    if (indexPath.section == 0 && indexPath.row == 0)
     {
        //系统通知
         SystemNoticeViewController *systemVC = [[SystemNoticeViewController alloc] init];
         [self.navigationController pushViewController:systemVC animated:YES];
     }
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1) {
         //用户指南   webView界面
         UserGuideViewController *userVC = [[UserGuideViewController alloc] init];
         [self.navigationController pushViewController:userVC animated:YES];
         
-    }else if (indexPath.row == 3)
+    }else if (indexPath.row == 2)
     {
         //联系客服
         UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"4001688050" preferredStyle:UIAlertControllerStyleAlert];

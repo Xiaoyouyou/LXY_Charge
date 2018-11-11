@@ -50,7 +50,7 @@
 };
 -(NSArray *)btnFunction{
     if(!_btnFunction){
-        _btnFunction = @[@"我的钱包",@"我的收藏",@"我要开票",@"我的车辆",@"充电记录",@"更多功能"];
+        _btnFunction = @[@"我的钱包",@"我的收藏",@"我要开票",@"我的车辆",@"充电记录"];
     }
     return _btnFunction;
 };
@@ -84,7 +84,7 @@
                               };
     [WMNetWork get:GetBalance parameters:paramer success:^(id responseObj) {
         [self.bottomTitleArr addObject:responseObj[@"balance"]];
-        [self.bottomTitleArr addObject:@"暂无"];
+        [self.bottomTitleArr addObject:@"00"];
         [self addSomeSubViews:self.bottomTitleArr];
     } failure:^(NSError *error) {
         
@@ -94,7 +94,8 @@
 
  //添加导航条和添加子view条
 -(void)addNavigationBar{
-    self.nav = [[NavView alloc] initWithFrame:CGRectZero title:@"我的" leftImgae:@"back@2x.png" rightImage:@"set_gray.png"];
+    self.nav = [[NavView alloc]
+                initWithFrame:CGRectZero title:@"我的" leftImgae:@"back@2x.png" rightButton:@"设置"];
     __weak typeof(self) weakSelf = self;
     self.nav.backBlock = ^{
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
@@ -200,7 +201,7 @@
     }
     /*---------bottom----------*/
     //九宫格布局button 假设有n个btn
-    int n = 6;
+    NSInteger n = self.btnFunction.count;
     CGFloat LeftSpace = 10;
     CGFloat TopSpace = 20;
     CGFloat bottomSpace = 10;

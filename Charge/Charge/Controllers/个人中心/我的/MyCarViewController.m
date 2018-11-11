@@ -76,6 +76,7 @@
     nav.rightBlock = ^{
         NSLog(@"点击了右边的按钮");
         MyAddCarViewController *addCar = [[MyAddCarViewController alloc] init];
+        addCar.titles = @"添加车辆";
         [self.navigationController pushViewController:addCar animated:YES];
     };
     [self.view addSubview:nav];
@@ -114,9 +115,47 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MyCarTableViewCell *cell = [MyCarTableViewCell creatMyCarCell];
+    cell.cancel = ^{
+        [self deleteCar];
+        [self.self.dataSource removeObjectAtIndex:indexPath.row];
+        [self.tableView reloadData];
+    };
+    cell.change = ^{
+        MyAddCarViewController *addCar = [[MyAddCarViewController alloc] init];
+        addCar.titles = @"修改车辆";
+        [self.navigationController pushViewController:addCar animated:YES];
+    };
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.listModel = self.dataSource[indexPath.row];
     return cell;
+}
+
+
+-(void)deleteCar{
+    NSMutableDictionary *parame = [NSMutableDictionary dictionary];
+    [parame setValue:@"13" forKey:@"id"];
+    [parame setValue:[Config getOwnID] forKey:@"userId"];
+    //    [parame setValue:@"" forKey:@""];
+    [WMNetWork get:ChargeDeleteMyCare parameters:parame success:^(id responseObj) {
+        //
+        if ([responseObj[@"status"] isEqualToString:@"0"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 [MBProgressHUD show:@"删除成功" icon:nil view:self.view];
+            });
+           
+//            NSMutableArray *muarr = [NSMutableArray objectArrayWithKeyValuesArray:responseObj[@"result"]];
+//            for (NSDictionary *dict in muarr ) {
+//                MyCarListModel *carListModel = [MyCarListModel objectWithKeyValues:dict];
+//                [self.dataSource addObject:carListModel];
+//            }
+//            [self.tableView reloadData];
+        }else if([responseObj[@"status"] isEqualToString:@"-1"]){
+            [MBProgressHUD show:responseObj[@"result"] icon:nil view:self.view];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 @end

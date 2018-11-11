@@ -198,8 +198,8 @@
     self.totalChargeArray = [NSMutableArray array];
     ChooseView *screen = [[ChooseView alloc]initWithFrame:CGRectZero];
     self.screen = screen;
-    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight - 320);
-    screen.backgroundColor = [UIColor whiteColor];
+    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight );
+    screen.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.4];
     screen.daohang = ^(NSString *a, NSString *b) {
         [self dahangLA:a andLO:b];
     };

@@ -10,6 +10,7 @@
 
 @interface MyAddCarViewController ()<UITextFieldDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *backScrollView;
 @property (strong, nonatomic) IBOutlet UITextField *carBrand;
@@ -95,6 +96,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.titleLabel.text = self.titles;
     //    self.carModels.delegate = self;
     //    self.carNumber.delegate = self;
     self.carBrand.tag = 123;
@@ -131,18 +133,38 @@
 }
 //确定按钮
 - (IBAction)sureBtn:(id)sender {
+    [self.carNumber resignFirstResponder];
     [self.pamaer setValue:[Config getOwnID] forKey:@"userId"];
     NSLog(@"%@",self.pamaer);
 //    [self.pamaer setValue:@"" forKey:@"userId"];
-    [WMNetWork post:ChargeAddMyCare parameters:self.pamaer success:^(id responseObj) {
-        if([responseObj[@"status"] isEqualToString:@"0"]){
-            [MBProgressHUD showSuccess:@"添加车辆成功"];
-        }else if ([responseObj[@"status"] isEqualToString:@"1"]){
-            [MBProgressHUD showSuccess:@"添加车辆失败"];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+    if([self.titles isEqualToString:@"添加车辆"]){
+        [WMNetWork post:ChargeAddMyCare parameters:self.pamaer success:^(id responseObj) {
+            if([responseObj[@"status"] isEqualToString:@"0"]){
+                [MBProgressHUD showSuccess:@"添加车辆成功"];
+            }else if ([responseObj[@"status"] isEqualToString:@"1"]){
+                [MBProgressHUD showSuccess:@"添加车辆失败"];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }else if([self.titles isEqualToString:@"修改车辆"]){
+         [self.pamaer setValue:@"13" forKey:@"id"];
+        [WMNetWork post:ChargeEditMyCare parameters:self.pamaer success:^(id responseObj) {
+            if([responseObj[@"status"] isEqualToString:@"0"]){
+                [self.navigationController popViewControllerAnimated:YES];
+                [MBProgressHUD showSuccess:@"修改车辆成功"];
+            }else if ([responseObj[@"status"] isEqualToString:@"1"]){
+                [MBProgressHUD showSuccess:@"修改车辆失败"];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+    
+    
+   
+    
+    
     
 }
 //选择车牌所在地

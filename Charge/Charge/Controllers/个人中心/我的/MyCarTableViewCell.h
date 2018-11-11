@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MyCarListModel.h"
 
+typedef void(^ChangeBlock)(void);
+typedef void(^CancelBlock)(void);
 @interface MyCarTableViewCell : UITableViewCell
+@property (copy, nonatomic) ChangeBlock change;
+@property (copy, nonatomic) CancelBlock cancel;
 @property (strong, nonatomic) IBOutlet UIImageView *chargeIamge;
 @property (strong, nonatomic) IBOutlet UILabel *CarModels;
 @property (strong, nonatomic) IBOutlet UILabel *CarNumber;

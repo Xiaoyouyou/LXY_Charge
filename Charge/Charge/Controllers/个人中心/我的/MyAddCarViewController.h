@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MyAddCarViewController : UIViewController
-
+@property (nonatomic ,strong)NSString *titles;
 @end

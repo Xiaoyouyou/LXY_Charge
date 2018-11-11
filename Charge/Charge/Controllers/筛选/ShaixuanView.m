@@ -41,18 +41,48 @@
     sender.selected = !sender.selected;
     NSLog(@"%ld",sender.tag);
     NSString *str = [NSString stringWithFormat:@"%d",(int)sender.tag];
-    if (sender.tag == 0) {
-        [self.dict setValue:@"交流" forKey:str];
-    }else if (sender.tag == 1){
-        [self.dict setValue:@"直流" forKey:str];
+    if (sender.tag == 0 ) {
+        if (sender.selected == YES) {
+             [self.dict setValue:@"交流" forKey:str];
+        }else{
+            [self.dict removeObjectForKey:str];
+        }
+       
+    }else if (sender.tag == 1 & sender.selected == YES){
+        if (sender.selected == YES) {
+             [self.dict setValue:@"直流" forKey:str];
+        }else{
+            [self.dict removeObjectForKey:str];
+        }
+       
     }else if (sender.tag == 2){
-        [self.dict setValue:@"是" forKey:str];
+        if (sender.selected == YES) {
+             [self.dict setValue:@"是" forKey:str];
+        }else{
+            [self.dict removeObjectForKey:str];
+        }
+       
     }else if (sender.tag == 3){
-        [self.dict setValue:@"否" forKey:str];
-    }else if (sender.tag == 4){
-        [self.dict setValue:@"是" forKey:str];
-    }else if (sender.tag == 5){
-        [self.dict setValue:@"否" forKey:str];
+        if (sender.selected == YES) {
+            [self.dict setValue:@"否" forKey:str];
+        }else{
+            [self.dict removeObjectForKey:str];
+        }
+        
+    }else if (sender.tag == 4 ){
+        if (sender.selected == YES) {
+            [self.dict setValue:@"是" forKey:str];
+        }else{
+            [self.dict removeObjectForKey:str];
+        }
+        
+    }else if (sender.tag == 5 ){
+        if (sender.selected == YES) {
+            [self.dict setValue:@"否" forKey:str];
+        }else{
+            [self.dict removeObjectForKey:str];
+        }
+        
     }
     
     

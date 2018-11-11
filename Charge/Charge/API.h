@@ -79,6 +79,9 @@
 
 #define ChargeMyCareList RequestURL(@"vehicles.action") //我的车辆列表
 #define ChargeAddMyCare RequestURL(@"addVehicle.action") //添加我的车辆
+#define ChargeEditMyCare RequestURL(@"editVehicle.action") //修改我的车辆
+#define ChargeDeleteMyCare RequestURL(@"deletevehicle.action") //删除我的车辆
+
 #define ChargeCostList RequestURL(@"chargingList.action") //充电计费规则
 #define Chargenumber RequestURL(@"equipmentList.action") //桩位个数接口
 #define ChargeMessge RequestURL(@"getCurrentChargInfo.action")

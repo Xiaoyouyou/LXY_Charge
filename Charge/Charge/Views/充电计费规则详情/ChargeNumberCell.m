@@ -33,7 +33,9 @@
     float a = model1.soc.floatValue / 100.00;
     self.ProgressA.progress = a;
     self.ProgressA.layer.masksToBounds = YES;
-    self.ProgressA.layer.cornerRadius = 2.0;
+    self.ProgressA.layer.cornerRadius = 3.0;
+    self.ProgressA.layer.borderWidth = 1.0;
+    self.ProgressA.layer.borderColor = [UIColor blackColor].CGColor;
     
 //    ，04，05，06    情况下，统一显示故障
 //    00，情况下，统一显示可用
@@ -57,7 +59,9 @@
      float a = model2.soc.floatValue / 100.00;
     self.progressB.progress = a;
     self.progressB.layer.masksToBounds = YES;
-    self.progressB.layer.cornerRadius = 2.0;
+    self.progressB.layer.cornerRadius = 3.0;
+    self.progressB.layer.borderWidth = 1.0;
+    self.progressB.layer.borderColor = [UIColor blackColor].CGColor;
     if ([model2.status isEqualToString:@"10"] || [model2.status isEqualToString:@"04"] || [model2.status isEqualToString:@"05"] || [model2.status isEqualToString:@"06"] || [model2.status isEqualToString:@"-1"]) {
         self.statusB.text = [NSString stringWithFormat:@"故障"];
         self.statusB.textColor = [UIColor redColor];

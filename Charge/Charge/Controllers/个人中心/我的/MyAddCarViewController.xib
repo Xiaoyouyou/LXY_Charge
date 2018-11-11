@@ -21,6 +21,7 @@
                 <outlet property="gobackBtn" destination="e9G-GY-LpQ" id="d5V-k6-Ftf"/>
                 <outlet property="searchCar" destination="zRJ-NM-CHB" id="xfg-aO-ZXw"/>
                 <outlet property="sureBtn" destination="Pxv-NY-jie" id="Uv3-95-ssr"/>
+                <outlet property="titleLabel" destination="aZG-4Y-HyM" id="fkh-JW-UI8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

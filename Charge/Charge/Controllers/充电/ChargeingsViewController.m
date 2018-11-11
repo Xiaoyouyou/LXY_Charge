@@ -40,6 +40,15 @@
 //    NSString *pingJieAddress;//拼接地址
     
 }
+
+/***--------luoxiaoyou------------****/
+@property (strong, nonatomic) IBOutlet UILabel *voltage;
+
+@property (strong, nonatomic) IBOutlet UILabel *current;
+@property (strong, nonatomic) IBOutlet UILabel *remainingTime;
+@property (strong, nonatomic) IBOutlet UIProgressView *socProgress;
+@property (strong, nonatomic) IBOutlet UILabel *socJIndu;
+
 ////地图相关
 //@property (strong,nonatomic) BMKLocationService *locService;
 //@property (nonatomic, strong) BMKGeoCodeSearch *searcher;//初始化检索对象
@@ -152,6 +161,11 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    self.socProgress.layer.masksToBounds = YES;
+    self.socProgress.layer.cornerRadius = 3;
+    self.socProgress.layer.borderWidth = 1.0;
+    self.socProgress.layer.borderColor = [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1.0].CGColor;
+    
     self.isUpdateLocation =1;//置位还原
     //反注册通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -409,10 +423,23 @@
                               };
     [WMNetWork get:ChargeMessge parameters:paramer success:^(id responseObj) {
         NSString *str1 = responseObj[@"chargInfo"][@"spendMoney"];
-         NSString *str2 = responseObj[@"chargInfo"][@"electric"];
+        NSString *str2 = responseObj[@"chargInfo"][@"electric"];//电量
+        NSString *volStr = responseObj[@"chargInfo"][@"vol"];//电压
+        NSString *lefttimeStr = responseObj[@"chargInfo"][@"lefttime"];//剩余时间
+        NSString *eleStr = responseObj[@"chargInfo"][@"ele"];//电流
+        NSString *socStr = responseObj[@"chargInfo"][@"soc"];//SOC
+        self.voltage.text = [NSString stringWithFormat:@"%.2fV",volStr.floatValue];//电压
+        self.current.text = [NSString stringWithFormat:@"%.2fA",eleStr.floatValue];//电流
+        self.remainingTime.text = [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
+        self.socJIndu.text = [NSString stringWithFormat:@"%.1f",socStr.floatValue];//进度
+        self.socProgress.progress = socStr.floatValue / 100.00;
+        
+        
+        self.remainingTime.text = [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
+
+        
         self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",str1.floatValue];//消费金额
         self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",str2.floatValue];//已充电量
-        
         [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",str2.floatValue]];
         //保存电量
         [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",str1.floatValue]];//保存电费

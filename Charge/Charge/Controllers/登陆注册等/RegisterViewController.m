@@ -54,7 +54,7 @@
 
 -(void)creatUI
 {
-    self.titleLab = [[UILabel alloc] initWithFrame:CGRectMake(15, StatusBarH + 44, XYScreenWidth-15, 30)];
+    self.titleLab = [[UILabel alloc] initWithFrame:CGRectMake(15, StatusBarH + 60 , XYScreenWidth-15, 30)];
     self.titleLab.text = @"设置手机号以保障您的账号安全";
     self.titleLab.font = [UIFont systemFontOfSize:13];
     self.titleLab.textColor = RGBA(164, 164, 164, 1);
