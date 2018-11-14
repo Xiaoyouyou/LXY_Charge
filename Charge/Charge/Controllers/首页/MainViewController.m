@@ -309,7 +309,7 @@
 -(void)creatNav
 {
     //初始化自定义nav
-    MainNavView *navView = [[MainNavView alloc] initWithFrame:CGRectZero title:@"桩者" leftImgae:@"search@2x.png" rightImage:@"caidan@2x.png"];
+    MainNavView *navView = [[MainNavView alloc] initWithFrame:CGRectZero title:@"友桩" leftImgae:@"search@2x.png" rightImage:@"caidan@2x.png"];
     navView.leftBlock = ^{
         //周边推荐事件
         [self zhouBianTapAction];
@@ -946,13 +946,13 @@ BOOL btnStatus = YES;
     }else
     {
         //判断是否在充电状态
-//        if ([Config getUseCharge]) {
-//            ChargeingsViewController *chargeingVC = [[ChargeingsViewController alloc]init];
-//            [self.navigationController pushViewController:chargeingVC animated:YES];
-//        }else
-//        {
+        if ([Config getUseCharge]) {
+            ChargeingsViewController *chargeingVC = [[ChargeingsViewController alloc]init];
+            [self.navigationController pushViewController:chargeingVC animated:YES];
+        }else
+        {
             [self saoMaAction];
-//        }
+        }
         
     }
 }
@@ -1442,7 +1442,7 @@ BOOL btnStatus = YES;
                     } failure:^(NSError *error) {
                         MYLog(@"error = %@",error);
                         if (error) {
-                            [MBProgressHUD showError:@"网络连接失败"];
+                            [MBProgressHUD showError:@"服务器连接异常，请稍后再试"];
                         }
                     }];
                     
@@ -1508,7 +1508,7 @@ BOOL btnStatus = YES;
                                 } failure:^(NSError *error) {
                                     MYLog(@"error = %@",error);
                                     if (error) {
-                                        [MBProgressHUD showError:@"网络连接失败"];
+                                        [MBProgressHUD showError:@"服务器连接异常，请稍后再试"];
                                     }
                                 }];
                             }else

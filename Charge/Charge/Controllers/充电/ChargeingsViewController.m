@@ -163,8 +163,8 @@
     [super viewDidDisappear:animated];
     self.socProgress.layer.masksToBounds = YES;
     self.socProgress.layer.cornerRadius = 3;
-    self.socProgress.layer.borderWidth = 1.0;
-    self.socProgress.layer.borderColor = [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1.0].CGColor;
+    self.socProgress.layer.borderWidth = 2.0;
+    self.socProgress.layer.borderColor = [UIColor whiteColor].CGColor;
     
     self.isUpdateLocation =1;//置位还原
     //反注册通知
@@ -431,7 +431,7 @@
         self.voltage.text = [NSString stringWithFormat:@"%.2fV",volStr.floatValue];//电压
         self.current.text = [NSString stringWithFormat:@"%.2fA",eleStr.floatValue];//电流
         self.remainingTime.text = [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
-        self.socJIndu.text = [NSString stringWithFormat:@"%.1f",socStr.floatValue];//进度
+        self.socJIndu.text = [NSString stringWithFormat:@"%.1f%%",socStr.floatValue];//进度
         self.socProgress.progress = socStr.floatValue / 100.00;
         
         
@@ -545,7 +545,8 @@
          timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
         [timer fire];
         [MBProgressHUD showSuccess:@"正在结束充电"];
-        [[Singleton sharedInstance] startReconectBlcok];
+        [[Singleton sharedInstance] socketConnectHost];
+//        [[Singleton sharedInstance] startReconectBlcok];
         [[Singleton sharedInstance] stopChargingWithChargeNum:self.chargeingNum];//停止充电
         
     }];
@@ -659,6 +660,7 @@
         NSString *status2 = [text substringWithRange:NSMakeRange(4, 2)];
         if([status isEqualToString:@"0201"]){
             [MBProgressHUD showMessage:@"正在结束充电,请稍后" toView:self.view];
+            [MBProgressHUD hideHUDForView:self.view];
         }else if([status isEqualToString:@"0200"]){
             [MBProgressHUD showSuccess:@"结束充电失败"];
             [[Singleton sharedInstance] cutOffSocket];

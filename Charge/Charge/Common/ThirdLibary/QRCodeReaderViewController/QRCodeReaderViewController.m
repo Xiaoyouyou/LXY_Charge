@@ -585,8 +585,6 @@
                 [self.view endEditing:YES];
                 
                 //二维码是24位数字
-                if (textField.text.length == 18) {
-                    
                     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
                     parmas[@"qrCode"] = textField.text;//扫描结果10
                     parmas[@"token"] = [Config getToken];
@@ -644,18 +642,17 @@
                         }
                     }];
                     
-                }else
-                {
-                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"该二维码无效，或者不属于兴国充电桩" preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                       
-                    }];
-                    
-                    [alertVc addAction:sureAction];
-                    [self presentViewController:alertVc animated:YES completion:nil];
+                
+//                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"该二维码无效，或者不属于兴国充电桩" preferredStyle:UIAlertControllerStyleAlert];
+//                    
+//                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//                       
+//                    }];
+//                    
+//                    [alertVc addAction:sureAction];
+//                    [self presentViewController:alertVc animated:YES completion:nil];
                 }
-            }
+        
         
     }else
     {

@@ -74,12 +74,12 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "563647859.685871"
+                  timestampString = "563850207.34706"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "434">
+                  offsetFromSymbolStart = "408">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -89,12 +89,12 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "563647859.6877019"
+                  timestampString = "563850207.349033"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
                   endingLineNumber = "62"
-                  offsetFromSymbolStart = "54">
+                  offsetFromSymbolStart = "64">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -104,62 +104,14 @@
                   moduleName = "Charge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/luoxiaoyou/Desktop/%E6%A1%A9%E8%80%85/%E6%A1%A9%E8%80%85/LXY_Changes/Charge/Charge/Controllers/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/RechargeDetailsViewController.m"
-                  timestampString = "563647859.689859"
+                  timestampString = "563850207.350906"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Charge/AppDelegate.m"
-            timestampString = "562864378.974346"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "489"
-            endingLineNumber = "489"
-            landmarkName = "-goToMssageViewControllerWith:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Charge/AppDelegate.m"
-            timestampString = "562864378.97443"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "537"
-            endingLineNumber = "537"
-            landmarkName = "-jpushNotificationCenter:willPresentNotification:withCompletionHandler:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Charge/AppDelegate.m"
-            timestampString = "562864378.974491"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "580"
-            endingLineNumber = "580"
-            landmarkName = "-application:didReceiveRemoteNotification:fetchCompletionHandler:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -191,38 +143,6 @@
             startingLineNumber = "423"
             endingLineNumber = "423"
             landmarkName = "-weChatAction"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Charge/Charge/Controllers/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/QianMingViewController.m"
-            timestampString = "563647859.516734"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Charge/Charge/Controllers/&#x5145;&#x7535;/OpenChangeViewController.m"
-            timestampString = "562954667.688635"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
-            landmarkName = "-startChageClick:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -271,6 +191,54 @@
             startingLineNumber = "191"
             endingLineNumber = "191"
             landmarkName = "-loadDataSource"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/RecommendedViewController.m"
+            timestampString = "563803808.366729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
+            timestampString = "563850206.531301"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "901"
+            endingLineNumber = "901"
+            landmarkName = "-MessageActionClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Charge/Charge/Controllers/&#x9996;&#x9875;/MainViewController.m"
+            timestampString = "563850206.55366"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "951"
+            endingLineNumber = "951"
+            landmarkName = "-scanActionClick"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

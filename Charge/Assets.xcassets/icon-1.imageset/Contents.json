@@ -2,16 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "3D9A2153-B39E-4fa4-83D6-BAD0FC7B1F38.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "page_welcome.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "page_welcome-1.png",
       "scale" : "3x"
     }
   ],

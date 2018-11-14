@@ -122,6 +122,7 @@
                 <outlet property="chargeName" destination="xrj-dS-mdq" id="gKq-ZO-8VC"/>
                 <outlet property="chargePrice" destination="uxm-y3-q6Z" id="J1l-RO-Dau"/>
                 <outlet property="daoHangView" destination="zKi-3x-qDf" id="bjy-lD-myc"/>
+                <outlet property="icon" destination="Ni8-BX-gle" id="VXD-4c-cZy"/>
             </connections>
             <point key="canvasLocation" x="43.5" y="71"/>
         </tableViewCell>

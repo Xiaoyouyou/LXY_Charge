@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *chargeAddress;
 @property (strong, nonatomic) IBOutlet UILabel *chargePrice;
 @property (strong, nonatomic) IBOutlet UIView *daoHangView;
+@property (strong, nonatomic) IBOutlet UIImageView *icon;
 @property (strong, nonatomic) ChooseModel *model1;
 @end
 
@@ -36,6 +37,7 @@
     self.chargeName.text = model.stationName;
     self.chargeAddress.text = model.addr;
     self.chargePrice.text = [NSString stringWithFormat:@"%.2f元/度",[model.price floatValue]];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:model.stationPic] placeholderImage:[UIImage imageNamed:@"icon-1"]];
 }
 
 -(void)daohangEvent{

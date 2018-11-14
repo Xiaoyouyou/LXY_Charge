@@ -18,6 +18,8 @@
 #import "MyCarViewController.h"
 #import "ChargeMessageViewController.h"
 #import "MeInvoiceViewController.h"
+#import "PersonMessage.h"
+#import "PersonMesCaches.h"
 
 @interface MeViewController ()
 //导航
@@ -26,6 +28,10 @@
 @property (nonatomic ,strong)UIView *topView;
 //mineView
 @property (nonatomic ,strong)UIView *mineView;
+
+@property (nonatomic ,strong) UILabel *userName;
+@property (nonatomic ,strong) UILabel *userLevel;
+
 //bottomView
 @property (nonatomic ,strong)UIView *bottomView;
 @property (nonatomic ,strong)NSArray *topTitleArr;
@@ -89,6 +95,34 @@
     } failure:^(NSError *error) {
         
     }];
+    
+    NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
+    paramers[@"userId"] =[Config getOwnID];
+    paramers[@"token"] =[Config getToken];
+    [WMNetWork get:GetPerMes parameters:paramers success:^(id responseObj) {
+        
+        NSLog(@"PerMesresponseObj = %@",responseObj);
+        if ([responseObj[@"status"] intValue] == 401) {
+            [Config removeOwnID];//移除ID
+            [Config removeUseName];//移除用户名字
+            //退出登陆时通知主控制器收起左滑界面
+            [MBProgressHUD showError:@"账号异常登录"];
+            return ;
+        }
+        
+        if ([responseObj[@"status"] intValue] == 0) {
+            
+            PersonMessage  *per = [PersonMessage objectWithKeyValues:responseObj[@"result"]];
+            [self saveDataWithSex:per.sex andAge:per.age andNick:per.nick andMobile:per.mobile andAvatar:per.avatar andSignature:per.signature];
+            self.userName.text = per.userName;
+            self.userLevel.text = per.signature;
+            //图片路径赋值
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"error = %@",error);
+        [MBProgressHUD show:@"网络连接超时" icon:nil view:self.view];
+    }];
+    
 }
 
 
@@ -163,7 +197,7 @@
         make.size.mas_equalTo(CGSizeMake(60, 60));
     }];
     
-    UILabel *userName = [[UILabel alloc] init];
+     UILabel *userName = [[UILabel alloc] init];
     userName.font = [UIFont systemFontOfSize:12];
     userName.text = @"185****3020";
     userName.textAlignment = NSTextAlignmentCenter;
@@ -173,7 +207,7 @@
         make.top.equalTo(userIcon.mas_top);
         make.size.mas_equalTo(CGSizeMake(100, 40));
     }];
-    
+    self.userName = userName;
     
     UILabel *userLevel = [[UILabel alloc] init];
     userLevel.font = [UIFont systemFontOfSize:12];
@@ -185,6 +219,7 @@
         make.bottom.equalTo(userIcon.mas_bottom);
         make.size.mas_equalTo(CGSizeMake(100, 40));
     }];
+    self.userLevel = userLevel;
     /*---------mine----------*/
     
     int count = 2;
@@ -196,7 +231,7 @@
         MeVcWithMineView *backView = [[MeVcWithMineView alloc] initWithFrame:CGRectMake(x, y, w, h) TopTitle:self.topTitleArr[i] BottomTitle:arr[i]];
         userLevel.font = [UIFont systemFontOfSize:12];
         userLevel.text = @"我是至尊VIP";
-        userLevel.textAlignment = NSTextAlignmentCenter;
+        userLevel.textAlignment = NSTextAlignmentLeft;
         [self.mineView addSubview:backView];
     }
     /*---------bottom----------*/
@@ -281,5 +316,27 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark -- 保存个人信息缓存
+
+- (void)saveDataWithSex:(NSString *)Sex andAge:(NSString *)Age andNick:(NSString *)Nick andMobile:(NSString *)Mobile andAvatar:(NSString *)Avatar andSignature:(NSString *)Signature
+{
+    PersonMesCaches *perCaches = [[PersonMesCaches alloc]init];
+    perCaches.sex = Sex;
+    perCaches.age = Age;
+    perCaches.nick = Nick;
+    perCaches.mobile = Mobile;
+    perCaches.avatar = Avatar;
+    perCaches.signature = Signature;
+    
+    //获取文件路径
+    NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    //文件类型可以随便取，不一定要正确的格式
+    NSString *targetPath = [docPath stringByAppendingPathComponent:@"mes.plist"];
+    
+    //将自定义对象保存在指定路径下
+    [NSKeyedArchiver archiveRootObject:perCaches toFile:targetPath];
+    NSLog(@"文件已储存");
+}
+
 
 @end
