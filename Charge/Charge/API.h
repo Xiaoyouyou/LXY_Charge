@@ -18,8 +18,9 @@
 //RGB color
 #define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
-#define BaseURL @"http://47.107.14.253:80/app/phone/"
+//#define BaseURL @"http://47.107.14.253:80/app/phone/"
 //#define BaseURL @"http://120.77.146.167:88/app/phone/"
+#define BaseURL @"http://192.168.5.4:8080/app/phone/"
 #define RequestURL(string) [NSString stringWithFormat:@"%@%@",BaseURL,string]
 
 //APPKey
@@ -88,11 +89,10 @@
 
 #define ChargeMessageList RequestURL(@"chargingLog.action") //充电记录
 #define ChargeChooseList RequestURL(@"searchSideList.action") //充电站筛选接口
-#define ChargeInvoiceList RequestURL(@"checkInvoice.action") //充电站筛选接口
-
+#define ChargeInvoiceList RequestURL(@"checkInvoice.action") //开票接口
 #define ChargeNoticeList RequestURL(@"notices.action") //公告
-
 #define ChargeVersionUpdate @"http://47.107.14.253/ios/version.json" //版本更新
+#define CheckInvoice RequestURL(@"getAvaiInvoice.action") //检查开票金额
 
 //#define WeChatLogin @"https://api.weixin.qq.com/sns/oauth2/access_token"//微信登陆api
 

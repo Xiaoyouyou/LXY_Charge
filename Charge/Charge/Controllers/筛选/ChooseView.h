@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^DaohangClick)(NSString *a ,NSString *b);
+typedef void(^DaohangClick)(NSString *a ,NSString *b,NSString *addr);
+typedef void(^GotoChargeDetail)(NSString *stationID);
 @interface ChooseView : UIView
 -(instancetype)initWithFrame:(CGRect)frame;
-@property (nonatomic ,strong)DaohangClick daohang;
+@property (nonatomic ,copy)DaohangClick daohang;
+@property (nonatomic,copy) GotoChargeDetail detail;
 @end

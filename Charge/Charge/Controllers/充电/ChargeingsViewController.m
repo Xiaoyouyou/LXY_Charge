@@ -430,12 +430,14 @@
         NSString *socStr = responseObj[@"chargInfo"][@"soc"];//SOC
         self.voltage.text = [NSString stringWithFormat:@"%.2fV",volStr.floatValue];//电压
         self.current.text = [NSString stringWithFormat:@"%.2fA",eleStr.floatValue];//电流
-        self.remainingTime.text = [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
+        self.remainingTime.text = [self timeString:lefttimeStr];
+        //[NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
         self.socJIndu.text = [NSString stringWithFormat:@"%.1f%%",socStr.floatValue];//进度
         self.socProgress.progress = socStr.floatValue / 100.00;
         
         
-        self.remainingTime.text = [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
+        self.remainingTime.text = [self timeString:lefttimeStr];
+//        [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
 
         
         self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",str1.floatValue];//消费金额
@@ -663,7 +665,7 @@
             [MBProgressHUD hideHUDForView:self.view];
         }else if([status isEqualToString:@"0200"]){
             [MBProgressHUD showSuccess:@"结束充电失败"];
-            [[Singleton sharedInstance] cutOffSocket];
+            [[Singleton sharedInstance] startReconectBlcok];
         }
         if([status2 isEqualToString:@"05"]){
             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -844,6 +846,28 @@
         self.chargeTime.text = [NSString stringWithFormat:@"%@:%@:%@",tmphh,tmpmm,tmpss];
     }
     
+}
+
+
+-(NSString *)timeString:(NSString *)timeStr{
+    NSString *tmphh = [NSString stringWithFormat:@"%d",timeStr.intValue/3600];
+    if ([tmphh length] == 1)
+    {
+        tmphh = [NSString stringWithFormat:@"0%@",tmphh];
+    }
+    NSString *tmpmm = [NSString stringWithFormat:@"%d",(timeStr.intValue/60)%60];
+    if ([tmpmm length] == 1)
+    {
+        tmpmm = [NSString stringWithFormat:@"0%@",tmpmm];
+    }
+    NSString *tmpss = [NSString stringWithFormat:@"%d",timeStr.intValue%60];
+    if ([tmpss length] == 1)
+    {
+        tmpss = [NSString stringWithFormat:@"0%@",tmpss];
+    }
+    
+   NSString *str = [NSString stringWithFormat:@"%@:%@:%@",tmphh,tmpmm,tmpss];
+    return str;
 }
 
 @end

@@ -33,14 +33,14 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6p-qv-cG0">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注：根据车型充电接口，匹配充电桩，推荐行驶里程内充电桩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE8-oK-w5m">
-                            <rect key="frame" x="40" y="510" width="294" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注：根据车型充电接口，匹配充电桩，推荐行驶里程内充电桩" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BE8-oK-w5m">
+                            <rect key="frame" x="40" y="552" width="294" height="26.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.90588235294117647" green="0.47058823529411764" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxv-NY-jie">
-                            <rect key="frame" x="60" y="554" width="255" height="40"/>
+                            <rect key="frame" x="60" y="608.5" width="255" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Wvr-2j-t8C"/>
                             </constraints>
@@ -52,7 +52,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2A8-gb-Zqd">
-                            <rect key="frame" x="8" y="210" width="359" height="280"/>
+                            <rect key="frame" x="8" y="252" width="359" height="280"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V66-Iw-z6E">
                                     <rect key="frame" x="0.0" y="1" width="359" height="55"/>
@@ -66,8 +66,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入车品牌" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4ke-HG-mpz">
-                                            <rect key="frame" x="165" y="0.0" width="194" height="55"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入车品牌" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4ke-HG-mpz">
+                                            <rect key="frame" x="115" y="0.0" width="244" height="55"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="twitter" keyboardAppearance="alert"/>
@@ -78,7 +78,7 @@
                                         <constraint firstItem="4ke-HG-mpz" firstAttribute="top" secondItem="V66-Iw-z6E" secondAttribute="top" id="IX2-B2-7WM"/>
                                         <constraint firstAttribute="bottom" secondItem="4ke-HG-mpz" secondAttribute="bottom" id="Mjo-B9-cDM"/>
                                         <constraint firstAttribute="trailing" secondItem="4ke-HG-mpz" secondAttribute="trailing" id="XZp-5V-taz"/>
-                                        <constraint firstItem="4ke-HG-mpz" firstAttribute="leading" secondItem="g03-sc-cWM" secondAttribute="trailing" constant="100" id="g0F-2z-UCt"/>
+                                        <constraint firstItem="4ke-HG-mpz" firstAttribute="leading" secondItem="g03-sc-cWM" secondAttribute="trailing" constant="50" id="g0F-2z-UCt"/>
                                         <constraint firstItem="g03-sc-cWM" firstAttribute="leading" secondItem="V66-Iw-z6E" secondAttribute="leading" id="hWg-MM-d5Z"/>
                                         <constraint firstAttribute="bottom" secondItem="g03-sc-cWM" secondAttribute="bottom" id="iQC-Jd-gnB"/>
                                         <constraint firstItem="g03-sc-cWM" firstAttribute="top" secondItem="V66-Iw-z6E" secondAttribute="top" id="rxx-5b-maD"/>
@@ -87,8 +87,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="073-Ct-1d2">
                                     <rect key="frame" x="0.0" y="57" width="359" height="54.5"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入车型号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ehI-dN-rgp">
-                                            <rect key="frame" x="165" y="0.0" width="194" height="54.5"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入车型号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ehI-dN-rgp">
+                                            <rect key="frame" x="115" y="0.0" width="244" height="54.5"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="twitter" keyboardAppearance="alert"/>
@@ -107,7 +107,6 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ehI-dN-rgp" secondAttribute="trailing" id="21b-lO-F73"/>
                                         <constraint firstAttribute="bottom" secondItem="NVj-gF-PtN" secondAttribute="bottom" id="Erg-2W-ydq"/>
-                                        <constraint firstItem="ehI-dN-rgp" firstAttribute="leading" secondItem="NVj-gF-PtN" secondAttribute="trailing" constant="100" id="HgM-VK-1o1"/>
                                         <constraint firstItem="NVj-gF-PtN" firstAttribute="top" secondItem="073-Ct-1d2" secondAttribute="top" id="Jo8-KK-UB7"/>
                                         <constraint firstItem="ehI-dN-rgp" firstAttribute="top" secondItem="073-Ct-1d2" secondAttribute="top" id="a2G-OV-L8O"/>
                                         <constraint firstAttribute="bottom" secondItem="ehI-dN-rgp" secondAttribute="bottom" id="fGb-u0-A2W"/>
@@ -127,11 +126,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRJ-NM-CHB">
-                                            <rect key="frame" x="222" y="0.0" width="137" height="55"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="137" id="9YA-H8-XER"/>
-                                            </constraints>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRJ-NM-CHB">
+                                            <rect key="frame" x="115" y="0.0" width="244" height="55"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <state key="normal" title="请选择车充类型"/>
                                             <connections>
@@ -161,8 +157,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TN-8K-f43">
-                                            <rect key="frame" x="223" y="0.0" width="136" height="55"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7TN-8K-f43">
+                                            <rect key="frame" x="116" y="0.0" width="243" height="55"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <state key="normal" title="请选择车辆类型"/>
                                             <connections>
@@ -193,29 +189,29 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biw-nT-dTJ">
-                                            <rect key="frame" x="212" y="4" width="1" height="47"/>
+                                            <rect key="frame" x="98" y="4" width="1" height="47"/>
                                             <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="1" id="kgi-Qp-ppA"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bl-CN-6gh">
-                                            <rect key="frame" x="100" y="0.0" width="80" height="55"/>
+                                            <rect key="frame" x="65" y="0.0" width="1" height="55"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="L68-uO-Jbb"/>
+                                                <constraint firstAttribute="width" constant="1" id="L68-uO-Jbb"/>
                                             </constraints>
                                             <connections>
                                                 <action selector="carNumberAdress:" destination="-1" eventType="touchUpInside" id="Hlu-qF-SWN"/>
                                             </connections>
                                         </button>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入车牌号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l4f-Kz-oxh">
-                                            <rect key="frame" x="221" y="0.0" width="138" height="55"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入车牌号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l4f-Kz-oxh">
+                                            <rect key="frame" x="116" y="0.0" width="243" height="55"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                                         </textField>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiantou.png" translatesAutoresizingMaskIntoConstraints="NO" id="6ia-lz-L7Z">
-                                            <rect key="frame" x="185" y="20" width="16" height="16"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ia-lz-L7Z">
+                                            <rect key="frame" x="71" y="20" width="16" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="16" id="M1E-WF-XqQ"/>
                                                 <constraint firstAttribute="height" constant="16" id="s0v-nJ-qee"/>
@@ -231,9 +227,8 @@
                                         <constraint firstItem="6bl-CN-6gh" firstAttribute="top" secondItem="PJi-F0-yWl" secondAttribute="top" id="SrX-jH-RUc"/>
                                         <constraint firstAttribute="bottom" secondItem="biw-nT-dTJ" secondAttribute="bottom" constant="4" id="T8Z-LT-ja6"/>
                                         <constraint firstItem="6ia-lz-L7Z" firstAttribute="centerY" secondItem="PJi-F0-yWl" secondAttribute="centerY" id="U97-dd-gTl"/>
+                                        <constraint firstItem="6bl-CN-6gh" firstAttribute="leading" secondItem="sRJ-Lw-z4x" secondAttribute="trailing" id="WjQ-ow-C2B"/>
                                         <constraint firstItem="biw-nT-dTJ" firstAttribute="leading" secondItem="6ia-lz-L7Z" secondAttribute="trailing" constant="11" id="Y1u-Nx-Svw"/>
-                                        <constraint firstItem="l4f-Kz-oxh" firstAttribute="leading" secondItem="biw-nT-dTJ" secondAttribute="trailing" constant="8" id="ZyQ-42-P2X"/>
-                                        <constraint firstItem="6bl-CN-6gh" firstAttribute="leading" secondItem="PJi-F0-yWl" secondAttribute="leading" constant="100" id="add-MQ-nri"/>
                                         <constraint firstItem="sRJ-Lw-z4x" firstAttribute="leading" secondItem="PJi-F0-yWl" secondAttribute="leading" id="iwZ-7h-6zn"/>
                                         <constraint firstAttribute="bottom" secondItem="sRJ-Lw-z4x" secondAttribute="bottom" id="lUW-IB-VKd"/>
                                         <constraint firstAttribute="bottom" secondItem="6bl-CN-6gh" secondAttribute="bottom" id="mKg-mb-Z7v"/>
@@ -253,7 +248,10 @@
                                 <constraint firstItem="V66-Iw-z6E" firstAttribute="top" secondItem="2A8-gb-Zqd" secondAttribute="top" constant="1" id="ESX-Rs-fCa"/>
                                 <constraint firstItem="u2I-Kl-4OR" firstAttribute="leading" secondItem="2A8-gb-Zqd" secondAttribute="leading" id="GI0-LM-RC7"/>
                                 <constraint firstItem="Rsi-6K-Kqj" firstAttribute="height" secondItem="u2I-Kl-4OR" secondAttribute="height" id="Olc-Hp-0YE"/>
+                                <constraint firstItem="zRJ-NM-CHB" firstAttribute="leading" secondItem="ehI-dN-rgp" secondAttribute="leading" id="OmM-C9-kXF"/>
+                                <constraint firstItem="l4f-Kz-oxh" firstAttribute="leading" secondItem="7TN-8K-f43" secondAttribute="leading" id="QRc-i0-mL0"/>
                                 <constraint firstItem="Rsi-6K-Kqj" firstAttribute="top" secondItem="u2I-Kl-4OR" secondAttribute="bottom" constant="1" id="Tpd-k8-7K4"/>
+                                <constraint firstItem="ehI-dN-rgp" firstAttribute="leading" secondItem="4ke-HG-mpz" secondAttribute="leading" id="XbC-Ly-YNo"/>
                                 <constraint firstItem="PJi-F0-yWl" firstAttribute="height" secondItem="Rsi-6K-Kqj" secondAttribute="height" id="a1f-3Y-P81"/>
                                 <constraint firstAttribute="bottom" secondItem="PJi-F0-yWl" secondAttribute="bottom" constant="1" id="dhn-yU-dWr"/>
                                 <constraint firstAttribute="bottom" secondItem="PJi-F0-yWl" secondAttribute="bottom" constant="1" id="faP-fy-OF2"/>
@@ -272,9 +270,9 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addMyCar.png" translatesAutoresizingMaskIntoConstraints="NO" id="hYk-zJ-pLJ">
-                            <rect key="frame" x="0.0" y="72" width="375" height="138"/>
+                            <rect key="frame" x="0.0" y="72" width="375" height="180"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="138" id="QUW-Wp-IKG"/>
+                                <constraint firstAttribute="height" constant="180" id="QUW-Wp-IKG"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -347,6 +345,5 @@
         <image name="addMyCar.png" width="760" height="400"/>
         <image name="back.png" width="20" height="20"/>
         <image name="greenBg.png" width="291" height="40"/>
-        <image name="jiantou.png" width="13" height="13"/>
     </resources>
 </document>

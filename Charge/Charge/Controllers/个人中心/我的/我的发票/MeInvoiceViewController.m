@@ -8,7 +8,7 @@
 
 #import "MeInvoiceViewController.h"
 
-@interface MeInvoiceViewController ()<UITextFieldDelegate>
+@interface MeInvoiceViewController ()<UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *shibieNumber;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITextField *invoicePrice;
@@ -22,6 +22,9 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *beizhu;
 @property (strong, nonatomic) NSMutableDictionary *pamaer;
+//快递方式
+@property (strong, nonatomic) UIPickerView *pickView;
+@property (strong, nonatomic) NSArray *emailArr;
 @end
 
 @implementation MeInvoiceViewController
@@ -33,23 +36,13 @@
     return _pamaer;
 }
 
-- (IBAction)upLoadBtnClick:(UIButton *)sender {
-    //提交开发票申请
-    [self.pamaer setValue:[Config getMobile] forKey:@"phone"];
-    [self.pamaer setValue:@"顺风" forKey:@"express"];
-    NSLog(@"%@",self.pamaer);
-    //    [self.pamaer setValue:@"" forKey:@"userId"];
-    [WMNetWork post:ChargeInvoiceList parameters:self.pamaer success:^(id responseObj) {
-        if([responseObj[@"status"] isEqualToString:@"0"]){
-            [MBProgressHUD showSuccess:responseObj[@"msg"]];
-        }else if ([responseObj[@"status"] isEqualToString:@"1"]){
-            [MBProgressHUD showSuccess:@"开发票申请失败"];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-    
+-(NSArray *)emailArr{
+    if(!_emailArr){
+        _emailArr = @[@"顺丰快递(到付)",@"中通快递快递(到付)",@"申通快递(到付)",@"圆通快递(到付)",@"天天快递(到付)",@"韵达快递(到付)",@"百世汇通快递(到付)",@"邮政快递(到付)"];
+    }
+    return _emailArr;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,17 +52,13 @@
     nav.backBlock = ^{
         [self.navigationController popViewControllerAnimated:YES];
     };
-    
     [self.view addSubview:nav];
-    
     [nav mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
         make.height.mas_equalTo(StatusBarH + 44);
     }];
-    
-    
     [super viewDidLoad];
     //    self.carModels.delegate = self;
     //    self.carNumber.delegate = self;
@@ -85,13 +74,60 @@
     self.shibieNumber.delegate = self;
     self.beizhu.tag = 15;
     self.beizhu.delegate = self;
-    
-  
     self.scrollView.scrollEnabled = YES;
-    
-    
+    self.scrollView.contentSize = CGSizeMake(XYScreenWidth, XYScreenHeight * 1.3);
+    self.scrollView.delegate = self;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyoBoard)];
     [self.scrollView addGestureRecognizer:tap];
+    //检查开票金额
+    [self checkInvocie];
+}
+-(void)checkInvocie{
+    
+    NSDictionary *dict = @{
+                           @"userId":[Config getOwnID]
+                           };
+    
+    NSLog(@"%@",dict);
+    //    [self.pamaer setValue:@"" forKey:@"userId"];
+    [WMNetWork post:CheckInvoice parameters:dict success:^(id responseObj) {
+        if([responseObj[@"status"] isEqualToString:@"0"]){
+            
+            self.invoicePrice.placeholder = [NSString stringWithFormat:@"可开金额%@元",responseObj[@"money"]];
+        }else if ([responseObj[@"status"] isEqualToString:@"-1"]){
+           self.invoicePrice.text = @"0";
+        [MBProgressHUD showSuccess:@"网络异常"];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (IBAction)upLoadBtnClick:(UIButton *)sender {
+    //提交开发票申请
+    
+    if( [[self.pamaer valueForKeyPath:@"price"]  isEqualToString: @""] || [self.pamaer valueForKeyPath:@"price"] == nil){
+        [MBProgressHUD showSuccess:@"请填写开票金额"];
+        return;
+    }
+    if( ( [[self.pamaer valueForKeyPath:@"express"]  isEqualToString: @""] || [self.pamaer valueForKeyPath:@"express"] == nil)){
+        [MBProgressHUD showSuccess:@"请选择快递方式"];
+        return;
+    }
+    
+    [self.pamaer setValue:[Config getMobile] forKey:@"phone"];
+    NSLog(@"%@",self.pamaer);
+    //    [self.pamaer setValue:@"" forKey:@"userId"];
+    [WMNetWork post:ChargeInvoiceList parameters:self.pamaer success:^(id responseObj) {
+        if([responseObj[@"status"] isEqualToString:@"0"]){
+            [MBProgressHUD showSuccess:responseObj[@"msg"]];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else if ([responseObj[@"status"] isEqualToString:@"-1"]){
+            [MBProgressHUD showSuccess:responseObj[@"msg"]];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
     
 }
 
@@ -150,7 +186,15 @@
 }
 
 
-
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.invoicePrice resignFirstResponder];
+    [self.address resignFirstResponder];
+    [self.email resignFirstResponder];
+    [self.kaiTou resignFirstResponder];
+    [self.shibieNumber resignFirstResponder];
+    [self.beizhu resignFirstResponder];
+    [self.pickView removeFromSuperview];
+}
 
 
 
@@ -161,6 +205,8 @@
     [self.kaiTou resignFirstResponder];
     [self.shibieNumber resignFirstResponder];
     [self.beizhu resignFirstResponder];
+    [self.pickView removeFromSuperview];
+    self.pickView = nil;
     NSLog(@"%@",@"移除键盘");
 }
 
@@ -232,8 +278,73 @@
 
 - (IBAction)ChooseEmailTypeBtn:(UIButton *)sender {
 //key: express
+    //添加一个pickView
+    if( self.pickView == nil){
+        UIPickerView *pickView = [[UIPickerView alloc] init];
+        pickView.backgroundColor = [UIColor grayColor];
+        self.pickView = pickView;
+        [self.view addSubview:pickView];
+        pickView.delegate = self;
+        pickView.dataSource = self;
+        [pickView setShowsSelectionIndicator:YES];
+        [pickView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.equalTo(self.view);
+            make.bottom.equalTo(self.view.mas_bottom);
+            make.height.mas_equalTo(150);
+        }];
+    }
+//    self.selectedArea = self.area[0];
 }
 
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.emailArr.count;
+}
+
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    if (!view){
+        view = [[UIView alloc]init];
+    }
+    UILabel *text = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width/2, 40)];
+    text.textAlignment = NSTextAlignmentCenter;
+    text.text = [self.emailArr objectAtIndex:row];
+    [view addSubview:text];
+    //隐藏上下直线
+//    [self.pickerView.subviews objectAtIndex:1].backgroundColor = [UIColor clearColor];
+//    [self.pickerView.subviews objectAtIndex:2].backgroundColor = [UIColor clearColor];
+    return view;
+}
+
+
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+        NSString *str = [NSString stringWithFormat:@"%@",self.emailArr[row]];
+        NSLog(@"%@",str);
+        return str;
+}
+
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+      NSString *str = [NSString stringWithFormat:@"%@",self.emailArr[row]];
+    NSLog(@"%@",str);
+    [pickerView selectRow:row inComponent:component animated:YES];
+    [self.chooseEmailType setTitle:str forState:UIControlStateNormal];
+    [self.pamaer setValue:str forKey:@"express"];
+}
+
+
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+        return 150;
+}
+
+//-------------------------------------
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

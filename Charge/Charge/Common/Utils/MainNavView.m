@@ -94,8 +94,8 @@
     
     [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self).offset(-11);
-        make.left.equalTo(self).offset(8);
-        make.size.mas_equalTo(CGSizeMake(22,20));
+        make.left.equalTo(self).offset(15);
+        make.size.mas_equalTo(CGSizeMake(22,19));
     }];
     
     [leftTapView mas_makeConstraints:^(MASConstraintMaker *make) {

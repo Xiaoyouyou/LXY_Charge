@@ -33,7 +33,7 @@
 -(void)setModel:(ChargeMessageModel *)model
 {
     self.ZhanDianName.text = model.stationName;
-    self.FlashTime.text = model.endDate;
+    self.FlashTime.text = [NSString stringWithFormat:@"%@ —— %@",model.createDate,model.endDate];
     self.serverCost.text = [NSString stringWithFormat:@"服务费:￥%@元",model.serverCost];
     
     

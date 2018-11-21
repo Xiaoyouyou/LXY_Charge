@@ -18,25 +18,22 @@
 
 -(instancetype)initWithFrame:(CGRect)frame TopTitle:(NSString *)topStr BottomTitle:(NSString *)bottomStr{
     if (self == [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
         UILabel *topLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         topLabel.text = topStr;
-        topLabel.layer.borderColor = RGB_COLOR(231, 231, 231, 1.0).CGColor;
-        topLabel.layer.borderWidth = 1;
-        topLabel.textColor = RGB_COLOR(247, 135, 54, 1.0);
-        topLabel.font = [UIFont systemFontOfSize:12];
+        topLabel.textColor = RGB_COLOR(154, 154, 154, 1.0);
+        topLabel.font = [UIFont systemFontOfSize:15];
         topLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:topLabel];
         
         UILabel *bottomLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        bottomLabel.layer.borderColor = RGB_COLOR(231, 231, 231, 1.0).CGColor;
-        bottomLabel.layer.borderWidth = 1;
         bottomLabel.text = bottomStr;
-        bottomLabel.font = [UIFont systemFontOfSize:12];
-        bottomLabel.textColor = RGB_COLOR(154, 154, 154, 1.0);
+        bottomLabel.font = [UIFont systemFontOfSize:15];
+        bottomLabel.textColor = RGB_COLOR(247, 135, 54, 1.0);
         bottomLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:bottomLabel];
         
-        CGFloat H = self.frame.size.height / 2;
+        CGFloat H = self.frame.size.height / 2 - 2;
         [topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerX.equalTo(self);
@@ -46,7 +43,15 @@
             make.height.mas_offset(H);
             
         }];
-        
+//        UIView *lineView = [[UIView alloc] init];
+//        [self addSubview:lineView];
+//        lineView.backgroundColor = RGB_COLOR(154, 154, 154, 1.0);
+//        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(self);
+//            make.centerY.equalTo(self);
+//            make.height.mas_offset(self.mas_height);
+//            make.width.mas_offset(1);
+//        }];
         [bottomLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);
             make.top.equalTo(topLabel.mas_bottom);

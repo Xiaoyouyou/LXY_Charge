@@ -109,7 +109,7 @@
                             //退出登陆时通知主控制器收起左滑界面
                             
                             [[NSNotificationCenter defaultCenter] postNotificationName:LeaveOutNoti object:nil];
-                            [self.navigationController popViewControllerAnimated:YES];
+                            [self.navigationController popToRootViewControllerAnimated:YES];
                             
                         });
                     }

@@ -1149,8 +1149,6 @@
 		75BCDA212173482D00AC2F73 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
-				75BCDA222173488300AC2F73 /* MeVcWithMineView.h */,
-				75BCDA232173488300AC2F73 /* MeVcWithMineView.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1162,6 +1160,8 @@
 				757BA864218886C500D4B6FE /* 我的发票 */,
 				75BCDA1C217316A600AC2F73 /* MeViewController.h */,
 				75BCDA1D217316A600AC2F73 /* MeViewController.m */,
+				75BCDA222173488300AC2F73 /* MeVcWithMineView.h */,
+				75BCDA232173488300AC2F73 /* MeVcWithMineView.m */,
 				75FDA57221778D98004A70E1 /* MyAddCarViewController.h */,
 				75FDA57321778D98004A70E1 /* MyAddCarViewController.m */,
 				75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */,
@@ -2290,7 +2290,7 @@
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = G8H5MHKS76;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2879,10 +2879,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = G8H5MHKS76;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2950,10 +2950,10 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a4eb207-0316-44de-ac02-6b487428b35a";
-				PROVISIONING_PROFILE_SPECIFIER = LXYADDHOCPP;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2964,10 +2964,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = G8H5MHKS76;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3035,10 +3035,10 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a4eb207-0316-44de-ac02-6b487428b35a";
-				PROVISIONING_PROFILE_SPECIFIER = LXYADDHOCPP;
+				PROVISIONING_PROFILE = "b703f85e-698a-40fd-8386-a89be4065160";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

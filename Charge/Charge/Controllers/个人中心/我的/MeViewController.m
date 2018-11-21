@@ -20,6 +20,8 @@
 #import "MeInvoiceViewController.h"
 #import "PersonMessage.h"
 #import "PersonMesCaches.h"
+#import "ChuZiViewController.h"
+
 
 @interface MeViewController ()
 //导航
@@ -30,13 +32,14 @@
 @property (nonatomic ,strong)UIView *mineView;
 
 @property (nonatomic ,strong) UILabel *userName;
-@property (nonatomic ,strong) UILabel *userLevel;
+@property (nonatomic ,strong) UIButton *userLevel;
 
 //bottomView
 @property (nonatomic ,strong)UIView *bottomView;
 @property (nonatomic ,strong)NSArray *topTitleArr;
 @property (nonatomic ,strong)NSMutableArray *bottomTitleArr;
 @property (nonatomic ,strong)NSArray *btnFunction;
+@property (nonatomic ,strong)NSArray *btnImage;
 @end
 
 @implementation MeViewController
@@ -56,9 +59,16 @@
 };
 -(NSArray *)btnFunction{
     if(!_btnFunction){
-        _btnFunction = @[@"我的钱包",@"我的收藏",@"我要开票",@"我的车辆",@"充电记录"];
+        _btnFunction = @[@"我的钱包",@"我的收藏",@"我要开票",@"我的车辆",@"充电记录",@""];
     }
     return _btnFunction;
+};
+
+-(NSArray *)btnImage{
+    if(!_btnImage){
+        _btnImage = @[@"qqq",@"shoucang",@"kaipiao",@"mycar",@"chongdian",@""];
+    }
+    return _btnImage;
 };
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -73,7 +83,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0];
     //添加导航条和站位view
     [self addNavigationBar];
     //添加子view
@@ -115,7 +125,6 @@
             PersonMessage  *per = [PersonMessage objectWithKeyValues:responseObj[@"result"]];
             [self saveDataWithSex:per.sex andAge:per.age andNick:per.nick andMobile:per.mobile andAvatar:per.avatar andSignature:per.signature];
             self.userName.text = per.userName;
-            self.userLevel.text = per.signature;
             //图片路径赋值
         }
     } failure:^(NSError *error) {
@@ -150,7 +159,7 @@
     
     self.topView = [[UIView alloc] init];
     [self.view addSubview:self.topView];
-    self.topView.backgroundColor = RGB_COLOR(29, 167, 145, 1.0);
+    self.topView.backgroundColor = [UIColor whiteColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoMYMessage)];
     [self.topView addGestureRecognizer:tap];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -162,20 +171,31 @@
     }];
     
     self.mineView = [[UIView alloc] init];
+    self.mineView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.mineView];
     [self.mineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topView.mas_bottom);
+        make.top.equalTo(self.topView.mas_bottom).offset(10);
         make.left.equalTo(self.view.mas_left).offset(2);
         make.right.equalTo(self.view.mas_right).offset(-2);
-       
         make.height.mas_equalTo(@60);
-        
     }];
+    
+    
+    UIView *lineView = [[UIView alloc] init];
+    [self.mineView addSubview:lineView];
+    lineView.backgroundColor = RGB_COLOR(154, 154, 154, 1.0);
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mineView);
+        make.centerY.equalTo(self.mineView);
+        make.height.mas_offset(40);
+        make.width.mas_offset(1);
+    }];
+    
     
     self.bottomView = [[UIView alloc] init];
     [self.view addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mineView.mas_bottom);
+        make.top.equalTo(self.mineView.mas_bottom).offset(1);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.bottom.equalTo(self.view.mas_bottom);
@@ -186,80 +206,74 @@
 -(void)addSomeSubViews:(NSMutableArray *)arr{
     
     /*---------top----------*/
-    UIImageView *userIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pic2"] highlightedImage:[UIImage imageNamed:@"pic2"]];
+    UIImageView *userIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grayIcon.png"] highlightedImage:[UIImage imageNamed:@"grayIcon.png"]];
     userIcon.layer.masksToBounds = YES;
     userIcon.layer.cornerRadius = 30;
     userIcon.layer.borderWidth = 1.0;
     [self.topView addSubview:userIcon];
     [userIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topView).mas_offset(15);
-        make.left.equalTo(self.topView).mas_offset(15);
+        make.centerX.equalTo(self.topView.mas_centerX);
+        make.top.equalTo(self.topView.mas_top).mas_offset(20);
         make.size.mas_equalTo(CGSizeMake(60, 60));
     }];
     
      UILabel *userName = [[UILabel alloc] init];
     userName.font = [UIFont systemFontOfSize:12];
-    userName.text = @"185****3020";
+//    userName.text = @"185****3020";
     userName.textAlignment = NSTextAlignmentCenter;
     [self.topView addSubview:userName];
     [userName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(userIcon.mas_right).mas_offset(10);
-        make.top.equalTo(userIcon.mas_top);
-        make.size.mas_equalTo(CGSizeMake(100, 40));
+        make.centerX.equalTo(self.topView.mas_centerX);
+        make.top.equalTo(userIcon.mas_bottom).offset(10);
+        make.size.mas_equalTo(CGSizeMake(100, 30));
     }];
     self.userName = userName;
     
-    UILabel *userLevel = [[UILabel alloc] init];
-    userLevel.font = [UIFont systemFontOfSize:12];
-    userLevel.text = @"我是至尊VIP";
-    userLevel.textAlignment = NSTextAlignmentCenter;
+    UIButton *userLevel = [UIButton buttonWithType:UIButtonTypeCustom];
+    [userLevel setTitle:@"充值" forState:UIControlStateNormal];
+    userLevel.titleLabel.font = [UIFont systemFontOfSize:16];
+    [userLevel setTitleColor:RGB_COLOR(29, 167, 145, 1.0) forState:UIControlStateNormal];
+    userLevel.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [userLevel addTarget:self action:@selector(gotopay) forControlEvents:UIControlEventTouchDown];
     [self.topView addSubview:userLevel];
     [userLevel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(userName.mas_left);
-        make.bottom.equalTo(userIcon.mas_bottom);
-        make.size.mas_equalTo(CGSizeMake(100, 40));
+        make.right.equalTo(_topView.mas_right).mas_offset(-20);
+        make.centerY.equalTo(_topView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(60, 30));
     }];
     self.userLevel = userLevel;
     /*---------mine----------*/
     
     int count = 2;
     for (int i = 0; i < count; i++) {
-         CGFloat x = XYScreenWidth / count * i;
-         CGFloat w = XYScreenWidth / count;
+         CGFloat x = (XYScreenWidth / count + 2) * i;
+         CGFloat w = XYScreenWidth / count - 4;
          CGFloat y = 0;
          CGFloat h = 60;
         MeVcWithMineView *backView = [[MeVcWithMineView alloc] initWithFrame:CGRectMake(x, y, w, h) TopTitle:self.topTitleArr[i] BottomTitle:arr[i]];
-        userLevel.font = [UIFont systemFontOfSize:12];
-        userLevel.text = @"我是至尊VIP";
-        userLevel.textAlignment = NSTextAlignmentLeft;
         [self.mineView addSubview:backView];
     }
     /*---------bottom----------*/
     //九宫格布局button 假设有n个btn
     NSInteger n = self.btnFunction.count;
-    CGFloat LeftSpace = 10;
-    CGFloat TopSpace = 20;
-    CGFloat bottomSpace = 10;
     //每一行有三个
-    int Xitem = 3;
+    int Xitem = 2;
     
     for (int i = 0; i < n; i ++) {
-        CGFloat w = (XYScreenWidth - (Xitem + 1) * LeftSpace)/Xitem;
-        CGFloat x = (w  + LeftSpace) * (i%Xitem) + LeftSpace ;
+        CGFloat w = XYScreenWidth / 2;
+        CGFloat x = w * (i%Xitem);
         CGFloat h = 60;
-        CGFloat y = (h + bottomSpace) * (i/Xitem) + TopSpace;
+        CGFloat y = h  * (i/Xitem);
         
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *btn = [[UIButton alloc] init];;
         [btn setTitle:self.btnFunction[i] forState:UIControlStateNormal];
-        btn.layer.masksToBounds = YES;
-        btn.layer.cornerRadius = 5;
-        btn.layer.borderWidth = 1;
-        btn.layer.borderColor = RGB_COLOR(235, 235, 235, 1.0).CGColor;
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        btn.backgroundColor = RGB_COLOR(235, 235, 235, 1.0);
+        [btn setImage:[UIImage imageNamed:self.btnImage[i]] forState:UIControlStateNormal];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 15)];//调整图片大小5:2
+        btn.backgroundColor = [UIColor whiteColor];
         btn.tag = i;
         [btn addTarget:self action:@selector(someFunction:) forControlEvents:UIControlEventTouchDown];
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        btn.titleLabel.font = [UIFont systemFontOfSize:18];
         btn.frame = CGRectMake(x, y, w, h);
         [self.bottomView addSubview:btn];
     }
@@ -339,4 +353,9 @@
 }
 
 
+//调支付
+-(void)gotopay{
+    ChuZiViewController *chuziVC = [[ChuZiViewController alloc] init];
+    [self.navigationController pushViewController:chuziVC animated:YES];
+}
 @end

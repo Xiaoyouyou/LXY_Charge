@@ -90,7 +90,7 @@ typedef enum{
         make.height.mas_equalTo(64);
     }];
     
-    self.view.backgroundColor = RGBA(235, 236, 237, 1);
+//    self.view.backgroundColor = RGBA(235, 236, 237, 1);
     [self creatUI];
     
     //增加支付宝充值完成通知

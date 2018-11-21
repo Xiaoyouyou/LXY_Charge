@@ -126,6 +126,7 @@
     NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
     paramers[@"password"] = [XStringUtil stringToMD5:mima.text];//MD5加密
     paramers[@"mobile"] = self.phone;
+    paramers[@"code"] = self.code;
     MYLog(@"phone = %@",self.phone);
     MYLog(@"mima = %@",mima);
     //更改密码

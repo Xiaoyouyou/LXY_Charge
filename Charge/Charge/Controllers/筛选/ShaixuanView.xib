@@ -39,82 +39,87 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjR-Lx-4Ej">
-                    <rect key="frame" x="150" y="20" width="83" height="30"/>
-                    <state key="normal" title="交流" image="checkbox_normal">
+                    <rect key="frame" x="150" y="20" width="53" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-18" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="13" maxY="0.0"/>
+                    <state key="normal" title="交流" image="nomal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" image="checkbox_checked"/>
+                    <state key="selected" image="selected"/>
                     <connections>
                         <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="sLN-e5-GAe"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhn-hb-cNP">
-                    <rect key="frame" x="263" y="20" width="83" height="30"/>
+                    <rect key="frame" x="243" y="20" width="53" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="直流" image="checkbox_normal">
+                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-18" maxY="0.0"/>
+                    <state key="normal" title="直流" image="nomal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" image="checkbox_checked"/>
+                    <state key="selected" image="selected"/>
                     <connections>
                         <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="VQW-Rd-0M8"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enI-K5-fJ7">
-                    <rect key="frame" x="150" y="55" width="83" height="30"/>
+                    <rect key="frame" x="150" y="55" width="53" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="是" image="checkbox_normal">
+                    <state key="normal" title="是" image="nomal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" image="checkbox_checked"/>
+                    <state key="selected" image="selected"/>
                     <connections>
                         <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="9Nk-eo-juT"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYU-zb-g4n">
-                    <rect key="frame" x="263" y="55" width="83" height="30"/>
+                    <rect key="frame" x="243" y="55" width="53" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="-17" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="否" image="checkbox_normal">
+                    <state key="normal" title="否" image="nomal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" image="checkbox_checked"/>
+                    <state key="selected" image="selected"/>
                     <connections>
                         <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="lMn-XT-EN1"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngo-Ya-CZc">
-                    <rect key="frame" x="150" y="90" width="83" height="30"/>
+                    <rect key="frame" x="150" y="90" width="53" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="是" image="checkbox_normal">
+                    <state key="normal" title="是" image="nomal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" image="checkbox_checked"/>
+                    <state key="selected" image="selected"/>
                     <connections>
                         <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vzq-Mw-CAp"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3b-DH-Ads">
-                    <rect key="frame" x="263" y="90" width="83" height="30"/>
+                    <rect key="frame" x="243" y="90" width="53" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="-18" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="否" image="checkbox_normal">
+                    <state key="normal" title="否" image="nomal">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <state key="selected" image="checkbox_checked"/>
+                    <state key="selected" image="selected"/>
                     <connections>
                         <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="3Nv-IQ-vyb"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMV-hL-wak">
-                    <rect key="frame" x="74" y="150" width="46" height="30"/>
+                    <rect key="frame" x="74" y="140" width="80" height="40"/>
+                    <color key="backgroundColor" red="0.37825000289999999" green="0.81037008759999996" blue="0.64704221490000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="46" id="BQU-f0-ZhC"/>
-                        <constraint firstAttribute="height" constant="30" id="hTQ-b9-I6r"/>
+                        <constraint firstAttribute="width" constant="80" id="BQU-f0-ZhC"/>
+                        <constraint firstAttribute="height" constant="40" id="hTQ-b9-I6r"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="取消" backgroundImage="button.png">
+                    <state key="normal" title="取消">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -122,25 +127,34 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNO-Ob-bd8">
-                    <rect key="frame" x="254" y="150" width="46" height="30"/>
+                    <rect key="frame" x="220" y="140" width="80" height="40"/>
+                    <color key="backgroundColor" red="0.37825000286102295" green="0.81037008762359619" blue="0.64704221487045288" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="m4n-sA-mqr"/>
-                        <constraint firstAttribute="width" constant="46" id="pvG-3b-YA1"/>
+                        <constraint firstAttribute="height" constant="40" id="m4n-sA-mqr"/>
+                        <constraint firstAttribute="width" constant="80" id="pvG-3b-YA1"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="确定" backgroundImage="button.png">
+                    <state key="normal" title="确定">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="sureBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="xbD-l1-HoF"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mM5-ee-5eN">
+                    <rect key="frame" x="0.0" y="199" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="RoH-7R-GhD"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="KLZ-P2-ZB4" firstAttribute="top" secondItem="Dab-rI-kOW" secondAttribute="bottom" constant="5" id="17N-ho-Agv"/>
                 <constraint firstItem="sjR-Lx-4Ej" firstAttribute="height" secondItem="Dab-rI-kOW" secondAttribute="height" id="27a-Bu-agd"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="HNO-Ob-bd8" secondAttribute="bottom" constant="20" id="5Gy-jE-iIB"/>
+                <constraint firstItem="mM5-ee-5eN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5iu-ea-yCB"/>
                 <constraint firstItem="enI-K5-fJ7" firstAttribute="bottom" secondItem="KLZ-P2-ZB4" secondAttribute="bottom" id="91l-j4-Unj"/>
                 <constraint firstItem="Dab-rI-kOW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="CtR-DJ-TY7"/>
                 <constraint firstItem="VYU-zb-g4n" firstAttribute="leading" secondItem="hhn-hb-cNP" secondAttribute="leading" id="EHz-dC-Tn4"/>
@@ -160,12 +174,14 @@
                 <constraint firstItem="H3b-DH-Ads" firstAttribute="trailing" secondItem="VYU-zb-g4n" secondAttribute="trailing" id="X8P-7g-rOq"/>
                 <constraint firstItem="hhn-hb-cNP" firstAttribute="width" secondItem="sjR-Lx-4Ej" secondAttribute="width" id="Y4c-Pj-jt8"/>
                 <constraint firstItem="L3n-Zz-Mc2" firstAttribute="width" secondItem="KLZ-P2-ZB4" secondAttribute="width" id="YV0-kb-YrV"/>
+                <constraint firstItem="mM5-ee-5eN" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Ym7-E4-LJ9"/>
                 <constraint firstItem="L3n-Zz-Mc2" firstAttribute="top" secondItem="KLZ-P2-ZB4" secondAttribute="bottom" constant="5" id="aPK-kY-Um0"/>
                 <constraint firstItem="enI-K5-fJ7" firstAttribute="top" secondItem="KLZ-P2-ZB4" secondAttribute="top" id="bur-Ug-oJg"/>
                 <constraint firstItem="L3n-Zz-Mc2" firstAttribute="leading" secondItem="KLZ-P2-ZB4" secondAttribute="leading" id="htq-oV-nhJ"/>
+                <constraint firstItem="mM5-ee-5eN" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="iOG-Ro-kgw"/>
                 <constraint firstItem="enI-K5-fJ7" firstAttribute="trailing" secondItem="sjR-Lx-4Ej" secondAttribute="trailing" id="jCZ-cD-fRY"/>
                 <constraint firstItem="enI-K5-fJ7" firstAttribute="leading" secondItem="sjR-Lx-4Ej" secondAttribute="leading" id="lGg-ri-Ryq"/>
-                <constraint firstItem="hhn-hb-cNP" firstAttribute="leading" secondItem="sjR-Lx-4Ej" secondAttribute="trailing" constant="30" id="mDL-AD-dtT"/>
+                <constraint firstItem="hhn-hb-cNP" firstAttribute="leading" secondItem="sjR-Lx-4Ej" secondAttribute="trailing" constant="40" id="mDL-AD-dtT"/>
                 <constraint firstItem="sjR-Lx-4Ej" firstAttribute="leading" secondItem="Dab-rI-kOW" secondAttribute="trailing" constant="30" id="pm1-ZA-Jop"/>
                 <constraint firstItem="H3b-DH-Ads" firstAttribute="top" secondItem="Ngo-Ya-CZc" secondAttribute="top" id="prW-aB-Bxt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HNO-Ob-bd8" secondAttribute="trailing" constant="75" id="snL-SS-RrO"/>
@@ -192,12 +208,11 @@
                 <outlet property="yesKongxian" destination="enI-K5-fJ7" id="IVL-za-XOz"/>
                 <outlet property="zhiliu" destination="hhn-hb-cNP" id="mYI-CD-tUm"/>
             </connections>
-            <point key="canvasLocation" x="17" y="-417"/>
+            <point key="canvasLocation" x="16.5" y="-417"/>
         </view>
     </objects>
     <resources>
-        <image name="button.png" width="130" height="48"/>
-        <image name="checkbox_checked" width="46" height="46"/>
-        <image name="checkbox_normal" width="46" height="46"/>
+        <image name="nomal" width="20" height="20"/>
+        <image name="selected" width="20" height="20"/>
     </resources>
 </document>

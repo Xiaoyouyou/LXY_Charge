@@ -244,7 +244,15 @@
                     [rightBtn1 addTarget:self action:@selector(rightTapViewAction) forControlEvents:UIControlEventTouchDown];
         [self addSubview:rightBtn1];
         
-        
+        if ([self hidRightBtn]) {
+            //右边的btn
+            rightBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+            [rightBtn1 setTitle:rightStr forState:UIControlStateNormal];
+            rightBtn1.titleLabel.font = [UIFont systemFontOfSize:14];
+            [rightBtn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [rightBtn1 addTarget:self action:@selector(rightTapViewAction) forControlEvents:UIControlEventTouchDown];
+            [self addSubview:rightBtn1];
+        }
 //        //rightTapView
 //        rightTapView = [[UIView alloc] init];
 //        [self addSubview:rightTapView];
@@ -260,7 +268,9 @@
     return self;
 }
 
-
+-(BOOL)hidRightBtn{
+    return NO;
+}
 
 -(void)MakeMasonry
 {

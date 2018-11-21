@@ -12,6 +12,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *chargeName;
 @property (strong, nonatomic) IBOutlet UILabel *chargeAddress;
 @property (strong, nonatomic) IBOutlet UILabel *chargePrice;
+@property (strong, nonatomic) IBOutlet UILabel *space;
+
 @property (strong, nonatomic) IBOutlet UIView *daoHangView;
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
 @property (strong, nonatomic) ChooseModel *model1;
@@ -38,10 +40,12 @@
     self.chargeAddress.text = model.addr;
     self.chargePrice.text = [NSString stringWithFormat:@"%.2f元/度",[model.price floatValue]];
     [self.icon sd_setImageWithURL:[NSURL URLWithString:model.stationPic] placeholderImage:[UIImage imageNamed:@"icon-1"]];
+    self.space.text = [NSString stringWithFormat:@"%.2fkm",[model.distance floatValue]];
+    
 }
 
 -(void)daohangEvent{
-    self.daohang(self.model1.latitude, self.model1.longitude);
+    self.daohang(self.model1.latitude, self.model1.longitude,self.model1.stationName);
     NSLog(@"点击了导航按钮");
 }
 @end

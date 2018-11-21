@@ -82,7 +82,7 @@
     [self.view addSubview:phoneNums];
     
     [phoneNums mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(StatusBarH + 44);
+        make.top.equalTo(self.view).offset(StatusBarH + 44 + 10);
         make.left.equalTo(self.view).offset(15);
         make.right.equalTo(self.view).offset(-15);
         make.height.mas_equalTo(44);
@@ -153,9 +153,9 @@
     if ([phoneNums.text isEqualToString:dengLuMiMa.text]) {
         
         NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
-        paramers[@"password"] = [XStringUtil stringToMD5:dengLuMiMa.text];//MD5加密
+        paramers[@"password"] = dengLuMiMa.text; //[XStringUtil stringToMD5:dengLuMiMa.text];
         paramers[@"mobile"] = self.phoneNum;
-        
+        paramers[@"oldpwd"] = self.oldPaw;
         //更改密码校验验证码
         [WMNetWork post:ChangePassWord parameters:paramers success:^(id responseObj) {
             

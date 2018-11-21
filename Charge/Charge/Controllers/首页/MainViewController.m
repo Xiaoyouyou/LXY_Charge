@@ -63,7 +63,7 @@
 #import "MeViewController.h"
 #import "ScreeningViewController.h"
 #import "ChooseView.h"
-
+#import "ChargeDetailViewController.h"
 
 #define leftWidth (230)
 
@@ -197,11 +197,17 @@
     self.JuDianqiPaoArray = [NSMutableArray array];
     self.totalChargeArray = [NSMutableArray array];
     ChooseView *screen = [[ChooseView alloc]initWithFrame:CGRectZero];
+    screen.detail = ^(NSString *stationID) {
+        ChargeDetailViewController *chargeVCc = [[ChargeDetailViewController alloc] init];
+        chargeVCc.id = stationID;
+        [self presentViewController:chargeVCc animated:YES completion:nil];
+    };
     self.screen = screen;
     screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight );
     screen.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.4];
-    screen.daohang = ^(NSString *a, NSString *b) {
-        [self dahangLA:a andLO:b];
+    screen.daohang = ^(NSString *a, NSString *b, NSString *addr) {
+        [self dahangLA:a andLO:b andAddress:addr];
+        
     };
 //    [self.navigationController addChildViewController:screen];
     // Do any additional setup after loading the view from its nib.
@@ -333,20 +339,28 @@
     _mapview = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
     _mapview.delegate = self;
     _mapview.userTrackingMode = BMKUserTrackingModeNone;
+    _mapview.mapType = BMKMapTypeStandard;
     _mapview.showsUserLocation = YES;
+    [_mapview setZoomEnabled:YES];
+   
+    [_mapview setZoomLevel:3];
+//    _mapview.minZoomLevel = 0;
     [self.bgMapvView addSubview:_mapview];
     
     BMKLocationViewDisplayParam* testParam = [[BMKLocationViewDisplayParam alloc] init];
     testParam.isRotateAngleValid = false;// 跟随态旋转角度是否生效
-    testParam.isAccuracyCircleShow = false;// 精度圈是否显示 testParam.locationViewImgName = @"icon_compass";// 定位图标名称 testParam.locationViewOffsetX = 0;//定位图标偏移量(经度) testParam.locationViewOffsetY = 0;// 定位图标偏移量(纬度)
+    testParam.isAccuracyCircleShow = false;// 精度圈是否显示
+//    testParam.locationViewImgName = @"icon_compass";// 定位图标名称
+//    testParam.locationViewOffsetX = 10;//定位图标偏移量(经度)
+//    testParam.locationViewOffsetY = 0;// 定位图标偏移量(纬度)
     [_mapview updateLocationViewWithParam:testParam];
-    //初始化BMKLocationService
+  //  初始化BMKLocationService
     _locService = [[BMKLocationService alloc]init];
     _locService.delegate = self;
-    //启动LocationService
+  //  启动LocationService
     [_locService startUserLocationService];
     
-    //初始化检索对象
+   // 初始化检索对象
     _searcher = [[BMKGeoCodeSearch alloc]init];
     _searcher.delegate = self;
 }
@@ -499,6 +513,7 @@
 
 - (void)mapView:(BMKMapView *)mapView didDeselectAnnotationView:(BMKAnnotationView *)view
 {
+    
         [UIView animateWithDuration:0.1 animations:^{
             CGAffineTransform transform = CGAffineTransformMakeScale(1, 1);
             view.transform = transform;
@@ -509,16 +524,22 @@
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
     BMKCoordinateRegion region;
-    region.center.latitude  = userLocation.location.coordinate.latitude;
-    region.center.longitude = userLocation.location.coordinate.longitude;
-    region.span.latitudeDelta  = 0.1;
-    region.span.longitudeDelta = 0.1;
+    region.center.latitude  = userLocation.location.coordinate.latitude ;
+    region.center.longitude = userLocation.location.coordinate.longitude+ 0.05;
+    region.span.longitudeDelta = 0.01;
+    region.span.latitudeDelta  = 0.01;
     
+
+
+
     _mapview.region = region;
+//    _mapview.limitMapRegion = region;
     //保存
     MYLog(@"当前的坐标是: %f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     self.LocationLatitude = userLocation.location.coordinate.latitude;
     self.LocationLongitude = userLocation.location.coordinate.longitude;
+    
+    
     NSLog(@"LocationLatitude = %f,LocationLongitude = %f",self.LocationLatitude,self.LocationLongitude);
     //保存当前地理位置
     [Config saveCurrentLocation:userLocation];
@@ -533,11 +554,12 @@
     {MYLog(@"反geo检索发送成功");}
     else
     {MYLog(@"反geo检索发送失败");}
-    
     [_mapview updateLocationData:userLocation];
+//    NSArray *zoomLevelArr = @[@"2000000"];
+//    [_mapview showAnnotations:zoomLevelArr animated:YES];
     [_locService stopUserLocationService];
-    
 }
+
 
 -(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
    
@@ -805,9 +827,9 @@
     
 }
 
--(void)dahangLA:(NSString *)a andLO:(NSString *)b{
+-(void)dahangLA:(NSString *)a andLO:(NSString *)b andAddress:(NSString *)address{
     
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"您将导航至：%@",_ChargeDetal.address]message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"您将导航至：%@",address]message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //百度坐标转高德坐标
     CLLocation *desLocation = [[CLLocation alloc] initWithLatitude:a.doubleValue longitude:b.doubleValue];
     CLLocationCoordinate2D desCoordinate =  [desLocation locationMarsFromBaidu].coordinate;
@@ -817,7 +839,7 @@
         MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
         //目的地的位置
         MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:desCoordinate addressDictionary:nil]];
-        toLocation.name = _ChargeDetal.address;
+        toLocation.name = address;
         
         NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
         //打开苹果自身地图应用，并呈现特定的item

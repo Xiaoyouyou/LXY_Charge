@@ -50,7 +50,7 @@
     
     //初始化数据
 //    self.arraytitle = @[@"电费",@"停车费",@"服务费",@"预约费用",@"支付方式",@"开放时间"];
-     self.arraytitle = @[@"收费规则",@"开发时间",@"停车费",@"支付方式"];
+     self.arraytitle = @[@"收费规则",@"开放时间",@"停车费",@"支付方式"];
     // self.FuTitle = @[@"0.5元/度",@"免费",@"免费",@"5元",@"00:00~24:00",@"微信"];
     
     [self creatUI];
@@ -75,7 +75,7 @@
     }];
     
     //tableview 中的 topview
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, 140)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, 100)];
     self.tableView.tableHeaderView = backView;
     detailView = [[DetailZhuangWeiHeaderView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, 90)];
     detailView.titleLab.text = self.name;
@@ -154,7 +154,7 @@
 //        {
 //          Cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元/分钟",_parkingFee];
 //        }
-        Cell.detailTextLabel.text = [NSString stringWithFormat:@"00:00-24:00"];
+        Cell.detailTextLabel.text = [NSString stringWithFormat:@"07:00-20:00"];
     }else if (indexPath.section == 0 && indexPath.row ==2)
     {
 //        if ([self.servesFee isEqualToString:@"0"]) {

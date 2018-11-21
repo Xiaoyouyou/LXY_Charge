@@ -37,6 +37,15 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"ShaixuanView" owner:nil options:nil] lastObject];
 }
 
+-(void)awakeFromNib{
+    [super awakeFromNib];
+    self.cancel.layer.masksToBounds = YES;
+    self.cancel.layer.cornerRadius = 10;
+    self.sure.layer.masksToBounds = YES;
+    self.sure.layer.cornerRadius = 10;
+}
+
+
 - (IBAction)chooseTypeBtn:(UIButton *)sender {
     sender.selected = !sender.selected;
     NSLog(@"%ld",sender.tag);

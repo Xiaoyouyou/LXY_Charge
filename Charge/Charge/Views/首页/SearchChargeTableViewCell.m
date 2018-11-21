@@ -66,12 +66,12 @@
 -(void)setTempDistabceLab:(NSString *)tempDistabceLab
 {
     _tempDistabceLab = tempDistabceLab;
-    if(tempDistabceLab.floatValue > 1000){
-     CGFloat distabce = tempDistabceLab.floatValue/1000;
-        self.distabceLab.text = [NSString stringWithFormat:@"%.2lfkm",distabce];
-    }else{
-        self.distabceLab.text = [NSString stringWithFormat:@"%.2lfm",tempDistabceLab.floatValue];
-    }
+//    if(tempDistabceLab.floatValue > 1000){
+//     CGFloat distabce = tempDistabceLab.floatValue/1000;
+        self.distabceLab.text = [NSString stringWithFormat:@"%.2lfkm",tempDistabceLab.floatValue];
+//    }else{
+//        self.distabceLab.text = [NSString stringWithFormat:@"%.2lfm",tempDistabceLab.floatValue];
+//    }
 }
 
 //充电桩地址

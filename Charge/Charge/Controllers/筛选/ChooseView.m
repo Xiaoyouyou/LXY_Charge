@@ -11,6 +11,10 @@
 #import "ChooseTableViewCell.h"
 #import "ShaixuanView.h"
 
+
+
+
+
 @interface ChooseView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong) UIScrollView *scroll;
 
@@ -21,6 +25,8 @@
 @property (nonatomic,strong) UIButton *selectedBtn;
 //筛选界面
 @property (nonatomic,strong) ShaixuanView *views;
+
+
 @end
 
 @implementation ChooseView
@@ -63,8 +69,9 @@
     scroll.backgroundColor = RGB_COLOR(109, 109, 109, 1.0);
     [self addSubview:scroll];
     
-    UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 6, XYScreenWidth, 450) style:UITableViewStylePlain];
+    UITableView *table = [[UITableView alloc] initWithFrame:CGRectMake(0, 2, XYScreenWidth, 450) style:UITableViewStylePlain];
     [table registerNib:[UINib nibWithNibName:@"ChooseTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"chooseCell"];
+    table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView = table;
     table.delegate = self;
     table.dataSource = self;
@@ -91,14 +98,22 @@
     }
     
     NSLog(@"点击了按钮--%ld",button.tag);
+    CLLocationCoordinate2D userLocation =  [Config getCurrentLocation];
+    NSString *strla = [NSString stringWithFormat:@"%lf", userLocation.latitude ];
+    NSString *strlo = [NSString stringWithFormat:@"%lf", userLocation.longitude ];
     if (button.tag == 0) {
+   
          [paramer setValue:@"0" forKey:@"priceOrderby"];
+         [paramer setValue:strla forKey:@"latitude"];
+         [paramer setValue:strlo forKey: @"longitude"];
         [self loadDataSource:paramer];
         if( self.views){
             [self.views removeFromSuperview];
             self.views = nil;
         }
     }else if (button.tag == 1) {
+        [paramer setValue:strla forKey:@"latitude"];
+        [paramer setValue:strlo forKey: @"longitude"];
         [paramer setValue:@"1" forKey:@"priceOrderby"];
         [self loadDataSource:paramer];
         if( self.views){
@@ -147,11 +162,16 @@
     ChooseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chooseCell" forIndexPath:indexPath];
     cell.model = self.dataSource[indexPath.row];
     __weak typeof(self) weakSelf = self;
-    cell.daohang = ^(NSString *la, NSString *lo) {
-        weakSelf.daohang(la, lo);
-        NSLog(@"再把这个点击事件传出去");
+    cell.daohang = ^(NSString *la, NSString *lo, NSString *address) {
+           weakSelf.daohang(la, lo,address);
     };
     return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ChooseModel *model = self.dataSource[indexPath.row];
+    self.detail(model.stationId);
 }
 
 //添加筛选界面到这个view上
@@ -192,5 +212,9 @@
         [self.scroll addSubview:self.views];
     }
    
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self removeFromSuperview];
 }
 @end
