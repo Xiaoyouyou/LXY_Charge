@@ -214,6 +214,7 @@ static NSString *channel = @"Publish channel";
     [NSThread sleepForTimeInterval:0.5];
     [self initialization];
 
+
     //初始化JPUSH
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
@@ -257,9 +258,95 @@ static NSString *channel = @"Publish channel";
         [JPUSHService setAlias:_tempRegistrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     });
 
+    //版本更新
+    [self VersionUpDate];
+    
+    //初始化JPUSH
+    //Required
+    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+//        // 可以添加自定义categories
+//        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+//        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+//    }
+//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+//
+//    // Required
+//    // init Push
+//    // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
+//    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+//    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_appkey
+//                          channel:channel
+//                 apsForProduction:isProduction
+//            advertisingIdentifier:nil];
+//    NSLog(@"launchOptions = %@",launchOptions);
+//    NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//     NSLog(@"推送消息sdfsdf==== %@",remoteNotification);
+//    if (launchOptions) {
+//        NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//        //这个判断是在程序没有运行的情况下收到通知，点击通知跳转页面
+//        if (remoteNotification) {
+//            NSLog(@"推送消息==== %@",remoteNotification);
+//            [self goToMssageViewControllerWith:remoteNotification];
+//        }
+//    }
+//    //获取RegistrationID
+//    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+//        NSLog(@"resCode : %d,registrationID: %@",resCode,registrationID);
+//        _tempRegistrationID = registrationID;
+//        NSLog(@"_tempRegistrationID = %@",_tempRegistrationID);
+//    }];
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        //设置别名
+//        [JPUSHService setAlias:_tempRegistrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+//    });
+
+
     return YES;
 }
 
+
+-(void)VersionUpDate{
+    
+     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://47.107.14.253/ios/version.json"]];
+    NSData *res = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSDictionary *JsonObject=[NSJSONSerialization JSONObjectWithData:res options:NSJSONReadingAllowFragments error:nil];
+    NSLog (@"%@",JsonObject);
+    NSString* newVersion = [JsonObject objectForKey:@"version"];
+    if ([newVersion isEqualToString:@""]) return;
+    //本地的版本号
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
+    
+    //当前版本号小于服务上的版本号 需要下载
+    if (myVersion.floatValue < newVersion.floatValue) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[JsonObject objectForKey:@"versionDesc"] message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JsonObject objectForKey:@"downloadUrl"]] options:@{} completionHandler:^(BOOL success) {
+                }];
+                
+            }];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertController addAction:comfirmAction];
+            [alertController addAction:cancelAction];
+            [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+        });
+    }
+//    {
+//        apkName = cdz;
+//        downloadUrl = "http://sys2.xgnet.com.cn/apk/cdz.apk";
+//        version = "1.4";
+//        versionDesc = "\U53cb\U6869\U65b0\U7248\U672c\U53d1\U5e03\Uff0c\U5feb\U5145\U5145\U7535\U6869\U66f4\U8282\U7701\U4f60\U7684\U7b49\U5f85\U65f6\U95f4\Uff01";
+//    }
+}
+    
+>>>>>>> develope
 - (void)tagsAliasCallback:(int)iResCode tags:(NSString *)tags alias:(NSString*)alias {
     NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
     switch (iResCode) {

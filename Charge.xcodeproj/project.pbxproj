@@ -2282,7 +2282,7 @@
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = G8H5MHKS76;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2871,8 +2871,11 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+
+
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
+
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2944,6 +2947,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1e581d90-54eb-4df8-9370-29fc3770dac0";
 				PROVISIONING_PROFILE_SPECIFIER = Charge_LXY_Text_PP;
+
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2958,6 +2962,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
+
+
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3029,6 +3035,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1e581d90-54eb-4df8-9370-29fc3770dac0";
 				PROVISIONING_PROFILE_SPECIFIER = Charge_LXY_Text_PP;
+
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

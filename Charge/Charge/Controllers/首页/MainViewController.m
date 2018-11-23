@@ -509,11 +509,11 @@
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
     BMKCoordinateRegion region;
+
     region.center.latitude  = userLocation.location.coordinate.latitude;
     region.center.longitude = userLocation.location.coordinate.longitude;
     region.span.latitudeDelta  = 0.1;
     region.span.longitudeDelta = 0.1;
-    
     _mapview.region = region;
     //保存
     MYLog(@"当前的坐标是: %f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
