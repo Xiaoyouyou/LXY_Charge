@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class MyCarListModel;
+
 @interface MyAddCarViewController : UIViewController
-@property (nonatomic ,strong)NSString *titles;
-@property (nonatomic ,strong)NSString *careID;
-@property (nonatomic ,strong)MyCarListModel *carModel;
+
 @end

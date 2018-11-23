@@ -206,7 +206,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "925"
             endingLineNumber = "925"
-            landmarkName = "-MessageActionClick:"
+            landmarkName = "-scanActionClick"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -222,7 +222,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "975"
             endingLineNumber = "975"
-            landmarkName = "-scanActionClick"
+            landmarkName = "-refreshBtnAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

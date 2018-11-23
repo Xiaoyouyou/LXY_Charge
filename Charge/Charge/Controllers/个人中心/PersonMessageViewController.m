@@ -297,50 +297,50 @@
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
         
-//        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//        
-//        UIAlertAction *paiZhaoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            
-//            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//            picker.delegate = self;
-//            picker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//            picker.allowsEditing = YES;
-//            
-//            
-//            if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
-//                
-//                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-//                    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//                    picker.showsCameraControls = YES;
-//                    
-//                }else{
-//                    MYLog(@"模拟器无法打开相机");
-//                }
-//                [self presentViewController:picker animated:YES completion:nil];
-//            }
-//        }];
-//        
-//        UIAlertAction *xiangCeAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            
-//            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//            picker.delegate = self;
-//            picker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//            picker.allowsEditing = YES;
-//            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//            
-//            [self presentViewController:picker animated:YES completion:nil];
-//            
-//        }];
-//        
-//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//            
-//        }];
-//        
-//        [alertVC addAction:paiZhaoAction];
-//        [alertVC addAction:xiangCeAction];
-//        [alertVC addAction:cancelAction];
-//        
-//        [self presentViewController:alertVC animated:YES completion:nil];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *paiZhaoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            picker.allowsEditing = YES;
+            
+            
+            if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
+                
+                if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    picker.showsCameraControls = YES;
+                    
+                }else{
+                    MYLog(@"模拟器无法打开相机");
+                }
+                [self presentViewController:picker animated:YES completion:nil];
+            }
+        }];
+        
+        UIAlertAction *xiangCeAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+            
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertVC addAction:paiZhaoAction];
+        [alertVC addAction:xiangCeAction];
+        [alertVC addAction:cancelAction];
+        
+        [self presentViewController:alertVC animated:YES completion:nil];
     }else if (indexPath.section == 0 && indexPath.row == 5)
     {
         QianMingViewController *qianMingVC = [[QianMingViewController alloc] init];

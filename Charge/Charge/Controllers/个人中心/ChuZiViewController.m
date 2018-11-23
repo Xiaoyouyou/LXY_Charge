@@ -210,12 +210,12 @@ typedef enum{
         make.height.mas_equalTo(payVieHeight);
     }];
     
-//    _SanBaiView.layer.cornerRadius = 6;
-//    _SanBaiView.layer.masksToBounds = YES;
-//    _SanBaiView.userInteractionEnabled = YES;
-//    _SanBaiView.layer.borderWidth = 1;
-//    _SanBaiView.layer.borderColor = RGBA(29, 167, 146, 1).CGColor;
-//
+    _SanBaiView.layer.cornerRadius = 6;
+    _SanBaiView.layer.masksToBounds = YES;
+    _SanBaiView.userInteractionEnabled = YES;
+    _SanBaiView.layer.borderWidth = 1;
+    _SanBaiView.layer.borderColor = RGBA(29, 167, 146, 1).CGColor;
+    
     //金额lab设置
     [_ErShiLab sizeToFit];
     _ErShiLab.textColor = RGBA(29, 167, 146, 1);
@@ -233,8 +233,8 @@ typedef enum{
     [_ErBaiLab sizeToFit];
       _ErBaiLab.textColor = RGBA(29, 167, 146, 1);
     
-//    [_SanBaiLab sizeToFit];
-//    _SanBaiLab.textColor = RGBA(29, 167, 146, 1);
+    [_SanBaiLab sizeToFit];
+    _SanBaiLab.textColor = RGBA(29, 167, 146, 1);
     
     [_ErShiLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_ErShiview);
@@ -261,10 +261,10 @@ typedef enum{
         make.centerY.equalTo(_ErBaiView);
     }];
     
-//    [_SanBaiLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.equalTo(_SanBaiView);
-//        make.centerY.equalTo(_SanBaiView);
-//    }];
+    [_SanBaiLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(_SanBaiView);
+        make.centerY.equalTo(_SanBaiView);
+    }];
     
     //金额选择手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ErShiAction)];
@@ -282,8 +282,8 @@ typedef enum{
     UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(ErBaiAction)];
     [_ErBaiView addGestureRecognizer:tap4];
     
-//    UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(SanBaiAction)];
-//    [_SanBaiView addGestureRecognizer:tap5];
+    UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(SanBaiAction)];
+    [_SanBaiView addGestureRecognizer:tap5];
     
     
     UITapGestureRecognizer *tap6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(weChatAction)];
@@ -470,22 +470,22 @@ typedef enum{
     
     NSString *tempStr = @"";
     if (self.ChooseMonetyType == 0) {
-        tempStr = @"50";
+        tempStr = @"0.01";
     }else if (self.ChooseMonetyType == 1)
     {
-        tempStr = @"100";
+        tempStr = @"50";
     }else if (self.ChooseMonetyType == 2)
     {
-        tempStr = @"200";
+        tempStr = @"100";
     }else if (self.ChooseMonetyType == 3)
     {
-        tempStr = @"500";
+        tempStr = @"200";
     }else if (self.ChooseMonetyType == 4)
     {
-        tempStr = @"1000";
+        tempStr = @"500";
     }else if (self.ChooseMonetyType == 5)
     {
-        tempStr = @"0";
+        tempStr = @"1000";
     }
   //  NSLog(@"tempStr = %@",tempStr);
     if (self.InActionType == 0) {

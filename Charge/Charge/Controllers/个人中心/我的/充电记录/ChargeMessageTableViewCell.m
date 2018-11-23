@@ -11,15 +11,10 @@
 
 @interface ChargeMessageTableViewCell()
 @property (strong, nonatomic) IBOutlet UILabel *ZhanDianName;
+@property (strong, nonatomic) IBOutlet UILabel *FlashStatus;
 @property (strong, nonatomic) IBOutlet UILabel *FlashMoney;
 
 @property (strong, nonatomic) IBOutlet UILabel *FlashTime;
-@property (strong, nonatomic) IBOutlet UILabel *serverCost;
-
-
-@property (strong, nonatomic) IBOutlet UILabel *electricCost;
-
-@property (strong, nonatomic) IBOutlet UILabel *elecDegree;
 
 @end
 
@@ -33,13 +28,8 @@
 -(void)setModel:(ChargeMessageModel *)model
 {
     self.ZhanDianName.text = model.stationName;
-    self.FlashTime.text = [NSString stringWithFormat:@"%@ —— %@",model.createDate,model.endDate];
-    self.serverCost.text = [NSString stringWithFormat:@"服务费:￥%@元",model.serverCost];
-    
-    
-    self.electricCost.text = [NSString stringWithFormat:@"电费:￥%@元",model.electricCost];
-    
-    self.elecDegree.text = [NSString stringWithFormat:@"充电度数:%@kwh",model.elecDegree];
+    self.FlashTime.text = model.endDate;
+    self.FlashStatus.text = @"完成充电";
     self.FlashMoney.text = [NSString stringWithFormat:@"消费金额 %@元",model.totalCost];
 }
 

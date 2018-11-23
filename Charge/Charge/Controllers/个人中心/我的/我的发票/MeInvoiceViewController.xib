@@ -35,15 +35,16 @@
                     <rect key="frame" x="0.0" y="64" width="375" height="60"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9U-9l-svp">
-                            <rect key="frame" x="150.5" y="54" width="75.5" height="1"/>
+                            <rect key="frame" x="138" y="54" width="100" height="1"/>
                             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="dU1-2n-H7H"/>
+                                <constraint firstAttribute="width" constant="100" id="eI1-ny-10Y"/>
                             </constraints>
                         </view>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入金额" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iQt-dX-uXw">
-                            <rect key="frame" x="150.5" y="32" width="75.5" height="17"/>
-                            <color key="textColor" red="0.20000159740000001" green="0.19999706749999999" blue="0.20000010730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <rect key="frame" x="138" y="32" width="100" height="17"/>
+                            <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
@@ -135,10 +136,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写发票开头" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a48-4i-2MC">
-                                            <rect key="frame" x="167" y="18.5" width="200" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="lrf-hi-XdO"/>
-                                            </constraints>
+                                            <rect key="frame" x="224" y="18.5" width="143" height="17"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -162,7 +160,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写纳税识别号" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P3m-kd-Azk">
-                                            <rect key="frame" x="167" y="18.5" width="200" height="17"/>
+                                            <rect key="frame" x="224" y="18.5" width="143" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="143" id="gCQ-Q4-L7p"/>
+                                            </constraints>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -185,7 +186,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写收票人邮箱" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kYi-i3-Vqd">
-                                            <rect key="frame" x="167" y="18.5" width="200" height="17"/>
+                                            <rect key="frame" x="224" y="18.5" width="143" height="17"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -209,7 +210,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写收票人地址" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mPg-rO-uCv">
-                                            <rect key="frame" x="167" y="18.5" width="200" height="17"/>
+                                            <rect key="frame" x="224" y="18.5" width="143" height="17"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -233,8 +234,8 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSS-SO-xRb">
-                                            <rect key="frame" x="259" y="0.0" width="108" height="55"/>
-                                            <state key="normal" title="请选择快递方式"/>
+                                            <rect key="frame" x="305" y="0.0" width="62" height="55"/>
+                                            <state key="normal" title="顺风到付"/>
                                             <connections>
                                                 <action selector="ChooseEmailTypeBtn:" destination="-1" eventType="touchUpInside" id="rFY-Vk-YfS"/>
                                             </connections>
@@ -259,7 +260,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="添加备注" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WTw-EO-DIu">
-                                            <rect key="frame" x="167" y="19" width="200" height="17"/>
+                                            <rect key="frame" x="224" y="19" width="143" height="17"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>

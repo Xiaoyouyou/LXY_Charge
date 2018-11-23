@@ -156,7 +156,6 @@
             
             ChangePassWord1ViewController *changeVC = [[ChangePassWord1ViewController alloc] init];
             changeVC.phone = phoneNum.text;
-            changeVC.code = yanZhengMa.text;
             [self.navigationController pushViewController:changeVC animated:YES];
             
         }else if([responseObj[@"status"] intValue] == -1)

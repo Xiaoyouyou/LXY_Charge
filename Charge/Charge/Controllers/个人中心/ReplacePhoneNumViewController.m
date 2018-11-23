@@ -53,7 +53,7 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(44 + StatusBarH);
+        make.height.mas_equalTo(64);
     }];
     
     [self creatUI];
@@ -78,7 +78,7 @@
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(self.view).offset(StatusBarH + 60);
+        make.top.equalTo(self.view).offset(80);
         make.size.mas_equalTo(CGSizeMake(180, 35));
     }];
     

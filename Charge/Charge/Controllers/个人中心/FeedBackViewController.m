@@ -50,7 +50,7 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(StatusBarH + 44);
+        make.height.mas_equalTo(64);
     }];
     
     [self creatUI];//创建UI
@@ -65,7 +65,7 @@
 
 -(void)creatUI
 {
-    myTextView = [[MyTextView alloc] initWithFrame:CGRectMake(0, StatusBarH + 44, XYScreenWidth, 180-64) placeholder:nil];
+    myTextView = [[MyTextView alloc] initWithFrame:CGRectMake(0, 64, XYScreenWidth, 180-64) placeholder:nil];
     myTextView.delegate = self;
     myTextView.backgroundColor = [UIColor whiteColor];
     myTextView.placeholder.text = @"请输入您的反馈意见(300字以内)";

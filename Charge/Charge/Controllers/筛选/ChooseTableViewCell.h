@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class ChooseModel;
-typedef void(^DaoHangEvent)(NSString *la,NSString *lo,NSString *address);
+typedef void(^DaoHangEvent)(NSString *la,NSString *lo);
 
 @interface ChooseTableViewCell : UITableViewCell
 @property (nonatomic ,copy)DaoHangEvent daohang;

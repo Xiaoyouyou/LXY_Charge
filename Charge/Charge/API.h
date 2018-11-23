@@ -18,15 +18,13 @@
 //RGB color
 #define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
-#define BaseURL @"http://47.107.14.253:80/app/phone/"
-//#define BaseURL @"http://120.77.146.167:88/app/phone/"
-//#define BaseURL @"http://192.168.5.4:8080/app/phone/"
+//#define BaseURL @"http://47.107.14.253:80/app/phone/"
+#define BaseURL @"http://120.77.146.167:88/app/phone/"
 #define RequestURL(string) [NSString stringWithFormat:@"%@%@",BaseURL,string]
 
 //APPKey
 #define WeChat_appkey    @"wx99369c2484d2a152" //微信APPkey
-//#define BaiDuMap_appkey  @"DDOXVg1C3et2vlrZwzSvwLlhHPCQkcsh" //百度APPkey
-#define BaiDuMap_appkey  @"YuWy0luk4lA0FhOV8TCGIpbvKpn6zujl"
+#define BaiDuMap_appkey  @"DDOXVg1C3et2vlrZwzSvwLlhHPCQkcsh" //百度APPkey
 #define YouMeng_appkey   @"5840e455c895767de90010ae" //友盟APPkey
 #define WeChat_appSecret @"7aacd13968afdcce98968bf57290eb55" //微信APPSecret
 #define JPUSH_appkey   @"34315539ed9431af470f4cf0" //极光推送APPkey
@@ -81,19 +79,15 @@
 
 #define ChargeMyCareList RequestURL(@"vehicles.action") //我的车辆列表
 #define ChargeAddMyCare RequestURL(@"addVehicle.action") //添加我的车辆
-#define ChargeEditMyCare RequestURL(@"editVehicle.action") //修改我的车辆
-#define ChargeDeleteMyCare RequestURL(@"deletevehicle.action") //删除我的车辆
-
 #define ChargeCostList RequestURL(@"chargingList.action") //充电计费规则
 #define Chargenumber RequestURL(@"equipmentList.action") //桩位个数接口
 #define ChargeMessge RequestURL(@"getCurrentChargInfo.action")
 
 #define ChargeMessageList RequestURL(@"chargingLog.action") //充电记录
 #define ChargeChooseList RequestURL(@"searchSideList.action") //充电站筛选接口
-#define ChargeInvoiceList RequestURL(@"checkInvoice.action") //开票接口
+#define ChargeInvoiceList RequestURL(@"checkInvoice.action") //充电站筛选接口
+
 #define ChargeNoticeList RequestURL(@"notices.action") //公告
-#define ChargeVersionUpdate @"http://47.107.14.253/ios/version.json" //版本更新
-#define CheckInvoice RequestURL(@"getAvaiInvoice.action") //检查开票金额
 
 //#define WeChatLogin @"https://api.weixin.qq.com/sns/oauth2/access_token"//微信登陆api
 

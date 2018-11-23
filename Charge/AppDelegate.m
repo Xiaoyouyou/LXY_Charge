@@ -49,18 +49,11 @@ static NSString *channel = @"Publish channel";
 
 @property (nonatomic, strong) NSString *tempRegistrationID;
 @property (nonatomic, strong) TencentOAuth *tencentOAuth;//qq实例
-@property (nonatomic ,strong)NSMutableArray *allTypeArr;
+
 
 @end
 
 @implementation AppDelegate
-
--(NSMutableArray *)allTypeArr{
-    if(!_allTypeArr){
-        _allTypeArr = [NSMutableArray array];
-    }
-    return _allTypeArr;
-}
 
 -(void)initWeChat
 {
@@ -109,6 +102,7 @@ static NSString *channel = @"Publish channel";
 - (void)initialization
 {
     [self checkNetWork];//检测网络
+    [self initBaiDu];//初始化百度
     [self initWeChat];//初始化微信
     [self init3DTouch];//初始化3Dtouch
     //[self initTencent];//初始化qq
@@ -116,7 +110,7 @@ static NSString *channel = @"Publish channel";
   //  [self initAVAudio];//初始化后台运行
      [self initSaveLog];//初始化保存log日志文件
   // [RichAPM startWithAppID:Rich_APM_appkey];//初始化richAPM
-    [self initBaiDu];//初始化百度
+
     if (self.window == nil) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
         [self.window makeKeyAndVisible];
@@ -220,9 +214,6 @@ static NSString *channel = @"Publish channel";
     [NSThread sleepForTimeInterval:0.5];
     [self initialization];
 
-    //版本更新
-//    [self VersionUpDate];
-    
     //初始化JPUSH
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
@@ -234,7 +225,7 @@ static NSString *channel = @"Publish channel";
         // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-
+    
     // Required
     // init Push
     // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
@@ -260,7 +251,7 @@ static NSString *channel = @"Publish channel";
         _tempRegistrationID = registrationID;
         NSLog(@"_tempRegistrationID = %@",_tempRegistrationID);
     }];
-
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //设置别名
         [JPUSHService setAlias:_tempRegistrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
@@ -269,45 +260,6 @@ static NSString *channel = @"Publish channel";
     return YES;
 }
 
--(void)VersionUpDate{
-    
-     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://47.107.14.253/ios/version.json"]];
-    NSData *res = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    if(res == nil)return;
-    NSDictionary *JsonObject=[NSJSONSerialization JSONObjectWithData:res options:NSJSONReadingAllowFragments error:nil];
-    NSLog (@"%@",JsonObject);
-    NSString* newVersion = [JsonObject objectForKey:@"version"];
-    if ([newVersion isEqualToString:@""]) return;
-    //本地的版本号
-    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-    NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
-    
-    //当前版本号小于服务上的版本号 需要下载
-    if (newVersion.floatValue > myVersion.floatValue) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[JsonObject objectForKey:@"versionDesc"] message:nil preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JsonObject objectForKey:@"downloadUrl"]] options:@{} completionHandler:^(BOOL success) {
-                }];
-                
-            }];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            [alertController addAction:comfirmAction];
-            [alertController addAction:cancelAction];
-            [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
-        });
-        request = nil;
-    }
-//    {
-//        apkName = cdz;
-//        downloadUrl = "http://sys2.xgnet.com.cn/apk/cdz.apk";
-//        version = "1.4";
-//        versionDesc = "\U53cb\U6869\U65b0\U7248\U672c\U53d1\U5e03\Uff0c\U5feb\U5145\U5145\U7535\U6869\U66f4\U8282\U7701\U4f60\U7684\U7b49\U5f85\U65f6\U95f4\Uff01";
-//    }
-}
-    
 - (void)tagsAliasCallback:(int)iResCode tags:(NSString *)tags alias:(NSString*)alias {
     NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
     switch (iResCode) {

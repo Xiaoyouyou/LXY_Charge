@@ -12,6 +12,6 @@
 @interface ChangePassWord1ViewController : WKAvoidKeyboardViewController
 
 @property(nonatomic,copy) NSString *phone;
-@property(nonatomic,copy) NSString *code;
+
 
 @end

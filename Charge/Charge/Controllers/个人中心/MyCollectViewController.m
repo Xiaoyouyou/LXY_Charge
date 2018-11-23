@@ -169,7 +169,6 @@
     
     [WMNetWork post:CollectionList parameters:parmas success:^(id responseObj) {
         //结束下拉刷新状态
-        // 马上进入刷新状态
         [self.tableView.mj_header endRefreshing];
         //   MYLog(@"collectResponseObj = %@",responseObj);
         //异常登陆
@@ -214,7 +213,7 @@
                     make.left.equalTo(self.view);
                     make.right.equalTo(self.view);
                     make.bottom.equalTo(self.view);
-                    make.top.equalTo(self.view).offset(StatusBarH + 44);
+                    make.top.equalTo(self.view).offset(64);
                     
                 }];
                 return ;
@@ -243,7 +242,7 @@
             make.left.equalTo(self.view);
             make.right.equalTo(self.view);
             make.bottom.equalTo(self.view);
-            make.top.equalTo(self.view).offset(StatusBarH + 44);
+            make.top.equalTo(self.view).offset(64);
         }];
     }];
 }

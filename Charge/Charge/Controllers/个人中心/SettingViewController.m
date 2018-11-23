@@ -54,11 +54,11 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(44+StatusBarH);
+        make.height.mas_equalTo(64);
     }];
     
     //初始化
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44+StatusBarH, XYScreenWidth, XYScreenHeight-64) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, XYScreenWidth, XYScreenHeight-64) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -109,7 +109,7 @@
                             //退出登陆时通知主控制器收起左滑界面
                             
                             [[NSNotificationCenter defaultCenter] postNotificationName:LeaveOutNoti object:nil];
-                            [self.navigationController popToRootViewControllerAnimated:YES];
+                            [self.navigationController popViewControllerAnimated:YES];
                             
                         });
                     }
