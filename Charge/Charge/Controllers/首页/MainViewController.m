@@ -200,9 +200,9 @@
     self.screen = screen;
     screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight - 320);
     screen.backgroundColor = [UIColor whiteColor];
-    screen.daohang = ^(NSString *a, NSString *b) {
-        [self dahangLA:a andLO:b];
-    };
+//    screen.daohang = ^(NSString *a, NSString *b) {
+//        [self dahangLA:a andLO:b];
+//    };
 //    [self.navigationController addChildViewController:screen];
     // Do any additional setup after loading the view from its nib.
     //初始化地图
