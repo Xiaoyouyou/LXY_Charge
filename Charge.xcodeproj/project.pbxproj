@@ -28,6 +28,7 @@
 		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
 		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
 		75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA662174D4B400AC2F73 /* MyCarViewController.m */; };
+		75D7F8F921A5AC44008E3DB6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0281D17C9F200AA0918 /* libstdc++.6.0.9.tbd */; };
 		75DC38E7218F1DF000F94A51 /* MyTrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC38E6218F1DF000F94A51 /* MyTrendViewController.m */; };
 		75DC38EB218F1E1F00F94A51 /* MyNoticationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC38E9218F1E1F00F94A51 /* MyNoticationTableViewCell.m */; };
 		75DC38EC218F1E1F00F94A51 /* MyNoticationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75DC38EA218F1E1F00F94A51 /* MyNoticationTableViewCell.xib */; };
@@ -219,7 +220,6 @@
 		857D96971D65AF2400A58A4E /* PersonMesCaches.m in Sources */ = {isa = PBXBuildFile; fileRef = 857D96961D65AF2400A58A4E /* PersonMesCaches.m */; };
 		857F01971DDC4AAF00169FA8 /* MyYuYueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 857F01961DDC4AAF00169FA8 /* MyYuYueViewController.m */; };
 		857F29C21DF1217B0093A564 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 857F29C11DF1217B0093A564 /* libsqlite3.tbd */; };
-		857F29C41DF121D20093A564 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 857F29C31DF121D20093A564 /* libc++.tbd */; };
 		857F29C61DF121E80093A564 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 857F29C51DF121E80093A564 /* libz.tbd */; };
 		857F29CC1DF1580E0093A564 /* TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 857F29CB1DF1580E0093A564 /* TipView.m */; };
 		857F29D01DF15EF00093A564 /* NoneCollect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 857F29CF1DF15EF00093A564 /* NoneCollect@2x.png */; };
@@ -265,7 +265,6 @@
 		8587C0231D17C9C300AA0918 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0221D17C9C300AA0918 /* Security.framework */; };
 		8587C0251D17C9D600AA0918 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0241D17C9D600AA0918 /* libsqlite3.0.tbd */; };
 		8587C0271D17C9E600AA0918 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0261D17C9E600AA0918 /* CoreTelephony.framework */; };
-		8587C0291D17C9F200AA0918 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0281D17C9F200AA0918 /* libstdc++.6.0.9.tbd */; };
 		8587C0581D17CC8400AA0918 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8587C04A1D17CC8400AA0918 /* beep.wav */; };
 		8587C05D1D17CC8400AA0918 /* ic_map_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8587C04F1D17CC8400AA0918 /* ic_map_light@2x.png */; };
 		8587C05E1D17CC8400AA0918 /* QRCodeScanLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8587C0501D17CC8400AA0918 /* QRCodeScanLine@2x.png */; };
@@ -1037,6 +1036,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75D7F8F921A5AC44008E3DB6 /* libstdc++.6.0.9.tbd in Frameworks */,
 				75F1C39821808CF300577B46 /* libiconv.tbd in Frameworks */,
 				85BA182E1E8CECAB00FB63D7 /* TencentOpenAPI.framework in Frameworks */,
 				8594585E1E665CB3007BB59F /* AddressBookUI.framework in Frameworks */,
@@ -1049,7 +1049,6 @@
 				8533CEAF1DF686F800F88A3A /* Foundation.framework in Frameworks */,
 				8533CEAB1DF686B800F88A3A /* CFNetwork.framework in Frameworks */,
 				857F29C61DF121E80093A564 /* libz.tbd in Frameworks */,
-				857F29C41DF121D20093A564 /* libc++.tbd in Frameworks */,
 				857F29C21DF1217B0093A564 /* libsqlite3.tbd in Frameworks */,
 				85394C2F1D18E9550063D16C /* ImageIO.framework in Frameworks */,
 				8587C0271D17C9E600AA0918 /* CoreTelephony.framework in Frameworks */,
@@ -1059,7 +1058,6 @@
 				8587C0211D17C9BB00AA0918 /* CoreGraphics.framework in Frameworks */,
 				85BA18391E8CFA0000FB63D7 /* TencentOpenAPI.framework in Frameworks */,
 				85AD8E2C1E27283100C5DE82 /* AlipaySDK.framework in Frameworks */,
-				8587C0291D17C9F200AA0918 /* libstdc++.6.0.9.tbd in Frameworks */,
 				8592F0611D52F11300C6F922 /* libz.1.1.3.tbd in Frameworks */,
 				85394C371D18E9C90063D16C /* JavaScriptCore.framework in Frameworks */,
 				857F79D01D2F4488003812CD /* BaiduMapAPI_Search.framework in Frameworks */,
@@ -2284,13 +2282,13 @@
 		850EE41E1D01387600B59D3F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = com.XinGuoXin.cn;
 				TargetAttributes = {
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = G8H5MHKS76;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2793,18 +2791,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2838,18 +2847,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2877,13 +2897,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E140A293A740616CB4ECE233 /* Pods-Charge.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = G8H5MHKS76;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2953,7 +2974,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDeveloPP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2962,13 +2983,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE6B885F74D7A77940C92369 /* Pods-Charge.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = G8H5MHKS76;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3038,7 +3060,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b703f85e-698a-40fd-8386-a89be4065160";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDistriPP;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

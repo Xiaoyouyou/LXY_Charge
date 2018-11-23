@@ -109,7 +109,6 @@ static NSString *channel = @"Publish channel";
 - (void)initialization
 {
     [self checkNetWork];//检测网络
-    [self initBaiDu];//初始化百度
     [self initWeChat];//初始化微信
     [self init3DTouch];//初始化3Dtouch
     //[self initTencent];//初始化qq
@@ -117,7 +116,7 @@ static NSString *channel = @"Publish channel";
   //  [self initAVAudio];//初始化后台运行
      [self initSaveLog];//初始化保存log日志文件
   // [RichAPM startWithAppID:Rich_APM_appkey];//初始化richAPM
-
+    [self initBaiDu];//初始化百度
     if (self.window == nil) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
         [self.window makeKeyAndVisible];
@@ -222,50 +221,50 @@ static NSString *channel = @"Publish channel";
     [self initialization];
 
     //版本更新
-    [self VersionUpDate];
+//    [self VersionUpDate];
     
     //初始化JPUSH
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
-//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-//        // 可以添加自定义categories
-//        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
-//        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
-//    }
-//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-//
-//    // Required
-//    // init Push
-//    // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
-//    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
-//    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_appkey
-//                          channel:channel
-//                 apsForProduction:isProduction
-//            advertisingIdentifier:nil];
-//    NSLog(@"launchOptions = %@",launchOptions);
-//    NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-//     NSLog(@"推送消息sdfsdf==== %@",remoteNotification);
-//    if (launchOptions) {
-//        NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-//        //这个判断是在程序没有运行的情况下收到通知，点击通知跳转页面
-//        if (remoteNotification) {
-//            NSLog(@"推送消息==== %@",remoteNotification);
-//            [self goToMssageViewControllerWith:remoteNotification];
-//        }
-//    }
-//    //获取RegistrationID
-//    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
-//        NSLog(@"resCode : %d,registrationID: %@",resCode,registrationID);
-//        _tempRegistrationID = registrationID;
-//        NSLog(@"_tempRegistrationID = %@",_tempRegistrationID);
-//    }];
-//
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        //设置别名
-//        [JPUSHService setAlias:_tempRegistrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-//    });
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        // 可以添加自定义categories
+        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+
+    // Required
+    // init Push
+    // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
+    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_appkey
+                          channel:channel
+                 apsForProduction:isProduction
+            advertisingIdentifier:nil];
+    NSLog(@"launchOptions = %@",launchOptions);
+    NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+     NSLog(@"推送消息sdfsdf==== %@",remoteNotification);
+    if (launchOptions) {
+        NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        //这个判断是在程序没有运行的情况下收到通知，点击通知跳转页面
+        if (remoteNotification) {
+            NSLog(@"推送消息==== %@",remoteNotification);
+            [self goToMssageViewControllerWith:remoteNotification];
+        }
+    }
+    //获取RegistrationID
+    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+        NSLog(@"resCode : %d,registrationID: %@",resCode,registrationID);
+        _tempRegistrationID = registrationID;
+        NSLog(@"_tempRegistrationID = %@",_tempRegistrationID);
+    }];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //设置别名
+        [JPUSHService setAlias:_tempRegistrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    });
 
     return YES;
 }
@@ -274,6 +273,7 @@ static NSString *channel = @"Publish channel";
     
      NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://47.107.14.253/ios/version.json"]];
     NSData *res = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if(res == nil)return;
     NSDictionary *JsonObject=[NSJSONSerialization JSONObjectWithData:res options:NSJSONReadingAllowFragments error:nil];
     NSLog (@"%@",JsonObject);
     NSString* newVersion = [JsonObject objectForKey:@"version"];
@@ -283,7 +283,7 @@ static NSString *channel = @"Publish channel";
     NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
     
     //当前版本号小于服务上的版本号 需要下载
-    if (myVersion.floatValue < newVersion.floatValue) {
+    if (newVersion.floatValue > myVersion.floatValue) {
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[JsonObject objectForKey:@"versionDesc"] message:nil preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -298,6 +298,7 @@ static NSString *channel = @"Publish channel";
             [alertController addAction:cancelAction];
             [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
         });
+        request = nil;
     }
 //    {
 //        apkName = cdz;
