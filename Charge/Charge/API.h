@@ -18,15 +18,14 @@
 //RGB color
 #define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
-#define BaseURL @"http://47.107.14.253:80/app/phone/"
+//#define BaseURL @"http://47.107.14.253:80/app/phone/"
 //#define BaseURL @"http://120.77.146.167:88/app/phone/"
-//#define BaseURL @"http://192.168.5.4:8080/app/phone/"
+#define BaseURL @"http://192.168.5.4:8080/app/phone/"
 #define RequestURL(string) [NSString stringWithFormat:@"%@%@",BaseURL,string]
 
 //APPKey
 #define WeChat_appkey    @"wx99369c2484d2a152" //微信APPkey
-//#define BaiDuMap_appkey  @"DDOXVg1C3et2vlrZwzSvwLlhHPCQkcsh" //百度APPkey
-#define BaiDuMap_appkey  @"YuWy0luk4lA0FhOV8TCGIpbvKpn6zujl"
+#define BaiDuMap_appkey  @"DDOXVg1C3et2vlrZwzSvwLlhHPCQkcsh" //百度APPkey
 #define YouMeng_appkey   @"5840e455c895767de90010ae" //友盟APPkey
 #define WeChat_appSecret @"7aacd13968afdcce98968bf57290eb55" //微信APPSecret
 #define JPUSH_appkey   @"34315539ed9431af470f4cf0" //极光推送APPkey

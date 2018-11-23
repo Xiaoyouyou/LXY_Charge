@@ -82,8 +82,7 @@
 @property (nonatomic, strong) NSMutableArray *B;
 @property (nonatomic, strong) NSMutableArray *zhuangID;
 
-@property (nonatomic, strong)ZhuangWeiMesViewController *ZhuangWeiVC;
-@property (nonatomic, strong)ChargeDetailViewController *detailVC;
+
 
 - (IBAction)collectBtnAction:(UIButton *)sender;
 - (IBAction)daoHangAction:(id)sender;
@@ -349,7 +348,6 @@
 -(void)creatZhuangWei{
     //桩位控制器
     ZhuangWeiMesViewController *ZhuangWeiMesVC = [[ZhuangWeiMesViewController alloc] init];
-    self.ZhuangWeiVC = ZhuangWeiMesVC;
     ZhuangWeiMesVC.chargeNumber = self.array;//桩位控制器数据
     ZhuangWeiMesVC.zhuangA = self.A;
     ZhuangWeiMesVC.zhzuangB = self.B;
@@ -368,7 +366,6 @@
     
     //详情控制器
     DetailZhuangWeiViewController *DetailZhuangWeiVC = [[DetailZhuangWeiViewController alloc]init];
-    self.detailVC = DetailZhuangWeiVC;
     DetailZhuangWeiVC.id = self.id;
     //    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
     DetailZhuangWeiVC.chargeDeatlModel = self.dataDict;//详情控制器数据
@@ -533,7 +530,6 @@
                          view1.frame =CGRectMake(XYScreenWidth/2+15, 7, XYScreenWidth/2 -30, 30);
                      } completion:^(BOOL finished) {
                      }];
-    if(self.detailVC == nil || self.ZhuangWeiVC == nil)return;
     DetailZhuangWeiViewController *DetailVC = self.childViewControllers[1];
     ZhuangWeiMesViewController *ZhuangWeiVC = self.childViewControllers[0];
     
@@ -572,7 +568,6 @@
                      } completion:^(BOOL finished) {
                      }];
    
-    if(self.detailVC == nil || self.ZhuangWeiVC == nil)return;
     ZhuangWeiMesViewController *ZhuangWeiVC = self.childViewControllers[0];
     DetailZhuangWeiViewController *DetailVC = self.childViewControllers[1];
     

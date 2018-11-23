@@ -108,7 +108,7 @@
 @property (nonatomic, strong) NSMutableArray *qiPaoArray;//添加的气泡数组
 @property (nonatomic, strong) NSMutableArray *JuDianqiPaoArray;//添加的聚点桩气泡数组
 
-@property (nonatomic, strong) NSMutableArray *chargingMess;//友桩充电桩数组
+@property (nonatomic, strong) NSMutableArray *chargingMess;//桩者充电桩数组
 @property (nonatomic, strong) NSMutableArray *juDianChargingMess;//聚电桩数组
 @property (nonatomic, strong) NSMutableArray *totalChargeArray;//总充电转数组
 @property (strong, nonatomic) IBOutlet UIButton *refreshBtnPro;//刷新按钮属性
@@ -288,7 +288,7 @@
                     [_totalChargeArray addObjectsFromArray:self.qiPaoArray];
                     [_totalChargeArray addObjectsFromArray:self.JuDianqiPaoArray];
                     [_mapview addAnnotations:_totalChargeArray];
-                    [_mapview setZoomLevel:12];
+                    [_mapview setZoomLevel:14];
                     [self.refreshImageView stopAnimating];
                     self.refreshBtnPro.userInteractionEnabled = YES;
                     
@@ -341,11 +341,9 @@
     _mapview.userTrackingMode = BMKUserTrackingModeNone;
     _mapview.mapType = BMKMapTypeStandard;
     _mapview.showsUserLocation = YES;
-//
-    _mapview.zoomEnabled = YES;
-    _mapview.showMapScaleBar=YES;
-    [_mapview setZoomLevel:12];
-    
+    [_mapview setZoomEnabled:YES];
+   
+    [_mapview setZoomLevel:3];
 //    _mapview.minZoomLevel = 0;
     [self.bgMapvView addSubview:_mapview];
     
@@ -527,10 +525,10 @@
 {
     BMKCoordinateRegion region;
     region.center.latitude  = userLocation.location.coordinate.latitude ;
-    region.center.longitude = userLocation.location.coordinate.longitude;
-//        region.span.longitudeDelta = 0.01;
-//        region.span.latitudeDelta  = 0.01;
-//
+    region.center.longitude = userLocation.location.coordinate.longitude+ 0.05;
+    region.span.longitudeDelta = 0.01;
+    region.span.latitudeDelta  = 0.01;
+    
 
 
 
@@ -610,7 +608,7 @@
                        // _JuDianQiPao.image = [UIImage imageNamed:@"qipaopoint.png"];
                         [self.qiPaoArray addObject:_qiPao];
                     }
-                    [_mapview setZoomLevel:12];
+                 //   [_mapview setZoomLevel:10];
 //                    [_mapview addAnnotations:self.qiPaoArray];
              //   NSLog(@"qiPaoArray = %@",self.qiPaoArray);
                       [self addJuDianCharge];
