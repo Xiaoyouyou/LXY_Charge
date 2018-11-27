@@ -33,7 +33,7 @@
 			<string>wexin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx99369c2484d2a152</string>
+				<string>wxd24c22745a380e9e</string>
 			</array>
 		</dict>
 		<dict>
@@ -58,7 +58,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>baidumap</string>
