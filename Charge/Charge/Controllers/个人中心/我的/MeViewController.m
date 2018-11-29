@@ -73,12 +73,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    if ([Config getOwnID] == nil || [Config getToken] == nil) {
-//        LoginViewController *loginVC = [[LoginViewController alloc] init];
-//        UINavigationController *nav = [[UINavigationController alloc] init];
-//        [nav addChildViewController:loginVC];
-//        [self presentViewController:nav animated:YES completion:nil];
-//    }
+   
 }
 
 - (void)viewDidLoad {
@@ -99,6 +94,7 @@
                               @"userId" : [Config getOwnID]
                               };
     [WMNetWork get:GetBalance parameters:paramer success:^(id responseObj) {
+        [self.bottomTitleArr removeAllObjects];
         [self.bottomTitleArr addObject:responseObj[@"balance"]];
         [self.bottomTitleArr addObject:@"00"];
         [self addSomeSubViews:self.bottomTitleArr];
@@ -116,7 +112,13 @@
             [Config removeOwnID];//移除ID
             [Config removeUseName];//移除用户名字
             //退出登陆时通知主控制器收起左滑界面
-            [MBProgressHUD showError:@"账号异常登录"];
+//            if ([Config getOwnID] == nil || [Config getToken] == nil) {
+//
+//                LoginViewController *loginVC = [[LoginViewController alloc] init];
+//                UINavigationController *nav = [[UINavigationController alloc] init];
+//                [nav addChildViewController:loginVC];
+//                [self presentViewController:nav animated:YES completion:nil];
+//            }
             return ;
         }
         
@@ -290,25 +292,40 @@
 
 
 -(void)someFunction:(UIButton *)sender{
-    if(sender.tag == 0){
-        MyWalletViewController *MyWalletVC = [[MyWalletViewController alloc]init];
-        [self.navigationController pushViewController:MyWalletVC animated:YES];
-    }else if (sender.tag == 1){
-        MyCollectViewController *MyCollectVC = [[MyCollectViewController alloc] init];
-        [self.navigationController pushViewController:MyCollectVC animated:YES];
-    }else if (sender.tag == 2){
-        MeInvoiceViewController *invoice = [[MeInvoiceViewController alloc] init];
-        [self.navigationController pushViewController:invoice animated:YES];
-    }else if (sender.tag == 3){
-        MyCarViewController * carVc = [[MyCarViewController alloc] init];
-        [self.navigationController pushViewController:carVc animated:YES];
-    }else if (sender.tag == 4){
-        ChargeMessageViewController *message = [[ChargeMessageViewController alloc]init];
-        [self.navigationController pushViewController:message animated:YES];
-    }else if (sender.tag == 5){
-        
+    
+    if ([Config getOwnID] == nil || [Config getToken] == nil) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] init];
+        [nav addChildViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+        [self.bottomTitleArr removeAllObjects];
+        [self.bottomTitleArr addObject:@"00"];
+        [self.bottomTitleArr addObject:@"00"];
+        [self addSomeSubViews:self.bottomTitleArr];
+    }else{
+        if(sender.tag == 0){
+            MyWalletViewController *MyWalletVC = [[MyWalletViewController alloc]init];
+            [self.navigationController pushViewController:MyWalletVC animated:YES];
+        }else if (sender.tag == 1){
+            MyCollectViewController *MyCollectVC = [[MyCollectViewController alloc] init];
+            [self.navigationController pushViewController:MyCollectVC animated:YES];
+        }else if (sender.tag == 2){
+            MeInvoiceViewController *invoice = [[MeInvoiceViewController alloc] init];
+            [self.navigationController pushViewController:invoice animated:YES];
+        }else if (sender.tag == 3){
+            MyCarViewController * carVc = [[MyCarViewController alloc] init];
+            [self.navigationController pushViewController:carVc animated:YES];
+        }else if (sender.tag == 4){
+            ChargeMessageViewController *message = [[ChargeMessageViewController alloc]init];
+            [self.navigationController pushViewController:message animated:YES];
+        }else if (sender.tag == 5){
+            
+        }
+        NSLog(@"%ld",sender.tag);
     }
-    NSLog(@"%ld",sender.tag);
+    
+    
+   
 }
 
 -(void)gotoMYMessage{

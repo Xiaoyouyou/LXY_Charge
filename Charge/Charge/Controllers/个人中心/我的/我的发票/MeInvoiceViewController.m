@@ -44,6 +44,8 @@
 }
 
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.pamaer setValue:@"0" forKey:@"companyType"];
@@ -84,23 +86,24 @@
 }
 -(void)checkInvocie{
     
-    NSDictionary *dict = @{
-                           @"userId":[Config getOwnID]
-                           };
-    
-    NSLog(@"%@",dict);
-    //    [self.pamaer setValue:@"" forKey:@"userId"];
-    [WMNetWork post:CheckInvoice parameters:dict success:^(id responseObj) {
-        if([responseObj[@"status"] isEqualToString:@"0"]){
-            
-            self.invoicePrice.placeholder = [NSString stringWithFormat:@"可开金额%@元",responseObj[@"money"]];
-        }else if ([responseObj[@"status"] isEqualToString:@"-1"]){
-           self.invoicePrice.text = @"0";
-        [MBProgressHUD showSuccess:@"网络异常"];
-        }
-    } failure:^(NSError *error) {
+        NSDictionary *dict = @{
+                               @"userId":[Config getOwnID]
+                               };
         
-    }];
+        NSLog(@"%@",dict);
+        //    [self.pamaer setValue:@"" forKey:@"userId"];
+        [WMNetWork post:CheckInvoice parameters:dict success:^(id responseObj) {
+            if([responseObj[@"status"] isEqualToString:@"0"]){
+                
+                self.invoicePrice.placeholder = [NSString stringWithFormat:@"可开金额%@元",responseObj[@"money"]];
+            }else if ([responseObj[@"status"] isEqualToString:@"-1"]){
+                self.invoicePrice.text = @"0";
+                [MBProgressHUD showSuccess:responseObj[@"msg"]];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+   
 }
 
 - (IBAction)upLoadBtnClick:(UIButton *)sender {

@@ -70,51 +70,56 @@
     }
     return _chargingPointArray;
 }
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self loadDataSource:@""];
+}
+
+-(void)loadDataSource:(NSString *)str{
     //如果充电点数据有值，先清除数据再获取值
     if (self.chargingPointArray) {
         [self.chargingPointArray removeAllObjects];
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-       NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
     //充电点字典
     NSMutableDictionary *tempdict = [NSMutableDictionary dictionary];
     //全部数据距离数组
     NSMutableArray *temparray = [NSMutableArray array];
     //新的模型数组
     NSMutableArray *modelArray = [NSMutableArray array];
-
-        parmas[@"province"] = nil;
-        parmas[@"city"] = self.cityStr;
-        MYLog(@"self.locationCity = %@",self.locationCity);
-        parmas[@"page"] = @"1";
-        parmas[@"pageSize"] = @"100";
-        [WMNetWork post:RecommendList parameters:parmas success:^(id responseObj) {
+    
+    parmas[@"province"] = nil;
+    parmas[@"city"] = self.cityStr;
+    MYLog(@"self.locationCity = %@",self.locationCity);
+    parmas[@"page"] = @"1";
+    parmas[@"pageSize"] = @"100";
+    parmas[@"sideName"] = str;
+    [WMNetWork post:RecommendList parameters:parmas success:^(id responseObj) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-            
+        
         MYLog(@"responseObjffff = %@",responseObj);
-            
+        
         if ([responseObj[@"status"] intValue] == 0) {
-        //存数据
-        _chargingMess = [ZhouBianChargeModel objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
-        //MYLog(@"_chargingMess = %@",_chargingMess);
+            //存数据
+            _chargingMess = [ZhouBianChargeModel objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
+            //MYLog(@"_chargingMess = %@",_chargingMess);
             
-        //获取保存的经纬度
-        BMKMapPoint point1 = BMKMapPointForCoordinate([Config getCurrentLocation]);
+            //获取保存的经纬度
+            BMKMapPoint point1 = BMKMapPointForCoordinate([Config getCurrentLocation]);
             
-        for (ZhouBianChargeModel *zhouBian in _chargingMess) {
+            for (ZhouBianChargeModel *zhouBian in _chargingMess) {
                 
-        BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake([zhouBian.latitudes doubleValue],[zhouBian.longitude doubleValue]));
-        CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
-        NSString *distanceStr = [NSString stringWithFormat:@"%.1fkm",distance/1000];
-        NSNumber *nums = @([distanceStr floatValue]);
-        [tempdict setObject:zhouBian forKey:nums];
-        [temparray addObject:nums];
-
-        }
+                BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake([zhouBian.latitudes doubleValue],[zhouBian.longitude doubleValue]));
+                CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
+                NSString *distanceStr = [NSString stringWithFormat:@"%.1fkm",distance/1000];
+                NSNumber *nums = @([distanceStr floatValue]);
+                [tempdict setObject:zhouBian forKey:nums];
+                [temparray addObject:nums];
+                
+            }
             //升序
             [temparray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 return [obj1 floatValue] > [obj2 floatValue];
@@ -137,12 +142,14 @@
             [self.tableView reloadData];
         }
         MYLog(@"responseObj = %@",self.chargingPointArray);
-
+        
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         MYLog(@"error = %@",error);
     }];
 }
+
+
 
 - (void)viewDidLoad {
     
@@ -294,7 +301,13 @@
 #pragma mark - TextField 代理
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if([self isInputRuleNotBlank:textField.text]){
+        [self loadDataSource:textField.text];
+        [textField resignFirstResponder];
+    }else{
+        [MBProgressHUD showError:@"包含特殊字符，请重新输入"];
+    }
+   
     return YES;
 }
 
@@ -305,44 +318,44 @@
     if (strLength > 15){
         return NO;
     }
-    NSString *text = nil;
+//     parmas[@"sideName"] = @"黄";
     //如果string为空，表示删除
-    if (string.length > 0) {
-        if (self.tempArray) {
-            [self.tempArray removeAllObjects];
-        }
-
-       text = [NSString stringWithFormat:@"%@%@",textField.text,string];
-   
-       for (int i = 0; i < self.chargingPointArray.count; i++) {
-          ZhouBianChargeModel *ZhouBianchargeModel = self.chargingPointArray[i];
-          NSRange chinese = [ZhouBianchargeModel.address rangeOfString:text options:NSCaseInsensitiveSearch];
-           if (chinese.location != NSNotFound) {
-               [self.tempArray addObject:ZhouBianchargeModel];
-           }
-        }
-        
-        self.tableView.alpha = 0;
-        self.tableview1.alpha = 1;
-        [self.tableview1 reloadData];
-    
-    }else{
-        if (self.tempArray) {
-           [self.tempArray removeAllObjects];
-        }
-      
-        text = [NSString stringWithFormat:@"%@%@",textField.text,string];
-        for (int i = 0; i < self.chargingPointArray.count; i++) {
-            ZhouBianChargeModel *ZhouBianchargeModel = self.chargingPointArray[i];
-            NSRange chinese = [ZhouBianchargeModel.address rangeOfString:text options:NSCaseInsensitiveSearch];
-            if (chinese.location != NSNotFound) {
-                [self.tempArray addObject:ZhouBianchargeModel];
-            }
-        }
-         self.tableView.alpha = 0;
-         self.tableview1.alpha = 1;
-         [self.tableview1 reloadData];
-    }
+//    if (string.length > 0) {
+//        if (self.tempArray) {
+//            [self.tempArray removeAllObjects];
+//        }
+//
+//       text = [NSString stringWithFormat:@"%@%@",textField.text,string];
+//
+//       for (int i = 0; i < self.chargingPointArray.count; i++) {
+//          ZhouBianChargeModel *ZhouBianchargeModel = self.chargingPointArray[i];
+//          NSRange chinese = [ZhouBianchargeModel.address rangeOfString:text options:NSCaseInsensitiveSearch];
+//           if (chinese.location != NSNotFound) {
+//               [self.tempArray addObject:ZhouBianchargeModel];
+//           }
+//        }
+//
+//        self.tableView.alpha = 0;
+//        self.tableview1.alpha = 1;
+//        [self.tableview1 reloadData];
+//
+//    }else{
+//        if (self.tempArray) {
+//           [self.tempArray removeAllObjects];
+//        }
+//
+//        text = [NSString stringWithFormat:@"%@%@",textField.text,string];
+//        for (int i = 0; i < self.chargingPointArray.count; i++) {
+//            ZhouBianChargeModel *ZhouBianchargeModel = self.chargingPointArray[i];
+//            NSRange chinese = [ZhouBianchargeModel.address rangeOfString:text options:NSCaseInsensitiveSearch];
+//            if (chinese.location != NSNotFound) {
+//                [self.tempArray addObject:ZhouBianchargeModel];
+//            }
+//        }
+//         self.tableView.alpha = 0;
+//         self.tableview1.alpha = 1;
+//         [self.tableview1 reloadData];
+//    }
     if (strLength == 0) {
         self.tableView.alpha = 1;
         self.tableview1.alpha = 0;
@@ -350,5 +363,17 @@
     }
     return YES;
 }
+
+//字母数字中文
+- (BOOL)isInputRuleNotBlank:(NSString *)str {
+    //
+    NSString *pattern = @"^[➋➌➍➎➏➐➑➒a-zA-Z\u4E00-\u9FA5\\d]*$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    BOOL isMatch = [pred evaluateWithObject:str];
+    return isMatch;
+    
+}
+    
+    
 
 @end

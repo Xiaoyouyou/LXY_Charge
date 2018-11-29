@@ -83,7 +83,7 @@
 @property (nonatomic, strong) NSMutableArray *zhuangID;
 
 @property (nonatomic, strong)ZhuangWeiMesViewController *ZhuangWeiVC;
-@property (nonatomic, strong)ChargeDetailViewController *detailVC;
+@property (nonatomic, strong)DetailZhuangWeiViewController *detailVC;
 
 - (IBAction)collectBtnAction:(UIButton *)sender;
 - (IBAction)daoHangAction:(id)sender;
@@ -280,6 +280,24 @@
             [_dict setObject:_ChargeDetal.dcCount forKey:@"dcCount"];//zhi充
             [_dict setObject:_ChargeDetal.acCount forKey:@"acCount"];//jiao充
             [_dict setObject:_ChargeDetal.stationId forKey:@"id"];//站点id
+            
+            [_dict setObject:_ChargeDetal.latitude forKey:@"latitude"];//站点经度
+            [_dict setObject:_ChargeDetal.longitude forKey:@"longitude"];//站点纬度
+            //            [_dict setObject:_ChargeDetal.chargingId forKey:@"chargingId"];//计费规则id
+            //            [_dict setObject:_ChargeDetal.fastCount forKey:@"fastCount"];//快充
+            //            [_dict setObject:_ChargeDetal.slowCount forKey:@"slowCount"];//慢充
+            [_dict setObject:_ChargeDetal.dcCount forKey:@"dcCount"];//zhi充
+            [_dict setObject:_ChargeDetal.acCount forKey:@"acCount"];//jiao充
+            [_dict setObject:_ChargeDetal.stationId forKey:@"id"];//站点id
+            
+            //------
+            [_dict setObject:_ChargeDetal.payWay forKey:@"payWay"];///支付方式
+            [_dict setObject:_ChargeDetal.parkNote forKey:@"parkNote"];//停车说明
+            [_dict setObject:_ChargeDetal.openTime forKey:@"openTime"];//开放时间
+            [_dict setObject:_ChargeDetal.feeNote forKey:@"feeNote"];//收费说明   加一行  平段是1.09，峰段1.49
+            [_dict setObject:_ChargeDetal.stationPic forKey:@"stationPic"];
+            
+            
         /*-----------------------------------------------*/
          
 //            if(_ChargeDetal.piles == NULL){
@@ -367,13 +385,13 @@
     
     
     //详情控制器
-    DetailZhuangWeiViewController *DetailZhuangWeiVC = [[DetailZhuangWeiViewController alloc]init];
-    self.detailVC = DetailZhuangWeiVC;
-    DetailZhuangWeiVC.id = self.id;
+    DetailZhuangWeiViewController *detailZhuangWeiVC = [[DetailZhuangWeiViewController alloc]init];
+    self.detailVC = detailZhuangWeiVC;
+    detailZhuangWeiVC.id = self.id;
     //    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
-    DetailZhuangWeiVC.chargeDeatlModel = self.dataDict;//详情控制器数据
-    DetailZhuangWeiVC.view.frame = self.subView.frame;
-    [self addChildViewController:DetailZhuangWeiVC];
+    detailZhuangWeiVC.chargeDeatlModel = self.dataDict;//详情控制器数据
+    detailZhuangWeiVC.view.frame = self.subView.frame;
+    [self addChildViewController:detailZhuangWeiVC];
 }
 
 -(void)creatDetailBtnKuang

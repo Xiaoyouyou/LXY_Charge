@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11760" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11755"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,10 +24,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ERF-4f-gpp">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtH-Nl-lr8">
-                            <rect key="frame" x="322" y="22" width="53" height="43"/>
+                            <rect key="frame" x="322" y="35" width="53" height="53"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="53" id="8cr-Is-4Nb"/>
                             </constraints>
@@ -40,7 +40,7 @@
                             </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入城市名字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MMW-vK-j0H">
-                            <rect key="frame" x="15" y="28" width="307" height="31"/>
+                            <rect key="frame" x="15" y="41" width="307" height="41"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -54,21 +54,21 @@
                         <constraint firstItem="MMW-vK-j0H" firstAttribute="leading" secondItem="ERF-4f-gpp" secondAttribute="leading" constant="15" id="2IG-lJ-gWk"/>
                         <constraint firstItem="MMW-vK-j0H" firstAttribute="centerY" secondItem="mtH-Nl-lr8" secondAttribute="centerY" id="2ww-lR-GaC"/>
                         <constraint firstAttribute="bottom" secondItem="MMW-vK-j0H" secondAttribute="bottom" constant="6" id="DMj-WT-pMx"/>
-                        <constraint firstAttribute="height" constant="65" id="DNZ-fo-Hvm"/>
+                        <constraint firstAttribute="height" constant="88" id="DNZ-fo-Hvm"/>
                         <constraint firstItem="mtH-Nl-lr8" firstAttribute="leading" secondItem="MMW-vK-j0H" secondAttribute="trailing" id="IVb-Vl-0Lz"/>
                         <constraint firstAttribute="bottom" secondItem="mtH-Nl-lr8" secondAttribute="bottom" id="JF7-oa-Mqp"/>
-                        <constraint firstItem="mtH-Nl-lr8" firstAttribute="top" secondItem="ERF-4f-gpp" secondAttribute="top" constant="22" id="Uyh-gD-yHl"/>
+                        <constraint firstItem="mtH-Nl-lr8" firstAttribute="top" secondItem="ERF-4f-gpp" secondAttribute="top" constant="35" id="Uyh-gD-yHl"/>
                     </constraints>
                 </view>
                 <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAi-s4-76K">
-                    <rect key="frame" x="0.0" y="65" width="375" height="1"/>
+                    <rect key="frame" x="0.0" y="88" width="375" height="1"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="AEt-Do-sAR"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前定位城市：" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vol-wW-wxX">
-                    <rect key="frame" x="10" y="66" width="100" height="38"/>
+                    <rect key="frame" x="10" y="89" width="100" height="38"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="AMR-ZX-Kai"/>
                         <constraint firstAttribute="width" constant="100" id="UYW-it-aBM"/>
@@ -78,7 +78,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州市" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKz-gn-iQK">
-                    <rect key="frame" x="110" y="66" width="265" height="38"/>
+                    <rect key="frame" x="110" y="89" width="265" height="38"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="WST-k4-2xc"/>
                     </constraints>
@@ -87,7 +87,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J1O-hD-p2f">
-                    <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                    <rect key="frame" x="0.0" y="127" width="375" height="540"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="BT5-F8-myy"/>
@@ -114,12 +114,7 @@
                 <constraint firstItem="eAi-s4-76K" firstAttribute="top" secondItem="ERF-4f-gpp" secondAttribute="bottom" id="zfU-XE-Whg"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="308" y="229"/>
+            <point key="canvasLocation" x="492.80000000000001" y="205.99700149925039"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

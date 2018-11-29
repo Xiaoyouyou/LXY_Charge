@@ -363,7 +363,7 @@
     _shouBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _shouBtn.frame = CGRectMake(XYScreenWidth/2 - 60,y + 90 + c_width +5+20+20, 120, 42);
     _shouBtn.backgroundColor = RGBA(29, 167, 146, 1);
-    [_shouBtn setTitle:@"输入电桩号" forState:UIControlStateNormal];
+    [_shouBtn setTitle:@"输入充电枪编码" forState:UIControlStateNormal];
     [_shouBtn setBackgroundImage:[UIImage imageNamed:@"greenBg"] forState:UIControlStateNormal];
     [_shouBtn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
     [_shouBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

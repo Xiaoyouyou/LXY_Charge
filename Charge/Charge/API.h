@@ -98,5 +98,5 @@
 //#define WeChatLogin @"https://api.weixin.qq.com/sns/oauth2/access_token"//微信登陆api
 
 
-
+#define ChargeVersion RequestURL(@"getLatestVersion.action") //banben跟新
 #endif

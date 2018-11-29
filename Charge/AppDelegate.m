@@ -221,7 +221,7 @@ static NSString *channel = @"Publish channel";
     [self initialization];
 
     //版本更新
-//    [self VersionUpDate];
+    [self VersionUpDate];
     
     //初始化JPUSH
     //Required
@@ -271,35 +271,41 @@ static NSString *channel = @"Publish channel";
 
 -(void)VersionUpDate{
     
-     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://47.107.14.253/ios/version.json"]];
-    NSData *res = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    if(res == nil)return;
-    NSDictionary *JsonObject=[NSJSONSerialization JSONObjectWithData:res options:NSJSONReadingAllowFragments error:nil];
-    NSLog (@"%@",JsonObject);
-    NSString* newVersion = [JsonObject objectForKey:@"version"];
-    if ([newVersion isEqualToString:@""]) return;
-    //本地的版本号
-    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-    NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
-    
-    //当前版本号小于服务上的版本号 需要下载
-    if (newVersion.floatValue > myVersion.floatValue) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[JsonObject objectForKey:@"versionDesc"] message:nil preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JsonObject objectForKey:@"downloadUrl"]] options:@{} completionHandler:^(BOOL success) {
+    NSDictionary *paramer = @{
+                              @"appType" :@"ios"
+                              };
+    [WMNetWork get:ChargeVersion parameters:paramer success:^(id responseObj) {
+      
+        NSDictionary* newVersion = responseObj[@"version"];
+        if (newVersion == nil) return;
+        //本地的版本号
+        NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+        NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
+        NSString *str = newVersion[@"version"];
+        
+        
+        //当前版本号小于服务上的版本号 需要下载
+        if (str.floatValue > myVersion.floatValue) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle: newVersion[@"versionDesc"] message:nil preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"去更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newVersion[@"downloadUrl"]] options:@{} completionHandler:^(BOOL success) {
+                    }];
+                    
                 }];
-                
-            }];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            [alertController addAction:comfirmAction];
-            [alertController addAction:cancelAction];
-            [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
-        });
-        request = nil;
-    }
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                }];
+                [alertController addAction:comfirmAction];
+                [alertController addAction:cancelAction];
+                [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+            });
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
 //    {
 //        apkName = cdz;
 //        downloadUrl = "http://sys2.xgnet.com.cn/apk/cdz.apk";

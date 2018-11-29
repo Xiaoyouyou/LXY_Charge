@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSArray *arraytitle;
 @property (strong, nonatomic) NSArray *FuTitle;
 
+@property (copy, nonatomic) NSString *picture;//站照片
 @property (copy, nonatomic) NSString *chargeFee;//电费
 @property (copy, nonatomic) NSString *parkingFee;//停车费
 @property (copy, nonatomic) NSString *servesFee;//服务费
@@ -50,11 +51,28 @@
     
     //初始化数据
 //    self.arraytitle = @[@"电费",@"停车费",@"服务费",@"预约费用",@"支付方式",@"开放时间"];
-     self.arraytitle = @[@"收费规则",@"开放时间",@"停车费",@"支付方式"];
+     self.arraytitle = @[@"收费规则",@"开放时间",@"停车费",@"支付方式",@"收费说明"];
     // self.FuTitle = @[@"0.5元/度",@"免费",@"免费",@"5元",@"00:00~24:00",@"微信"];
     
     [self creatUI];
 }
+
+
+-(void)loadSource{
+    NSDictionary *paramer = @{
+                              @"userId" : [Config getOwnID]
+                              };
+    [WMNetWork get:GetBalance parameters:paramer success:^(id responseObj) {
+//        [self.bottomTitleArr removeAllObjects];
+//        [self.bottomTitleArr addObject:responseObj[@"balance"]];
+//        [self.bottomTitleArr addObject:@"00"];
+//        [self addSomeSubViews:self.bottomTitleArr];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
 
 #pragma mark -- creatUI
 
@@ -78,6 +96,7 @@
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, 100)];
     self.tableView.tableHeaderView = backView;
     detailView = [[DetailZhuangWeiHeaderView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, 90)];
+    [detailView.pictImageView sd_setImageWithURL:[NSURL URLWithString:self.picture]];
     detailView.titleLab.text = self.name;
     detailView.FutitleLab.text = self.address;
     detailView.fastLab.text = [NSString stringWithFormat:@"交流(%@)",_fastCount];
@@ -104,8 +123,11 @@
 #pragma mark - UITableView代理方法
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 44;
+    if(indexPath.row == self.arraytitle.count - 1){
+        return 88;
+    }else{
+        return 44;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -145,6 +167,7 @@
     Cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Cell.detailTextLabel.font = TableViewCellFuTitleFont;
     if (indexPath.section == 0 && indexPath.row == 0) {
+        Cell.detailTextLabel.textColor = [UIColor blackColor];
        Cell.detailTextLabel.text = [NSString stringWithFormat:@"收费详情   >"];
     }else if (indexPath.section == 0 &indexPath.row == 1)
     {
@@ -154,7 +177,7 @@
 //        {
 //          Cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元/分钟",_parkingFee];
 //        }
-        Cell.detailTextLabel.text = [NSString stringWithFormat:@"07:00-20:00"];
+        Cell.detailTextLabel.text = [self.dataDict objectForKey:@"openTime"];
     }else if (indexPath.section == 0 && indexPath.row ==2)
     {
 //        if ([self.servesFee isEqualToString:@"0"]) {
@@ -163,7 +186,7 @@
 //        {
 //            Cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元/分钟",self.servesFee];
 //        }
-          Cell.detailTextLabel.text = [NSString stringWithFormat:@"按物业停车场收费"];
+          Cell.detailTextLabel.text = [self.dataDict objectForKey:@"parkNote"];
     }else if (indexPath.section == 0 && indexPath.row == 3)
     {
 //        if ([self.yuYueFee isEqualToString:@"0"]) {
@@ -172,13 +195,20 @@
 //        {
 //            Cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元/分钟",self.yuYueFee];
 //        }
-         Cell.detailTextLabel.text = @"微信支付";
-    }
-//        else if (indexPath.section == 0 && indexPath.row == 4)
-//    {
-//          Cell.detailTextLabel.text = @"微信支付";
+       
 //
-//    }else if (indexPath.section == 0 && indexPath.row == 5)
+         Cell.detailTextLabel.text = [self.dataDict objectForKey:@"payWay"];
+    }else if (indexPath.section == 0 && indexPath.row == 4)
+    {
+        Cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        Cell.detailTextLabel.numberOfLines = 0;
+        NSString *str = [self.dataDict objectForKey:@"feeNote"];
+        str = [str stringByReplacingOccurrencesOfString:@"，"withString:@"\n"];
+        NSLog(@"replaceStr=%@",str);
+          Cell.detailTextLabel.text = str;
+
+    }
+//    else if (indexPath.section == 0 && indexPath.row == 5)
 //    {
 //          Cell.detailTextLabel.text = [NSString stringWithFormat:@"%@~%@",self.startTimes,self.endTimes];
 //    }
@@ -220,6 +250,9 @@
     self.fastCount = [self.dataDict objectForKey:@"acCount"];
     self.slowCount = [self.dataDict objectForKey:@"dcCount"];
     self.distances = [self.dataDict objectForKey:@"distance"];
+    self.picture = [self.dataDict objectForKey:@"stationPic"];
+//    [_dict setObject:_ChargeDetal.feeNote forKey:@"feeNote"];//收费说明   加一行  平段是1.09，峰段1.49
+
 }
 
 

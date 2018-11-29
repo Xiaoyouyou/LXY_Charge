@@ -152,7 +152,11 @@
             [Config removeOwnID];//移除ID
             [Config removeUseName];//移除用户名字
             //退出登陆时通知主控制器收起左滑界面
-            [[NSNotificationCenter defaultCenter] postNotificationName:LeaveOutNoti object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:LeaveOutNoti object:nil];
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] init];
+            [nav addChildViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:nil];
             [self.navigationController popViewControllerAnimated:YES];
             
             [MBProgressHUD showError:@"账号异常登录"];

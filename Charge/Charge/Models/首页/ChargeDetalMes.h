@@ -42,5 +42,10 @@
 
 
 
+@property (nonatomic, copy) NSString *payWay;//支付方式
+@property (nonatomic, copy) NSString *parkNote;// 停车说明
+@property (nonatomic, copy) NSString *openTime;//开放时间
+@property (nonatomic, copy) NSString *feeNote;//收费说明   加一行  平段是1.09，峰段1.49
+@property (nonatomic, copy) NSString *stationPic;
 @end
 

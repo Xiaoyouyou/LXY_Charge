@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="345" height="97.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ni8-BX-gle">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ni8-BX-gle">
                         <rect key="frame" x="16" y="11" width="66" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="66" id="6Qd-OR-gJf"/>
@@ -99,8 +99,8 @@
                             <constraint firstAttribute="width" constant="1" id="c3I-xg-vf5"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ed-c6-RX3">
-                        <rect key="frame" x="183.5" y="71" width="33" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ed-c6-RX3">
+                        <rect key="frame" x="183.5" y="71" width="30" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -157,7 +157,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon" width="180" height="180"/>
         <image name="icon_navi_dialog" width="50" height="60"/>
     </resources>
 </document>

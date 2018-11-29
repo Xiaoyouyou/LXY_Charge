@@ -33,6 +33,6 @@
 {
     self.timeLabel.text = [NSString stringWithFormat:@"时间段: %@ - %@",model.startTime,model.endTime];
     self.chargeLabel.text = [NSString stringWithFormat:@"电费: %@元/kwh",model.chargeCost];
-    self.serviceFee.text = [NSString stringWithFormat:@"电费: %@元/kwh",model.serviceCost];
+    self.serviceFee.text = [NSString stringWithFormat:@"服务费: %@元/kwh",model.serviceCost];
 }
 @end

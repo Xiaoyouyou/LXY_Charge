@@ -41,7 +41,15 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         [self addSubViews:frame];
-        [self loadDataSource:@"0"];
+        
+        NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+        CLLocationCoordinate2D userLocation =  [Config getCurrentLocation];
+        NSString *strla = [NSString stringWithFormat:@"%lf", userLocation.latitude ];
+        NSString *strlo = [NSString stringWithFormat:@"%lf", userLocation.longitude ];
+            [paramer setValue:@"0" forKey:@"priceOrderby"];
+            [paramer setValue:strla forKey:@"latitude"];
+            [paramer setValue:strlo forKey: @"longitude"];
+            [self loadDataSource:paramer];
     };
     return self;
 };

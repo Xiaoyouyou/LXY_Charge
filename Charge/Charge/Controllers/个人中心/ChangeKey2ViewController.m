@@ -165,7 +165,10 @@
                 [MBProgressHUD hideHUD];
                 [MBProgressHUD show:responseObj[@"message"] icon:nil view:self.view];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    LoginViewController *loginVC = [[LoginViewController alloc] init];
+                    UINavigationController *nav = [[UINavigationController alloc] init];
+                    [nav addChildViewController:loginVC];
+                    [self presentViewController:nav animated:YES completion:nil];
                 });
                 
             }else if([responseObj[@"status"] intValue] == -1)

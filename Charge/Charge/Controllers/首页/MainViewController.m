@@ -669,26 +669,25 @@
                         MYLog(@"pile_id = %@\n,charging_fee = %@\n,charging_power = %@\n,start_time = %@\n,charging_status = %@\n,end_time = %@\n",chargeMes.pile_id,chargeMes.charging_fee,chargeMes.charging_power,chargeMes.start_time,chargeMes.charging_status,chargeMes.end_time);
                         
                         if (chargeMes.pile_id == NULL && chargeMes.charging_power == NULL && chargeMes.start_time == NULL && chargeMes.charging_status == NULL) {
-                            MYLog(@"服务器断开了,充电结束");
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
-                            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器断开了,充电结束." message:nil preferredStyle:UIAlertControllerStyleAlert];
+//                            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//
+//                            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                             
-                            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                            [Config removeChargePay];//移除电费
+                            [Config removeChargeNum];//移除充电桩号
+                            [Config removeCurrentPower];//移除当前电量
+                            [Config removeCurrentDate];//移除当前时间
+                            //存充电状态:0.代表结束充电
+                            [Config saveUseCharge:@"0"];
+                            //存正常结束充电标志位为1
+                            [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
                                 
-                                [Config removeChargePay];//移除电费
-                                [Config removeChargeNum];//移除充电桩号
-                                [Config removeCurrentPower];//移除当前电量
-                                [Config removeCurrentDate];//移除当前时间
-                                //存充电状态:0.代表结束充电
-                                [Config saveUseCharge:@"0"];
-                                //存正常结束充电标志位为1
-                                [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
-                                
-                            }];
+//                            }];
                             
-                            [alertVc addAction:sureAction];
-                            
-                            [self presentViewController:alertVc animated:YES completion:nil];
+//                            [alertVc addAction:sureAction];
+//
+//                            [self presentViewController:alertVc animated:YES completion:nil];
                             //存正常结束充电标志位为1
                             [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
                             return ;
@@ -975,7 +974,7 @@ BOOL btnStatus = YES;
             [self.navigationController pushViewController:chargeingVC animated:YES];
         }else
         {
-            [self saoMaAction];
+             [self saoMaAction];
         }
         
     }
@@ -1164,9 +1163,9 @@ BOOL btnStatus = YES;
             if (chargeMes.pile_id == NULL && chargeMes.charging_power == NULL && chargeMes.start_time == NULL && chargeMes.charging_status == NULL) {
                 MYLog(@"服务器断开了,充电结束");
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器断开了,充电结束." message:nil preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器断开了,充电结束." message:nil preferredStyle:UIAlertControllerStyleAlert];
+//
+//                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                     [Config removeChargePay];//移除电费
                     [Config removeChargeNum];//移除充电桩号
                     [Config removeCurrentPower];//移除当前电量
@@ -1178,11 +1177,11 @@ BOOL btnStatus = YES;
                     //移除充电状态
                     [Config removeUseCharge];
                     
-                }];
+//                }];
                 
-                [alertVc addAction:sureAction];
-                
-                [self presentViewController:alertVc animated:YES completion:nil];
+//                [alertVc addAction:sureAction];
+//
+//                [self presentViewController:alertVc animated:YES completion:nil];
                 //存正常结束充电标志位为1
                 [Config saveNormalEndChargingFlag:@"1"];//思路：开始充电的时候正常结束充电位置为为0.正常结束的时候为1
                 return ;
@@ -1391,175 +1390,202 @@ BOOL btnStatus = YES;
 {
     //判断是否登陆
     MYLog(@"扫码状态界面的用户id获取情况 = %@",[Config getOwnID]);
-    if ([Config getOwnID]) {
-        //判断是否是充电状态
-//        if ([Config getUseCharge]) {
-//            //提示：请结束当前充电
-//            [MBProgressHUD showError:@"正在充电,请先结束充电!"];
-//        }else
-//        {
-            static dispatch_once_t onceToken;
+    if([Config getOwnID] == nil || [Config getToken] == nil){
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] init];
+        [nav addChildViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }else if ([Config getOwnID]) {
+        
+        
+        
+        NSDictionary *paramer = @{
+                                  @"userId" : [Config getOwnID]
+                                  };
+        //判断用户余额够不够
+        [WMNetWork post:GetBalance parameters:paramer success:^(id responseObj) {
+            NSString * balance = responseObj[@"balance" ];
             
-            dispatch_once(&onceToken, ^{
+            if(balance.intValue < 2){
+                //余额不足
+                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"账户余额不足，请先充值" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *sureAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                }];
                 
-                QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
-                readerVc                   = [QRCodeReaderViewController readerWithCancelButtonTitle:@"" codeReader:reader startScanningAtLoad:YES  showTorchButton:NO];
+                [alertVc addAction:sureAction];
+                //调用self的方法展现控制器
+                [self presentViewController:alertVc animated:YES completion:nil];
                 
-                readerVc.delegate = self;
-            });
-            
-            __weak MainViewController *weakSelf = self;
-            
-            [readerVc setCompletionWithBlock:^(NSString *resultAsString) {
-                MYLog(@"resultAsString = %@",resultAsString);
-                MYLog(@"length = %lu",(unsigned long)resultAsString.length);
+            }else{
+                //余额足
+                static dispatch_once_t onceToken;
                 
-                //二维码是24位数字
-                //if (resultAsString.length == 18) {
-                   if (YES) {
-                    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-                    parmas[@"qrCode"] = resultAsString;//扫描结果10
-                    parmas[@"token"] = [Config getToken];
-                    [Config saveChargeNum:resultAsString];
-//                       parmas[@"token"] = @"WG1mEQUUGqlnyvDz";
-                    MYLog(@"token = %@",[Config getToken]);
+                dispatch_once(&onceToken, ^{
                     
-                    [WMNetWork get:ScanQrCode parameters:parmas success:^(id responseObj) {
+                    QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
+                    readerVc                   = [QRCodeReaderViewController readerWithCancelButtonTitle:@"" codeReader:reader startScanningAtLoad:YES  showTorchButton:NO];
+                    
+                    readerVc.delegate = self;
+                });
+                
+                __weak MainViewController *weakSelf = self;
+                
+                [readerVc setCompletionWithBlock:^(NSString *resultAsString) {
+                    MYLog(@"resultAsString = %@",resultAsString);
+                    MYLog(@"length = %lu",(unsigned long)resultAsString.length);
+                    
+                    //二维码是24位数字
+                    //if (resultAsString.length == 18) {
+                    if (YES) {
+                        NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+                        parmas[@"qrCode"] = resultAsString;//扫描结果10
+                        parmas[@"token"] = [Config getToken];
+                        [Config saveChargeNum:resultAsString];
+                        //                       parmas[@"token"] = @"WG1mEQUUGqlnyvDz";
+                        MYLog(@"token = %@",[Config getToken]);
                         
-                        //  MYLog(@"responseObjrrrrrrr = %@",responseObj);
-                        
-                        if ([responseObj[@"status"] intValue] == 0) {
-                            //    [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
-                            //                            [MBProgressHUD hideHUD];
-                            OpenChangeViewController *openVC = [[OpenChangeViewController alloc] init];
+                        [WMNetWork get:ScanQrCode parameters:parmas success:^(id responseObj) {
                             
-//                            NSString *equStr = responseObj[@"equipmentNum"];
-                             NSString *equStr = resultAsString;
+                            //  MYLog(@"responseObjrrrrrrr = %@",responseObj);
                             
-                            NSString *chargingStr = responseObj[@"stationName"];
-                            openVC.equipmentNum = equStr;
-                            openVC.chargingAddress = chargingStr;
-                            MYLog(@"chargingStr地址 = %@",chargingStr);
-                            [weakSelf.navigationController pushViewController:openVC animated:YES];
-                            
-                        }else if ([responseObj[@"status"] intValue] == 401)
-                        {
-                            //        [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
-                            //                              [MBProgressHUD hideHUD];
-                            [Config removeOwnID];//移除ID
-                            [Config removeUseName];//移除用户名字
-                            
-                            [weakSelf.navigationController popViewControllerAnimated:YES];
-                            
-                            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"手机号登陆异常" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                            UIAlertAction *sureAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                            }];
-                            
-                            [alertVc addAction:sureAction];
-                            //调用self的方法展现控制器
-                            [weakSelf presentViewController:alertVc animated:YES completion:nil];
-                            
-                        }else
-                        {
-                            [MBProgressHUD showError:responseObj[@"message"]];
-                        }
-                    } failure:^(NSError *error) {
-                        MYLog(@"error = %@",error);
-                        if (error) {
-                            [MBProgressHUD showError:@"服务器连接异常，请稍后再试"];
-                        }
-                    }];
-                    
-                }else
-                {
-                    NSString *temp =nil;
-                    //遍历resultAsString 字符串
-                    //                     NSString *tmp = nil;
-                    //                     NSRange ance = [resultAsString rangeOfString:@"="];
-                    //                     NSLog(@"ance = %@",NSStringFromRange(ance));
-                    
-                    for (int i = 0; i < resultAsString.length; i++) {
-                        temp = [resultAsString substringWithRange:NSMakeRange(i,1)];
-                        if ([temp isEqualToString:@"="]) {
-                            NSString *b = [resultAsString substringFromIndex:i+1];
-                            NSLog(@"充电桩号 = %@",b);
-                            NSLog(@"充电桩号的长度 = %lu",(unsigned long)b.length);
-                            if (b.length == 18) {
-                                NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-                                parmas[@"qrCode"] = b;//扫描结果10
-                                parmas[@"token"] = [Config getToken];
-                                MYLog(@"token = %@",[Config getToken]);
+                            if ([responseObj[@"status"] intValue] == 0) {
+                                //    [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
+                                //                            [MBProgressHUD hideHUD];
+                                OpenChangeViewController *openVC = [[OpenChangeViewController alloc] init];
                                 
-                                [WMNetWork get:ScanQrCode parameters:parmas success:^(id responseObj) {
-                                    
-                                //MYLog(@"responseObjrrrrrrr = %@",responseObj);
-                                    
-                                    if ([responseObj[@"status"] intValue] == 0) {
-                                        //    [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
-                                        //                            [MBProgressHUD hideHUD];
-                                        OpenChangeViewController *openVC = [[OpenChangeViewController alloc] init];
-                                        
-                                        NSString *equStr = responseObj[@"equipmentNum"];
-                                        //                           NSString *equStr = resultAsString;
-                                        NSString *chargingStr = responseObj[@"stationName"];
-                                        NSLog(@"chargingStr = %@",chargingStr);
-                                        openVC.equipmentNum = equStr;
-                                        openVC.chargingAddress = chargingStr;
-                                        MYLog(@"chargingStr地址 = %@",chargingStr);
-                                        [weakSelf.navigationController pushViewController:openVC animated:YES];
-                                        
-                                    }else if ([responseObj[@"status"] intValue] == 401)
-                                    {
-                                        //        [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
-                                        //                              [MBProgressHUD hideHUD];
-                                        [Config removeOwnID];//移除ID
-                                        [Config removeUseName];//移除用户名字
-                                        
-                                        [weakSelf.navigationController popViewControllerAnimated:YES];
-                                        
-                                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"手机号登陆异常" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                                        UIAlertAction *sureAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                                        }];
-                                        
-                                        [alertVc addAction:sureAction];
-                                        //调用self的方法展现控制器
-                                        [weakSelf presentViewController:alertVc animated:YES completion:nil];
-                                        
-                                    }else
-                                    {
-                                        [MBProgressHUD showError:responseObj[@"message"]];
-                                    }
-                                } failure:^(NSError *error) {
-                                    MYLog(@"error = %@",error);
-                                    if (error) {
-                                        [MBProgressHUD showError:@"服务器连接异常，请稍后再试"];
-                                    }
-                                }];
-                            }else
+                                //                            NSString *equStr = responseObj[@"equipmentNum"];
+                                NSString *equStr = resultAsString;
+                                
+                                NSString *chargingStr = responseObj[@"stationName"];
+                                openVC.equipmentNum = equStr;
+                                openVC.chargingAddress = chargingStr;
+                                MYLog(@"chargingStr地址 = %@",chargingStr);
+                                [weakSelf.navigationController pushViewController:openVC animated:YES];
+                                
+                            }else if ([responseObj[@"status"] intValue] == 401)
                             {
-                                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"该二维码无效，或者不属于兴国充电桩" preferredStyle:UIAlertControllerStyleAlert];
-                                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                                //        [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
+                                //                              [MBProgressHUD hideHUD];
+                                [Config removeOwnID];//移除ID
+                                [Config removeUseName];//移除用户名字
+                                
+                                [weakSelf.navigationController popViewControllerAnimated:YES];
+                                
+                                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"手机号登陆异常" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                                UIAlertAction *sureAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                                 }];
                                 
                                 [alertVc addAction:sureAction];
+                                //调用self的方法展现控制器
                                 [weakSelf presentViewController:alertVc animated:YES completion:nil];
+                                
+                            }else
+                            {
+                                [MBProgressHUD showError:responseObj[@"message"]];
                             }
-                            return ;
+                        } failure:^(NSError *error) {
+                            MYLog(@"error = %@",error);
+                            if (error) {
+                                [MBProgressHUD showError:@"服务器连接异常，请稍后再试"];
+                            }
+                        }];
+                        
+                    }else
+                    {
+                        NSString *temp =nil;
+                        //遍历resultAsString 字符串
+                        //                     NSString *tmp = nil;
+                        //                     NSRange ance = [resultAsString rangeOfString:@"="];
+                        //                     NSLog(@"ance = %@",NSStringFromRange(ance));
+                        
+                        for (int i = 0; i < resultAsString.length; i++) {
+                            temp = [resultAsString substringWithRange:NSMakeRange(i,1)];
+                            if ([temp isEqualToString:@"="]) {
+                                NSString *b = [resultAsString substringFromIndex:i+1];
+                                NSLog(@"充电桩号 = %@",b);
+                                NSLog(@"充电桩号的长度 = %lu",(unsigned long)b.length);
+                                if (b.length == 18) {
+                                    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+                                    parmas[@"qrCode"] = b;//扫描结果10
+                                    parmas[@"token"] = [Config getToken];
+                                    MYLog(@"token = %@",[Config getToken]);
+                                    
+                                    [WMNetWork get:ScanQrCode parameters:parmas success:^(id responseObj) {
+                                        
+                                        //MYLog(@"responseObjrrrrrrr = %@",responseObj);
+                                        
+                                        if ([responseObj[@"status"] intValue] == 0) {
+                                            //    [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
+                                            //                            [MBProgressHUD hideHUD];
+                                            OpenChangeViewController *openVC = [[OpenChangeViewController alloc] init];
+                                            
+                                            NSString *equStr = responseObj[@"equipmentNum"];
+                                            //                           NSString *equStr = resultAsString;
+                                            NSString *chargingStr = responseObj[@"stationName"];
+                                            NSLog(@"chargingStr = %@",chargingStr);
+                                            openVC.equipmentNum = equStr;
+                                            openVC.chargingAddress = chargingStr;
+                                            MYLog(@"chargingStr地址 = %@",chargingStr);
+                                            [weakSelf.navigationController pushViewController:openVC animated:YES];
+                                            
+                                        }else if ([responseObj[@"status"] intValue] == 401)
+                                        {
+                                            //        [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
+                                            //                              [MBProgressHUD hideHUD];
+                                            [Config removeOwnID];//移除ID
+                                            [Config removeUseName];//移除用户名字
+                                            
+                                            [weakSelf.navigationController popViewControllerAnimated:YES];
+                                            
+                                            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"手机号登陆异常" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                                            UIAlertAction *sureAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                                            }];
+                                            
+                                            [alertVc addAction:sureAction];
+                                            //调用self的方法展现控制器
+                                            [weakSelf presentViewController:alertVc animated:YES completion:nil];
+                                            
+                                        }else
+                                        {
+                                            [MBProgressHUD showError:responseObj[@"message"]];
+                                        }
+                                    } failure:^(NSError *error) {
+                                        MYLog(@"error = %@",error);
+                                        if (error) {
+                                            [MBProgressHUD showError:@"服务器连接异常，请稍后再试"];
+                                        }
+                                    }];
+                                }else
+                                {
+                                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"该二维码无效，或者不属于兴国充电桩" preferredStyle:UIAlertControllerStyleAlert];
+                                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                                        [weakSelf.navigationController popViewControllerAnimated:YES];
+                                    }];
+                                    
+                                    [alertVc addAction:sureAction];
+                                    [weakSelf presentViewController:alertVc animated:YES completion:nil];
+                                }
+                                return ;
+                            }
                         }
+                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"该二维码无效，或者不属于兴国充电桩" preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                            [weakSelf.navigationController popViewControllerAnimated:YES];
+                        }];
+                        
+                        [alertVc addAction:sureAction];
+                        [weakSelf presentViewController:alertVc animated:YES completion:nil];
                     }
-                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"该二维码无效，或者不属于兴国充电桩" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                        [weakSelf.navigationController popViewControllerAnimated:YES];
-                    }];
-                    
-                    [alertVc addAction:sureAction];
-                    [weakSelf presentViewController:alertVc animated:YES completion:nil];
-                }
-            }];
+                }];
+                
+                [self.navigationController pushViewController:readerVc animated:YES];
+
+            }
             
-            [self.navigationController pushViewController:readerVc animated:YES];
-//        }
+        } failure:^(NSError *error) {
+            
+        }];
+        
     }else
     {
         [self loginShow];//登陆界面
