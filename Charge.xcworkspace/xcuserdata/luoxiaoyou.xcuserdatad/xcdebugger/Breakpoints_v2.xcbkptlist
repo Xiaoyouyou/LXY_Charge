@@ -254,7 +254,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1589"
             endingLineNumber = "1589"
-            landmarkName = "-saoMaAction"
+            landmarkName = "-addChooseView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
