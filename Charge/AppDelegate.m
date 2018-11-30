@@ -360,7 +360,7 @@ static NSString *channel = @"Publish channel";
 //    }
 }
     
->>>>>>> develope
+
 - (void)tagsAliasCallback:(int)iResCode tags:(NSString *)tags alias:(NSString*)alias {
     NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
     switch (iResCode) {
