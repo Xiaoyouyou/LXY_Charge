@@ -38,6 +38,8 @@
     return _dataSource;
 }
 
+
+
 -(instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         [self addSubViews:frame];
@@ -203,6 +205,11 @@
 //                                      @"priceOrderby":@0//是否根据价格排序，传0根据距离近远排序，传1根据价格低高排序。
 //                                      //                                  @"acFlag":      //交流直流标志，传1查含有直流的充电站，传0查交流充电站，不传查所有
 //                                      };
+            CLLocationCoordinate2D userLocation =  [Config getCurrentLocation];
+            NSString *strla = [NSString stringWithFormat:@"%lf", userLocation.latitude ];
+            NSString *strlo = [NSString stringWithFormat:@"%lf", userLocation.longitude ];
+            [paramer setValue:strla forKey:@"latitude"];
+            [paramer setValue:strlo forKey: @"longitude"];
             [paramer setValue:@"00" forKey:@"state"];
             if (([type objectForKey:@"0"] == nil && [type objectForKey:@"1"] == nil) || ([type objectForKey:@"0"] && [type objectForKey:@"1"]) ) {
                 [paramer setValue:@"" forKey:@"acFlag"];

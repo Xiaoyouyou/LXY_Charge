@@ -470,7 +470,7 @@ typedef enum{
     
     NSString *tempStr = @"";
     if (self.ChooseMonetyType == 0) {
-        tempStr = @"0.01";
+        tempStr = @"50";
     }else if (self.ChooseMonetyType == 1)
     {
         tempStr = @"100";

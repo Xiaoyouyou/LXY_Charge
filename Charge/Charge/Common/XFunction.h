@@ -31,6 +31,9 @@
 #define TouchSaoMa @"3DtouchSaoMa"//3Dtouch扫码通知
 #define JiTingChargeNot @"JiTingChargeNot"//急停停止充电通知
 #define UNenoughChargeNot @"UNenoughChargeNot"//急停停止充电通知
+
+#define AddChooseView @"addChooseView" //添加choose
+
 #define ThirdLoginPush @"thirdLoginPush"//第三方登陆推出通知
 
 //tableviewCell字体

@@ -18,9 +18,9 @@
 //RGB color
 #define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
-//#define BaseURL @"http://47.107.14.253:80/app/phone/"
+#define BaseURL @"http://47.107.14.253:80/app/phone/"
 //#define BaseURL @"http://120.77.146.167:88/app/phone/"
-#define BaseURL @"http://192.168.5.4:8080/app/phone/"
+//#define BaseURL @"http://192.168.5.4:8080/app/phone/"
 #define RequestURL(string) [NSString stringWithFormat:@"%@%@",BaseURL,string]
 
 //APPKey

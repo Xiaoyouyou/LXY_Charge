@@ -113,7 +113,7 @@ static NSString *channel = @"Publish channel";
     [self init3DTouch];//初始化3Dtouch
     //[self initTencent];//初始化qq
     
-  //  [self initAVAudio];//初始化后台运行
+//    [self initAVAudio];//初始化后台运行
      [self initSaveLog];//初始化保存log日志文件
   // [RichAPM startWithAppID:Rich_APM_appkey];//初始化richAPM
     [self initBaiDu];//初始化百度
@@ -217,7 +217,7 @@ static NSString *channel = @"Publish channel";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [NSThread sleepForTimeInterval:0.5];
+    [NSThread sleepForTimeInterval:1.0];
     [self initialization];
 
     //版本更新

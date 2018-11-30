@@ -196,19 +196,7 @@
     self.qiPaoArray = [NSMutableArray array];
     self.JuDianqiPaoArray = [NSMutableArray array];
     self.totalChargeArray = [NSMutableArray array];
-    ChooseView *screen = [[ChooseView alloc]initWithFrame:CGRectZero];
-    screen.detail = ^(NSString *stationID) {
-        ChargeDetailViewController *chargeVCc = [[ChargeDetailViewController alloc] init];
-        chargeVCc.id = stationID;
-        [self presentViewController:chargeVCc animated:YES completion:nil];
-    };
-    self.screen = screen;
-    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight );
-    screen.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.4];
-    screen.daohang = ^(NSString *a, NSString *b, NSString *addr) {
-        [self dahangLA:a andLO:b andAddress:addr];
-        
-    };
+   
 //    [self.navigationController addChildViewController:screen];
     // Do any additional setup after loading the view from its nib.
     //初始化地图
@@ -230,6 +218,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkChargingS) name:CheckChargingNotis object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YiChangJieSuan:) name:JiTingChargeNot object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YiChangJieSuan:) name:UNenoughChargeNot object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addChooseView) name:AddChooseView object:nil];
 }
 
 -(void)addJuDianCharge
@@ -339,12 +329,12 @@
     _mapview = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
     _mapview.delegate = self;
     _mapview.userTrackingMode = BMKUserTrackingModeNone;
-    _mapview.mapType = BMKMapTypeStandard;
+//    _mapview.mapType = BMKMapTypeStandard;
     _mapview.showsUserLocation = YES;
+//    _mapview.zoomLevel = 12;
 //
-    _mapview.zoomEnabled = YES;
-    _mapview.showMapScaleBar=YES;
-    [_mapview setZoomLevel:12];
+//    _mapview.zoomEnabled = YES;
+//    _mapview.showMapScaleBar=YES;
     
 //    _mapview.minZoomLevel = 0;
     [self.bgMapvView addSubview:_mapview];
@@ -528,20 +518,17 @@
     BMKCoordinateRegion region;
     region.center.latitude  = userLocation.location.coordinate.latitude ;
     region.center.longitude = userLocation.location.coordinate.longitude;
-//        region.span.longitudeDelta = 0.01;
-//        region.span.latitudeDelta  = 0.01;
-//
-
-
-
+    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+  
+    //将定位的点居中显示
+    _mapview.showsUserLocation = YES;//显示定位图层
+    _mapview.zoomLevel = 12;
     _mapview.region = region;
 //    _mapview.limitMapRegion = region;
     //保存
     MYLog(@"当前的坐标是: %f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     self.LocationLatitude = userLocation.location.coordinate.latitude;
     self.LocationLongitude = userLocation.location.coordinate.longitude;
-    
-    
     NSLog(@"LocationLatitude = %f,LocationLongitude = %f",self.LocationLatitude,self.LocationLongitude);
     //保存当前地理位置
     [Config saveCurrentLocation:userLocation];
@@ -908,9 +895,9 @@ BOOL btnStatus = YES;
     
     
     
-    
+    //排序按钮
     if (btnStatus == YES) {
-        [self.view addSubview:self.screen];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AddChooseView object:nil];
         btnStatus = NO;
     }else{
         [self.screen removeFromSuperview];
@@ -1595,5 +1582,23 @@ BOOL btnStatus = YES;
 - (IBAction)btnClick:(id)sender{
     [self scanActionClick];
     
+}
+
+
+-(void)addChooseView{
+    ChooseView *screen = [[ChooseView alloc]initWithFrame:CGRectZero];
+    screen.detail = ^(NSString *stationID) {
+        ChargeDetailViewController *chargeVCc = [[ChargeDetailViewController alloc] init];
+        chargeVCc.id = stationID;
+        [self presentViewController:chargeVCc animated:YES completion:nil];
+    };
+    [self.view addSubview:screen];
+    self.screen = screen;
+    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight );
+    screen.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.4];
+    screen.daohang = ^(NSString *a, NSString *b, NSString *addr) {
+        [self dahangLA:a andLO:b andAddress:addr];
+        
+    };
 }
 @end

@@ -466,6 +466,7 @@
 		757BA868218886E800D4B6FE /* ChargeMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChargeMessageTableViewCell.xib; sourceTree = "<group>"; };
 		757BA86B2188945200D4B6FE /* ChargeMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeMessageModel.h; sourceTree = "<group>"; };
 		757BA86C2188945200D4B6FE /* ChargeMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeMessageModel.m; sourceTree = "<group>"; };
+		75B6616621B0E3BA00B94AEC /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BCDA1C217316A600AC2F73 /* MeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		75BCDA1D217316A600AC2F73 /* MeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		75BCDA222173488300AC2F73 /* MeVcWithMineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeVcWithMineView.h; sourceTree = "<group>"; };
@@ -2172,6 +2173,7 @@
 		900AB28FF0A0ABD8FC737EF1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75B6616621B0E3BA00B94AEC /* libAFNetworking.a */,
 				75F1C39721808CF300577B46 /* libiconv.tbd */,
 				85BA18341E8CF6C500FB63D7 /* TencentOpenApi_IOS_Bundle.bundle */,
 				85BA182D1E8CECAB00FB63D7 /* TencentOpenAPI.framework */,
@@ -2898,10 +2900,11 @@
 			baseConfigurationReference = E140A293A740616CB4ECE233 /* Pods-Charge.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
@@ -2941,6 +2944,7 @@
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/JPUSH",
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/JPUSH/Lib",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2976,6 +2980,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDeveloPP;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};
 			name = Debug;
 		};
@@ -2984,6 +2989,7 @@
 			baseConfigurationReference = BE6B885F74D7A77940C92369 /* Pods-Charge.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
@@ -3027,6 +3033,7 @@
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/JPUSH",
 					"$(PROJECT_DIR)/Charge/Charge/Common/ThirdLibary/JPUSH/Lib",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -3062,6 +3069,7 @@
 				PROVISIONING_PROFILE = "b703f85e-698a-40fd-8386-a89be4065160";
 				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGADHOC_PP;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};
 			name = Release;
 		};
