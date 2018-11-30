@@ -63,7 +63,7 @@
 #import "MeViewController.h"
 #import "ScreeningViewController.h"
 #import "ChooseView.h"
-#import "ChargeDetailViewController.h"
+
 
 #define leftWidth (230)
 
@@ -108,7 +108,7 @@
 @property (nonatomic, strong) NSMutableArray *qiPaoArray;//添加的气泡数组
 @property (nonatomic, strong) NSMutableArray *JuDianqiPaoArray;//添加的聚点桩气泡数组
 
-@property (nonatomic, strong) NSMutableArray *chargingMess;//友桩充电桩数组
+@property (nonatomic, strong) NSMutableArray *chargingMess;//桩者充电桩数组
 @property (nonatomic, strong) NSMutableArray *juDianChargingMess;//聚电桩数组
 @property (nonatomic, strong) NSMutableArray *totalChargeArray;//总充电转数组
 @property (strong, nonatomic) IBOutlet UIButton *refreshBtnPro;//刷新按钮属性
@@ -196,7 +196,15 @@
     self.qiPaoArray = [NSMutableArray array];
     self.JuDianqiPaoArray = [NSMutableArray array];
     self.totalChargeArray = [NSMutableArray array];
-   
+
+    ChooseView *screen = [[ChooseView alloc]initWithFrame:CGRectZero];
+    self.screen = screen;
+    screen.frame = CGRectMake(0, StatusBarH + 44,XYScreenWidth, XYScreenHeight - 320);
+    screen.backgroundColor = [UIColor whiteColor];
+//    screen.daohang = ^(NSString *a, NSString *b) {
+//        [self dahangLA:a andLO:b];
+//    };
+
 //    [self.navigationController addChildViewController:screen];
     // Do any additional setup after loading the view from its nib.
     //初始化地图
@@ -278,7 +286,7 @@
                     [_totalChargeArray addObjectsFromArray:self.qiPaoArray];
                     [_totalChargeArray addObjectsFromArray:self.JuDianqiPaoArray];
                     [_mapview addAnnotations:_totalChargeArray];
-                    [_mapview setZoomLevel:12];
+                    [_mapview setZoomLevel:14];
                     [self.refreshImageView stopAnimating];
                     self.refreshBtnPro.userInteractionEnabled = YES;
                     
@@ -305,7 +313,7 @@
 -(void)creatNav
 {
     //初始化自定义nav
-    MainNavView *navView = [[MainNavView alloc] initWithFrame:CGRectZero title:@"友桩" leftImgae:@"search@2x.png" rightImage:@"caidan@2x.png"];
+    MainNavView *navView = [[MainNavView alloc] initWithFrame:CGRectZero title:@"桩者" leftImgae:@"search@2x.png" rightImage:@"caidan@2x.png"];
     navView.leftBlock = ^{
         //周边推荐事件
         [self zhouBianTapAction];
@@ -329,6 +337,7 @@
     _mapview = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
     _mapview.delegate = self;
     _mapview.userTrackingMode = BMKUserTrackingModeNone;
+
 //    _mapview.mapType = BMKMapTypeStandard;
     _mapview.showsUserLocation = YES;
 //    _mapview.zoomLevel = 12;
@@ -337,22 +346,20 @@
 //    _mapview.showMapScaleBar=YES;
     
 //    _mapview.minZoomLevel = 0;
+
     [self.bgMapvView addSubview:_mapview];
     
     BMKLocationViewDisplayParam* testParam = [[BMKLocationViewDisplayParam alloc] init];
     testParam.isRotateAngleValid = false;// 跟随态旋转角度是否生效
-    testParam.isAccuracyCircleShow = false;// 精度圈是否显示
-//    testParam.locationViewImgName = @"icon_compass";// 定位图标名称
-//    testParam.locationViewOffsetX = 10;//定位图标偏移量(经度)
-//    testParam.locationViewOffsetY = 0;// 定位图标偏移量(纬度)
+    testParam.isAccuracyCircleShow = false;// 精度圈是否显示 testParam.locationViewImgName = @"icon_compass";// 定位图标名称 testParam.locationViewOffsetX = 0;//定位图标偏移量(经度) testParam.locationViewOffsetY = 0;// 定位图标偏移量(纬度)
     [_mapview updateLocationViewWithParam:testParam];
-  //  初始化BMKLocationService
+    //初始化BMKLocationService
     _locService = [[BMKLocationService alloc]init];
     _locService.delegate = self;
-  //  启动LocationService
+    //启动LocationService
     [_locService startUserLocationService];
     
-   // 初始化检索对象
+    //初始化检索对象
     _searcher = [[BMKGeoCodeSearch alloc]init];
     _searcher.delegate = self;
 }
@@ -505,7 +512,6 @@
 
 - (void)mapView:(BMKMapView *)mapView didDeselectAnnotationView:(BMKAnnotationView *)view
 {
-    
         [UIView animateWithDuration:0.1 animations:^{
             CGAffineTransform transform = CGAffineTransformMakeScale(1, 1);
             view.transform = transform;
@@ -516,6 +522,7 @@
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
     BMKCoordinateRegion region;
+
     region.center.latitude  = userLocation.location.coordinate.latitude ;
     region.center.longitude = userLocation.location.coordinate.longitude;
     NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
@@ -523,8 +530,8 @@
     //将定位的点居中显示
     _mapview.showsUserLocation = YES;//显示定位图层
     _mapview.zoomLevel = 12;
+
     _mapview.region = region;
-//    _mapview.limitMapRegion = region;
     //保存
     MYLog(@"当前的坐标是: %f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     self.LocationLatitude = userLocation.location.coordinate.latitude;
@@ -543,12 +550,11 @@
     {MYLog(@"反geo检索发送成功");}
     else
     {MYLog(@"反geo检索发送失败");}
+    
     [_mapview updateLocationData:userLocation];
-//    NSArray *zoomLevelArr = @[@"2000000"];
-//    [_mapview showAnnotations:zoomLevelArr animated:YES];
     [_locService stopUserLocationService];
+    
 }
-
 
 -(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
    
@@ -597,7 +603,7 @@
                        // _JuDianQiPao.image = [UIImage imageNamed:@"qipaopoint.png"];
                         [self.qiPaoArray addObject:_qiPao];
                     }
-                    [_mapview setZoomLevel:12];
+                 //   [_mapview setZoomLevel:10];
 //                    [_mapview addAnnotations:self.qiPaoArray];
              //   NSLog(@"qiPaoArray = %@",self.qiPaoArray);
                       [self addJuDianCharge];
@@ -815,9 +821,9 @@
     
 }
 
--(void)dahangLA:(NSString *)a andLO:(NSString *)b andAddress:(NSString *)address{
+-(void)dahangLA:(NSString *)a andLO:(NSString *)b{
     
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"您将导航至：%@",address]message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"您将导航至：%@",_ChargeDetal.address]message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //百度坐标转高德坐标
     CLLocation *desLocation = [[CLLocation alloc] initWithLatitude:a.doubleValue longitude:b.doubleValue];
     CLLocationCoordinate2D desCoordinate =  [desLocation locationMarsFromBaidu].coordinate;
@@ -827,7 +833,7 @@
         MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
         //目的地的位置
         MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:desCoordinate addressDictionary:nil]];
-        toLocation.name = address;
+        toLocation.name = _ChargeDetal.address;
         
         NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
         //打开苹果自身地图应用，并呈现特定的item
@@ -963,7 +969,6 @@ BOOL btnStatus = YES;
         {
              [self saoMaAction];
         }
-        
     }
 }
 
@@ -1434,7 +1439,6 @@ BOOL btnStatus = YES;
                         [WMNetWork get:ScanQrCode parameters:parmas success:^(id responseObj) {
                             
                             //  MYLog(@"responseObjrrrrrrr = %@",responseObj);
-                            
                             if ([responseObj[@"status"] intValue] == 0) {
                                 //    [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
                                 //                            [MBProgressHUD hideHUD];
@@ -1450,6 +1454,87 @@ BOOL btnStatus = YES;
                                 [weakSelf.navigationController pushViewController:openVC animated:YES];
                                 
                             }else if ([responseObj[@"status"] intValue] == 401)
+                            [alertVc addAction:sureAction];
+                            //调用self的方法展现控制器
+                            [weakSelf presentViewController:alertVc animated:YES completion:nil];
+                            
+                        }else
+                        {
+                            [MBProgressHUD showError:responseObj[@"message"]];
+                        }
+                    } failure:^(NSError *error) {
+                        MYLog(@"error = %@",error);
+                        if (error) {
+                            [MBProgressHUD showError:@"网络连接失败"];
+                        }
+                    }];
+                    
+                }else
+                {
+                    NSString *temp =nil;
+                    //遍历resultAsString 字符串
+                    //                     NSString *tmp = nil;
+                    //                     NSRange ance = [resultAsString rangeOfString:@"="];
+                    //                     NSLog(@"ance = %@",NSStringFromRange(ance));
+                    
+                    for (int i = 0; i < resultAsString.length; i++) {
+                        temp = [resultAsString substringWithRange:NSMakeRange(i,1)];
+                        if ([temp isEqualToString:@"="]) {
+                            NSString *b = [resultAsString substringFromIndex:i+1];
+                            NSLog(@"充电桩号 = %@",b);
+                            NSLog(@"充电桩号的长度 = %lu",(unsigned long)b.length);
+                            if (b.length == 18) {
+                                NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+                                parmas[@"qrCode"] = b;//扫描结果10
+                                parmas[@"token"] = [Config getToken];
+                                MYLog(@"token = %@",[Config getToken]);
+                                
+                                [WMNetWork get:ScanQrCode parameters:parmas success:^(id responseObj) {
+                                    
+                                //MYLog(@"responseObjrrrrrrr = %@",responseObj);
+                                    
+                                    if ([responseObj[@"status"] intValue] == 0) {
+                                        //    [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
+                                        //                            [MBProgressHUD hideHUD];
+                                        OpenChangeViewController *openVC = [[OpenChangeViewController alloc] init];
+                                        
+                                        NSString *equStr = responseObj[@"equipmentNum"];
+                                        //                           NSString *equStr = resultAsString;
+                                        NSString *chargingStr = responseObj[@"stationName"];
+                                        NSLog(@"chargingStr = %@",chargingStr);
+                                        openVC.equipmentNum = equStr;
+                                        openVC.chargingAddress = chargingStr;
+                                        MYLog(@"chargingStr地址 = %@",chargingStr);
+                                        [weakSelf.navigationController pushViewController:openVC animated:YES];
+                                        
+                                    }else if ([responseObj[@"status"] intValue] == 401)
+                                    {
+                                        //        [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
+                                        //                              [MBProgressHUD hideHUD];
+                                        [Config removeOwnID];//移除ID
+                                        [Config removeUseName];//移除用户名字
+                                        
+                                        [weakSelf.navigationController popViewControllerAnimated:YES];
+                                        
+                                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"手机号登陆异常" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                                        UIAlertAction *sureAction= [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                                        }];
+                                        
+                                        [alertVc addAction:sureAction];
+                                        //调用self的方法展现控制器
+                                        [weakSelf presentViewController:alertVc animated:YES completion:nil];
+                                        
+                                    }else
+                                    {
+                                        [MBProgressHUD showError:responseObj[@"message"]];
+                                    }
+                                } failure:^(NSError *error) {
+                                    MYLog(@"error = %@",error);
+                                    if (error) {
+                                        [MBProgressHUD showError:@"网络连接失败"];
+                                    }
+                                }];
+                            }else
                             {
                                 //        [MBProgressHUD hideHUDForView:readerVc.view animated:YES];
                                 //                              [MBProgressHUD hideHUD];

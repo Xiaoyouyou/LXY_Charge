@@ -18,5 +18,4 @@
 @property (nonatomic ,strong)NSString *price;//价格
 @property (nonatomic ,strong)NSString *stationId;//
 @property (nonatomic ,strong)NSString *stationName;//站点名称
-@property (nonatomic ,strong)NSString *stationPic;//icon
 @end

@@ -2,34 +2,14 @@
 //  ChooseView.m
 //  Charge
 //
-//  Created by 罗小友 on 2018/10/31.
+//  Created by 罗小友 on 2018/11/7.
 //  Copyright © 2018 com.XinGuoXin.cn. All rights reserved.
 //
 
 #import "ChooseView.h"
-#import "ChooseModel.h"
-#import "ChooseTableViewCell.h"
-#import "ShaixuanView.h"
-
-
-
-
-
-@interface ChooseView()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic ,strong) UIScrollView *scroll;
-
-@property (nonatomic ,strong) UITableView *tableView;
-
-@property (nonatomic ,strong)NSMutableArray *dataSource;
-//状态按钮
-@property (nonatomic,strong) UIButton *selectedBtn;
-//筛选界面
-@property (nonatomic,strong) ShaixuanView *views;
-
-
-@end
 
 @implementation ChooseView
+
 
 -(NSMutableArray *)dataSource{
     if(!_dataSource){
@@ -176,7 +156,8 @@
            weakSelf.daohang(la, lo,address);
     };
     return cell;
-}
+
+
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -232,4 +213,6 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self removeFromSuperview];
 }
+
+    
 @end

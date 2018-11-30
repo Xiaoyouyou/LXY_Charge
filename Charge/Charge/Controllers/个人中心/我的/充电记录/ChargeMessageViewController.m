@@ -65,10 +65,9 @@
 
 -(void)addTableView{
     self.table = [[UITableView alloc] initWithFrame:CGRectMake(0, 88, XYScreenWidth, XYScreenHeight) style:UITableViewStylePlain];
-    self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.table];
     self.table.delegate = self;
-    self.table.rowHeight = 165;
+    self.table.rowHeight = 94;
     self.table.dataSource = self;
     [self.table registerNib:[UINib nibWithNibName:@"ChargeMessageTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"messageCell"];
     

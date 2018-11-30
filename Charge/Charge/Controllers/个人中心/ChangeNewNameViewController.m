@@ -52,7 +52,7 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(StatusBarH + 44);
+        make.height.mas_equalTo(64);
     }];
 
     [self creatUI];
@@ -60,7 +60,7 @@
 
 -(void)creatUI
 {
-    self.changeName = [[UITextField alloc] initWithFrame:CGRectMake(0, StatusBarH + 44, XYScreenWidth, 44)];
+    self.changeName = [[UITextField alloc] initWithFrame:CGRectMake(0, 80, XYScreenWidth, 44)];
     self.changeName.placeholder = @"您的新昵称";
     self.changeName.font = [UIFont systemFontOfSize:16];
     self.changeName.backgroundColor = [UIColor whiteColor];
@@ -72,7 +72,7 @@
     [self.changeName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(StatusBarH + 44);
+        make.top.equalTo(self.view).offset(80);
         make.height.mas_equalTo(44);
     }];
     

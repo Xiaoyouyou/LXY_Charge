@@ -40,15 +40,6 @@
 //    NSString *pingJieAddress;//拼接地址
     
 }
-
-/***--------luoxiaoyou------------****/
-@property (strong, nonatomic) IBOutlet UILabel *voltage;
-
-@property (strong, nonatomic) IBOutlet UILabel *current;
-@property (strong, nonatomic) IBOutlet UILabel *remainingTime;
-@property (strong, nonatomic) IBOutlet UIProgressView *socProgress;
-@property (strong, nonatomic) IBOutlet UILabel *socJIndu;
-
 ////地图相关
 //@property (strong,nonatomic) BMKLocationService *locService;
 //@property (nonatomic, strong) BMKGeoCodeSearch *searcher;//初始化检索对象
@@ -161,11 +152,6 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    self.socProgress.layer.masksToBounds = YES;
-    self.socProgress.layer.cornerRadius = 3;
-    self.socProgress.layer.borderWidth = 2.0;
-    self.socProgress.layer.borderColor = [UIColor whiteColor].CGColor;
-    
     self.isUpdateLocation =1;//置位还原
     //反注册通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -423,25 +409,10 @@
                               };
     [WMNetWork get:ChargeMessge parameters:paramer success:^(id responseObj) {
         NSString *str1 = responseObj[@"chargInfo"][@"spendMoney"];
-        NSString *str2 = responseObj[@"chargInfo"][@"electric"];//电量
-        NSString *volStr = responseObj[@"chargInfo"][@"vol"];//电压
-        NSString *lefttimeStr = responseObj[@"chargInfo"][@"lefttime"];//剩余时间
-        NSString *eleStr = responseObj[@"chargInfo"][@"ele"];//电流
-        NSString *socStr = responseObj[@"chargInfo"][@"soc"];//SOC
-        self.voltage.text = [NSString stringWithFormat:@"%.2fV",volStr.floatValue];//电压
-        self.current.text = [NSString stringWithFormat:@"%.2fA",eleStr.floatValue];//电流
-        self.remainingTime.text = [self timeString:lefttimeStr];
-        //[NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
-        self.socJIndu.text = [NSString stringWithFormat:@"%.1f%%",socStr.floatValue];//进度
-        self.socProgress.progress = socStr.floatValue / 100.00;
-        
-        
-        self.remainingTime.text = [self timeString:lefttimeStr];
-//        [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
-
-        
+         NSString *str2 = responseObj[@"chargInfo"][@"electric"];
         self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",str1.floatValue];//消费金额
         self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",str2.floatValue];//已充电量
+        
         [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",str2.floatValue]];
         //保存电量
         [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",str1.floatValue]];//保存电费
@@ -547,8 +518,7 @@
          timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(outTimeAction) userInfo:nil repeats:YES];
         [timer fire];
         [MBProgressHUD showSuccess:@"正在结束充电"];
-        [[Singleton sharedInstance] socketConnectHost];
-//        [[Singleton sharedInstance] startReconectBlcok];
+        [[Singleton sharedInstance] startReconectBlcok];
         [[Singleton sharedInstance] stopChargingWithChargeNum:self.chargeingNum];//停止充电
         
     }];
@@ -662,10 +632,9 @@
         NSString *status2 = [text substringWithRange:NSMakeRange(4, 2)];
         if([status isEqualToString:@"0201"]){
             [MBProgressHUD showMessage:@"正在结束充电,请稍后" toView:self.view];
-            [MBProgressHUD hideHUDForView:self.view];
         }else if([status isEqualToString:@"0200"]){
             [MBProgressHUD showSuccess:@"结束充电失败"];
-            [[Singleton sharedInstance] startReconectBlcok];
+            [[Singleton sharedInstance] cutOffSocket];
         }
         if([status2 isEqualToString:@"05"]){
             [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -846,28 +815,6 @@
         self.chargeTime.text = [NSString stringWithFormat:@"%@:%@:%@",tmphh,tmpmm,tmpss];
     }
     
-}
-
-
--(NSString *)timeString:(NSString *)timeStr{
-    NSString *tmphh = [NSString stringWithFormat:@"%d",timeStr.intValue/3600];
-    if ([tmphh length] == 1)
-    {
-        tmphh = [NSString stringWithFormat:@"0%@",tmphh];
-    }
-    NSString *tmpmm = [NSString stringWithFormat:@"%d",(timeStr.intValue/60)%60];
-    if ([tmpmm length] == 1)
-    {
-        tmpmm = [NSString stringWithFormat:@"0%@",tmpmm];
-    }
-    NSString *tmpss = [NSString stringWithFormat:@"%d",timeStr.intValue%60];
-    if ([tmpss length] == 1)
-    {
-        tmpss = [NSString stringWithFormat:@"0%@",tmpss];
-    }
-    
-   NSString *str = [NSString stringWithFormat:@"%@:%@:%@",tmphh,tmpmm,tmpss];
-    return str;
 }
 
 @end

@@ -51,7 +51,7 @@
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.top.equalTo(self.view);
-        make.height.mas_equalTo(StatusBarH + 44);
+        make.height.mas_equalTo(64);
     }];
     
     [self creatUI];
@@ -95,7 +95,7 @@
 
 - (void)creatUI
 {
-    qianMingTextView = [[MyTextView alloc] initWithFrame:CGRectMake(0, StatusBarH + 44, XYScreenWidth, XYScreenHeight-420-64) placeholder:nil];
+    qianMingTextView = [[MyTextView alloc] initWithFrame:CGRectMake(0, 64, XYScreenWidth, XYScreenHeight-420-64) placeholder:nil];
     qianMingTextView.delegate = self;
 //  qianMingTextView.placeholder.text = @"请输入您的个性签名";
     qianMingTextView.font = [UIFont systemFontOfSize:13];

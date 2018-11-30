@@ -23,12 +23,6 @@
     self.CarNumber.text = listModel.plate_number;
     self.CarChargeType.text = listModel.brand;
 }
-- (IBAction)cancelBtn:(UIButton *)sender {
-    self.cancel();
-}
-- (IBAction)changeBtn:(UIButton *)sender {
-    self.change();
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

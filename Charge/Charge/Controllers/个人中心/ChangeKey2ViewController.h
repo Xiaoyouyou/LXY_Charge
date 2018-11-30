@@ -11,6 +11,5 @@
 @interface ChangeKey2ViewController : UIViewController
 
 @property (nonatomic,copy) NSString *phoneNum;
-@property (nonatomic ,strong)NSString *oldPaw;
 
 @end

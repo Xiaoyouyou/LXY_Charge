@@ -112,6 +112,7 @@
             
             for (ZhouBianChargeModel *zhouBian in _chargingMess) {
                 
+
                 BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake([zhouBian.latitudes doubleValue],[zhouBian.longitude doubleValue]));
                 CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
                 NSString *distanceStr = [NSString stringWithFormat:@"%.1fkm",distance/1000];
@@ -120,6 +121,16 @@
                 [temparray addObject:nums];
                 
             }
+
+//        BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake([zhouBian.latitude doubleValue],[zhouBian.longitude doubleValue]));
+//        CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
+//        NSString *distanceStr = [NSString stringWithFormat:@"%.1fkm",distance/1000];
+//        NSNumber *nums = @([distanceStr floatValue]);
+//        [tempdict setObject:zhouBian forKey:nums];
+//        [temparray addObject:nums];
+//
+//        }
+
             //升序
             [temparray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 return [obj1 floatValue] > [obj2 floatValue];
@@ -141,8 +152,13 @@
             }
             [self.tableView reloadData];
         }
+
         MYLog(@"responseObj = %@",self.chargingPointArray);
         
+
+       // MYLog(@"responseObj = %@",responseObj);
+
+
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         MYLog(@"error = %@",error);

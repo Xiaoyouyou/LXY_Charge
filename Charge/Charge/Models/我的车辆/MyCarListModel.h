@@ -9,13 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface MyCarListModel : NSObject
-
-@property (nonatomic ,strong)NSString *id;
-@property (nonatomic ,strong)NSString *brand;//品牌
+@property (nonatomic ,strong)NSString *brand;
 @property (nonatomic ,strong)NSString *img;
-@property (nonatomic ,strong)NSString *pattern;//型号
-@property (nonatomic ,strong)NSString *plate_number;//chepai
-@property (nonatomic ,strong)NSString *type;//车辆类型
-@property (nonatomic ,strong)NSString *electricizeType;//车充类型
-
+@property (nonatomic ,strong)NSString *pattern;
+@property (nonatomic ,strong)NSString *plate_number;
 @end

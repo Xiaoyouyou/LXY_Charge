@@ -11,7 +11,6 @@
 		755EA29D218B55880062345F /* ChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA29B218B55880062345F /* ChooseTableViewCell.m */; };
 		755EA29E218B55880062345F /* ChooseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755EA29C218B55880062345F /* ChooseTableViewCell.xib */; };
 		755EA2A1218B55980062345F /* ChooseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA2A0218B55980062345F /* ChooseModel.m */; };
-		756C788C2189EC5E00276E9F /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 756C788B2189EC5E00276E9F /* ChooseView.m */; };
 		757BA82321840E5B00D4B6FE /* ChargeInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA82221840E5B00D4B6FE /* ChargeInfoTableViewController.m */; };
 		757BA8282184112F00D4B6FE /* ChargeInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA8262184112F00D4B6FE /* ChargeInfoTableViewCell.m */; };
 		757BA8292184112F00D4B6FE /* ChargeInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BA8272184112F00D4B6FE /* ChargeInfoTableViewCell.xib */; };
@@ -28,7 +27,6 @@
 		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
 		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
 		75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA662174D4B400AC2F73 /* MyCarViewController.m */; };
-		75D7F8F921A5AC44008E3DB6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0281D17C9F200AA0918 /* libstdc++.6.0.9.tbd */; };
 		75DC38E7218F1DF000F94A51 /* MyTrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC38E6218F1DF000F94A51 /* MyTrendViewController.m */; };
 		75DC38EB218F1E1F00F94A51 /* MyNoticationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DC38E9218F1E1F00F94A51 /* MyNoticationTableViewCell.m */; };
 		75DC38EC218F1E1F00F94A51 /* MyNoticationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75DC38EA218F1E1F00F94A51 /* MyNoticationTableViewCell.xib */; };
@@ -37,8 +35,7 @@
 		75E26F9E2147B0130075EA98 /* All_chargingSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */; };
 		75E58AE1217B8C8E00BA2BF2 /* MyCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */; };
 		75E58AE2217B8C8E00BA2BF2 /* MyCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */; };
-		75ED636921932B67008BDA79 /* ShaixuanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED636821932B67008BDA79 /* ShaixuanView.m */; };
-		75ED636B21932B77008BDA79 /* ShaixuanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75ED636A21932B77008BDA79 /* ShaixuanView.xib */; };
+		75ED636621932914008BDA79 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED636521932914008BDA79 /* ChooseView.m */; };
 		75F1C38A217F3C0100577B46 /* RsaUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C389217F3C0100577B46 /* RsaUtil.m */; };
 		75F1C39821808CF300577B46 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F1C39721808CF300577B46 /* libiconv.tbd */; };
 		75F1C39C2180CD1500577B46 /* ScreeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C39B2180CD1500577B46 /* ScreeningViewController.m */; };
@@ -220,6 +217,7 @@
 		857D96971D65AF2400A58A4E /* PersonMesCaches.m in Sources */ = {isa = PBXBuildFile; fileRef = 857D96961D65AF2400A58A4E /* PersonMesCaches.m */; };
 		857F01971DDC4AAF00169FA8 /* MyYuYueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 857F01961DDC4AAF00169FA8 /* MyYuYueViewController.m */; };
 		857F29C21DF1217B0093A564 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 857F29C11DF1217B0093A564 /* libsqlite3.tbd */; };
+		857F29C41DF121D20093A564 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 857F29C31DF121D20093A564 /* libc++.tbd */; };
 		857F29C61DF121E80093A564 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 857F29C51DF121E80093A564 /* libz.tbd */; };
 		857F29CC1DF1580E0093A564 /* TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 857F29CB1DF1580E0093A564 /* TipView.m */; };
 		857F29D01DF15EF00093A564 /* NoneCollect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 857F29CF1DF15EF00093A564 /* NoneCollect@2x.png */; };
@@ -265,6 +263,7 @@
 		8587C0231D17C9C300AA0918 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0221D17C9C300AA0918 /* Security.framework */; };
 		8587C0251D17C9D600AA0918 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0241D17C9D600AA0918 /* libsqlite3.0.tbd */; };
 		8587C0271D17C9E600AA0918 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0261D17C9E600AA0918 /* CoreTelephony.framework */; };
+		8587C0291D17C9F200AA0918 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8587C0281D17C9F200AA0918 /* libstdc++.6.0.9.tbd */; };
 		8587C0581D17CC8400AA0918 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8587C04A1D17CC8400AA0918 /* beep.wav */; };
 		8587C05D1D17CC8400AA0918 /* ic_map_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8587C04F1D17CC8400AA0918 /* ic_map_light@2x.png */; };
 		8587C05E1D17CC8400AA0918 /* QRCodeScanLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8587C0501D17CC8400AA0918 /* QRCodeScanLine@2x.png */; };
@@ -442,8 +441,6 @@
 		755EA29C218B55880062345F /* ChooseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTableViewCell.xib; sourceTree = "<group>"; };
 		755EA29F218B55980062345F /* ChooseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseModel.h; sourceTree = "<group>"; };
 		755EA2A0218B55980062345F /* ChooseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseModel.m; sourceTree = "<group>"; };
-		756C788A2189EC5E00276E9F /* ChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
-		756C788B2189EC5E00276E9F /* ChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
 		757BA82121840E5B00D4B6FE /* ChargeInfoTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeInfoTableViewController.h; sourceTree = "<group>"; };
 		757BA82221840E5B00D4B6FE /* ChargeInfoTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeInfoTableViewController.m; sourceTree = "<group>"; };
 		757BA8252184112F00D4B6FE /* ChargeInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -488,9 +485,8 @@
 		75E58ADE217B8C8E00BA2BF2 /* MyCarTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCarTableViewCell.h; sourceTree = "<group>"; };
 		75E58ADF217B8C8E00BA2BF2 /* MyCarTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCarTableViewCell.m; sourceTree = "<group>"; };
 		75E58AE0217B8C8E00BA2BF2 /* MyCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCarTableViewCell.xib; sourceTree = "<group>"; };
-		75ED636721932B67008BDA79 /* ShaixuanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaixuanView.h; sourceTree = "<group>"; };
-		75ED636821932B67008BDA79 /* ShaixuanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShaixuanView.m; sourceTree = "<group>"; };
-		75ED636A21932B77008BDA79 /* ShaixuanView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShaixuanView.xib; sourceTree = "<group>"; };
+		75ED636421932914008BDA79 /* ChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseView.h; sourceTree = "<group>"; };
+		75ED636521932914008BDA79 /* ChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseView.m; sourceTree = "<group>"; };
 		75F1C388217F3C0100577B46 /* RsaUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RsaUtil.h; sourceTree = "<group>"; };
 		75F1C389217F3C0100577B46 /* RsaUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RsaUtil.m; sourceTree = "<group>"; };
 		75F1C39721808CF300577B46 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -1037,7 +1033,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75D7F8F921A5AC44008E3DB6 /* libstdc++.6.0.9.tbd in Frameworks */,
 				75F1C39821808CF300577B46 /* libiconv.tbd in Frameworks */,
 				85BA182E1E8CECAB00FB63D7 /* TencentOpenAPI.framework in Frameworks */,
 				8594585E1E665CB3007BB59F /* AddressBookUI.framework in Frameworks */,
@@ -1050,6 +1045,7 @@
 				8533CEAF1DF686F800F88A3A /* Foundation.framework in Frameworks */,
 				8533CEAB1DF686B800F88A3A /* CFNetwork.framework in Frameworks */,
 				857F29C61DF121E80093A564 /* libz.tbd in Frameworks */,
+				857F29C41DF121D20093A564 /* libc++.tbd in Frameworks */,
 				857F29C21DF1217B0093A564 /* libsqlite3.tbd in Frameworks */,
 				85394C2F1D18E9550063D16C /* ImageIO.framework in Frameworks */,
 				8587C0271D17C9E600AA0918 /* CoreTelephony.framework in Frameworks */,
@@ -1059,6 +1055,7 @@
 				8587C0211D17C9BB00AA0918 /* CoreGraphics.framework in Frameworks */,
 				85BA18391E8CFA0000FB63D7 /* TencentOpenAPI.framework in Frameworks */,
 				85AD8E2C1E27283100C5DE82 /* AlipaySDK.framework in Frameworks */,
+				8587C0291D17C9F200AA0918 /* libstdc++.6.0.9.tbd in Frameworks */,
 				8592F0611D52F11300C6F922 /* libz.1.1.3.tbd in Frameworks */,
 				85394C371D18E9C90063D16C /* JavaScriptCore.framework in Frameworks */,
 				857F79D01D2F4488003812CD /* BaiduMapAPI_Search.framework in Frameworks */,
@@ -1148,6 +1145,8 @@
 		75BCDA212173482D00AC2F73 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				75BCDA222173488300AC2F73 /* MeVcWithMineView.h */,
+				75BCDA232173488300AC2F73 /* MeVcWithMineView.m */,
 			);
 			path = "我的";
 			sourceTree = "<group>";
@@ -1159,8 +1158,6 @@
 				757BA864218886C500D4B6FE /* 我的发票 */,
 				75BCDA1C217316A600AC2F73 /* MeViewController.h */,
 				75BCDA1D217316A600AC2F73 /* MeViewController.m */,
-				75BCDA222173488300AC2F73 /* MeVcWithMineView.h */,
-				75BCDA232173488300AC2F73 /* MeVcWithMineView.m */,
 				75FDA57221778D98004A70E1 /* MyAddCarViewController.h */,
 				75FDA57321778D98004A70E1 /* MyAddCarViewController.m */,
 				75FDA57421778D98004A70E1 /* MyAddCarViewController.xib */,
@@ -1192,16 +1189,13 @@
 			children = (
 				75F1C39A2180CD1500577B46 /* ScreeningViewController.h */,
 				75F1C39B2180CD1500577B46 /* ScreeningViewController.m */,
-				756C788A2189EC5E00276E9F /* ChooseView.h */,
-				756C788B2189EC5E00276E9F /* ChooseView.m */,
-				75ED636721932B67008BDA79 /* ShaixuanView.h */,
-				75ED636821932B67008BDA79 /* ShaixuanView.m */,
-				75ED636A21932B77008BDA79 /* ShaixuanView.xib */,
 				755EA29A218B55880062345F /* ChooseTableViewCell.h */,
 				755EA29B218B55880062345F /* ChooseTableViewCell.m */,
 				755EA29C218B55880062345F /* ChooseTableViewCell.xib */,
 				755EA29F218B55980062345F /* ChooseModel.h */,
 				755EA2A0218B55980062345F /* ChooseModel.m */,
+				75ED636421932914008BDA79 /* ChooseView.h */,
+				75ED636521932914008BDA79 /* ChooseView.m */,
 			);
 			path = "筛选";
 			sourceTree = "<group>";
@@ -2284,13 +2278,13 @@
 		850EE41E1D01387600B59D3F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = com.XinGuoXin.cn;
 				TargetAttributes = {
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = G8H5MHKS76;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2443,7 +2437,6 @@
 				850698E51D056F410002D28B /* SearchChargeTableViewCell.xib in Resources */,
 				85394C491D1938570063D16C /* cor3.png in Resources */,
 				85C630A11E97302E0039D755 /* refresh1@2x.png in Resources */,
-				75ED636B21932B77008BDA79 /* ShaixuanView.xib in Resources */,
 				85A41C421D66B69000E981CD /* zhanHao@2x.png in Resources */,
 				85C630B01E97302E0039D755 /* search@2x.png in Resources */,
 				85C630AE1E97302E0039D755 /* scan@3x.png in Resources */,
@@ -2649,6 +2642,7 @@
 				853E789D1E1DF0F200A037CB /* MJRefreshGifHeader.m in Sources */,
 				858670021D76C440005FDF79 /* MyTrendTableViewCell.m in Sources */,
 				85D955E41D06C75D00615182 /* HeaderImageTableViewCell.m in Sources */,
+				75ED636621932914008BDA79 /* ChooseView.m in Sources */,
 				75F89A1E218D38D700B1DFFB /* MeInvoiceViewController.m in Sources */,
 				859C09F21D0815230002600D /* AccountSafeHeaderView.m in Sources */,
 				853E78961E1DF0F200A037CB /* MJRefreshHeader.m in Sources */,
@@ -2656,7 +2650,6 @@
 				85ADBBA51E6D51D9007B6400 /* ChuZiViewController.m in Sources */,
 				757BA83621854C5000D4B6FE /* ChargeNumberCell.m in Sources */,
 				757BA82C218415BC00D4B6FE /* ChargeInfoModel.m in Sources */,
-				756C788C2189EC5E00276E9F /* ChooseView.m in Sources */,
 				85D323501D0FA76100502185 /* RegisterRightView.m in Sources */,
 				85675B5E1D6A9AFF006B62E8 /* heartView.m in Sources */,
 				853B2C8A1DF7F0D100CBAF4F /* ZhouBianChargeModel.m in Sources */,
@@ -2728,7 +2721,6 @@
 				85E256141DFAA05F0085BAC8 /* NavView.m in Sources */,
 				8567BFC21EA9A5AD00397871 /* JiFenTableViewCell.m in Sources */,
 				8547DC671E7A843F00778E30 /* MainViewController.m in Sources */,
-				75ED636921932B67008BDA79 /* ShaixuanView.m in Sources */,
 				858D90371D792F04003B3E97 /* AppAgreementViewController.m in Sources */,
 				8587C05F1D17CC8400AA0918 /* QRCodeReader.m in Sources */,
 				859C09E41D0804E90002600D /* DetailZhuangWeiViewController.m in Sources */,
@@ -2793,29 +2785,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2849,29 +2830,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2899,15 +2869,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E140A293A740616CB4ECE233 /* Pods-Charge.debug.xcconfig */;
 			buildSettings = {
+
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+
+
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
+
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2975,10 +2950,11 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDeveloPP;
+				PROVISIONING_PROFILE = "1e581d90-54eb-4df8-9370-29fc3770dac0";
+				PROVISIONING_PROFILE_SPECIFIER = Charge_LXY_Text_PP;
+
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};
@@ -2988,15 +2964,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE6B885F74D7A77940C92369 /* Pods-Charge.release.xcconfig */;
 			buildSettings = {
+
+
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+
+
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
+
+
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3064,10 +3046,13 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.cn.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+
 				PROVISIONING_PROFILE = "b703f85e-698a-40fd-8386-a89be4065160";
 				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGADHOC_PP;
+
+
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};

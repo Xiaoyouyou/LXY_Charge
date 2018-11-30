@@ -7,21 +7,25 @@
 //
 
 #import "MyAddCarViewController.h"
-#import "MyCarListModel.h"
 
 @interface MyAddCarViewController ()<UITextFieldDelegate>
-@property (strong, nonatomic) IBOutlet MyCarListModel *listModel;
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
 
 @property (strong, nonatomic) IBOutlet UIScrollView *backScrollView;
-@property (strong, nonatomic) IBOutlet UITextField *carBrand;//输入车品牌
-@property (strong, nonatomic) IBOutlet UITextField *carModels;//选择车型号
-@property (weak, nonatomic) IBOutlet UIButton *searchCar;//选择车充类型
-@property (strong, nonatomic) IBOutlet UIButton *carType;//选择车辆类型
+@property (strong, nonatomic) IBOutlet UITextField *carBrand;
+//输入车型号
+@property (strong, nonatomic) IBOutlet UITextField *carModels;
+//选择车充类型
+@property (weak, nonatomic) IBOutlet UIButton *searchCar;
+//选择车辆类型
+@property (strong, nonatomic) IBOutlet UIButton *carType;
+//选择车牌所在地
 @property (strong, nonatomic) IBOutlet UIButton *carNumberAddress;
 //输入车牌号
-@property (strong, nonatomic) IBOutlet UITextField *carNumber;//车牌号码
-@property (strong, nonatomic) IBOutlet UIButton *sureBtn;//确定按钮
+@property (strong, nonatomic) IBOutlet UITextField *carNumber;
+//确定按钮
+@property (strong, nonatomic) IBOutlet UIButton *sureBtn;
+//返回图片
 @property (strong, nonatomic) IBOutlet UIButton *gobackBtn;
 
 @property (nonatomic ,strong)NSMutableDictionary *pamaer;
@@ -91,7 +95,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleLabel.text = self.titles;
     //    self.carModels.delegate = self;
     //    self.carNumber.delegate = self;
     self.carBrand.tag = 123;
@@ -109,35 +112,10 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyoBoard)];
     [self.backScrollView addGestureRecognizer:tap];
-    
-    if([self.titles isEqualToString:@"修改车辆"]){
-        NSLog(@"%@",self.listModel);
-        self.carBrand.text = self.listModel.brand;
-        self.carModels.text = self.listModel.pattern;
-        [self.searchCar setTitle:self.listModel.electricizeType forState:UIControlStateNormal];
-        [self.carType setTitle:self.listModel.type forState:UIControlStateNormal];
-        self.carNumber.text = self.listModel.plate_number;
-        [self.pamaer setValue:self.listModel.brand forKey:@"brand"];
-        [self.pamaer setValue:self.listModel.pattern forKey:@"pattern"];
-        [self.pamaer setValue:self.listModel.plate_number forKey:@"plateNumber"];
-        [self.pamaer setValue:self.listModel.electricizeType forKey:@"electricizeType"];
-    }
-    NSLog(@"%@",self.listModel);
 }
 
 
--(void)setCarModel:(MyCarListModel *)carModel{
-   self.listModel  = carModel;
-  
-    
-//    @property (nonatomic ,strong)NSString *brand;//品牌
-//    @property (nonatomic ,strong)NSString *img;
-//    @property (nonatomic ,strong)NSString *pattern;//型号
-//    @property (nonatomic ,strong)NSString *plate_number;//chepai
-//    @property (nonatomic ,strong)NSString *type;//车辆类型
-//    @property (nonatomic ,strong)NSString *electricizeType;//车充类型
-    
-}
+
 
 
 -(void)removeKeyoBoard{
@@ -153,39 +131,18 @@
 }
 //确定按钮
 - (IBAction)sureBtn:(id)sender {
-    [self.carNumber resignFirstResponder];
     [self.pamaer setValue:[Config getOwnID] forKey:@"userId"];
     NSLog(@"%@",self.pamaer);
 //    [self.pamaer setValue:@"" forKey:@"userId"];
-    if([self.titles isEqualToString:@"添加车辆"]){
-        [WMNetWork post:ChargeAddMyCare parameters:self.pamaer success:^(id responseObj) {
-            if([responseObj[@"status"] isEqualToString:@"0"]){
-                [MBProgressHUD showSuccess:@"添加车辆成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else if ([responseObj[@"status"] isEqualToString:@"1"]){
-                [MBProgressHUD showSuccess:@"添加车辆失败"];
-            }
-        } failure:^(NSError *error) {
-            
-        }];
-    }else if([self.titles isEqualToString:@"修改车辆"]){
-         [self.pamaer setValue:self.careID forKey:@"id"];
-        [WMNetWork post:ChargeEditMyCare parameters:self.pamaer success:^(id responseObj) {
-            if([responseObj[@"status"] isEqualToString:@"0"]){
-                [self.navigationController popViewControllerAnimated:YES];
-                [MBProgressHUD showSuccess:@"修改车辆成功"];
-            }else if ([responseObj[@"status"] isEqualToString:@"1"]){
-                [MBProgressHUD showSuccess:@"修改车辆失败"];
-            }
-        } failure:^(NSError *error) {
-            
-        }];
-    }
-    
-    
-   
-    
-    
+    [WMNetWork post:ChargeAddMyCare parameters:self.pamaer success:^(id responseObj) {
+        if([responseObj[@"status"] isEqualToString:@"0"]){
+            [MBProgressHUD showSuccess:@"添加车辆成功"];
+        }else if ([responseObj[@"status"] isEqualToString:@"1"]){
+            [MBProgressHUD showSuccess:@"添加车辆失败"];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
     
 }
 //选择车牌所在地

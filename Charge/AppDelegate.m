@@ -49,18 +49,11 @@ static NSString *channel = @"Publish channel";
 
 @property (nonatomic, strong) NSString *tempRegistrationID;
 @property (nonatomic, strong) TencentOAuth *tencentOAuth;//qq实例
-@property (nonatomic ,strong)NSMutableArray *allTypeArr;
+
 
 @end
 
 @implementation AppDelegate
-
--(NSMutableArray *)allTypeArr{
-    if(!_allTypeArr){
-        _allTypeArr = [NSMutableArray array];
-    }
-    return _allTypeArr;
-}
 
 -(void)initWeChat
 {
@@ -109,6 +102,7 @@ static NSString *channel = @"Publish channel";
 - (void)initialization
 {
     [self checkNetWork];//检测网络
+    [self initBaiDu];//初始化百度
     [self initWeChat];//初始化微信
     [self init3DTouch];//初始化3Dtouch
     //[self initTencent];//初始化qq
@@ -116,7 +110,7 @@ static NSString *channel = @"Publish channel";
 //    [self initAVAudio];//初始化后台运行
      [self initSaveLog];//初始化保存log日志文件
   // [RichAPM startWithAppID:Rich_APM_appkey];//初始化richAPM
-    [self initBaiDu];//初始化百度
+
     if (self.window == nil) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
         [self.window makeKeyAndVisible];
@@ -220,9 +214,11 @@ static NSString *channel = @"Publish channel";
     [NSThread sleepForTimeInterval:1.0];
     [self initialization];
 
+
     //版本更新
     [self VersionUpDate];
     
+
     //初始化JPUSH
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
@@ -234,7 +230,7 @@ static NSString *channel = @"Publish channel";
         // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-
+    
     // Required
     // init Push
     // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
@@ -260,17 +256,66 @@ static NSString *channel = @"Publish channel";
         _tempRegistrationID = registrationID;
         NSLog(@"_tempRegistrationID = %@",_tempRegistrationID);
     }];
-
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //设置别名
         [JPUSHService setAlias:_tempRegistrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     });
 
+    //版本更新
+    [self VersionUpDate];
+    
+    //初始化JPUSH
+    //Required
+    //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
+//    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+//    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+//    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+//        // 可以添加自定义categories
+//        // NSSet<UNNotificationCategory *> *categories for iOS10 or later
+//        // NSSet<UIUserNotificationCategory *> *categories for iOS8 and iOS9
+//    }
+//    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+//
+//    // Required
+//    // init Push
+//    // notice: 2.1.5版本的SDK新增的注册方法，改成可上报IDFA，如果没有使用IDFA直接传nil
+//    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
+//    [JPUSHService setupWithOption:launchOptions appKey:JPUSH_appkey
+//                          channel:channel
+//                 apsForProduction:isProduction
+//            advertisingIdentifier:nil];
+//    NSLog(@"launchOptions = %@",launchOptions);
+//    NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//     NSLog(@"推送消息sdfsdf==== %@",remoteNotification);
+//    if (launchOptions) {
+//        NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//        //这个判断是在程序没有运行的情况下收到通知，点击通知跳转页面
+//        if (remoteNotification) {
+//            NSLog(@"推送消息==== %@",remoteNotification);
+//            [self goToMssageViewControllerWith:remoteNotification];
+//        }
+//    }
+//    //获取RegistrationID
+//    [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
+//        NSLog(@"resCode : %d,registrationID: %@",resCode,registrationID);
+//        _tempRegistrationID = registrationID;
+//        NSLog(@"_tempRegistrationID = %@",_tempRegistrationID);
+//    }];
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        //设置别名
+//        [JPUSHService setAlias:_tempRegistrationID callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+//    });
+
+
     return YES;
 }
 
+
 -(void)VersionUpDate{
     
+
     NSDictionary *paramer = @{
                               @"appType" :@"ios"
                               };
@@ -306,6 +351,7 @@ static NSString *channel = @"Publish channel";
         
     }];
 
+
 //    {
 //        apkName = cdz;
 //        downloadUrl = "http://sys2.xgnet.com.cn/apk/cdz.apk";
@@ -314,6 +360,7 @@ static NSString *channel = @"Publish channel";
 //    }
 }
     
+>>>>>>> develope
 - (void)tagsAliasCallback:(int)iResCode tags:(NSString *)tags alias:(NSString*)alias {
     NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
     switch (iResCode) {

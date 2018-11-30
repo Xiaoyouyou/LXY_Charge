@@ -36,10 +36,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDv-Jy-ogJ">
-                            <rect key="frame" x="0.0" y="30" width="80" height="33"/>
+                            <rect key="frame" x="0.0" y="22" width="80" height="41"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州市" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmF-m1-MgH">
-                                    <rect key="frame" x="0.0" y="0.0" width="52" height="33"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="52" height="41"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="52" id="hA2-Lt-JYV"/>
                                     </constraints>
@@ -48,14 +48,14 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiantoudown.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sxb-v2-KyT">
-                                    <rect key="frame" x="51" y="12" width="9" height="9"/>
+                                    <rect key="frame" x="51" y="16" width="9" height="9"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="9" id="VeN-Em-WcW"/>
                                         <constraint firstAttribute="height" constant="9" id="mhF-0P-7d2"/>
                                     </constraints>
                                 </imageView>
                                 <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvw-81-vq2" userLabel="lineView">
-                                    <rect key="frame" x="72" y="8" width="1" height="17"/>
+                                    <rect key="frame" x="72" y="12" width="1" height="17"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="3cZ-oQ-bt2"/>
@@ -98,8 +98,14 @@
                         <constraint firstItem="ILU-5O-ry6" firstAttribute="top" secondItem="VC5-Db-YT1" secondAttribute="top" id="0VD-u3-fGw"/>
                         <constraint firstItem="qDv-Jy-ogJ" firstAttribute="leading" secondItem="TZy-cP-kfs" secondAttribute="leading" id="1eA-Gc-Owm"/>
                         <constraint firstAttribute="trailing" secondItem="0oV-SF-1Np" secondAttribute="trailing" id="5pH-dC-2uz"/>
+<<<<<<< HEAD
                         <constraint firstItem="qDv-Jy-ogJ" firstAttribute="top" secondItem="TZy-cP-kfs" secondAttribute="top" constant="30" id="KZG-Rf-58l"/>
                         <constraint firstItem="VC5-Db-YT1" firstAttribute="bottom" secondItem="RmF-m1-MgH" secondAttribute="bottom" id="OVS-H4-kib"/>
+=======
+                        <constraint firstItem="VC5-Db-YT1" firstAttribute="centerY" secondItem="ILU-5O-ry6" secondAttribute="centerY" id="AJz-LD-zLn"/>
+                        <constraint firstItem="0oV-SF-1Np" firstAttribute="top" secondItem="VC5-Db-YT1" secondAttribute="bottom" constant="8" symbolic="YES" id="Jlr-Cp-wCN"/>
+                        <constraint firstItem="qDv-Jy-ogJ" firstAttribute="top" secondItem="TZy-cP-kfs" secondAttribute="top" constant="22" id="KZG-Rf-58l"/>
+>>>>>>> 761a3a8208279e0e1bc23e02bf3a2fc1f372121a
                         <constraint firstItem="0oV-SF-1Np" firstAttribute="top" secondItem="qDv-Jy-ogJ" secondAttribute="bottom" id="Oh7-g0-T3l"/>
                         <constraint firstAttribute="bottom" secondItem="0oV-SF-1Np" secondAttribute="bottom" id="RHm-rt-ihW"/>
                         <constraint firstItem="ILU-5O-ry6" firstAttribute="leading" secondItem="VC5-Db-YT1" secondAttribute="trailing" constant="8" id="ahk-3z-OjA"/>

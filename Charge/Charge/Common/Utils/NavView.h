@@ -22,6 +22,5 @@
 
 -(void)setRightBtnMasonry;//设置右边按钮约束
 
-//hidden  right Btn
--(BOOL)hidRightBtn;
+
 @end

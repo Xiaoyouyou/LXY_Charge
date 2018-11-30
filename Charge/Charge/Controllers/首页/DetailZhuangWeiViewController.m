@@ -52,6 +52,7 @@
     //初始化数据
 //    self.arraytitle = @[@"电费",@"停车费",@"服务费",@"预约费用",@"支付方式",@"开放时间"];
      self.arraytitle = @[@"收费规则",@"开放时间",@"停车费",@"支付方式",@"收费说明"];
+
     // self.FuTitle = @[@"0.5元/度",@"免费",@"免费",@"5元",@"00:00~24:00",@"微信"];
     
     [self creatUI];
@@ -93,7 +94,7 @@
     }];
     
     //tableview 中的 topview
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, 100)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, 140)];
     self.tableView.tableHeaderView = backView;
     detailView = [[DetailZhuangWeiHeaderView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, 90)];
     [detailView.pictImageView sd_setImageWithURL:[NSURL URLWithString:self.picture]];
@@ -177,6 +178,7 @@
 //        {
 //          Cell.detailTextLabel.text = [NSString stringWithFormat:@"%@元/分钟",_parkingFee];
 //        }
+
         Cell.detailTextLabel.text = [self.dataDict objectForKey:@"openTime"];
     }else if (indexPath.section == 0 && indexPath.row ==2)
     {

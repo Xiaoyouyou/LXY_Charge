@@ -167,7 +167,7 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [[Singleton sharedInstance] socketConnectHost];//连接socket
             });
-//            [MBProgressHUD showSuccess:@"和后台连接成功"];
+            [MBProgressHUD showSuccess:@"和后台连接成功"];
         }
      };
     
@@ -176,15 +176,15 @@
     MYLog(@"%@",str);
     [MBProgressHUD hideHUDForView:self.view];
         
-//    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"socket连接失败,是否重新连接" preferredStyle:UIAlertControllerStyleAlert];
-//
-//    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"socket连接失败,是否重新连接" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[Singleton sharedInstance] socketConnectHost];//连接socket
 //        [self.navigationController popToRootViewControllerAnimated:YES];
-//    }];
+    }];
     
-//    [alertVc addAction:sureAction];
-//    [self presentViewController:alertVc animated:YES completion:nil];
+    [alertVc addAction:sureAction];
+    [self presentViewController:alertVc animated:YES completion:nil];
     
     };
 }
@@ -332,16 +332,15 @@
                 //超时计时器开启
                 [self.timer fire];
                 
-//                [MBProgressHUD showMessage:@"请插充电枪到电动车" toView:self.view];
+                [MBProgressHUD showMessage:@"请插充电枪到电动车" toView:self.view];
                 
                 [Singleton sharedInstance].StartChargeBlock = ^(NSString *text)
                 {
-                    NSLog(@"返回的数据：%@",text);
                 NSString *status = [text substringWithRange:NSMakeRange(4, 4)];
                 if ([status isEqualToString:@"0101"]) {
-                        [MBProgressHUD showMessage:@"充电桩启动中，请稍等" toView:self.view];
+                        [MBProgressHUD showMessage:@"正在初始化充电桩，请您耐心等待" toView:self.view];
                 }else if ([status isEqualToString:@"0100"]){
-                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"开启充电桩失败" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"开启充电失败" preferredStyle:UIAlertControllerStyleAlert];
                     
                     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [self.navigationController popToRootViewControllerAnimated:YES];
@@ -380,11 +379,11 @@
                         
                         //收到开始充电确认指令上传经纬度
                         //上传经纬度
-                         if(self.latitude == nil || self.longitude == nil || address == nil || district == nil || city == nil || province == nil ) {
+                        if (self.latitude == NULL || self.longitude == NULL || address == NULL || district == NULL || city == NULL || province == NULL ) {
                             NSLog(@"上传的地址或者经纬度某个为空，不上传地址");
                         }else
                         {
-                             if(self.isUpdateLocation == 1) {
+                            if (self.isUpdateLocation == 1) {
                                 //调用上传经纬度位置接口
                                 [self UploadDeviceLocations];
                                 self.isUpdateLocation =0;
@@ -394,20 +393,19 @@
                         self.timer = nil;
                         //断开连接
                         [[Singleton sharedInstance] cutOffSocket];
-                    }
+                    }else if ([status isEqualToString:@"0600"]){
+                        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"初始化充电桩失败,请再试一遍" preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                            [self.navigationController popToRootViewControllerAnimated:YES];
+                        }];
+                        
+                        [alertVc addAction:sureAction];
+                        [self presentViewController:alertVc animated:YES completion:nil];
+                        [[Singleton sharedInstance] cutOffSocket];
+                     }
                     
-                }else if ([status isEqualToString:@"0600"]){
-                    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"提示" message:@"启动异常，请检查电桩是否正常" preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                        [self.navigationController popToRootViewControllerAnimated:YES];
-                         [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    }];
-                    
-                    [alertVc addAction:sureAction];
-                    [self presentViewController:alertVc animated:YES completion:nil];
-                    [[Singleton sharedInstance] cutOffSocket];
-                }
+                   }
                
             };
                 

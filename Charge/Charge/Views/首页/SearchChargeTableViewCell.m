@@ -41,19 +41,19 @@
     self.costLab.text = tempCostLab;
 }
 
-////快充
-//-(void)setTempFastLab:(NSString *)tempFastLab
-//{
-//    _tempFastLab = tempFastLab;
-//    self.fastLab.text = [NSString stringWithFormat:@"快(%@)",tempFastLab];
-//}
+//快充
+-(void)setTempFastLab:(NSString *)tempFastLab
+{
+    _tempFastLab = tempFastLab;
+    self.fastLab.text = [NSString stringWithFormat:@"快(%@)",tempFastLab];
+}
 
-////慢充
-//-(void)setTempSlowLab:(NSString *)tempSlowLab
-//{
-//    _tempSlowLab = tempSlowLab;
-//    self.slowLab.text = [NSString stringWithFormat:@"慢(%@)",tempSlowLab];
-//}
+//慢充
+-(void)setTempSlowLab:(NSString *)tempSlowLab
+{
+    _tempSlowLab = tempSlowLab;
+    self.slowLab.text = [NSString stringWithFormat:@"慢(%@)",tempSlowLab];
+}
 
 //充电站名
 -(void)setTempChargeName:(NSString *)tempChargeName
@@ -66,12 +66,7 @@
 -(void)setTempDistabceLab:(NSString *)tempDistabceLab
 {
     _tempDistabceLab = tempDistabceLab;
-//    if(tempDistabceLab.floatValue > 1000){
-//     CGFloat distabce = tempDistabceLab.floatValue/1000;
-        self.distabceLab.text = [NSString stringWithFormat:@"%.2lfkm",tempDistabceLab.floatValue];
-//    }else{
-//        self.distabceLab.text = [NSString stringWithFormat:@"%.2lfm",tempDistabceLab.floatValue];
-//    }
+    self.distabceLab.text = tempDistabceLab;
 }
 
 //充电桩地址
