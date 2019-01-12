@@ -37,7 +37,7 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     //初始化自定义nav
-    NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"昵称"];
+    NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"昵称" rightTitle:@"保存"];
     [nav setRightBtnMasonry];
     nav.backBlock = ^{
         [self.navigationController popViewControllerAnimated:YES];
