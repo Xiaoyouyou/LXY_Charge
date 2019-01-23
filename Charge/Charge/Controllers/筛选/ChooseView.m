@@ -210,14 +210,19 @@
             NSString *strlo = [NSString stringWithFormat:@"%lf", userLocation.longitude ];
             [paramer setValue:strla forKey:@"latitude"];
             [paramer setValue:strlo forKey: @"longitude"];
-            [paramer setValue:@"00" forKey:@"state"];
-            if (([type objectForKey:@"0"] == nil && [type objectForKey:@"1"] == nil) || ([type objectForKey:@"0"] && [type objectForKey:@"1"]) ) {
-                [paramer setValue:@"" forKey:@"acFlag"];
-            }else if([type objectForKey:@"0"]){
-                [paramer setValue:@"0" forKey:@"acFlag"];
-            }else{
-                [paramer setValue:@"1" forKey:@"acFlag"];
-            }
+            [paramer setValue:[type objectForKey:@"state"] forKey:@"state"];//00 可用  02否
+//             if (([type objectForKey:@"0"] == nil && [type objectForKey:@"1"] == nil) || ([type objectForKey:@"0"] && [type objectForKey:@"1"]) ) {
+//                [paramer setValue:@"" forKey:@"acFlag"];
+//            }else if([type objectForKey:@"0"]){
+//                [paramer setValue:@"0" forKey:@"acFlag"];
+//            }else{
+//                [paramer setValue:@"1" forKey:@"acFlag"];
+//            }
+            
+            [paramer setValue:[type objectForKey:@"acFlag"] forKey:@"acFlag"];
+            [paramer setValue:[type objectForKey:@"freePark"] forKey:@"freePark"];
+            
+            
             [weakSelf loadDataSource:paramer];
             [weakSelf.views removeFromSuperview];
             weakSelf.views = nil;

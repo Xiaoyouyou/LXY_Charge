@@ -372,6 +372,7 @@
     ZhuangWeiMesVC.zhuangA = self.A;
     ZhuangWeiMesVC.zhzuangB = self.B;
     ZhuangWeiMesVC.zhuangID = self.zhuangID;
+    ZhuangWeiMesVC.stationID = self.id;
     //  ZhuangWeiMesVC.dict = self.cheWeiDict;//桩的数量字典
     
     ZhuangWeiMesVC.view.frame = self.subView.frame;

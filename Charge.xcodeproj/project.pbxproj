@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6401F5074D8CF40A598E84E8 /* libPods-Charge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A854C1C871D76831930C96 /* libPods-Charge.a */; };
+		7529678521F73EB400A4809A /* left_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 7529678221F73EB400A4809A /* left_red.png */; };
+		7529678621F73EB400A4809A /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 7529678321F73EB400A4809A /* green.png */; };
+		7529678721F73EB400A4809A /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 7529678421F73EB400A4809A /* red.png */; };
 		755EA29D218B55880062345F /* ChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA29B218B55880062345F /* ChooseTableViewCell.m */; };
 		755EA29E218B55880062345F /* ChooseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 755EA29C218B55880062345F /* ChooseTableViewCell.xib */; };
 		755EA2A1218B55980062345F /* ChooseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 755EA2A0218B55980062345F /* ChooseModel.m */; };
@@ -44,10 +47,6 @@
 		75F1C39C2180CD1500577B46 /* ScreeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C39B2180CD1500577B46 /* ScreeningViewController.m */; };
 		75F1C3A82181EB8100577B46 /* MyCarListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F1C3A72181EB8100577B46 /* MyCarListModel.m */; };
 		75F1C3AA2182022E00577B46 /* addMyCar.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F1C3A92182022E00577B46 /* addMyCar.png */; };
-		75F51827218DEEDE00B467F7 /* left_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51823218DEEDD00B467F7 /* left_red.png */; };
-		75F51828218DEEDE00B467F7 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51824218DEEDD00B467F7 /* green.png */; };
-		75F51829218DEEDE00B467F7 /* left_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51825218DEEDD00B467F7 /* left_green.png */; };
-		75F5182A218DEEDE00B467F7 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 75F51826218DEEDD00B467F7 /* red.png */; };
 		75F89A1E218D38D700B1DFFB /* MeInvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F89A1C218D38D700B1DFFB /* MeInvoiceViewController.m */; };
 		75F89A1F218D38D700B1DFFB /* MeInvoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75F89A1D218D38D700B1DFFB /* MeInvoiceViewController.xib */; };
 		75FDA57521778D98004A70E1 /* MyAddCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FDA57321778D98004A70E1 /* MyAddCarViewController.m */; };
@@ -437,6 +436,9 @@
 
 /* Begin PBXFileReference section */
 		29A854C1C871D76831930C96 /* libPods-Charge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Charge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7529678221F73EB400A4809A /* left_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_red.png; sourceTree = "<group>"; };
+		7529678321F73EB400A4809A /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		7529678421F73EB400A4809A /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		755EA29A218B55880062345F /* ChooseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseTableViewCell.h; sourceTree = "<group>"; };
 		755EA29B218B55880062345F /* ChooseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseTableViewCell.m; sourceTree = "<group>"; };
 		755EA29C218B55880062345F /* ChooseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTableViewCell.xib; sourceTree = "<group>"; };
@@ -499,10 +501,6 @@
 		75F1C3A62181EB8100577B46 /* MyCarListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCarListModel.h; sourceTree = "<group>"; };
 		75F1C3A72181EB8100577B46 /* MyCarListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCarListModel.m; sourceTree = "<group>"; };
 		75F1C3A92182022E00577B46 /* addMyCar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addMyCar.png; sourceTree = "<group>"; };
-		75F51823218DEEDD00B467F7 /* left_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_red.png; sourceTree = "<group>"; };
-		75F51824218DEEDD00B467F7 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
-		75F51825218DEEDD00B467F7 /* left_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_green.png; sourceTree = "<group>"; };
-		75F51826218DEEDD00B467F7 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		75F89A1B218D38D700B1DFFB /* MeInvoiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeInvoiceViewController.h; sourceTree = "<group>"; };
 		75F89A1C218D38D700B1DFFB /* MeInvoiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeInvoiceViewController.m; sourceTree = "<group>"; };
 		75F89A1D218D38D700B1DFFB /* MeInvoiceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeInvoiceViewController.xib; sourceTree = "<group>"; };
@@ -1099,6 +1097,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7529678121F73EB400A4809A /* 图标 */ = {
+			isa = PBXGroup;
+			children = (
+				7529678221F73EB400A4809A /* left_red.png */,
+				7529678321F73EB400A4809A /* green.png */,
+				7529678421F73EB400A4809A /* red.png */,
+			);
+			path = "图标";
+			sourceTree = SOURCE_ROOT;
+		};
 		757BA8242184110D00D4B6FE /* 充电计费规则详情 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,22 +1224,10 @@
 			path = "Charge/Charge/Models/我的车辆";
 			sourceTree = SOURCE_ROOT;
 		};
-		75F51822218DEEDD00B467F7 /* 图标 */ = {
-			isa = PBXGroup;
-			children = (
-				75F51823218DEEDD00B467F7 /* left_red.png */,
-				75F51824218DEEDD00B467F7 /* green.png */,
-				75F51825218DEEDD00B467F7 /* left_green.png */,
-				75F51826218DEEDD00B467F7 /* red.png */,
-			);
-			path = "图标";
-			sourceTree = "<group>";
-		};
 		850EE41D1D01387600B59D3F = {
 			isa = PBXGroup;
 			children = (
 				75BCDA262173938000AC2F73 /* PrefixHeader.pch */,
-				75F51822218DEEDD00B467F7 /* 图标 */,
 				850EE4281D01387600B59D3F /* Charge */,
 				850EE4421D01387600B59D3F /* ChargeTests */,
 				850EE44D1D01387600B59D3F /* ChargeUITests */,
@@ -1255,6 +1251,7 @@
 			isa = PBXGroup;
 			children = (
 				8533CEB61DF6885F00F88A3A /* Charge.entitlements */,
+				7529678121F73EB400A4809A /* 图标 */,
 				850EE4651D0154C900B59D3F /* Charge */,
 				850EE42C1D01387600B59D3F /* AppDelegate.h */,
 				850EE42D1D01387600B59D3F /* AppDelegate.m */,
@@ -2290,7 +2287,7 @@
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = G8H5MHKS76;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2373,7 +2370,6 @@
 				852EB5ED1EA0B7D600C5FE42 /* guize@2x.png in Resources */,
 				85E69F641D0E9CD2002D8AB5 /* mima@2x.png in Resources */,
 				850698E71D0571E20002D28B /* kuais@2x.png in Resources */,
-				75F51829218DEEDE00B467F7 /* left_green.png in Resources */,
 				852EB5EE1EA0B7D600C5FE42 /* guize@3x.png in Resources */,
 				850698E91D05737D0002D28B /* mans@2x.png in Resources */,
 				8529C7A91D24EB7300211D2F /* YuYueTableViewCell.xib in Resources */,
@@ -2382,7 +2378,7 @@
 				850EE4A01D01794700B59D3F /* dingwei@2x.png in Resources */,
 				85640E971E5C435D002C366D /* fault@3x.png in Resources */,
 				85A41C461D66E42800E981CD /* payIcon@2x.png in Resources */,
-				75F51828218DEEDE00B467F7 /* green.png in Resources */,
+				7529678521F73EB400A4809A /* left_red.png in Resources */,
 				853763021E9B2C2600623ABC /* news@2x.png in Resources */,
 				8584AAE31E5D1C2400F31721 /* stop@2x.png in Resources */,
 				859C09CA1D07E7240002600D /* ChargeDetailViewController.xib in Resources */,
@@ -2452,7 +2448,6 @@
 				8563493C1D0D55F100535714 /* caricon@2x.png in Resources */,
 				85640E9B1E5C435D002C366D /* YuYues@2x.png in Resources */,
 				857FD6811E9E00A500D4E000 /* 02@3x.png in Resources */,
-				75F51827218DEEDE00B467F7 /* left_red.png in Resources */,
 				85394C481D1938570063D16C /* cor2.png in Resources */,
 				85C630A51E97302E0039D755 /* refresh2@3x.png in Resources */,
 				85992AB71EA6F8CA002B3E08 /* kefus@3x.png in Resources */,
@@ -2498,7 +2493,6 @@
 				85E2560E1DFA546D0085BAC8 /* choose@2x.png in Resources */,
 				85866FFB1D76B97F005FDF79 /* SystemTableViewCell.xib in Resources */,
 				857FD67E1E9E00A500D4E000 /* 01@2x.png in Resources */,
-				75F5182A218DEEDE00B467F7 /* red.png in Resources */,
 				85E12C341D6AAC5600187A36 /* bgView2s@2x.png in Resources */,
 				85A7E2B81D4C86B1002953EA /* QianMingTableViewCell.xib in Resources */,
 				852EB5FE1EA0BC1A00C5FE42 /* ref7@2x.png in Resources */,
@@ -2509,6 +2503,7 @@
 				8587C05D1D17CC8400AA0918 /* ic_map_light@2x.png in Resources */,
 				85640E9C1E5C435D002C366D /* YuYues@3x.png in Resources */,
 				852FB9E51D40BD6A00B022DB /* greenBg@2x.png in Resources */,
+				7529678721F73EB400A4809A /* red.png in Resources */,
 				853763031E9B2C2600623ABC /* news@3x.png in Resources */,
 				85AD8E2B1E27283100C5DE82 /* AlipaySDK.bundle in Resources */,
 				852EB5F91EA0BC1A00C5FE42 /* ref1@2x.png in Resources */,
@@ -2518,6 +2513,7 @@
 				85394C4B1D1938570063D16C /* cor1.png in Resources */,
 				850698E01D05676B0002D28B /* jiantoudown@2x.png in Resources */,
 				852EB5FB1EA0BC1A00C5FE42 /* ref3@2x.png in Resources */,
+				7529678621F73EB400A4809A /* green.png in Resources */,
 				852409011EA491E600E71529 /* 666.gif in Resources */,
 				85C630A31E97302E0039D755 /* refresh2.png in Resources */,
 				85C630971E97302E0039D755 /* caidan.png in Resources */,
@@ -2906,7 +2902,7 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2978,7 +2974,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDeveloPP;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};
@@ -2995,7 +2991,7 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3067,7 +3063,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b703f85e-698a-40fd-8386-a89be4065160";
-				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDistriPP;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};

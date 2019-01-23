@@ -64,7 +64,7 @@
     leftView = [[adminLeftView alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
     leftView.imageName = @"mima";
     
-    mima = [[UITextField alloc] initWithFrame:CGRectMake(15, 80, XYScreenWidth-30, 45)];
+    mima = [[UITextField alloc] initWithFrame:CGRectMake(15, StatusBarH + 60, XYScreenWidth-30, 45)];
     mima.leftView = leftView;
     mima.delegate = self;
     mima.placeholder = @"请输入新密码(长度6~16位)";

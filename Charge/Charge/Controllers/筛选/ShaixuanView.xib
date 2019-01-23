@@ -32,7 +32,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全时段开放" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3n-Zz-Mc2">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="停车免费" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3n-Zz-Mc2">
                     <rect key="frame" x="30" y="90" width="90" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
@@ -47,8 +47,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected" image="selected"/>
+                    <state key="highlighted" image="selected"/>
                     <connections>
-                        <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="sLN-e5-GAe"/>
+                        <action selector="btnJiaoliu:" destination="iN0-l3-epB" eventType="touchUpInside" id="0ZC-Ra-6e3"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhn-hb-cNP">
@@ -59,8 +60,11 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected" image="selected"/>
+                    <state key="highlighted" image="selected">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                     <connections>
-                        <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="VQW-Rd-0M8"/>
+                        <action selector="btnZhiLiu:" destination="iN0-l3-epB" eventType="touchUpInside" id="7Nf-Ty-tJe"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enI-K5-fJ7">
@@ -68,11 +72,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="是" image="nomal">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                     </state>
                     <state key="selected" image="selected"/>
+                    <state key="highlighted" image="selected"/>
                     <connections>
-                        <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="9Nk-eo-juT"/>
+                        <action selector="kongxianYES:" destination="iN0-l3-epB" eventType="touchUpInside" id="Uy3-OS-z6e"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYU-zb-g4n">
@@ -83,8 +88,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected" image="selected"/>
+                    <state key="highlighted" image="selected"/>
                     <connections>
-                        <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="lMn-XT-EN1"/>
+                        <action selector="kongxianNO:" destination="iN0-l3-epB" eventType="touchUpInside" id="23z-QA-QRM"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngo-Ya-CZc">
@@ -95,8 +101,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected" image="selected"/>
+                    <state key="highlighted" image="selected"/>
                     <connections>
-                        <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vzq-Mw-CAp"/>
+                        <action selector="mainfeiYES:" destination="iN0-l3-epB" eventType="touchUpInside" id="8t9-86-PqS"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3b-DH-Ads">
@@ -107,8 +114,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="selected" image="selected"/>
+                    <state key="highlighted" image="selected"/>
                     <connections>
-                        <action selector="chooseTypeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="3Nv-IQ-vyb"/>
+                        <action selector="mianfeiNO:" destination="iN0-l3-epB" eventType="touchUpInside" id="T0D-lG-WI9"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMV-hL-wak">

@@ -46,15 +46,79 @@
 }
 
 
+- (IBAction)btnZhiLiu:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (_zhiliu.selected == YES) {
+        [self.dict setValue:@"1" forKey:@"acFlag"];
+        _jiaoliu.selected = NO;
+    }else{
+         [self.dict removeObjectForKey:@"acFlag"];
+    }
+    
+}
+
+- (IBAction)btnJiaoliu:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (_jiaoliu.selected == YES) {
+         [self.dict setValue:@"0" forKey:@"acFlag"];
+        _zhiliu.selected = NO;
+    }else{
+         [self.dict removeObjectForKey:@"acFlag"];
+    }
+}
+
+
+
+
+- (IBAction)kongxianYES:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (_yesKongxian.selected == YES) {
+         [self.dict setValue:@"00" forKey:@"state"];
+        _noKongxian.selected = NO;
+    }else{
+        [self.dict removeObjectForKey:@"state"];
+    }
+}
+
+- (IBAction)kongxianNO:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (_noKongxian.selected == YES) {
+         [self.dict setValue:@"02" forKey:@"state"];
+        _yesKongxian.selected = NO;
+    }else{
+        [self.dict removeObjectForKey:@"state"];
+    }
+}
+- (IBAction)mainfeiYES:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (_yesKaifang.selected == YES) {
+         [self.dict setValue:@"0" forKey:@"freePark"];
+        _noKaifang.selected = NO;
+    }else{
+        [self.dict removeObjectForKey:@"freePark"];
+    }
+}
+- (IBAction)mianfeiNO:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (_noKaifang.selected == YES) {
+         [self.dict setValue:@"1" forKey:@"freePark"];
+        _yesKaifang.selected = NO;
+    }else{
+        [self.dict removeObjectForKey:@"freePark"];
+    }
+}
+
+
+
 - (IBAction)chooseTypeBtn:(UIButton *)sender {
     sender.selected = !sender.selected;
     NSLog(@"%ld",sender.tag);
     NSString *str = [NSString stringWithFormat:@"%d",(int)sender.tag];
     if (sender.tag == 0 ) {
         if (sender.selected == YES) {
-             [self.dict setValue:@"交流" forKey:str];
+          
         }else{
-            [self.dict removeObjectForKey:str];
+           
         }
        
     }else if (sender.tag == 1 & sender.selected == YES){
@@ -80,19 +144,20 @@
         
     }else if (sender.tag == 4 ){
         if (sender.selected == YES) {
-            [self.dict setValue:@"是" forKey:str];
+            [self.dict setValue:@"0" forKey:@"freePark"];
         }else{
-            [self.dict removeObjectForKey:str];
+            [self.dict removeObjectForKey:@"freePark"];
         }
         
     }else if (sender.tag == 5 ){
         if (sender.selected == YES) {
-            [self.dict setValue:@"否" forKey:str];
+            [self.dict setValue:@"1" forKey:@"freePark"];
         }else{
-            [self.dict removeObjectForKey:str];
+            [self.dict removeObjectForKey:@"freePark"];
         }
         
     }
+    
     
     
 }
@@ -102,7 +167,7 @@
 }
 
 - (IBAction)sureBtn:(id)sender {
-    NSLog(@"点击的是确认按钮");
-    self.chooseBlock(self.dict);
+    NSLog(@"点击的是确认按钮%@",self.dict);
+    self.chooseBlock(_dict);
 }
 @end
