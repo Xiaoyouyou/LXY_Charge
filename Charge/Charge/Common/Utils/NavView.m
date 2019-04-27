@@ -121,16 +121,16 @@
         rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         [rightBtn setTitle:rightTitle forState:UIControlStateNormal];
         [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-   //   [rightBtn addTarget: self action:@selector(rightBtnlAction) forControlEvents:UIControlEventTouchUpInside];
+        [rightBtn addTarget: self action:@selector(rightBtnlAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:rightBtn];
         
-        //rightTapView
-        rightTapView = [[UIView alloc] init];
-        [self addSubview:rightTapView];
-        
-        //右边按钮手势
-        UITapGestureRecognizer *RightTap = [[[UITapGestureRecognizer alloc] init]initWithTarget:self action:@selector(rightTapViewAction)];
-        [rightTapView addGestureRecognizer:RightTap];
+//        //rightTapView
+//        rightTapView = [[UIView alloc] init];
+//        [self addSubview:rightTapView];
+//
+//        //右边按钮手势
+//        UITapGestureRecognizer *RightTap = [[[UITapGestureRecognizer alloc] init]initWithTarget:self action:@selector(rightTapViewAction)];
+//        [rightTapView addGestureRecognizer:RightTap];
         
         [self MakeMasonry];
         [self setRightBtnTitleMasonry];

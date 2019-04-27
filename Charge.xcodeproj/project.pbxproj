@@ -28,6 +28,7 @@
 		757BA869218886E800D4B6FE /* ChargeMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA867218886E800D4B6FE /* ChargeMessageTableViewCell.m */; };
 		757BA86A218886E800D4B6FE /* ChargeMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 757BA868218886E800D4B6FE /* ChargeMessageTableViewCell.xib */; };
 		757BA86D2188945200D4B6FE /* ChargeMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 757BA86C2188945200D4B6FE /* ChargeMessageModel.m */; };
+		75A77D20223D15330047ACF6 /* YZWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A77D1F223D15330047ACF6 /* YZWebViewController.m */; };
 		75BCDA1E217316A700AC2F73 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA1D217316A600AC2F73 /* MeViewController.m */; };
 		75BCDA242173488300AC2F73 /* MeVcWithMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA232173488300AC2F73 /* MeVcWithMineView.m */; };
 		75BCDA672174D4B400AC2F73 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BCDA662174D4B400AC2F73 /* MyCarViewController.m */; };
@@ -468,6 +469,8 @@
 		757BA868218886E800D4B6FE /* ChargeMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChargeMessageTableViewCell.xib; sourceTree = "<group>"; };
 		757BA86B2188945200D4B6FE /* ChargeMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChargeMessageModel.h; sourceTree = "<group>"; };
 		757BA86C2188945200D4B6FE /* ChargeMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChargeMessageModel.m; sourceTree = "<group>"; };
+		75A77D1E223D15330047ACF6 /* YZWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZWebViewController.h; sourceTree = "<group>"; };
+		75A77D1F223D15330047ACF6 /* YZWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZWebViewController.m; sourceTree = "<group>"; };
 		75B6616621B0E3BA00B94AEC /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		75BCDA1C217316A600AC2F73 /* MeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		75BCDA1D217316A600AC2F73 /* MeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
@@ -1456,6 +1459,8 @@
 				85313FE11E9CB0750002FC97 /* PersonHeaderViewController.m */,
 				8586D9681E9F7BFD00D061EE /* ScoreViewController.h */,
 				8586D9691E9F7BFD00D061EE /* ScoreViewController.m */,
+				75A77D1E223D15330047ACF6 /* YZWebViewController.h */,
+				75A77D1F223D15330047ACF6 /* YZWebViewController.m */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -2287,7 +2292,7 @@
 					850EE4251D01387600B59D3F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = G8H5MHKS76;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2583,6 +2588,7 @@
 				853E78981E1DF0F200A037CB /* MJRefreshAutoNormalFooter.m in Sources */,
 				8538BAB51DDD54AB00358374 /* ChargingMessageModel.m in Sources */,
 				8586D96B1E9F7BFD00D061EE /* ScoreViewController.m in Sources */,
+				75A77D20223D15330047ACF6 /* YZWebViewController.m in Sources */,
 				85A41C371D66B14400E981CD /* ChangePayViewController.m in Sources */,
 				8587C0601D17CC8400AA0918 /* QRCodeReaderView.m in Sources */,
 				853E78931E1DF0F200A037CB /* MJRefreshBackFooter.m in Sources */,
@@ -2902,7 +2908,7 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2974,7 +2980,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDeveloPP;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};
@@ -2991,7 +2997,7 @@
 				CODE_SIGN_ENTITLEMENTS = Charge/Charge.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G8H5MHKS76;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3063,7 +3069,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.XingGuoXin.Charge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b703f85e-698a-40fd-8386-a89be4065160";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = LXYYOUZHUANGDistriPP;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s arm64 armv7 arm64e i386";
 			};

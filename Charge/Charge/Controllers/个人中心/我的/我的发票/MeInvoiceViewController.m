@@ -93,9 +93,10 @@
         NSLog(@"%@",dict);
         //    [self.pamaer setValue:@"" forKey:@"userId"];
         [WMNetWork post:CheckInvoice parameters:dict success:^(id responseObj) {
+            
             if([responseObj[@"status"] isEqualToString:@"0"]){
-                
-                self.invoicePrice.placeholder = [NSString stringWithFormat:@"可开金额%@元",responseObj[@"money"]];
+                NSString *money = [NSString stringWithFormat:@"%@",responseObj[@"money"]];
+                self.invoicePrice.placeholder = [NSString stringWithFormat:@"可开金额%.2f元",money.floatValue];
             }else if ([responseObj[@"status"] isEqualToString:@"-1"]){
                 self.invoicePrice.text = @"0";
                 [MBProgressHUD showSuccess:responseObj[@"msg"]];

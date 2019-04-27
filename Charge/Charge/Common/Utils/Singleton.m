@@ -16,7 +16,7 @@
 //#define Host_PORT 3005
 //#define Host_IP @"10.0.0.5"
 //#define Host_IP @"183.234.61.201"
-//#define Host_IP @"192.168.5.4"
+//#define Host_IP @"192.168.1.101"
 #define Host_IP @"47.107.14.253"
 //#define Host_IP @"120.77.146.167"
 
@@ -127,7 +127,7 @@
     //如果正在充电，重连后发送继续充电指令
     if ([[Config getNormalEndChargingFlag] isEqualToString:@"0"]){//获得用户充电状态
     
-        [self continueCharging];//发送继续充电指令
+//        [self continueCharging];//发送继续充电指令
     }
     
     [clientSocket readDataWithTimeout:- 1 tag:0];

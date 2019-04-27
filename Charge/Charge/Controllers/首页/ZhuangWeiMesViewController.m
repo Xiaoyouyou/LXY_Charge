@@ -56,6 +56,8 @@
 //    [self.view addSubview:_zhuangWei];
 //
     NSLog(@"%@",self.zhuangID);
+    NSLog(@"%@",self.stationID);
+    
     [self creatUI];
 
 }
@@ -66,8 +68,7 @@
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight-StatusBarH - 44 - 44)];
 //    webView.delegate = self;
     [self.view addSubview:webView];
-    
-    NSString *filePath  = [NSString stringWithFormat:@"%@",@"http://192.168.5.4:8080/app/app_h5/list.jsp?stationId=b2c1bbfc323f4f9996de2d8bdaf282d2"];
+    NSString *filePath  = [NSString stringWithFormat:@"%@%@%@",H5BaseURL,@"/list.jsp?stationId=",self.stationID];
     NSURL *localurl = [NSURL URLWithString:filePath];
     [webView loadRequest:[NSURLRequest requestWithURL:localurl]];
     

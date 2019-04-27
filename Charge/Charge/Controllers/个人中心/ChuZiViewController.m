@@ -18,6 +18,8 @@
 #import "Config.h"
 #import "API.h"
 #import "NavView.h"
+#import "YZWebViewController.h"
+
 
 
 typedef enum{
@@ -92,9 +94,13 @@ typedef enum{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //初始化自定义nav
-    NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"余额储值"];
+    NavView *nav = [[NavView alloc] initWithFrame:CGRectZero title:@"余额储值" rightTitle:@"退款"];
     nav.backBlock = ^{
         [self.navigationController popViewControllerAnimated:YES];
+    };
+    nav.rightBlock = ^{
+        YZWebViewController *web = [[YZWebViewController alloc] init];
+        [self.navigationController pushViewController:web animated:YES];
     };
     self.navView = nav;
     
