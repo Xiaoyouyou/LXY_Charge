@@ -25,6 +25,7 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - SPCycleScrollView (2.0.1)
   - sqlite3 (3.8.7.4):
     - sqlite3/common (= 3.8.7.4)
   - sqlite3/common (3.8.7.4)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - MJExtension (~> 2.5.9)
   - Reachability (~> 3.2)
   - SDWebImage (~> 3.7.5)
+  - SPCycleScrollView (~> 2.0.1)
   - sqlite3 (~> 3.8.7.4)
 
 SPEC REPOS:
@@ -51,6 +53,7 @@ SPEC REPOS:
     - MJExtension
     - Reachability
     - SDWebImage
+    - SPCycleScrollView
     - sqlite3
 
 SPEC CHECKSUMS:
@@ -62,8 +65,9 @@ SPEC CHECKSUMS:
   MJExtension: b8c1321a77d91bcc007b94d38cbf5383c95ea30e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SPCycleScrollView: 07e44ab7c3e918dc9d51f7f1cff76642044ee89f
   sqlite3: 7ab5e4e7c6eb9cfd098d481719a8b7edea99ccc8
 
-PODFILE CHECKSUM: 6ac01e66e940865a183173a458d797734a03411a
+PODFILE CHECKSUM: eaccae925745a6c8e92e0e56c9077d1d18f2d474
 
 COCOAPODS: 1.5.3

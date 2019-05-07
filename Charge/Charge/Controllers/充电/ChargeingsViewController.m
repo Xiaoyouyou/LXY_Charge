@@ -264,7 +264,7 @@
             MYLog(@"getChargePaygetChargePay%@",[Config getChargePay]);
             MYLog(@"getCurrentPowergetCurrentPower%@",[Config getCurrentPower]);
             
-            self.ChangePay.payMoneyStr = [Config getCurrentPower];
+            self.ChangePay.xiaofeizongjine = [Config getCurrentPower];
          
             self.ChangePay.powersStr =  [Config getChargePay];
     
@@ -422,12 +422,35 @@
                               @"userId":[Config getOwnID]
                               };
     [WMNetWork get:ChargeMessge parameters:paramer success:^(id responseObj) {
-        NSString *str1 = responseObj[@"chargInfo"][@"spendMoney"];
-        NSString *str2 = responseObj[@"chargInfo"][@"electric"];//电量
+//        {
+//            chargInfo =     {
+//                discountMoney = 0;
+//                elecMoney = 0;
+//                electric = 0;
+//                endTime = "2019-05-07 22:36:21";
+//                serviceMoney = 0;
+//                spendMoney = 0;
+//                startTime = "2019-05-07 22:36:21";
+//            };
+//            msg = "\U67e5\U8be2\U5230\U8bb0\U5f55\U4e3a\U7a7a\Uff01";
+//            status = 0;
+//        }
+       
         NSString *volStr = responseObj[@"chargInfo"][@"vol"];//电压
         NSString *lefttimeStr = responseObj[@"chargInfo"][@"lefttime"];//剩余时间
         NSString *eleStr = responseObj[@"chargInfo"][@"ele"];//电流
         NSString *socStr = responseObj[@"chargInfo"][@"soc"];//SOC
+        
+        NSString *electric =  responseObj[@"chargInfo"][@"electric"];//已充电量
+        NSString *elecMoney = responseObj[@"chargInfo"][@"elecMoney"];//电费
+        NSString *serviceMoney = responseObj[@"chargInfo"][@"serviceMoney"];//服务费
+        NSString *discountMoney = responseObj[@"chargInfo"][@"discountMoney"];//服务优惠价格
+        NSString *spendMoney = responseObj[@"chargInfo"][@"spendMoney"];//总电费
+       
+       
+        
+        
+        
         self.voltage.text = [NSString stringWithFormat:@"%.2fV",volStr.floatValue];//电压
         self.current.text = [NSString stringWithFormat:@"%.2fA",eleStr.floatValue];//电流
         self.remainingTime.text = [self timeString:lefttimeStr];
@@ -440,35 +463,53 @@
 //        [NSString stringWithFormat:@"%.2fs",lefttimeStr.floatValue];//剩余时间
 
         
-        self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",str1.floatValue];//消费金额
-        self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",str2.floatValue];//已充电量
-        [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",str2.floatValue]];
-        //保存电量
-        [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",str1.floatValue]];//保存电费
+        self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",spendMoney.floatValue];//消费总金额
+        self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",electric.floatValue];//已充电量
+       
+       
+       
+        //保存已充电量
+        [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",electric.floatValue]];
+        //保存电费
+        [Config saveElecMoney:[NSString stringWithFormat:@"%.2f￥",elecMoney.floatValue]];
+        //保存服务费
+        [Config savesServiceMoney:[NSString stringWithFormat:@"%.2f￥",serviceMoney.floatValue]];
+        //保存服务优惠价格
+        [Config saveDiscountMoney:[NSString stringWithFormat:@"%.2f￥",discountMoney.floatValue]];
+        //保存总电费
+        [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",spendMoney.floatValue]];
+        
         
         if(![responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
             [MBProgressHUD showSuccess:@"充电已经结束"];
             //充电之后的结算
-            self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",str1.floatValue];//消费金额
-            self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",str2.floatValue];//已充电量
+            self.costMoney.text = [NSString stringWithFormat:@"%.2f￥",spendMoney.floatValue];//消费总金额
+            self.chargedAmount.text = [NSString stringWithFormat:@"%.2fkwh",electric.floatValue];//已充电量
             
-            [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",str2.floatValue]];
-            //保存电量
-            [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",str1.floatValue]];//保存电费
+            
+            //保存已充电量
+            [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",electric.floatValue]];
+            //保存电费
+            [Config saveElecMoney:[NSString stringWithFormat:@"%.2f￥",elecMoney.floatValue]];
+            //保存服务费
+            [Config savesServiceMoney:[NSString stringWithFormat:@"%.2f￥",serviceMoney.floatValue]];
+            //保存服务优惠价格
+            [Config saveDiscountMoney:[NSString stringWithFormat:@"%.2f￥",discountMoney.floatValue]];
+            //保存总电费
+            [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",spendMoney.floatValue]];
+            
             //结束充电通知 修改首页扫码充电按钮文字
             [[NSNotificationCenter defaultCenter] postNotificationName:EndChargeingMessage object:nil];
             //跳转到结算界面
             //---------------------------------------------------------//
+            
             if (self.ChangePay == nil) {
-                self.ChangePay = [[ChangePayViewController alloc] init];
                 
-                if ([Config getChargePay] == NULL) {
-                    self.ChangePay.payMoneyStr =@"0￥";
-                }else
-                {
-                    self.ChangePay.payMoneyStr = [Config getChargePay];
-                }
                 
+                //充电时间
+                self.ChangePay.chargeTimeStr = self.chargeTime.text;
+                
+                //d已充电量
                 if ([Config getCurrentPower] == NULL) {
                     self.ChangePay.powersStr =@"0kwh";
                 }else
@@ -476,7 +517,41 @@
                     self.ChangePay.powersStr = [Config getCurrentPower];
                 }
                 
-                self.ChangePay.chargeTimeStr = self.chargeTime.text;
+
+                //电费
+                self.ChangePay = [[ChangePayViewController alloc] init];
+                
+                if ([Config getelecMoney] == NULL) {
+                    self.ChangePay.chargeMoneyStr =@"0￥";
+                }else
+                {
+                    self.ChangePay.chargeMoneyStr = [Config getelecMoney];
+                }
+                
+//                //服务费
+                if ([Config getfuwufei] == NULL) {
+                    self.ChangePay.fuwufei =@"0￥";
+                }else
+                {
+                    self.ChangePay.fuwufei = [Config getfuwufei];
+                }
+                
+               //服务费优惠
+                if ([Config getfuwufeiyouhui] == NULL) {
+                    self.ChangePay.fuwufeiyouhui =@"0￥";
+                }else
+                {
+                    self.ChangePay.fuwufeiyouhui = [Config getfuwufeiyouhui];
+                }
+                
+                 //总电费
+                if ([Config getChargePay] == NULL) {
+                    self.ChangePay.xiaofeizongjine =@"0￥";
+                }else
+                {
+                    self.ChangePay.xiaofeizongjine = [Config getChargePay];
+                }
+                
                 
                 
                 if (self.MoneyNoEnoughTipStr == nil) {

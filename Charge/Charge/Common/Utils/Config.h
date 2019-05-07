@@ -128,6 +128,8 @@
 +(void)removeUseCharge;
 
 
+
+
 //保存用户名字
 +(void)saveUseName:(NSString *)useName;
 //获取用户名字
@@ -159,5 +161,42 @@
  *  @return 位置
  */
 +(CLLocationCoordinate2D)getCurrentLocation;
+
+
+//保存用户自己的邀请码
++(void)saveUserInviteCode:(NSString *)inviteCode;
+//获取用户自己的邀请码
++(NSString*)getInviteCode;
+//移除用户自己的邀请码
++(void)removeInviteCode;
+
+
+//保存电费
++(void)saveElecMoney:(NSString *)elecMoney;
+//获取电费
++(NSString*)getelecMoney;
+//移除电费
++(void)removeElecMoney;
+
+
+//保存服务费
++(void)savesServiceMoney:(NSString *)serviceMoney;
+//获取服务费
++(NSString*)getfuwufei;
+//移除服务费
++(void)removeServiceMoney;
+
+
+
+//保存服务优惠费
++(void)saveDiscountMoney:(NSString *)discountMoney;
+//获取服务优惠费
++(NSString*)getfuwufeiyouhui;
+//移除服务优惠费
++(void)removeIDiscountMoney;
+
+
+
+
 
 @end

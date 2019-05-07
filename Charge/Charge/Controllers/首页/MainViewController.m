@@ -64,10 +64,12 @@
 #import "ScreeningViewController.h"
 #import "ChooseView.h"
 #import "ChargeDetailViewController.h"
+#import "HomeActivitModel.h"
+#import "HomeActivityController.h"
 
 #define leftWidth (230)
 
-@interface MainViewController ()<QRCodeReaderDelegate,BMKMapViewDelegate,BMKLocationServiceDelegate,CLLocationManagerDelegate,PersonSlideViewDelegate,UIGestureRecognizerDelegate,BMKGeoCodeSearchDelegate>
+@interface MainViewController ()<QRCodeReaderDelegate,BMKMapViewDelegate,BMKLocationServiceDelegate,CLLocationManagerDelegate,PersonSlideViewDelegate,UIGestureRecognizerDelegate,BMKGeoCodeSearchDelegate,UIScrollViewDelegate>
 {
     UIButton *bgBtn;
     UIView *chargeingView;//充电状态view
@@ -116,6 +118,13 @@
 @property (nonatomic, strong) UIView *screen;
 
 
+@property (nonatomic, strong)UIView *bannerBack;//轮播图的背景图
+@property (nonatomic, strong)UIView *backView;//大的背景
+@property (nonatomic, strong)NSMutableArray *bannerArray;//保存轮播图信息的数组
+@property (nonatomic, strong)UIScrollView *scroll;//banner图
+@property (nonatomic, strong)NSTimer *timer;//定时器
+@property (nonatomic, strong)UIPageControl *pageControl;//分页器
+
 - (IBAction)locationActionClick:(id)sender;
 - (IBAction)PersonActionClick:(id)sender;
 - (IBAction)MessageActionClick:(id)sender;
@@ -127,6 +136,14 @@
 @end
 
 @implementation MainViewController
+
+-(NSMutableArray *)bannerArray{
+    if(!_bannerArray){
+        _bannerArray = [NSMutableArray array];
+    }
+    return _bannerArray;
+}
+
 
 -(void)dealloc
 {
@@ -192,6 +209,14 @@
 #pragma mark -- 生命周期方法
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //添加活动view
+    [self addActivtView];
+    
+    //请求数据
+    [self addActivtDataSource];
+    
+    
     //初始化
     self.qiPaoArray = [NSMutableArray array];
     self.JuDianqiPaoArray = [NSMutableArray array];
@@ -221,6 +246,239 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addChooseView) name:AddChooseView object:nil];
 }
+
+//添加活动图片
+-(void)addActivtView{
+    
+    _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
+    _backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+//    [[UIApplication sharedApplication].keyWindow addSubview:_backView];
+    [self.view addSubview:_backView];
+    
+    
+    _bannerBack = [[UIView alloc] init];
+    _bannerBack.backgroundColor = [UIColor whiteColor];
+    _bannerBack.layer.masksToBounds = YES;
+    _bannerBack.layer.cornerRadius = 6;
+    [_backView addSubview:_bannerBack];
+    [_bannerBack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.backView.mas_left).mas_offset(30);
+        make.right.mas_equalTo(self.backView.mas_right).mas_offset(-30);
+        make.height.mas_offset(400);
+        make.top.mas_offset((XYScreenHeight - 400) / 2);
+    }];
+    
+    
+   
+   
+    
+//    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+//    back.layer.masksToBounds = YES;
+//    back.layer.cornerRadius = 20;
+//    [_backView addSubview:back];
+//    [back mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(_bannerBack.mas_top).mas_offset(0);
+//        make.right.mas_equalTo(_bannerBack.mas_right).mas_offset(10);
+//        make.size.mas_offset(CGSizeMake(40, 40));
+//    }];
+//    [back setImage:[UIImage imageNamed:@"functionBtn"] forState:UIControlStateNormal];
+//    [back addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+    
+}
+
+//请求活动数据
+-(void)addActivtDataSource{
+    [WMNetWork get:ChargeHomeBannerList parameters:nil success:^(id responseObj) {
+        //加载完数据检测是否有上次充电的状态
+        NSArray *dataArray = responseObj[@"data"];
+        for (int i = 0; i < dataArray.count; i++) {
+         HomeActivitModel *model = [HomeActivitModel objectWithKeyValues:dataArray[i]];
+        [self.bannerArray addObject:model];
+        }
+        HomeActivitModel *model = self.bannerArray[0];
+        _scroll = [[UIScrollView alloc] initWithFrame:self.bannerBack.bounds];
+        _scroll.contentSize = CGSizeMake(self.bannerBack.frame.size.width * self.bannerArray.count, self.bannerBack.frame.size.height);
+        _scroll.pagingEnabled = YES;
+        _scroll.delegate = self;
+        [self.bannerBack addSubview:_scroll];
+        
+       
+        UIImageView *back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"functionBtn"]];
+        back.userInteractionEnabled = YES;
+//        back.layer.masksToBounds = YES;
+//        back.layer.cornerRadius = 20;
+        [_bannerBack addSubview:back];
+        [back mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_bannerBack.mas_top).mas_offset(10);
+            make.right.mas_equalTo(_bannerBack.mas_right).mas_offset(-10);
+            make.size.mas_offset(CGSizeMake(20, 20));
+        }];
+        UITapGestureRecognizer *tapp = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack)];
+        //[[UITapGestureRecognizer alloc] addTarget:self action:@selector(goBack)];
+        [back addGestureRecognizer:tapp];
+        
+        
+        
+        
+        //创建 初始化
+        _pageControl = [[UIPageControl alloc]init];
+        //设置点的个数
+        _pageControl.numberOfPages = self.bannerArray.count;
+        //设置指示器默认显示的颜色
+        _pageControl.pageIndicatorTintColor = [UIColor redColor];
+        //设置当前选中的颜色
+        _pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
+        //设置当前默认显示位置
+        _pageControl.currentPage = 0;
+        //将pageControl添加到视图中
+        [_bannerBack addSubview:_pageControl];
+        //设置frame
+        [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(_bannerBack).mas_offset((_bannerBack.frame.size.width - 150) / 2);
+            make.bottom.mas_equalTo(_bannerBack.mas_bottom).mas_offset(-15);
+            make.size.mas_equalTo(CGSizeMake(150, 20));
+        make.right.mas_equalTo(_bannerBack).mas_offset(-(_bannerBack.frame.size.width - 150) / 2);
+        }];
+        
+        //启动定时器
+        [self initTimerFunction];
+        
+        for (int i = 0; i < self.bannerArray.count; i++) {
+            [_scroll addSubview:[self addSubViewToBannerWithModel:self.bannerArray[i] withFrame:CGRectMake(self.bannerBack.frame.size.width * i,0, self.bannerBack.frame.size.width, self.bannerBack.frame.size.height) withTag:(i + 1)]];
+        }
+        
+        
+        MYLog(@"%@",model.desc);
+    }failure:^(NSError *error) {
+        MYLog(@"%@",error);
+    }];
+}
+
+
+-(UIView *)addSubViewToBannerWithModel:(HomeActivitModel *)model withFrame:(CGRect)frame withTag:(int)tag{
+    UIView *views = [[UIView alloc] initWithFrame:frame];
+    
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",tag]]];
+    image.frame =  self.bannerBack.bounds;
+    [views addSubview:image];
+    
+    
+    
+    
+    //
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bannerBack.frame.size.width, 44)];
+    label1.text = model.name;
+    label1.textAlignment = NSTextAlignmentCenter;
+    label1.font = [UIFont systemFontOfSize:20];
+    [views addSubview:label1];
+    //
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(label1.frame), self.bannerBack.frame.size.width - 30, 88)];
+    label2.text = model.desc;
+    label2.numberOfLines = 0;
+    label2.textAlignment = NSTextAlignmentCenter;
+    label2.font = [UIFont systemFontOfSize:16];
+    [views addSubview:label2];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor = [UIColor whiteColor];
+    btn.layer.masksToBounds = YES;
+    btn.layer.cornerRadius = 10;
+    btn.tag = tag;
+    btn.frame = CGRectMake((self.bannerBack.frame.size.width - 60) / 2, CGRectGetMaxY(label2.frame) + 60, 60, 45);
+    [btn setTitle:@"了解详情" forState:UIControlStateNormal];
+    [btn setTitleColor:RGB_COLOR(122, 193, 189, 1) forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(gotoWebView:) forControlEvents:UIControlEventTouchDown];
+    btn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [views addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(views.mas_bottom).mas_offset(-45);
+        make.centerX.mas_equalTo(views.mas_centerX).mas_offset(0);
+        make.size.mas_offset(CGSizeMake(90, 40));
+    }];
+    return views;
+}
+
+-(void)goBack{
+    [_backView removeFromSuperview];
+    [_bannerBack removeFromSuperview];
+    [_timer invalidate];
+    _timer = nil;
+}
+
+
+-(void)gotoWebView:(UIButton *)sender{
+    NSLog(@"点击了第%ld个按钮",sender.tag);
+    HomeActivityController *activity = [[HomeActivityController alloc] init];
+    [self.navigationController pushViewController:activity animated:YES];
+    HomeActivitModel *model = self.bannerArray[sender.tag -1];
+    activity.name = model.name;
+    activity.url = model.url;
+}
+
+//添加定时器
+
+-(void)initTimerFunction{
+    //创建计时器
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(autoSelectPage) userInfo:nil repeats:YES];
+    NSRunLoop *mainLoop = [NSRunLoop mainRunLoop];
+    
+    [mainLoop addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    self.timer = timer;
+}
+
+
+-(void)autoSelectPage{
+    //取出当前的偏移量
+    CGPoint offset =  self.scroll.contentOffset;
+    //取出当前的设置显示 的page指示
+    NSInteger  currentPage = self.pageControl.currentPage;
+    
+    if (currentPage == (self.bannerArray.count - 1)) {
+        //设置为初始值
+        currentPage =0;
+        offset = CGPointZero;
+        //更新offset
+        [self.scroll setContentOffset:offset animated:YES];
+    }else{
+        currentPage++;
+        offset.x += self.bannerBack.bounds.size.width;
+        //更新offset
+        [self.scroll setContentOffset:offset animated:YES];
+    }
+    //更新pageControl显示
+    self.pageControl.currentPage = currentPage;
+    
+}
+
+
+
+#pragma mark  scrollViewDelegate
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    //获取当前scrollview 的X轴方向的 偏移量
+    CGFloat offset = self.scroll.contentOffset.x;
+    //每个图片页面的宽度
+    CGFloat pageWi =self.bannerBack.bounds.size.width;
+    //设置当前的显示位置
+    self.pageControl.currentPage = offset/pageWi;
+}
+
+//6、当手势滑动scrollview的时候停止定时器任务，滑动结束的时候开启定时任务
+//当滑动开始的时候 ，停止计数器
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    //取消定时器任务
+    [self.timer invalidate];
+}
+//当滑动停止时启动定时器任务
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self.timer fire];
+    //设置自动滚动定时任务
+    [self initTimerFunction];
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
 
 -(void)addJuDianCharge
 {
@@ -633,12 +891,35 @@
                           @"userId" : [Config getOwnID]
                           };
     [WMNetWork get:ChargeMessge parameters:par success:^(id responseObj) {
-        if([responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
+        if(![responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
             NSLog(@"9---");
+            
+            
+            NSString *electric = responseObj[@"chargInfo"][@"electric"];//已充电量
+            NSString *elecMoney = responseObj[@"chargInfo"][@"elecMoney"];//电费
+            NSString *serviceMoney = responseObj[@"chargInfo"][@"serviceMoney"];//服务费
+            NSString *discountMoney = responseObj[@"chargInfo"][@"discountMoney"];//服务优惠价格
+            NSString *spendMoney = responseObj[@"chargInfo"][@"spendMoney"];//总电费
+            
+            //已充电量
+            [Config saveCurrentPower:[NSString stringWithFormat:@"%.2fkwh",electric.floatValue]];
+            //保存电费
+            [Config saveElecMoney:[NSString stringWithFormat:@"%.2f￥",elecMoney.floatValue]];
+            //保存服务费
+            [Config savesServiceMoney:[NSString stringWithFormat:@"%.2f￥",serviceMoney.floatValue]];
+            //保存服务优惠价格
+            [Config saveDiscountMoney:[NSString stringWithFormat:@"%.2f￥",discountMoney.floatValue]];
+            //保存总电费
+            [Config saveChargePay: [NSString stringWithFormat:@"%.2f￥",spendMoney.floatValue]];
+            
+            
+            
+            
+            
+            //获取手机号
                 if ([Config getMobile]) {
                     MYLog(@"[Config getNormalEndChargingFlag] = %@",[Config getNormalEndChargingFlag]);
-//
-//                }
+
 //            if ([[Config getNormalEndChargingFlag] isEqualToString:@"0"]) {
                 
                 [MBProgressHUD showMessage:@"加载上次未结束充电状态" toView:self.view];
@@ -661,9 +942,14 @@
 //
 //                            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                             
-                            [Config removeChargePay];//移除电费
-                            [Config removeChargeNum];//移除充电桩号
+                            [Config removeChargePay];//移除总电费
                             [Config removeCurrentPower];//移除当前电量
+                            [Config removeElecMoney];//移除电费
+                            [Config removeServiceMoney];//移除服务费
+                            [Config removeIDiscountMoney];//移除服务费优惠
+                            
+                            
+                            [Config removeChargeNum];//移除充电桩号
                             [Config removeCurrentDate];//移除当前时间
                             //存充电状态:0.代表结束充电
                             [Config saveUseCharge:@"0"];
@@ -756,9 +1042,12 @@
                                 //跳转到结算界面
                                 ChangePayViewController *ChangePayVC = [[ChangePayViewController alloc]init];
                                 //处理的情况，1.电量。2.电费。3.时间
-                                ChangePayVC.payMoneyStr = [NSString stringWithFormat:@"%@￥",chargeMes.charging_fee];
-                                ChangePayVC.powersStr = [NSString stringWithFormat:@"%@kwh",chargeMes.charging_power];
                                 ChangePayVC.chargeTimeStr =  [NSString stringWithFormat:@"%@",chargeTime];//充电时间
+                                ChangePayVC.powersStr = [NSString stringWithFormat:@"%@",[Config getCurrentPower]];//已充电量
+                                ChangePayVC.chargeMoneyStr =  [NSString stringWithFormat:@"%@",[Config getelecMoney]];//电费
+                                ChangePayVC.fuwufei = [NSString stringWithFormat:@"%@",[Config getfuwufei]];//服务费
+                                ChangePayVC.fuwufeiyouhui =  [NSString stringWithFormat:@"%@",[Config getfuwufeiyouhui]];//服务优惠费
+                                ChangePayVC.xiaofeizongjine = [NSString stringWithFormat:@"%@",[Config getChargePay]];//总电费
                                 ChangePayVC.alertTitle = @"";
                                 [self.navigationController pushViewController:ChangePayVC animated:YES];
                             });
@@ -1153,9 +1442,15 @@ BOOL btnStatus = YES;
 //                UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"服务器断开了,充电结束." message:nil preferredStyle:UIAlertControllerStyleAlert];
 //
 //                UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                    [Config removeChargePay];//移除电费
-                    [Config removeChargeNum];//移除充电桩号
+                
+                    [Config removeChargePay];//移除总电费
                     [Config removeCurrentPower];//移除当前电量
+                    [Config removeElecMoney];//移除电费
+                    [Config removeServiceMoney];//移除服务费
+                    [Config removeIDiscountMoney];//移除服务费优惠
+                
+                
+                    [Config removeChargeNum];//移除充电桩号
                     [Config removeCurrentDate];//移除当前时间
                     //存充电状态:0.代表结束充电
                     [Config saveUseCharge:@"0"];
@@ -1246,9 +1541,12 @@ BOOL btnStatus = YES;
                         //跳转到结算界面
                         ChangePayViewController *ChangePayVC = [[ChangePayViewController alloc]init];
                         //处理的情况，1.电量。2.电费。3.时间
-                        ChangePayVC.payMoneyStr = [NSString stringWithFormat:@"%@￥",chargeMes.charging_fee];
-                        ChangePayVC.powersStr = [NSString stringWithFormat:@"%@kwh",chargeMes.charging_power];
                         ChangePayVC.chargeTimeStr =  [NSString stringWithFormat:@"%@",chargeTime];//充电时间
+                        ChangePayVC.powersStr = [NSString stringWithFormat:@"%@",[Config getCurrentPower]];//已充电量
+                        ChangePayVC.chargeMoneyStr =  [NSString stringWithFormat:@"%@",[Config getelecMoney]];//电费
+                        ChangePayVC.fuwufei = [NSString stringWithFormat:@"%@",[Config getfuwufei]];//服务费
+                        ChangePayVC.fuwufeiyouhui =  [NSString stringWithFormat:@"%@",[Config getfuwufeiyouhui]];//服务优惠费
+                        ChangePayVC.xiaofeizongjine = [NSString stringWithFormat:@"%@",[Config getChargePay]];//总电费
                         ChangePayVC.alertTitle = @"";
                         [self.navigationController pushViewController:ChangePayVC animated:YES];
                 });
@@ -1275,10 +1573,10 @@ BOOL btnStatus = YES;
     ChangePayViewController  *ChangePay = [[ChangePayViewController alloc] init];
     
     if ([Config getChargePay] == NULL) {
-        ChangePay.payMoneyStr =@"0￥";
+        ChangePay.xiaofeizongjine =@"0￥";
     }else
     {
-        ChangePay.payMoneyStr = [Config getChargePay];
+        ChangePay.xiaofeizongjine = [Config getChargePay];
     }
     
     if ([Config getCurrentPower] == NULL) {

@@ -13,5 +13,6 @@ pod 'MJExtension'
 pod 'Reachability', '~> 3.2'
 pod 'CocoaAsyncSocket', '7.4.1'
 pod 'JSONKit-NoWarning', '~> 1.2'
+pod 'SPCycleScrollView', '~> 2.0.1'
 
 end

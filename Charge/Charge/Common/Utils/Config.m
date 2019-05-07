@@ -41,6 +41,13 @@ NSString *const IntChargeNum = @"IntChargeNum";//输入的充电桩号
 
 NSString *const ThirdLoginType = @"ThirdLoginType";//第三方登陆状态
 
+NSString *const InviteCode = @"InviteCode";//用户的邀请码
+
+NSString *const ElecMoney = @"ElecMoney";//电费
+
+NSString *const ServiceMoney = @"ServiceMoney";//服务费
+
+NSString *const DiscountMoney = @"DiscountMoney";//服务优惠费
 
 @implementation Config
 
@@ -412,6 +419,97 @@ NSString *const ThirdLoginType = @"ThirdLoginType";//第三方登陆状态
     NSUserDefaults *LoginType = [NSUserDefaults standardUserDefaults];
     [LoginType setObject:nil forKey:ThirdLoginType];
 }
+
+
+
+//保存用户自己的邀请码
++(void)saveUserInviteCode:(NSString *)inviteCode;
+{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:inviteCode forKey:InviteCode];
+    [code synchronize];
+}
+
+//获取用户自己的邀请码
++(NSString*)getInviteCode{
+    NSUserDefaults * code= [NSUserDefaults standardUserDefaults];
+    NSString *inviteCode = [code objectForKey:InviteCode];
+    return inviteCode;
+}
+
+//移除用户自己的邀请码
++(void)removeInviteCode{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:nil forKey:InviteCode];
+}
+
+
+
+
+
+
+//保存电费
++(void)saveElecMoney:(NSString *)elecMoney{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:elecMoney forKey:ElecMoney];
+    [code synchronize];
+}
+//获取电费
++(NSString*)getelecMoney
+{
+    NSUserDefaults * code= [NSUserDefaults standardUserDefaults];
+    NSString *elecMoney = [code objectForKey:ElecMoney];
+    return elecMoney;
+}
+//移除电费
++(void)removeElecMoney
+{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:nil forKey:ElecMoney];
+}
+
+
+
+
+//保存服务费
++(void)savesServiceMoney:(NSString *)serviceMoney{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:serviceMoney forKey:ServiceMoney];
+    [code synchronize];
+}
+//获取服务费
++(NSString*)getfuwufei{
+    NSUserDefaults * code= [NSUserDefaults standardUserDefaults];
+    NSString *fuwufei = [code objectForKey:ServiceMoney];
+    return fuwufei;
+}
+//移除服务费
++(void)removeServiceMoney{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:nil forKey:ServiceMoney];
+}
+
+
+
+//保存服务优惠费
++(void)saveDiscountMoney:(NSString *)discountMoney{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:discountMoney forKey:DiscountMoney];
+    [code synchronize];
+}
+//获取服务优惠费
++(NSString*)getfuwufeiyouhui{
+    NSUserDefaults * code= [NSUserDefaults standardUserDefaults];
+    NSString *fuwufeiyouhui = [code objectForKey:DiscountMoney];
+    return fuwufeiyouhui;
+}
+//移除服务优惠费
++(void)removeIDiscountMoney{
+    NSUserDefaults *code = [NSUserDefaults standardUserDefaults];
+    [code setObject:nil forKey:DiscountMoney];
+}
+
+
 
 ////保存手动输入的充电桩号
 //+(void)saveInPutChargeNum:(NSString *)ChargeNum

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6401F5074D8CF40A598E84E8 /* libPods-Charge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A854C1C871D76831930C96 /* libPods-Charge.a */; };
+		750B38692280686C006A99B7 /* HomeActivitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 750B38682280686C006A99B7 /* HomeActivitModel.m */; };
+		750B386C22818F07006A99B7 /* HomeActivityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 750B386B22818F07006A99B7 /* HomeActivityController.m */; };
 		7529678521F73EB400A4809A /* left_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 7529678221F73EB400A4809A /* left_red.png */; };
 		7529678621F73EB400A4809A /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 7529678321F73EB400A4809A /* green.png */; };
 		7529678721F73EB400A4809A /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 7529678421F73EB400A4809A /* red.png */; };
@@ -437,6 +439,10 @@
 
 /* Begin PBXFileReference section */
 		29A854C1C871D76831930C96 /* libPods-Charge.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Charge.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		750B38672280686C006A99B7 /* HomeActivitModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeActivitModel.h; sourceTree = "<group>"; };
+		750B38682280686C006A99B7 /* HomeActivitModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeActivitModel.m; sourceTree = "<group>"; };
+		750B386A22818F07006A99B7 /* HomeActivityController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeActivityController.h; sourceTree = "<group>"; };
+		750B386B22818F07006A99B7 /* HomeActivityController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeActivityController.m; sourceTree = "<group>"; };
 		7529678221F73EB400A4809A /* left_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_red.png; sourceTree = "<group>"; };
 		7529678321F73EB400A4809A /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		7529678421F73EB400A4809A /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
@@ -1406,6 +1412,7 @@
 		850EE46B1D0154C900B59D3F /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
+				75DC38E4218F1DF000F94A51 /* 公告 */,
 				75BCDA2521734C1F00AC2F73 /* 我的 */,
 				8515827F1D220FD8009E8F52 /* PersonMessageViewController.h */,
 				851582801D220FD8009E8F52 /* PersonMessageViewController.m */,
@@ -1468,10 +1475,11 @@
 		850EE46C1D0154C900B59D3F /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				75DC38E4218F1DF000F94A51 /* 公告 */,
 				859FC9B31DDC295700D7C4B6 /* YuYueViewController.h */,
 				859FC9B41DDC295700D7C4B6 /* YuYueViewController.m */,
 				859FC9B51DDC295700D7C4B6 /* YuYueViewController.xib */,
+				750B386A22818F07006A99B7 /* HomeActivityController.h */,
+				750B386B22818F07006A99B7 /* HomeActivityController.m */,
 				850698DA1D0566280002D28B /* RecommendedViewController.h */,
 				850698DB1D0566280002D28B /* RecommendedViewController.m */,
 				850698DC1D0566280002D28B /* RecommendedViewController.xib */,
@@ -1554,6 +1562,8 @@
 				8547DC5B1E7A7BE800778E30 /* JuDianChargeModel.m */,
 				75E26F9C2147B0130075EA98 /* All_chargingSubModel.h */,
 				75E26F9D2147B0130075EA98 /* All_chargingSubModel.m */,
+				750B38672280686C006A99B7 /* HomeActivitModel.h */,
+				750B38682280686C006A99B7 /* HomeActivitModel.m */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -2314,6 +2324,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -2697,6 +2708,7 @@
 				75E58AE1217B8C8E00BA2BF2 /* MyCarTableViewCell.m in Sources */,
 				8590FB991D77D2C200E65EE4 /* RechargeDetailsTableViewCell.m in Sources */,
 				853054DC1D0527590013E308 /* KeFuViewController.m in Sources */,
+				750B386C22818F07006A99B7 /* HomeActivityController.m in Sources */,
 				85E6D97A1DE98F4800306CDD /* ChargingSubModel.m in Sources */,
 				853E7B711E7F6DAA0007C47A /* JuDianQiPaoBMKAnnotation.m in Sources */,
 				854DBCCC1D1CD729004EEC47 /* CoverBgBtn.m in Sources */,
@@ -2729,6 +2741,7 @@
 				85A22FDA1DEE9EBE005012BF /* UseCollectChargeModel.m in Sources */,
 				85E256141DFAA05F0085BAC8 /* NavView.m in Sources */,
 				8567BFC21EA9A5AD00397871 /* JiFenTableViewCell.m in Sources */,
+				750B38692280686C006A99B7 /* HomeActivitModel.m in Sources */,
 				8547DC671E7A843F00778E30 /* MainViewController.m in Sources */,
 				75ED636921932B67008BDA79 /* ShaixuanView.m in Sources */,
 				858D90371D792F04003B3E97 /* AppAgreementViewController.m in Sources */,

@@ -18,12 +18,13 @@
 //RGB color
 #define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
-#define BaseURL @"http://47.107.14.253:80/app/phone/"
+#define BaseURL @"http://47.107.143.107:80/app/phone/"
+//#define BaseURL @"http://47.107.14.253:80/app/phone/"
 #define H5BaseURL @"http://47.107.14.253:80/app/app_h5"
 
 
 
-//#define BaseURL @"http://192.168.1.101:8080/app/phone/"
+
 //#define H5BaseURL @"http://192.168.1.101:8080/app/app_h5"
 //#define BaseURL @"http://120.77.146.167:88/app/phone/"
 
@@ -105,4 +106,8 @@
 
 
 #define ChargeVersion RequestURL(@"getLatestVersion.action") //banben跟新
+#define ChargeHomeBannerList RequestURL(@"getActivities.action") //首页轮播图
+
+
+
 #endif

@@ -11,18 +11,32 @@
 #import "XFunction.h"
 
 @interface ChangePayViewController ()
-{
-    NSString *tempChargeTime;//临时赋值数据
-    NSString *tempChargePower;
-    NSString *tempPayMoney;
-}
+//{
+//    NSString *tempChargeTime;//临时赋值数据
+//    NSString *tempChargePower;
+//    NSString *chargeMoney;
+//    NSString *fuwufei;//服务费
+//    NSString *fuwufeiyouhui;//服务费优惠
+//    NSString *xiaofeizongjine;//消费总金额
+//}
 
 @property (strong, nonatomic) IBOutlet UILabel *chargeTime;//充电时长
-@property (strong, nonatomic) IBOutlet UILabel *chargePower;//电量
-@property (strong, nonatomic) IBOutlet UILabel *payMoney;//消费金额
+@property (strong, nonatomic) IBOutlet UILabel *chargePower;//已充电量
+@property (strong, nonatomic) IBOutlet UILabel *payMoney;//电费金额
+@property (weak, nonatomic) IBOutlet UILabel *fuwumoney;//服务费
+@property (weak, nonatomic) IBOutlet UILabel *youhuifuwumoney;//服务费优惠
+@property (weak, nonatomic) IBOutlet UILabel *xiaofeizongmoney;//消费总金额
+
+
 @property (strong, nonatomic) IBOutlet UIButton *sureBtn ;
 @property (strong, nonatomic) IBOutlet UIView *back;
 @property (strong, nonatomic) IBOutlet UILabel *tipTitle;//余额不足提示信息
+
+
+
+
+
+
 
 - (IBAction)sureBtnClick:(id)sender;
 
@@ -78,15 +92,23 @@
 
 -(void)initUI
 {
-    self.chargeTime.text = tempChargeTime;
-    self.chargePower.text = tempChargePower;
-    
+    self.chargeTime.text = _chargeTimeStr;
+    self.chargePower.text = _powersStr;
     if (self.payMoney.text == NULL) {
-      self.payMoney.text = @"0.00";
+        self.payMoney.text = @"0.00";
     }else
     {
-      self.payMoney.text = tempPayMoney;
+        self.payMoney.text = _chargeMoneyStr;
     }
+    self.fuwumoney.text = _fuwufei;//服务费
+    self.youhuifuwumoney.text = _fuwufeiyouhui;//服务费优惠
+    self.xiaofeizongmoney.text = _xiaofeizongjine;//消费总金额
+    
+    
+    
+    
+    
+   
 //    self.payMoney.text = tempPayMoney;
     
     self.sureBtn.layer.masksToBounds = YES;
@@ -113,22 +135,33 @@
 }
 
 #pragma mark - SET方法
--(void)setChargeTimeStr:(NSString *)chargeTimeStr
-{
-    _chargeTimeStr = chargeTimeStr;
-    tempChargeTime = chargeTimeStr;
-}
-
--(void)setPowersStr:(NSString *)powersStr
-{
-    _powersStr = powersStr;
-    tempChargePower = powersStr;
-}
-
--(void)setPayMoneyStr:(NSString *)payMoneyStr
-{
-    _payMoneyStr = payMoneyStr;
-    tempPayMoney= payMoneyStr;
-}
-
+//-(void)setChargeTimeStr:(NSString *)chargeTimeStr
+//{
+//    _chargeTimeStr = chargeTimeStr;
+////    tempChargeTime = chargeTimeStr;
+//}
+//
+//-(void)setPowersStr:(NSString *)powersStr
+//{
+//    _powersStr = powersStr;
+//
+//}
+//
+//-(void)setChargeMoneyStr:(NSString *)chargeMoneyStr
+//{
+//    _chargeMoneyStr = chargeMoneyStr;
+////    chargeMoney= chargeMoneyStr;
+//}
+//
+//-(void)setFuwufei:(NSString *)fuwufei{
+//    _fuwufei = fuwufei;
+//}
+//
+//-(void)setFuwufeiyouhui:(NSString *)fuwufeiyouhui{
+//    _fuwufeiyouhui = fuwufeiyouhui;
+//}
+//
+//-(void)setXiaofeizongjine:(NSString *)xiaofeizongjine{
+//    _xiaofeizongjine = xiaofeizongjine;
+//}
 @end

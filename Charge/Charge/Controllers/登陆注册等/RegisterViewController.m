@@ -21,6 +21,7 @@
     RegisterRightView *rightView;
     UITextField *yanZhengMa;
     UITextField *dengLuMiMa;
+    UITextField *invitCode;
     UIButton *nextBtn;
 }
 
@@ -67,6 +68,9 @@
     kongGeView1.backgroundColor = [UIColor clearColor];
     
     UIView *kongGeView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 44)];
+    kongGeView2.backgroundColor = [UIColor clearColor];
+    
+    UIView *kongGeView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 44)];
     kongGeView2.backgroundColor = [UIColor clearColor];
     
     phoneNum = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -150,7 +154,29 @@
         make.right.equalTo(self.view).offset(-15);
         make.height.mas_equalTo(44);
     }];
-
+    
+    
+    
+    invitCode = [[UITextField alloc] initWithFrame:CGRectZero];
+    invitCode.placeholder = @"请输入邀请码(非必填)";
+    invitCode.delegate = self;
+    invitCode.font = [UIFont systemFontOfSize:14];
+    invitCode.backgroundColor = [UIColor whiteColor];
+    invitCode.returnKeyType = UIReturnKeyDone;
+    invitCode.layer.cornerRadius = 6;
+    invitCode.clipsToBounds = YES;
+    invitCode.tag = RegisterVcTextfielTag;
+    invitCode.keyboardType = UIKeyboardTypeNumberPad;
+    invitCode.leftView = kongGeView3;
+    invitCode.leftViewMode = UITextFieldViewModeAlways;
+    [self.view addSubview:invitCode];
+    [invitCode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(dengLuMiMa.mas_bottom).offset(15);
+        make.left.equalTo(self.view).offset(15);
+        make.right.equalTo(self.view).offset(-15);
+        make.height.mas_equalTo(44);
+    }];
+//
     nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [nextBtn setTitle:@"注 册" forState:UIControlStateNormal];
     nextBtn.layer.cornerRadius = 6;
@@ -162,7 +188,7 @@
     [self.view addSubview:nextBtn];
     
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(dengLuMiMa.mas_bottom).offset(50);
+        make.top.equalTo(invitCode.mas_bottom).offset(50);
         make.right.equalTo(self.view).offset(-15);
         make.left.equalTo(self.view).offset(15);
         make.height.mas_equalTo(38);
@@ -181,6 +207,7 @@
     [phoneNum resignFirstResponder];
     [yanZhengMa resignFirstResponder];
     [dengLuMiMa resignFirstResponder];
+    [invitCode resignFirstResponder];
 }
 
 -(void)nextBtnAction
@@ -221,6 +248,7 @@
         [alertVc addAction:sureAction];
         [self presentViewController:alertVc animated:YES completion:nil];
     }
+    
 
     [MBProgressHUD showMessage:@""];
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
@@ -239,6 +267,7 @@
             NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
             paramers[@"mobile"] = phoneNum.text;
             paramers[@"code"] = yanZhengMa.text;
+            parmas[@"inviteCode"] = invitCode.text;
             paramers[@"password"] = [XStringUtil stringToMD5:dengLuMiMa.text];
             
             [MBProgressHUD showMessage:@""];
