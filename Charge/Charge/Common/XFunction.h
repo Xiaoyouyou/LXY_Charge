@@ -36,6 +36,11 @@
 
 #define ThirdLoginPush @"thirdLoginPush"//第三方登陆推出通知
 
+// 微信
+#define XYWXAppId                @"wxd24c22745a380e9e"
+#define XYWXAppSecret            @"3254366994ccffb64009cd61d21eaf7d"
+
+
 //tableviewCell字体
 #define TableViewCellFont [UIFont systemFontOfSize:15];
 #define TableViewCellFuTitleFont [UIFont systemFontOfSize:13];

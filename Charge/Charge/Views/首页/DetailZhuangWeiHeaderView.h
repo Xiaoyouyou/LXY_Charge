@@ -19,5 +19,5 @@
 @property (nonatomic, strong) UIImageView *fastImageView;
 @property (nonatomic, strong) UIImageView *slowImageView;
 
-
+@property (nonatomic ,strong)NSArray *picArray;
 @end

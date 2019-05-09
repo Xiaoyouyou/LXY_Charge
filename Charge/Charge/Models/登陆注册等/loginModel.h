@@ -21,5 +21,5 @@
 @property (copy, nonatomic) NSString *userName;//签名
 @property (copy, nonatomic) NSString *token;//token
 @property (copy, nonatomic) NSString *checkCharging;//检查是否是新手机登陆
-
+@property (copy, nonatomic) NSString *inviteCode;//用户自己的邀请码
 @end

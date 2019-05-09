@@ -7,6 +7,8 @@
 //
 
 #import "HomeActivityController.h"
+#import "ChargeShareView.h"
+
 
 @interface HomeActivityController ()
 
@@ -22,8 +24,15 @@
     nav.backBlock = ^{
         [self.navigationController popViewControllerAnimated:YES];
     };
-    nav.rightBlock = ^{
+    __weak typeof(self) weakSelf = self;
+     nav.rightBlock = ^{
         //分享到朋友圈和微信
+        ChargeShareView *share = [[ChargeShareView alloc] init];
+        share.title1 = weakSelf.name;
+        share.msg = weakSelf.des;
+        share.url = weakSelf.url;
+        share.icon = weakSelf.icon;
+        [weakSelf.view addSubview:share];
     };
     [self.view addSubview:nav];
     [nav mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -44,6 +53,7 @@
         make.top.equalTo(nav.mas_bottom);
         make.bottom.equalTo(self.view);
     }];
+//    NSString *filePath  = [NSString stringWithFormat:@"%@%@%@",H5BaseURL,@"/list.jsp?stationId=",self.stationID];
     NSURL *localurl = [NSURL URLWithString:_url];
     [webView loadRequest:[NSURLRequest requestWithURL:localurl]];
 }

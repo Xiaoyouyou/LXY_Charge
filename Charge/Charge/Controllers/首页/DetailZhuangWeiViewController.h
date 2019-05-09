@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "All_chargingSubModel.h"
+@class ChargeDetalMes;
 
 @interface DetailZhuangWeiViewController : UIViewController
+@property (nonatomic, strong) ChargeDetalMes *model;
 @property (nonatomic, strong) NSMutableArray *all_chargingSub;
 @property(nonatomic, strong) NSString *id;//充电站的id
 @property (nonatomic, strong) NSMutableDictionary *chargeDeatlModel;

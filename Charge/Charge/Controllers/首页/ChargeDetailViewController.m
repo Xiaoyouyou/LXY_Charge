@@ -389,7 +389,7 @@
     DetailZhuangWeiViewController *detailZhuangWeiVC = [[DetailZhuangWeiViewController alloc]init];
     self.detailVC = detailZhuangWeiVC;
     detailZhuangWeiVC.id = self.id;
-    //    DetailZhuangWeiVC.all_chargingSub = _all_chargingSub;
+    detailZhuangWeiVC.model = _ChargeDetal;
     detailZhuangWeiVC.chargeDeatlModel = self.dataDict;//详情控制器数据
     detailZhuangWeiVC.view.frame = self.subView.frame;
     [self addChildViewController:detailZhuangWeiVC];

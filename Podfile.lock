@@ -22,10 +22,9 @@ PODS:
   - Masonry (1.1.0)
   - MJExtension (2.5.16)
   - Reachability (3.2)
-  - SDWebImage (3.7.5):
-    - SDWebImage/Core (= 3.7.5)
-  - SDWebImage/Core (3.7.5)
-  - SPCycleScrollView (2.0.1)
+  - SDWebImage (5.0.0-beta5):
+    - SDWebImage/Core (= 5.0.0-beta5)
+  - SDWebImage/Core (5.0.0-beta5)
   - sqlite3 (3.8.7.4):
     - sqlite3/common (= 3.8.7.4)
   - sqlite3/common (3.8.7.4)
@@ -39,8 +38,7 @@ DEPENDENCIES:
   - MJExtension
   - MJExtension (~> 2.5.9)
   - Reachability (~> 3.2)
-  - SDWebImage (~> 3.7.5)
-  - SPCycleScrollView (~> 2.0.1)
+  - SDWebImage (~> 5.0.0-beta5)
   - sqlite3 (~> 3.8.7.4)
 
 SPEC REPOS:
@@ -53,7 +51,6 @@ SPEC REPOS:
     - MJExtension
     - Reachability
     - SDWebImage
-    - SPCycleScrollView
     - sqlite3
 
 SPEC CHECKSUMS:
@@ -64,10 +61,9 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJExtension: b8c1321a77d91bcc007b94d38cbf5383c95ea30e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
-  SPCycleScrollView: 07e44ab7c3e918dc9d51f7f1cff76642044ee89f
+  SDWebImage: fd609df53c0f55fdcd4705bd14c01c9d5c348d0c
   sqlite3: 7ab5e4e7c6eb9cfd098d481719a8b7edea99ccc8
 
-PODFILE CHECKSUM: eaccae925745a6c8e92e0e56c9077d1d18f2d474
+PODFILE CHECKSUM: 5f6df36aca41d1ccfb1d36ddbd995b19dba1b008
 
 COCOAPODS: 1.5.3

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B5FEDFBEF8B2A8168CC7FA2839B632AA"
+               BlueprintIdentifier = "D84DF946FEDB66DB85A7EE82A973618F"
                BlueprintName = "sqlite3"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libsqlite3.a">

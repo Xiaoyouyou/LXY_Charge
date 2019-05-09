@@ -107,7 +107,7 @@
 
 #define ChargeVersion RequestURL(@"getLatestVersion.action") //banben跟新
 #define ChargeHomeBannerList RequestURL(@"getActivities.action") //首页轮播图
-
+#define ChargeGETMoney RequestURL(@"getChargeRet.action") //首页轮播图
 
 
 #endif

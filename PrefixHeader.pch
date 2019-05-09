@@ -22,6 +22,7 @@
 #import "LoginViewController.h"
 #import "Masonry.h"
 #import "NavView.h"
+#import <ShareSDK/ShareSDK.h>
 #endif
 
 // Include any system framework and library headers here that should be included in all compilation units.

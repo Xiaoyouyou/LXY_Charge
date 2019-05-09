@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic ,strong)NSString *desc;//活动描述
 
+@property (nonatomic ,strong)NSString *icon;//活动icon
+
 @end
 
 NS_ASSUME_NONNULL_END

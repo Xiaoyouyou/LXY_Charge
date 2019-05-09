@@ -256,21 +256,54 @@
     [self.view addSubview:_backView];
     
     
-    _bannerBack = [[UIView alloc] init];
+    _bannerBack = [[UIView alloc] initWithFrame:CGRectMake(30, (XYScreenHeight - 400) / 2, XYScreenWidth - 60, 400)];
     _bannerBack.backgroundColor = [UIColor whiteColor];
     _bannerBack.layer.masksToBounds = YES;
     _bannerBack.layer.cornerRadius = 6;
     [_backView addSubview:_bannerBack];
-    [_bannerBack mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.backView.mas_left).mas_offset(30);
-        make.right.mas_equalTo(self.backView.mas_right).mas_offset(-30);
-        make.height.mas_offset(400);
-        make.top.mas_offset((XYScreenHeight - 400) / 2);
+    
+    
+    _scroll = [[UIScrollView alloc] initWithFrame:_bannerBack.bounds];
+    _scroll.pagingEnabled = YES;
+    _scroll.delegate = self;
+    [_bannerBack addSubview:_scroll];
+   
+    
+    UIImageView *back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"functionBtn"]];
+    back.userInteractionEnabled = YES;
+    back.layer.masksToBounds = YES;
+    back.layer.borderColor = [UIColor blackColor].CGColor;
+    back.layer.borderWidth = 1;
+    back.layer.cornerRadius = 10;
+    [_bannerBack addSubview:back];
+    [back mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_bannerBack.mas_top).mas_offset(10);
+        make.right.mas_equalTo(_bannerBack.mas_right).mas_offset(-10);
+        make.size.mas_offset(CGSizeMake(20, 20));
     }];
+    UITapGestureRecognizer *tapp = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack)];
+    [back addGestureRecognizer:tapp];
     
     
-   
-   
+    //
+    
+    //创建 初始化
+    _pageControl = [[UIPageControl alloc]init];
+    //设置指示器默认显示的颜色
+    _pageControl.pageIndicatorTintColor = [UIColor redColor];
+    //设置当前选中的颜色
+    _pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
+    //设置当前默认显示位置
+    _pageControl.currentPage = 0;
+    //将pageControl添加到视图中
+    [_bannerBack addSubview:_pageControl];
+    //设置frame
+    [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(_bannerBack).mas_offset((_bannerBack.frame.size.width - 150) / 2);
+        make.bottom.mas_equalTo(_bannerBack.mas_bottom).mas_offset(-15);
+        make.size.mas_equalTo(CGSizeMake(150, 20));
+        make.right.mas_equalTo(_bannerBack).mas_offset(-(_bannerBack.frame.size.width - 150) / 2);
+    }];
     
 //    UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
 //    back.layer.masksToBounds = YES;
@@ -290,65 +323,28 @@
 -(void)addActivtDataSource{
     [WMNetWork get:ChargeHomeBannerList parameters:nil success:^(id responseObj) {
         //加载完数据检测是否有上次充电的状态
-        NSArray *dataArray = responseObj[@"data"];
-        for (int i = 0; i < dataArray.count; i++) {
-         HomeActivitModel *model = [HomeActivitModel objectWithKeyValues:dataArray[i]];
-        [self.bannerArray addObject:model];
-        }
-        HomeActivitModel *model = self.bannerArray[0];
-        _scroll = [[UIScrollView alloc] initWithFrame:self.bannerBack.bounds];
-        _scroll.contentSize = CGSizeMake(self.bannerBack.frame.size.width * self.bannerArray.count, self.bannerBack.frame.size.height);
-        _scroll.pagingEnabled = YES;
-        _scroll.delegate = self;
-        [self.bannerBack addSubview:_scroll];
+        NSLog(@"0---%@",[NSThread currentThread]);  /////
+  
+
+                NSArray *dataArray = responseObj[@"data"];
+            for (int i = 0; i < dataArray.count; i++) {
+                HomeActivitModel *model = [HomeActivitModel objectWithKeyValues:dataArray[i]];
+                [self.bannerArray addObject:model];
+            }
         
+        //
+            _scroll.contentSize = CGSizeMake(self.bannerBack.frame.size.width * self.bannerArray.count, self.bannerBack.frame.size.height);
+            //设置点的个数
+            _pageControl.numberOfPages = self.bannerArray.count;
+            
+            for (int i = 0; i < self.bannerArray.count; i++) {
+                [_scroll addSubview:[self addSubViewToBannerWithModel:self.bannerArray[i] withFrame:CGRectMake(self.bannerBack.frame.size.width * i,0, self.bannerBack.frame.size.width, self.bannerBack.frame.size.height) withTag:(i + 1)]];
+            }
+            //启动定时器
+            [self initTimerFunction];
+        
+    
        
-        UIImageView *back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"functionBtn"]];
-        back.userInteractionEnabled = YES;
-//        back.layer.masksToBounds = YES;
-//        back.layer.cornerRadius = 20;
-        [_bannerBack addSubview:back];
-        [back mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_bannerBack.mas_top).mas_offset(10);
-            make.right.mas_equalTo(_bannerBack.mas_right).mas_offset(-10);
-            make.size.mas_offset(CGSizeMake(20, 20));
-        }];
-        UITapGestureRecognizer *tapp = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack)];
-        //[[UITapGestureRecognizer alloc] addTarget:self action:@selector(goBack)];
-        [back addGestureRecognizer:tapp];
-        
-        
-        
-        
-        //创建 初始化
-        _pageControl = [[UIPageControl alloc]init];
-        //设置点的个数
-        _pageControl.numberOfPages = self.bannerArray.count;
-        //设置指示器默认显示的颜色
-        _pageControl.pageIndicatorTintColor = [UIColor redColor];
-        //设置当前选中的颜色
-        _pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
-        //设置当前默认显示位置
-        _pageControl.currentPage = 0;
-        //将pageControl添加到视图中
-        [_bannerBack addSubview:_pageControl];
-        //设置frame
-        [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_bannerBack).mas_offset((_bannerBack.frame.size.width - 150) / 2);
-            make.bottom.mas_equalTo(_bannerBack.mas_bottom).mas_offset(-15);
-            make.size.mas_equalTo(CGSizeMake(150, 20));
-        make.right.mas_equalTo(_bannerBack).mas_offset(-(_bannerBack.frame.size.width - 150) / 2);
-        }];
-        
-        //启动定时器
-        [self initTimerFunction];
-        
-        for (int i = 0; i < self.bannerArray.count; i++) {
-            [_scroll addSubview:[self addSubViewToBannerWithModel:self.bannerArray[i] withFrame:CGRectMake(self.bannerBack.frame.size.width * i,0, self.bannerBack.frame.size.width, self.bannerBack.frame.size.height) withTag:(i + 1)]];
-        }
-        
-        
-        MYLog(@"%@",model.desc);
     }failure:^(NSError *error) {
         MYLog(@"%@",error);
     }];
@@ -359,20 +355,17 @@
     UIView *views = [[UIView alloc] initWithFrame:frame];
     
     UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",tag]]];
-    image.frame =  self.bannerBack.bounds;
+    image.frame =  views.bounds;
     [views addSubview:image];
     
-    
-    
-    
     //
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bannerBack.frame.size.width, 44)];
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, views.frame.size.width, 44)];
     label1.text = model.name;
     label1.textAlignment = NSTextAlignmentCenter;
     label1.font = [UIFont systemFontOfSize:20];
     [views addSubview:label1];
     //
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(label1.frame), self.bannerBack.frame.size.width - 30, 88)];
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(label1.frame),views.frame.size.width - 30, 88)];
     label2.text = model.desc;
     label2.numberOfLines = 0;
     label2.textAlignment = NSTextAlignmentCenter;
@@ -384,7 +377,7 @@
     btn.layer.masksToBounds = YES;
     btn.layer.cornerRadius = 10;
     btn.tag = tag;
-    btn.frame = CGRectMake((self.bannerBack.frame.size.width - 60) / 2, CGRectGetMaxY(label2.frame) + 60, 60, 45);
+    btn.frame = CGRectMake((views.frame.size.width - 60) / 2, CGRectGetMaxY(label2.frame) + 60, 60, 45);
     [btn setTitle:@"了解详情" forState:UIControlStateNormal];
     [btn setTitleColor:RGB_COLOR(122, 193, 189, 1) forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(gotoWebView:) forControlEvents:UIControlEventTouchDown];
@@ -397,6 +390,9 @@
     }];
     return views;
 }
+
+
+
 
 -(void)goBack{
     [_backView removeFromSuperview];
@@ -411,8 +407,16 @@
     HomeActivityController *activity = [[HomeActivityController alloc] init];
     [self.navigationController pushViewController:activity animated:YES];
     HomeActivitModel *model = self.bannerArray[sender.tag -1];
+    if(model.type.intValue == 4){
+        activity.url = [NSString stringWithFormat:@"%@%@",model.url,[Config getInviteCode] ];
+    }else{
+        activity.url = model.url;
+    }
     activity.name = model.name;
     activity.url = model.url;
+    activity.des = model.desc;
+    activity.icon = model.icon;
+
 }
 
 //添加定时器
@@ -891,7 +895,7 @@
                           @"userId" : [Config getOwnID]
                           };
     [WMNetWork get:ChargeMessge parameters:par success:^(id responseObj) {
-        if(![responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
+        if([responseObj[@"chargInfo"][@"endTime"] isEqualToString:@""]){
             NSLog(@"9---");
             
             

@@ -214,6 +214,23 @@ static NSString *channel = @"Publish channel";
     [[AVAudioSession sharedInstance] setActive: YES error: &activationErr];
 }
 
+//初始化shareSDK
+- (void)initShareSdk {
+    
+    NSMutableArray *platforems = [NSMutableArray array];
+    //微信好友
+    [platforems addObject:@(SSDKPlatformSubTypeWechatSession)];
+    //微信朋友圈
+    [platforems addObject:@(SSDKPlatformSubTypeWechatTimeline)];
+    [ShareSDK registPlatforms:^(SSDKRegister *platformsRegister) {
+       
+    [platformsRegister setupWeChatWithAppId:XYWXAppId appSecret:XYWXAppSecret];
+        
+    }];
+    
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
@@ -222,7 +239,8 @@ static NSString *channel = @"Publish channel";
 
     //版本更新
     [self VersionUpDate];
-    
+    //初始化分享SDK
+    [self initShareSdk];
     //初始化JPUSH
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式

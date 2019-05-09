@@ -47,5 +47,15 @@
 @property (nonatomic, copy) NSString *openTime;//开放时间
 @property (nonatomic, copy) NSString *feeNote;//收费说明   加一行  平段是1.09，峰段1.49
 @property (nonatomic, copy) NSString *stationPic;
+
+@property (nonatomic, copy) NSString *cTimeRange;// 当前时段
+@property (nonatomic, copy) NSString *elecFee;//  当前时段电费
+@property (nonatomic, copy) NSString *serverFee;//当前时段服务费
+@property (nonatomic, copy) NSString *serverDiscount;//当前时段优惠金额
+@property (nonatomic, copy) NSArray *picList; //轮播图数组
+@property (nonatomic, copy) NSString *gdlongitude; // 该站点的高德地图经度坐标
+@property (nonatomic, copy) NSString *gdlatitude; // 该站点的高德地图纬度坐标
+
+
 @end
 

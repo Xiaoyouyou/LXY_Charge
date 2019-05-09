@@ -571,6 +571,7 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
        [Config saveMobile:userInfo.mobile];
        [Config savePortrait:userInfo.avatar];
        [Config saveToken:userInfo.token];
+       [Config saveUserInviteCode:userInfo.inviteCode];
       
        //加载个人信息缓存模型
        PersonMessage  *per = [PersonMessage objectWithKeyValues:responseObj[@"result"]];
