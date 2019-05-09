@@ -63,6 +63,8 @@ typedef enum{
 @property (weak, nonatomic) IBOutlet UITextField *moneyFild;
 
 @property (weak, nonatomic) IBOutlet UILabel *youhiMoneyText;
+@property (nonatomic ,strong)NSString *textFildStr;
+
 
 //---------------------------------
 
@@ -96,6 +98,31 @@ typedef enum{
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    //监听当键将要退出时
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    int money = self.moneyFild.text.intValue;
+    if(money < 50){
+        [MBProgressHUD showSuccess:@"输入金额不能小于50元"];
+         self.youhiMoneyText.attributedText = [self straaaaaaa:@"0"];
+        self.sureBtn.enabled = NO;
+    }else if(![self isPureInt:self.moneyFild.text]){
+        [MBProgressHUD showSuccess:@"输入金额必须为整数"];
+         self.youhiMoneyText.attributedText = [self straaaaaaa:@"0"];
+        self.sureBtn.enabled = NO;
+    }else{
+        [self getChargeMoney:self.moneyFild.text];
+        self.sureBtn.enabled = YES;
+    }
+    [self.moneyFild resignFirstResponder];
 }
 
 
@@ -526,7 +553,6 @@ typedef enum{
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     NSInteger money = self.moneyFild.text.intValue;
-    NSLog(@"%ld",money % 10);
     if(money < 50){
         [MBProgressHUD showSuccess:@"输入金额不能小于50元"];
         self.sureBtn.enabled = NO;

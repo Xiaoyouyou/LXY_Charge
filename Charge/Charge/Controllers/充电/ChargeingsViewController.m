@@ -505,6 +505,9 @@
             
             if (self.ChangePay == nil) {
                 
+                //电费
+                self.ChangePay = [[ChangePayViewController alloc] init];
+                
                 
                 //充电时间
                 self.ChangePay.chargeTimeStr = self.chargeTime.text;
@@ -516,10 +519,6 @@
                 {
                     self.ChangePay.powersStr = [Config getCurrentPower];
                 }
-                
-
-                //电费
-                self.ChangePay = [[ChangePayViewController alloc] init];
                 
                 if ([Config getelecMoney] == NULL) {
                     self.ChangePay.chargeMoneyStr =@"0￥";

@@ -149,7 +149,7 @@
                                     images:self.icon
                                        url:[NSURL URLWithString:self.url]
                                      title:self.title1
-                                      type:SSDKContentTypeAuto];
+                                      type:SSDKContentTypeWebPage];
     [ShareSDK share:type
          parameters:parameters
      onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {

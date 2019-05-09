@@ -26,13 +26,21 @@
     };
     __weak typeof(self) weakSelf = self;
      nav.rightBlock = ^{
-        //分享到朋友圈和微信
-        ChargeShareView *share = [[ChargeShareView alloc] init];
-        share.title1 = weakSelf.name;
-        share.msg = weakSelf.des;
-        share.url = weakSelf.url;
-        share.icon = weakSelf.icon;
-        [weakSelf.view addSubview:share];
+         
+         //判断是否登录
+         if ([Config getOwnID] == nil) {
+             LoginViewController *loginVC = [[LoginViewController alloc] init];
+             [self presentViewController:loginVC animated:YES completion:nil];
+         }else{
+             //分享到朋友圈和微信
+             ChargeShareView *share = [[ChargeShareView alloc] init];
+             share.title1 = weakSelf.name;
+             share.msg = weakSelf.des;
+             share.url = weakSelf.url;
+             share.icon = weakSelf.icon;
+             [weakSelf.view addSubview:share];
+         }
+      
     };
     [self.view addSubview:nav];
     [nav mas_makeConstraints:^(MASConstraintMaker *make) {

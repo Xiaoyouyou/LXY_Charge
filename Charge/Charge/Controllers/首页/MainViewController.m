@@ -240,7 +240,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LeftViewPutUp) name:LeaveOutNoti object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ChargeingMessageAction) name:ChargeingMessage object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(EndChargeingMessageAction) name:EndChargeingMessage object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkChargingS) name:CheckChargingNotis object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkChargeing) name:CheckChargingNotis object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YiChangJieSuan:) name:JiTingChargeNot object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(YiChangJieSuan:) name:UNenoughChargeNot object:nil];
     
@@ -256,7 +256,7 @@
     [self.view addSubview:_backView];
     
     
-    _bannerBack = [[UIView alloc] initWithFrame:CGRectMake(30, (XYScreenHeight - 400) / 2, XYScreenWidth - 60, 400)];
+    _bannerBack = [[UIView alloc] initWithFrame:CGRectMake(30, (XYScreenHeight - XYScreenWidth + 60) / 2, XYScreenWidth - 60, XYScreenWidth - 60)];
     _bannerBack.backgroundColor = [UIColor whiteColor];
     _bannerBack.layer.masksToBounds = YES;
     _bannerBack.layer.cornerRadius = 6;
@@ -272,7 +272,7 @@
     UIImageView *back = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"functionBtn"]];
     back.userInteractionEnabled = YES;
     back.layer.masksToBounds = YES;
-    back.layer.borderColor = [UIColor blackColor].CGColor;
+    back.layer.borderColor = [UIColor grayColor].CGColor;
     back.layer.borderWidth = 1;
     back.layer.cornerRadius = 10;
     [_bannerBack addSubview:back];
@@ -290,9 +290,9 @@
     //创建 初始化
     _pageControl = [[UIPageControl alloc]init];
     //设置指示器默认显示的颜色
-    _pageControl.pageIndicatorTintColor = [UIColor redColor];
+    _pageControl.pageIndicatorTintColor = [UIColor grayColor];
     //设置当前选中的颜色
-    _pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
+    _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     //设置当前默认显示位置
     _pageControl.currentPage = 0;
     //将pageControl添加到视图中
@@ -407,13 +407,12 @@
     HomeActivityController *activity = [[HomeActivityController alloc] init];
     [self.navigationController pushViewController:activity animated:YES];
     HomeActivitModel *model = self.bannerArray[sender.tag -1];
-    if(model.type.intValue == 4){
-        activity.url = [NSString stringWithFormat:@"%@%@",model.url,[Config getInviteCode] ];
+    if(model.type.intValue == 4 && [Config getInviteCode] != nil){
+            activity.url = [NSString stringWithFormat:@"%@%@",model.url,[Config getInviteCode] ];
     }else{
         activity.url = model.url;
     }
     activity.name = model.name;
-    activity.url = model.url;
     activity.des = model.desc;
     activity.icon = model.icon;
 
@@ -938,21 +937,13 @@
                         MYLog(@"responseObj = %@",responseObj);
                         
                         ChargingMessageModel *chargeMes = [ChargingMessageModel objectWithKeyValues:responseObj[@"result"]];
-                        MYLog(@"pile_id = %@\n,charging_fee = %@\n,charging_power = %@\n,start_time = %@\n,charging_status = %@\n,end_time = %@\n",chargeMes.pile_id,chargeMes.charging_fee,chargeMes.charging_power,chargeMes.start_time,chargeMes.charging_status,chargeMes.end_time);
-                        
                         if (chargeMes.pile_id == NULL && chargeMes.charging_power == NULL && chargeMes.start_time == NULL && chargeMes.charging_status == NULL) {
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
-//                            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"" message:nil preferredStyle:UIAlertControllerStyleAlert];
-//
-//                            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                            
                             [Config removeChargePay];//移除总电费
                             [Config removeCurrentPower];//移除当前电量
                             [Config removeElecMoney];//移除电费
                             [Config removeServiceMoney];//移除服务费
                             [Config removeIDiscountMoney];//移除服务费优惠
-                            
-                            
                             [Config removeChargeNum];//移除充电桩号
                             [Config removeCurrentDate];//移除当前时间
                             //存充电状态:0.代表结束充电

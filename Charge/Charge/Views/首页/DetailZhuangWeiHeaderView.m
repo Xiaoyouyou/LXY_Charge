@@ -62,9 +62,9 @@
     //创建 初始化
     _pageControl = [[UIPageControl alloc]init];
     //设置指示器默认显示的颜色
-    _pageControl.pageIndicatorTintColor = [UIColor redColor];
+    _pageControl.pageIndicatorTintColor = [UIColor grayColor];
     //设置当前选中的颜色
-    _pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
+    _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     //设置当前默认显示位置
     _pageControl.currentPage = 0;
     //将pageControl添加到视图中

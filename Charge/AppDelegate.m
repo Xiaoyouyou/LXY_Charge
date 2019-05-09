@@ -237,7 +237,7 @@ static NSString *channel = @"Publish channel";
     [NSThread sleepForTimeInterval:1.0];
     [self initialization];
 
-    //版本更新
+//    //版本更新
     [self VersionUpDate];
     //初始化分享SDK
     [self initShareSdk];

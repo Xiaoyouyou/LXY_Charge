@@ -66,7 +66,7 @@
 	<array>
 		<string>baidumap</string>
 		<string>weixin</string>
-        <string>wechat</string>
+		<string>wechat</string>
 		<string>mqq</string>
 		<string>iosamap</string>
 		<string>alipay</string>
@@ -78,6 +78,10 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MOBAppKey</key>
+	<string>2b15ee7b2fbf6</string>
+	<key>MOBAppSecret</key>
+	<string>2ad343cfbdee2aa97780c5e68aa8dedc</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

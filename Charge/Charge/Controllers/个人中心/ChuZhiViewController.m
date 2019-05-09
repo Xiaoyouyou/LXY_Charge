@@ -65,7 +65,11 @@ typedef enum{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeValue:) name:UITextFieldTextDidChangeNotification object:nil];
     [moneyTextField becomeFirstResponder];
     
+   
+    
 }
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

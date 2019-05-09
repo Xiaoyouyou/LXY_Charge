@@ -267,7 +267,7 @@
             NSMutableDictionary *paramers = [NSMutableDictionary dictionary];
             paramers[@"mobile"] = phoneNum.text;
             paramers[@"code"] = yanZhengMa.text;
-            parmas[@"inviteCode"] = invitCode.text;
+            paramers[@"inviteCode"] = invitCode.text;
             paramers[@"password"] = [XStringUtil stringToMD5:dengLuMiMa.text];
             
             [MBProgressHUD showMessage:@""];

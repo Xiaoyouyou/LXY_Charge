@@ -106,6 +106,8 @@
                             [Config removeUseName];//移除用户名字
                             [Config removetoken]; //移除token
                             [Config removeThirdLoginType];//移除第三方登陆状态
+                            [Config removeInviteCode];//移除邀请码
+                            
                             //退出登陆时通知主控制器收起左滑界面
                             
                             [[NSNotificationCenter defaultCenter] postNotificationName:LeaveOutNoti object:nil];

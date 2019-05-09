@@ -295,7 +295,7 @@ typedef enum {
                         MYLog(@"充电费率是chargeCost = %@",chargeCost);
                         //发送预约电桩指令
                        // [[Singleton sharedInstance] yuYueChargeNum:@"004401001003000000" cost:chargeCost];
-                          [[Singleton sharedInstance] yuYueChargeNum:responseObj[@"pileId"] cost:chargeCost];
+//                          [[Singleton sharedInstance] yuYueChargeNum:responseObj[@"pileId"] cost:chargeCost];
                         //预约的充电桩号
                         NSString *strCharge = responseObj[@"pileId"];
                         MYLog(@"预约的充电桩号strCharge = %@",strCharge);
