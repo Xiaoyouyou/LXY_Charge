@@ -210,8 +210,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //添加活动view
-    [self addActivtView];
+   
     
     //请求数据
     [self addActivtDataSource];
@@ -324,15 +323,19 @@
     [WMNetWork get:ChargeHomeBannerList parameters:nil success:^(id responseObj) {
         //加载完数据检测是否有上次充电的状态
         NSLog(@"0---%@",[NSThread currentThread]);  /////
-  
-
-                NSArray *dataArray = responseObj[@"data"];
+        NSString *status = responseObj[@"status"];
+        NSLog(@"-------%ld",status.integerValue);
+        if(status.integerValue == 0){
+            //添加活动view
+            [self addActivtView];
+            
+            NSArray *dataArray = responseObj[@"data"];
             for (int i = 0; i < dataArray.count; i++) {
                 HomeActivitModel *model = [HomeActivitModel objectWithKeyValues:dataArray[i]];
                 [self.bannerArray addObject:model];
             }
-        
-        //
+            
+            //
             _scroll.contentSize = CGSizeMake(self.bannerBack.frame.size.width * self.bannerArray.count, self.bannerBack.frame.size.height);
             //设置点的个数
             _pageControl.numberOfPages = self.bannerArray.count;
@@ -342,6 +345,10 @@
             }
             //启动定时器
             [self initTimerFunction];
+        }else{
+              NSLog(@"暂无活动-------status：%ld",status.integerValue);
+        }
+        
         
     
        
@@ -1734,8 +1741,7 @@ BOOL btnStatus = YES;
                                 OpenChangeViewController *openVC = [[OpenChangeViewController alloc] init];
                                 
                                 //                            NSString *equStr = responseObj[@"equipmentNum"];
-                                NSString *equStr = resultAsString;
-                                
+                                NSString *equStr = responseObj[@"code"];//桩号
                                 NSString *chargingStr = responseObj[@"stationName"];
                                 openVC.equipmentNum = equStr;
                                 openVC.chargingAddress = chargingStr;
@@ -1787,6 +1793,7 @@ BOOL btnStatus = YES;
                                 if (b.length == 18) {
                                     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
                                     parmas[@"qrCode"] = b;//扫描结果10
+                                    parmas[@"qrCode"] = resultAsString;
                                     parmas[@"token"] = [Config getToken];
                                     MYLog(@"token = %@",[Config getToken]);
                                     

@@ -89,7 +89,7 @@
 {
     MYLog(@"phoneNum= %@",self.phoneNum);
     //判断手机号
-    if ([XStringUtil isMobileNumber:self.phoneNum]) {
+//    if ([XStringUtil isMobileNumber:self.phoneNum]) {
         timecount = TimeCount;
         _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
         [_rightBtn setTitle:[NSString stringWithFormat:@"%ds重新获取",timecount] forState:UIControlStateNormal];
@@ -125,7 +125,7 @@
                 self.ShowNetWorkFailMess();
             }
         }];
-    }
+//  }
 }
 
 #pragma mark -- 获取验证码处理方法
