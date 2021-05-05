@@ -10,7 +10,6 @@
 #import "MJExtension.h"
 #import "MJFoundation.h"
 #import "MJExtensionConst.h"
-#import "MJDictionaryCache.h"
 
 @implementation MJPropertyType
 
@@ -18,13 +17,17 @@
 {
     MJExtensionAssertParamNotNil2(code, nil);
     
-    static const char MJCachedTypesKey = '\0';
+    static NSMutableDictionary *types;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        types = [NSMutableDictionary dictionary];
+    });
     
-    MJPropertyType *type = [MJDictionaryCache objectForKey:code forDictId:&MJCachedTypesKey];
+    MJPropertyType *type = types[code];
     if (type == nil) {
         type = [[self alloc] init];
         type.code = code;
-        [MJDictionaryCache setObject:type forKey:code forDictId:&MJCachedTypesKey];
+        types[code] = type;
     }
     return type;
 }

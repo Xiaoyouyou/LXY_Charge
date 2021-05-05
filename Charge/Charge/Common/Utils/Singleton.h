@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+//#import "GCDAsyncSocket.h"
 #import "GCDAsyncSocket.h"
 
 #define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \

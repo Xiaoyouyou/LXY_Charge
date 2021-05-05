@@ -12,12 +12,12 @@
 #import "XStringUtil.h"
 #import "Config.h"
 #import <iconv.h>
-
+#import "RSAObjC.h"
 //#define Host_IP @"192.168.1.101"
 //#define Host_IP @"183.234.61.201"
 //#define Host_IP @"192.168.1.101"
 
-#define Host_IP @"47.107.14.253"
+#define Host_IP @"47.107.14.253"//"47.107.14.253" 47.112.192.194  sys2.xgnet.com.cn
 //#define Host_IP @"120.77.146.167"
 
 #define Host_PORT 3005
@@ -79,11 +79,11 @@
     //默认未连接为0
     self.isLink = NO;
     
-    clientSocket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *err;
-  BOOL isSuccess =  [clientSocket connectToHost:Host_IP onPort:Host_PORT withTimeout:1 error:&err];
+    BOOL isSuccess =  [clientSocket connectToHost:Host_IP onPort:Host_PORT withTimeout:1 error:&err];
     MYLog(@"socket是否连接成功:%d",isSuccess);
-    if (!err || [err isEqual:@"null"]) {
+    if (err) {
         MYLog(@"err = %@",err);
     }
 }
@@ -97,7 +97,6 @@
         _repeatsCount = 0;//重置重连次数
         
         NSString *str = @"socket重连失败，退出当前界面";
-        
         if (self.connectFailBlcok) {
             self.connectFailBlcok(str);
         }
@@ -137,7 +136,7 @@
     NSData *data = [NSData dataWithData:dat]; // UTF-8编码
     //   NSString *str1 =  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSMutableString *result = [NSMutableString string];
-    const char *bytes = [data bytes];
+    Byte *bytes = (Byte *)[data bytes];
     for (int i = 0; i < [data length]; i++) {
         [result appendFormat:@"%02hhx", (unsigned char)bytes[i]];
         
@@ -651,7 +650,7 @@
     NSString *brStr = @"\r\n";//换行符
     NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
     NSString *str1 = [NSString stringWithFormat:@"%@%@%@",@"01",strAscll1,[Config getMobile]];
-    NSString *str2 = [RsaUtil encryptString:str1 publicKey:Public];
+    NSString *str2 = [RSAObjC encrypt:str1 PublicKey:Public];
     NSString * strAscll2 = [XStringUtil ascllString:str2];
     NSString *startString = [NSString stringWithFormat:@"AABB6001%@",strAscll2];
 //   NSString *startString = [NSString stringWithFormat:@"MM%@%@00000000000001%@",ChargeNum,[Config getMobile],brStr];//开启电桩指令
@@ -667,7 +666,7 @@
     
     NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
     NSString *str1 = [NSString stringWithFormat:@"%@%@%@",@"02",strAscll1,[Config getMobile]];
-    NSString *str2 = [RsaUtil encryptString:str1 publicKey:Public];
+    NSString *str2 = [RSAObjC encrypt:str1 PublicKey:Public];
     NSString * strAscll2 = [XStringUtil ascllString:str2];
     NSString *stopString = [NSString stringWithFormat:@"AABB6001%@",strAscll2];
 //    NSString *stopString = [NSString stringWithFormat:@"MM%@%@00000000000005%@",ChargeNum,[Config getMobile],brStr];
@@ -682,7 +681,7 @@
     NSString *brStr = @"\r\n";//换行符
     NSString * strAscll1 = [XStringUtil ascllString:ChargeNum];
     NSString *str1 = [NSString stringWithFormat:@"%@%@",@"03",strAscll1];
-    NSString *str2 = [RsaUtil encryptString:str1 publicKey:Public];
+    NSString *str2 = [RSAObjC encrypt:str1 PublicKey:Public];
     NSString * strAscll2 = [XStringUtil ascllString:str2];
     NSString *checkString = [NSString stringWithFormat:@"AABB6001%@",strAscll2];
     

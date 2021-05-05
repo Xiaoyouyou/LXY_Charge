@@ -11,7 +11,7 @@
 
 #ifdef __OBJC__
 #import "API.h"
-#import "RsaUtil.h"
+
 #import "Singleton.h"
 #import "Config.h"
 #import "XStringUtil.h"
@@ -23,6 +23,7 @@
 #import "Masonry.h"
 #import "NavView.h"
 #import <ShareSDK/ShareSDK.h>
+#import <YYModel/YYModel.h>
 #endif
 
 // Include any system framework and library headers here that should be included in all compilation units.

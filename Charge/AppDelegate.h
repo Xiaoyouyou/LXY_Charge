@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "WXApi.h"
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
-
+//#import <BMKLocationkit/BMKLocationComponent.h>
+#import "BMKLocationkit/BMKLocationComponent.h"
 typedef void (^WXPayResultBlock) (int errCode);
 typedef void (^WXSendAuthRespResultBlock) (NSString* code,int errcode);
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
 {
   BMKMapManager* _mapManager;
 }

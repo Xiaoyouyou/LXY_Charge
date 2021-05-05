@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SSDKUserQueryCondition : MOBFDataModel
+
+@interface SSDKUserQueryCondition : SSDKDataModel
 
 /**
  *  用户标志
@@ -24,5 +25,6 @@
  *  用户路径
  */
 @property (nonatomic, copy) NSString *path;
+
 
 @end

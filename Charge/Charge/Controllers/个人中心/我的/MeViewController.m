@@ -124,7 +124,7 @@
         
         if ([responseObj[@"status"] intValue] == 0) {
             
-            PersonMessage  *per = [PersonMessage objectWithKeyValues:responseObj[@"result"]];
+            PersonMessage  *per = [PersonMessage yy_modelWithDictionary:responseObj[@"result"]];
             [self saveDataWithSex:per.sex andAge:per.age andNick:per.nick andMobile:per.mobile andAvatar:per.avatar andSignature:per.signature];
             self.userName.text = per.userName;
             //图片路径赋值

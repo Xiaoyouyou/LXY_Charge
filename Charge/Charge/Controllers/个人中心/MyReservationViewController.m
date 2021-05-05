@@ -7,7 +7,7 @@
 //
 
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+#import <BMKLocationkit/BMKLocationComponent.h>//引入定位功能所有的头文件
 #import "MyReservationViewController.h"
 #import "YuYueTableViewCell.h"
 #import "YuYueTableFooterView.h"
@@ -81,7 +81,7 @@
             
             if ([responseObj[@"status"] intValue] == 0) {
                 
-            _YuYueCharge = [YuYueChargeModel objectWithKeyValues:responseObj[@"result"]];
+            _YuYueCharge = [YuYueChargeModel yy_modelWithDictionary:responseObj[@"result"]];
             _codeChargeNum = _YuYueCharge.code;
                 //保存预约结束时间
                 [Config saveYuYueEndTime:_YuYueCharge.endTime];
@@ -285,7 +285,7 @@
             
             if ([responseObj[@"status"] intValue] == 0) {
                 
-                _YuYueCharge = [YuYueChargeModel objectWithKeyValues:responseObj[@"result"]];
+                _YuYueCharge = [YuYueChargeModel yy_modelWithDictionary:responseObj[@"result"]];
                 _codeChargeNum = _YuYueCharge.code;
                 //保存预约结束时间
                 [Config saveYuYueEndTime:_YuYueCharge.endTime];

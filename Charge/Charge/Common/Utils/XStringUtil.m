@@ -425,7 +425,7 @@
     NSData *data = [str  dataUsingEncoding:NSUTF8StringEncoding]; // UTF-8编码
 //   NSString *str1 =  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSMutableString *result = [NSMutableString string];
-    const char *bytes = [data bytes];
+    Byte *bytes = (Byte *)[data bytes];
     for (int i = 0; i < [data length]; i++) {
         [result appendFormat:@"%02hhx", (unsigned char)bytes[i]];
         

@@ -29,7 +29,6 @@
 #import "MBProgressHUD.h"
 #import "Singleton.h"
 #import "Config.h"
-//#import <RichAPM/RichAPM.h>
 #import "MBProgressHUD+MJ.h"
 #import "QRCodeReader.h"
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -41,7 +40,7 @@ static BOOL isProduction = FALSE;
 static NSString *channel = @"Publish channel";
 
 
-@interface AppDelegate ()<WXApiDelegate,YBMonitorNetWorkStateDelegate,JPUSHRegisterDelegate,TencentSessionDelegate>
+@interface AppDelegate ()<YBMonitorNetWorkStateDelegate,JPUSHRegisterDelegate,TencentSessionDelegate>
 {
   UIBackgroundTaskIdentifier bgTask;
     
@@ -65,7 +64,7 @@ static NSString *channel = @"Publish channel";
 -(void)initWeChat
 {
     //向微信注册
-    [WXApi registerApp:WeChat_appkey];
+    [WXApi registerApp:WeChat_appkey universalLink:UniversalLink];
    
 }
 
@@ -74,6 +73,7 @@ static NSString *channel = @"Publish channel";
     // 要使用百度地图，请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
     // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    
     BOOL ret = [_mapManager start:BaiDuMap_appkey generalDelegate:nil];
     if (!ret) {
         NSLog(@"manager start failed!");
@@ -115,7 +115,6 @@ static NSString *channel = @"Publish channel";
     
 //    [self initAVAudio];//初始化后台运行
      [self initSaveLog];//初始化保存log日志文件
-  // [RichAPM startWithAppID:Rich_APM_appkey];//初始化richAPM
     [self initBaiDu];//初始化百度
     if (self.window == nil) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds] ];
@@ -224,7 +223,7 @@ static NSString *channel = @"Publish channel";
     [platforems addObject:@(SSDKPlatformSubTypeWechatTimeline)];
     [ShareSDK registPlatforms:^(SSDKRegister *platformsRegister) {
        
-    [platformsRegister setupWeChatWithAppId:XYWXAppId appSecret:XYWXAppSecret];
+    [platformsRegister setupTikTokByAppKey:XYWXAppId appSecret:XYWXAppSecret];
         
     }];
     
@@ -456,10 +455,21 @@ static NSString *channel = @"Publish channel";
 
 #pragma mark - WXAPiDelegate
 
+-(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler{
+    return [WXApi handleOpenUniversalLink:userActivity delegate:self];
+}
+
+
+
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return [WXApi handleOpenURL:url delegate:self];
 }
+
+
+
+
+
 
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

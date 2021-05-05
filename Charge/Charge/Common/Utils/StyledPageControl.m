@@ -242,7 +242,12 @@
             
                 NSString *pageNumber = [NSString stringWithFormat:@"%i", i+1];
                 CGContextSetFillColorWithColor(myContext, [[UIColor whiteColor] CGColor]);
-                [pageNumber drawInRect:CGRectMake(x,(self.frame.size.height-_currentPageDiameter)/2-1,_currentPageDiameter,_currentPageDiameter) withFont:[UIFont systemFontOfSize:_currentPageDiameter-2] lineBreakMode:UILineBreakModeCharacterWrap alignment:UITextAlignmentCenter];
+                
+                NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+                paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+                paragraphStyle.alignment = NSTextAlignmentCenter;
+                NSDictionary*attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:_currentPageDiameter-2],NSParagraphStyleAttributeName:paragraphStyle};
+                [pageNumber drawWithRect:CGRectMake(x,(self.frame.size.height-_currentPageDiameter)/2-1,_currentPageDiameter,_currentPageDiameter) options:NSStringDrawingUsesLineFragmentOrigin attributes:attribute context:nil];
             }
             else
             {

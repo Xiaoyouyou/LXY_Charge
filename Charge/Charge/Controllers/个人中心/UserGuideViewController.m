@@ -13,10 +13,10 @@
 #import "Masonry.h"
 #import "NavView.h"
 #import "API.h"
+#import <WebKit/WebKit.h>
+@interface UserGuideViewController ()<WKNavigationDelegate>
 
-@interface UserGuideViewController ()<UIWebViewDelegate>
-
-@property(strong,nonatomic) UIWebView * webView;
+@property(strong,nonatomic) WKWebView * webView;
 
 @end
 
@@ -49,8 +49,8 @@
 
 -(void)creatUI
 {
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, StatusBarH +  44, XYScreenWidth, XYScreenHeight - StatusBarH - 44)];
-    self.webView.delegate = self;
+    self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, StatusBarH +  44, XYScreenWidth, XYScreenHeight - StatusBarH - 44)];
+    self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
     
     NSURL *url = [[NSURL alloc] initWithString:UserGuide];
@@ -60,27 +60,30 @@
 
 #pragma mark - webView代理
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-    
-    MYLog(@"webViewDidStartLoad");
-    
-      [MBProgressHUD showMessage:@"" toView:self.view];
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+   
+    [MBProgressHUD showMessage:@"" toView:self.view];
+      //修改图片的大小（会变形的）
 }
-
-- (void)webViewDidFinishLoad:(UIWebView *)web{
-    
-    MYLog(@"webViewDidFinishLoad");
-      [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+  dispatch_async(dispatch_get_main_queue(), ^{
+       
+   });
 }
-
--(void)webView:(UIWebView*)webView  DidFailLoadWithError:(NSError*)error{
-    
-    MYLog(@"DidFailLoadWithError");
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [MBProgressHUD showError:@"网络加载失败"];
-    
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -8,7 +8,7 @@
 
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+#import <BMKlocationKit/BMKLocationComponent.h>//引入定位功能所有的头文件
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
 #import "ChargeDetailViewController.h"
 #import "DetailZhuangWeiViewController.h"
@@ -38,7 +38,7 @@
 #import "ChargeNumberModel2.h"
 //#import <CoreLocation/CoreLocation.h>
 
-@interface ChargeDetailViewController ()<BMKLocationServiceDelegate>
+@interface ChargeDetailViewController ()<BMKLocationManagerDelegate>
 {
     UIView *view1;
 }
@@ -56,7 +56,7 @@
 @property (nonatomic, strong) NSMutableArray *all_chargingSub;//分段计时的数组模型
 
 //地图相关
-@property (strong,nonatomic) BMKLocationService *locService;
+@property (strong,nonatomic) BMKLocationManager *locService;
 @property (nonatomic, assign) BOOL isUpdateLocation;//是否更新地理位置
 
 @property (nonatomic) double  endLatitude;
@@ -132,7 +132,7 @@
         [Config saveCurrentLocation:userLocation];
         self.isUpdateLocation =0;
     }
-    [_locService stopUserLocationService];
+    [_locService stopUpdatingLocation];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -146,10 +146,10 @@
     //初始化状态
     self.isUpdateLocation = 1;//加载1次位置更新的置位
     //初始化百度地图定位
-    _locService = [[BMKLocationService alloc] init];
+    _locService = [[BMKLocationManager alloc] init];
     _locService.delegate = self;
     //启动locationService
-    [_locService startUserLocationService];
+    [_locService startUpdatingLocation];
     
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backClick)];
 //    [self.backView addGestureRecognizer:tap];
@@ -194,10 +194,10 @@
                 [self.zhuangID addObject:arr2];
 //                for (NSArray *array3 in arr1) {
                 
-                        ChargeNumberModel1 *model1 = [ChargeNumberModel1 objectWithKeyValues:arr1[0]];
+                        ChargeNumberModel1 *model1 = [ChargeNumberModel1 yy_modelWithJSON:arr1[0]];
                         [self.A addObject:model1];
                     
-                        ChargeNumberModel2 *model2 = [ChargeNumberModel2 objectWithKeyValues:arr1[1]];
+                        ChargeNumberModel2 *model2 = [ChargeNumberModel2 yy_modelWithJSON:arr1[0]];
                         [self.B addObject:model2];                    
                 }
         
@@ -255,7 +255,7 @@
 //            }
 
             
-            _ChargeDetal = [ChargeDetalMes objectWithKeyValues:responseObj[@"result"]];
+            _ChargeDetal = [ChargeDetalMes yy_modelWithJSON:responseObj[@"result"]];
             //充电站经纬度
             self.endLatitude = [_ChargeDetal.latitude doubleValue];
             self.endLongitude = [_ChargeDetal.longitude doubleValue];
@@ -369,8 +369,8 @@
     ZhuangWeiMesViewController *ZhuangWeiMesVC = [[ZhuangWeiMesViewController alloc] init];
     self.ZhuangWeiVC = ZhuangWeiMesVC;
     ZhuangWeiMesVC.chargeNumber = self.array;//桩位控制器数据
-    ZhuangWeiMesVC.zhuangA = self.A;
-    ZhuangWeiMesVC.zhzuangB = self.B;
+//    ZhuangWeiMesVC.zhuangA = self.A;
+//    ZhuangWeiMesVC.zhzuangB = self.B;
     ZhuangWeiMesVC.zhuangID = self.zhuangID;
     ZhuangWeiMesVC.stationID = self.id;
     //  ZhuangWeiMesVC.dict = self.cheWeiDict;//桩的数量字典

@@ -1,17 +1,33 @@
-
-![Logo](http://images.cnitblog.com/blog2015/497279/201505/051004316736641.png)
 MJExtension
 ===
-- A fast, convenient and nonintrusive conversion between JSON and model.
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![podversion](https://img.shields.io/cocoapods/v/MJExtension.svg)
+- A fast, convenient and nonintrusive conversion framework between JSON and model.
 - 转换速度快、使用简单方便的字典转模型框架
 
-GitHub：[CoderMJLee](https://github.com/CoderMJLee) ｜ Blog：[mjios(Chinese)](http://www.cnblogs.com/mjios) ｜ PR is welcome，or [feedback](mailto:richermj123go@vip.qq.com)
+
+
+## ‼️ 纯Swift版的JSON与Model转换框架已经开源上架 ‼️
+
+- [KakaJSON](https://github.com/kakaopensource/KakaJSON)
+- [中文教程](https://www.cnblogs.com/mjios/p/11352776.html)
+- 如果你的项目是用Swift写的Model，墙裂推荐使用[KakaJSON](https://github.com/kakaopensource/KakaJSON)
+  - 已经对各种常用的数据场景进行了大量的单元测试
+  - 简单易用、功能丰富、转换快速
+
+
+
+## 关于在Swift中使用MJExtension ‼️
+
+### ‼️ 在 Swift4 之后, 请在属性前加 `@objc` 修饰. 以保证 Swift 的属性能够暴露给 Objc 使用. ‼️
+### ‼️ 请勿使用 `Bool` 类型, 因为在 Swift 中并没有桥接该类型, 不能显式的对应 `BOOL`, 请使用 `NSNumber` 替代 ‼️
+
 
 
 ## Contents
+
 * [Getting Started 【开始使用】](#Getting_Started)
 	* [Features 【能做什么】](#Features)
-	* [Why MJExtension 【为什么使用MJExtension】](#Why_MJExtension)
 	* [Installation 【安装】](#Installation)
 * [Examples 【示例】](#Examples)
 	* [JSON -> Model](#JSON_Model)
@@ -40,26 +56,8 @@ GitHub：[CoderMJLee](https://github.com/CoderMJLee) ｜ Blog：[mjios(Chinese)]
 * `JSON Array` --> `Model Array`、`Core Data Model Array`
 * `JSONString` --> `Model Array`、`Core Data Model Array`
 * `Model Array`、`Core Data Model Array` --> `JSON Array`
-* Coding all properties of model in one line code.
+* Coding all properties of a model with only one line of code.
     * 只需要一行代码，就能实现模型的所有属性进行Coding（归档和解档）
-
-## <a id="Why_MJExtension"></a> Why use MJExtension, why not use JSONModel or Mantle
-#### MJExtension is faster than JSONModel and Mantle【转换速率】
-- `MJExtension` > `JSONModel` > `Mantle` _(Feel free to test it yourself)_
-- 各位开发者也可以自行测试
-
-#### MJExtension is more easy to go【MJExtension更加容易使用】
-- `JSONModel`
-	- You `must` let `all` model class extend `JSONModel` class
-   - 要求所有模型类`必须`继承自JSONModel基类
-
-- `Mantle`
-	- You `must` let `all` model class extend `MTModel` class.
-   - 要求所有模型类`必须`继承自MTModel基类
-
-- `MJExtension`
-	- Your model class `doesn't need to` extend another base class. You don't need to modify any model file.  `Nonintrusive`, `convenient`.
-   - `不需要`你的模型类继承任何特殊基类，也不需要修改任何模型代码，毫无污染，毫无侵入性
 
 ## <a id="Installation"></a> Installation【安装】
 
@@ -70,7 +68,7 @@ pod 'MJExtension'
 ```
 
 ### Manually【手动导入】
-- Drag all source files under floder `MJExtension` to your project.【将`MJExtension`文件夹中的所有源代码拽入项目中】
+- Drag all source files under folder `MJExtension` to your project.【将`MJExtension`文件夹中的所有源代码拽入项目中】
 - Import the main header file：`#import "MJExtension.h"`【导入主头文件：`#import "MJExtension.h"`】
 
 ```objc
@@ -119,7 +117,7 @@ NSDictionary *dict = @{
 };
 
 // JSON -> User
-User *user = [User objectWithKeyValues:dict];
+User *user = [User mj_objectWithKeyValues:dict];
 
 NSLog(@"name=%@, icon=%@, age=%zd, height=%@, money=%@, sex=%d, gay=%d", user.name, user.icon, user.age, user.height, user.money, user.sex, user.gay);
 // name=Jack, icon=lufy.png, age=20, height=1.550000, money=100.9, sex=1
@@ -132,7 +130,7 @@ NSLog(@"name=%@, icon=%@, age=%zd, height=%@, money=%@, sex=%d, gay=%d", user.na
 NSString *jsonString = @"{\"name\":\"Jack\", \"icon\":\"lufy.png\", \"age\":20}";
 
 // 2.JSONString -> User
-User *user = [User objectWithKeyValues:jsonString];
+User *user = [User mj_objectWithKeyValues:jsonString];
 
 // 3.Print user's properties
 NSLog(@"name=%@, icon=%@, age=%d", user.name, user.icon, user.age);
@@ -166,7 +164,7 @@ NSDictionary *dict = @{
 };
 
 // JSON -> Status
-Status *status = [Status objectWithKeyValues:dict];
+Status *status = [Status mj_objectWithKeyValues:dict];
 
 NSString *text = status.text;
 NSString *name = status.user.name;
@@ -199,8 +197,8 @@ NSLog(@"text2=%@, name2=%@, icon2=%@", text2, name2, icon2);
 
 /***********************************************/
 
-// Tell MJExtension what type model will be contained in statuses and ads.
-[StatusResult setupObjectClassInArray:^NSDictionary *{
+// Tell MJExtension what type of model will be contained in statuses and ads.
+[StatusResult mj_setupObjectClassInArray:^NSDictionary *{
     return @{
                @"statuses" : @"Status",
                // @"statuses" : [Status class],
@@ -208,7 +206,7 @@ NSLog(@"text2=%@, name2=%@, icon2=%@", text2, name2, icon2);
                // @"ads" : [Ad class]
            };
 }];
-// Equals: StatusResult.m implements +objectClassInArray method.
+// Equals: StatusResult.m implements +mj_objectClassInArray method.
 
 NSDictionary *dict = @{
     @"statuses" : @[
@@ -241,7 +239,7 @@ NSDictionary *dict = @{
 };
 
 // JSON -> StatusResult
-StatusResult *result = [StatusResult objectWithKeyValues:dict];
+StatusResult *result = [StatusResult mj_objectWithKeyValues:dict];
 
 NSLog(@"totalNumber=%@", result.totalNumber);
 // totalNumber=2014
@@ -284,21 +282,21 @@ for (Ad *ad in result.ads) {
 /***********************************************/
 
 // How to map
-[Student setupReplacedKeyFromPropertyName:^NSDictionary *{
+[Student mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
     return @{
                @"ID" : @"id",
-               @"desc" : @"desciption",
+               @"desc" : @"description",
                @"oldName" : @"name.oldName",
                @"nowName" : @"name.newName",
                @"nameChangedTime" : @"name.info[1].nameChangedTime",
                @"bag" : @"other.bag"
            };
 }];
-// Equals: Student.m implements +replacedKeyFromPropertyName method.
+// Equals: Student.m implements +mj_replacedKeyFromPropertyName method.
 
 NSDictionary *dict = @{
     @"id" : @"20",
-    @"desciption" : @"kids",
+    @"description" : @"kids",
     @"name" : @{
         @"newName" : @"lufy",
         @"oldName" : @"kitty",
@@ -318,7 +316,7 @@ NSDictionary *dict = @{
 };
 
 // JSON -> Student
-Student *stu = [Student objectWithKeyValues:dict];
+Student *stu = [Student mj_objectWithKeyValues:dict];
 
 // Printing
 NSLog(@"ID=%@, desc=%@, oldName=%@, nowName=%@, nameChangedTime=%@",
@@ -344,7 +342,7 @@ NSArray *dictArray = @[
                      ];
 
 // JSON array -> User array
-NSArray *userArray = [User objectArrayWithKeyValuesArray:dictArray];
+NSArray *userArray = [User mj_objectArrayWithKeyValuesArray:dictArray];
 
 // Printing
 for (User *user in userArray) {
@@ -366,7 +364,7 @@ status.user = user;
 status.text = @"Nice mood!";
 
 // Status -> JSON
-NSDictionary *statusDict = status.keyValues;
+NSDictionary *statusDict = status.mj_keyValues;
 NSLog(@"%@", statusDict);
 /*
  {
@@ -391,7 +389,7 @@ bag.name = @"a red bag";
 bag.price = 205;
 stu.bag = bag;
 
-NSDictionary *stuDict = stu.keyValues;
+NSDictionary *stuDict = stu.mj_keyValues;
 NSLog(@"%@", stuDict);
 /*
 {
@@ -423,7 +421,7 @@ user2.icon = @"nami.png";
 NSArray *userArray = @[user1, user2];
 
 // Model array -> JSON array
-NSArray *dictArray = [User keyValuesArrayWithObjectArray:userArray];
+NSArray *dictArray = [User mj_keyValuesArrayWithObjectArray:userArray];
 NSLog(@"%@", dictArray);
 /*
  (
@@ -454,7 +452,7 @@ NSDictionary *dict = @{
 
 // This demo just provide simple steps
 NSManagedObjectContext *context = nil;
-User *user = [User objectWithKeyValues:dict context:context];
+User *user = [User mj_objectWithKeyValues:dict context:context];
 
 [context save:nil];
 ```
@@ -466,16 +464,16 @@ User *user = [User objectWithKeyValues:dict context:context];
 
 @implementation Bag
 // NSCoding Implementation
-MJCodingImplementation
+MJExtensionCodingImplementation
 @end
 
 /***********************************************/
 
 // what properties not to be coded
-[Bag setupIgnoredCodingPropertyNames:^NSArray *{
+[Bag mj_setupIgnoredCodingPropertyNames:^NSArray *{
     return @[@"name"];
 }];
-// Equals: Bag.m implements +ignoredCodingPropertyNames method.
+// Equals: Bag.m implements +mj_ignoredCodingPropertyNames method.
 
 // Create model
 Bag *bag = [[Bag alloc] init];
@@ -498,10 +496,10 @@ NSLog(@"name=%@, price=%f", decodedBag.name, decodedBag.price);
 #import "MJExtension.h"
 
 @implementation Dog
-+ (NSString *)replacedKeyFromPropertyName121:(NSString *)propertyName
++ (NSString *)mj_replacedKeyFromPropertyName121:(NSString *)propertyName
 {
     // nickName -> nick_name
-    return [propertyName underlineFromCamel];
+    return [propertyName mj_underlineFromCamel];
 }
 @end
 
@@ -512,7 +510,7 @@ NSDictionary *dict = @{
                        @"run_speed" : @"100.9"
                        };
 // NSDictionary -> Dog
-Dog *dog = [Dog objectWithKeyValues:dict];
+Dog *dog = [Dog mj_objectWithKeyValues:dict];
 
 // printing
 NSLog(@"nickName=%@, scalePrice=%f runSpeed=%f", dog.nickName, dog.salePrice, dog.runSpeed);
@@ -524,7 +522,7 @@ NSLog(@"nickName=%@, scalePrice=%f runSpeed=%f", dog.nickName, dog.salePrice, do
 #import "MJExtension.h"
 
 @implementation Book
-- (id)newValueFromOldValue:(id)oldValue property:(MJProperty *)property
+- (id)mj_newValueFromOldValue:(id)oldValue property:(MJProperty *)property
 {
     if ([property.name isEqualToString:@"publisher"]) {
         if (oldValue == nil) return @"";
@@ -544,7 +542,7 @@ NSDictionary *dict = @{
                        @"publishedTime" : @"2011-09-10"
                        };
 // NSDictionary -> Book
-Book *book = [Book objectWithKeyValues:dict];
+Book *book = [Book mj_objectWithKeyValues:dict];
 
 // printing
 NSLog(@"name=%@, publisher=%@, publishedTime=%@", book.name, book.publisher, book.publishedTime);
@@ -558,4 +556,4 @@ NSLog(@"name=%@, publisher=%@, publishedTime=%@", book.name, book.publisher, boo
 * 如果在使用过程中遇到BUG，希望你能Issues我，谢谢（或者尝试下载最新的框架代码看看BUG修复没有）
 * 如果在使用过程中发现功能不够用，希望你能Issues我，我非常想为这个框架增加更多好用的功能，谢谢
 * 如果你想为MJExtension输出代码，请拼命Pull Requests我
-* 一起携手打造天朝乃至世界最好用的字典模型框架，做天朝程序员的骄傲
+

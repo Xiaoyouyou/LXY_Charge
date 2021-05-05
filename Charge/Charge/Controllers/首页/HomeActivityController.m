@@ -8,7 +8,7 @@
 
 #import "HomeActivityController.h"
 #import "ChargeShareView.h"
-
+#import <WebKit/WebKit.h>
 
 @interface HomeActivityController ()
 
@@ -52,7 +52,7 @@
     
     
     //添加webView
-    UIWebView *webView = [[UIWebView alloc] init];
+    WKWebView *webView = [[WKWebView alloc] init];
     //    webView.delegate = self;
     [self.view addSubview:webView];
     [webView mas_makeConstraints:^(MASConstraintMaker *make) {

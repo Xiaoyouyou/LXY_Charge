@@ -153,7 +153,7 @@
             NSMutableArray *muarray = responseObj[@"result"];
             [self.dataSource removeAllObjects];
             for (NSDictionary *dict in muarray) {
-                ChooseModel *model = [ChooseModel objectWithKeyValues:dict];
+                ChooseModel *model = [ChooseModel yy_modelWithDictionary:dict];
                 [self.dataSource addObject:model];
             }
             [self.tableView reloadData];

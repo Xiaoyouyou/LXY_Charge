@@ -13,7 +13,7 @@
 #import "XFunction.h"
 #import "PilesModel.h"
 #import "Masonry.h"
-
+#import <WebKit/WebKit.h>
 @interface ZhuangWeiMesViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -65,7 +65,7 @@
 -(void)creatUI
 {
     
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight-StatusBarH - 44 - 44)];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight-StatusBarH - 44 - 44)];
 //    webView.delegate = self;
     [self.view addSubview:webView];
     NSString *filePath  = [NSString stringWithFormat:@"%@%@%@",H5BaseURL,@"/list.jsp?stationId=",self.stationID];

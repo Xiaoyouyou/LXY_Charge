@@ -5,10 +5,12 @@
 //  Created by olive on 16/6/3.
 //  Copyright © 2016年 com.XinGuoXin.cn. All rights reserved.
 
+#import <BMKLocationKit/BMKLocationComponent.h>//引入定位功能所有的头文件
+#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入搜索功能头文件
+
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
-#import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入搜索功能头文件
+
 #import "MainViewController.h"
 #import "PersonMessageViewController.h"
 #import "MyWalletViewController.h"
@@ -69,7 +71,7 @@
 
 #define leftWidth (230)
 
-@interface MainViewController ()<QRCodeReaderDelegate,BMKMapViewDelegate,BMKLocationServiceDelegate,CLLocationManagerDelegate,PersonSlideViewDelegate,UIGestureRecognizerDelegate,BMKGeoCodeSearchDelegate,UIScrollViewDelegate>
+@interface MainViewController ()<QRCodeReaderDelegate,CLLocationManagerDelegate,PersonSlideViewDelegate,UIGestureRecognizerDelegate,BMKGeoCodeSearchDelegate,UIScrollViewDelegate,BMKMapViewDelegate,BMKLocationAuthDelegate,BMKLocationManagerDelegate>
 {
     UIButton *bgBtn;
     UIView *chargeingView;//充电状态view
@@ -91,7 +93,11 @@
 @property (strong, nonatomic) IBOutlet UIImageView *refreshImageView;
 //刷新imageView
 @property (strong, nonatomic) BMKMapView *mapview;  //地图
-@property (strong, nonatomic) BMKLocationService *locService;  //定位
+@property (strong, nonatomic) BMKUserLocation *userLocation;  //定位
+
+
+
+@property (strong, nonatomic) BMKLocationManager *locService;  //定位
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) QiPaoBMKPointAnnotation *qiPao;//气泡标注点
 @property (strong, nonatomic) JuDianQiPaoBMKAnnotation *JuDianQiPao;//聚电气泡标注点
@@ -158,7 +164,9 @@
     //开启系统自带的侧滑
      self.navigationController.interactivePopGestureRecognizer.enabled = YES;
      self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    _mapview.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _mapview.delegate = self;
+    _locService.delegate = self;
+    [_mapview viewWillAppear];
     //检测定位
     [self checkDingWei];
 }
@@ -166,64 +174,24 @@
 - (void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
-    _mapview.delegate = nil; // 不用时，置nil
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+    [_mapview viewWillDisappear];
 }
 
 
-#pragma mark - 地图标记点代理方法
-
-- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
-{
-    if ([annotation isKindOfClass:[QiPaoBMKPointAnnotation class]]) {
-        NSString *AnnotationViewID = @"myAnnotation";
-        BMKPinAnnotationView *annotationView = (BMKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
-        if (annotationView == nil) {
-            annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-//            annotationView.annotation = annotation;
-            annotationView.image = [UIImage imageNamed:@"qipaopoint.png"];
-        }
-        return annotationView;
-        
-    }else if ([annotation isKindOfClass:[JuDianQiPaoBMKAnnotation class]])
-    {
-        NSString *AnnotationViewID = @"judianAnnotation";
-        BMKPinAnnotationView *annotationView = (BMKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
-        if (annotationView == nil) {
-            annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-//            annotationView.annotation = annotation;
-            annotationView.image = [UIImage imageNamed:@"judianqipao@2x.png"];
-        }
-        return annotationView;
-    }else
-    {
-        return nil;
-    }
-    return nil;
-}
 
 #pragma mark -- 生命周期方法
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-   
-    
     //请求数据
     [self addActivtDataSource];
-    
-    
     //初始化
     self.qiPaoArray = [NSMutableArray array];
     self.JuDianqiPaoArray = [NSMutableArray array];
     self.totalChargeArray = [NSMutableArray array];
    
-//    [self.navigationController addChildViewController:screen];
-    // Do any additional setup after loading the view from its nib.
-    //初始化地图
+    //  [self.navigationController addChildViewController:screen];
+    //  Do any additional setup after loading the view from its nib.
+    //  初始化地图
     [self initMapView];
     //初始化子控制器
     [self initSubVC];
@@ -245,6 +213,173 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addChooseView) name:AddChooseView object:nil];
 }
+
+
+
+
+
+
+
+
+-(void)initMapView
+{
+//    [[BMKLocationAuth sharedInstance] checkPermisionWithKey:BaiDuMap_appkey authDelegate:self];
+    
+    
+    _mapview = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
+//    _mapview.delegate = self;
+    _mapview.userTrackingMode = BMKUserTrackingModeNone;
+    _mapview.mapType = BMKMapTypeStandard;
+    _mapview.showsUserLocation = YES;
+    _mapview.zoomLevel = 12;//shezhi ditu suofang
+//
+//    _mapview.zoomEnabled = YES;
+//    _mapview.showMapScaleBar=YES;
+    
+//    _mapview.minZoomLevel = 0;
+    [self.bgMapvView addSubview:_mapview];
+    
+    BMKLocationViewDisplayParam* testParam = [[BMKLocationViewDisplayParam alloc] init];
+    testParam.isRotateAngleValid = false;// 跟随态旋转角度是否生效
+    testParam.isAccuracyCircleShow = false;// 精度圈是否显示
+//    testParam.locationViewImgName = @"icon_compass";// 定位图标名称
+//    testParam.locationViewOffsetX = 10;//定位图标偏移量(经度)
+//    testParam.locationViewOffsetY = 0;// 定位图标偏移量(纬度)
+    [_mapview updateLocationViewWithParam:testParam];
+    
+    
+    //初始化实例
+    _locService = [[BMKLocationManager alloc] init];
+    //设置delegate
+    _locService.delegate = self;
+    //设置返回位置的坐标系类型
+    _locService.coordinateType = BMKLocationCoordinateTypeBMK09LL;
+    //设置距离过滤参数
+    _locService.distanceFilter = kCLDistanceFilterNone;
+    //设置预期精度参数
+    _locService.desiredAccuracy = kCLLocationAccuracyBest;
+    //设置应用位置类型
+    _locService.activityType = CLActivityTypeAutomotiveNavigation;
+    //设置是否自动停止位置更新
+    _locService.pausesLocationUpdatesAutomatically = NO;
+    //设置是否允许后台定位
+//    _locService.allowsBackgroundLocationUpdates = YES;
+    //设置位置获取超时时间
+    _locService.locationTimeout = 10;
+    //设置获取地址信息超时时间
+    _locService.reGeocodeTimeout = 10;
+    
+    
+    
+    
+  //  启动LocationService
+    [_locService setLocatingWithReGeocode:YES];
+    [_locService startUpdatingLocation];
+
+   // 初始化检索对象
+    _searcher = [[BMKGeoCodeSearch alloc]init];
+    _searcher.delegate = self;
+}
+
+
+
+
+
+
+
+//
+- (void)mapViewDidFinishLoading:(BMKMapView *)mapView{
+    
+    NSLog(@"地图加载完成");
+    
+}
+
+/**
+*地图绘制出有效数据时调用此接口
+*@param mapView 地图View
+*@param error 错误码
+*/
+- (void)mapViewDidRenderValidData:(BMKMapView *)mapView withError:(NSError *)error{
+    
+    NSLog(@"地图加载失败：%@",error);
+}
+
+/**
+*地图渲染完毕后会调用此接口
+*@param mapView 地图View
+*/
+- (void)mapViewDidFinishRendering:(BMKMapView *)mapView{
+    
+    NSLog(@"地图渲染完成");
+    
+}
+
+
+//
+- (void)BMKLocationManager:(BMKLocationManager * _Nonnull)manager didUpdateLocation:(BMKLocation * _Nullable)location orError:(NSError * _Nullable)error
+
+{
+    if (error)
+    {
+        NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+    } if (location) {//得到定位信息，添加annotation
+            
+                if (location.location) {
+                    NSLog(@"LOC = %@",location.location);
+                }
+                if (location.rgcData) {
+                    NSLog(@"rgc = %@",[location.rgcData description]);
+                }
+                
+                if (location.rgcData.poiList) {
+                    for (BMKLocationPoi * poi in location.rgcData.poiList) {
+                        NSLog(@"poi = %@, %@, %f, %@, %@", poi.name, poi.addr, poi.relaiability, poi.tags, poi.uid);
+                    }
+                }
+                
+                if (location.rgcData.poiRegion) {
+                    NSLog(@"poiregion = %@, %@, %@", location.rgcData.poiRegion.name, location.rgcData.poiRegion.tags, location.rgcData.poiRegion.directionDesc);
+                }
+
+            }
+    if (!self.userLocation) {
+    self.userLocation = [[BMKUserLocation alloc] init];
+    }
+    self.userLocation.location = location.location;
+    
+    BMKCoordinateRegion region;
+    region.center.latitude  = location.location.coordinate.latitude ;
+    region.center.longitude = location.location.coordinate.longitude;
+    NSLog(@"didUpdateUserLocation lat %f,long %f",location.location.coordinate.latitude,location.location.coordinate.longitude);
+  
+    //将定位的点居中显示
+    _mapview.showsUserLocation = YES;//显示定位图层
+    _mapview.zoomLevel = 12;
+    _mapview.region = region;
+    //保存
+    MYLog(@"当前的坐标是: %f,%f",location.location.coordinate.latitude,location.location.coordinate.longitude);
+    self.LocationLatitude = location.location.coordinate.latitude;
+    self.LocationLongitude = location.location.coordinate.longitude;
+    NSLog(@"LocationLatitude = %f,LocationLongitude = %f",self.LocationLatitude,self.LocationLongitude);
+    //保存当前地理位置
+    [Config saveCurrentLocation:self.userLocation];
+    
+    //发起反向地理编码检索
+    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.LocationLatitude, self.LocationLongitude};
+    BMKReverseGeoCodeSearchOption *reverseGeoCodeSearchOption = [[
+                                                                  BMKReverseGeoCodeSearchOption alloc]init];
+    reverseGeoCodeSearchOption.location = pt;
+    BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
+    if(flag)
+    {MYLog(@"反geo检索发送成功");}
+    else
+    {MYLog(@"反geo检索发送失败");}
+    [_mapview updateLocationData:self.userLocation];
+    [_locService stopUpdatingLocation];
+    
+}
+
+
 
 //添加活动图片
 -(void)addActivtView{
@@ -318,6 +453,43 @@
     
 }
 
+
+#pragma mark - 地图标记点代理方法
+
+- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[QiPaoBMKPointAnnotation class]]) {
+        NSString *AnnotationViewID = @"myAnnotation";
+        BMKPinAnnotationView *annotationView = (BMKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+        if (annotationView == nil) {
+            annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+//            annotationView.annotation = annotation;
+            annotationView.image = [UIImage imageNamed:@"qipaopoint.png"];
+        }
+        return annotationView;
+        
+    }else if ([annotation isKindOfClass:[JuDianQiPaoBMKAnnotation class]])
+    {
+        NSString *AnnotationViewID = @"judianAnnotation";
+        BMKPinAnnotationView *annotationView = (BMKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+        if (annotationView == nil) {
+            annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+//            annotationView.annotation = annotation;
+            annotationView.image = [UIImage imageNamed:@"judianqipao@2x.png"];
+        }
+        return annotationView;
+    }else
+    {
+        return nil;
+    }
+    return nil;
+}
+
+
+
+
+
+
 //请求活动数据
 -(void)addActivtDataSource{
     [WMNetWork get:ChargeHomeBannerList parameters:nil success:^(id responseObj) {
@@ -331,7 +503,7 @@
             
             NSArray *dataArray = responseObj[@"data"];
             for (int i = 0; i < dataArray.count; i++) {
-                HomeActivitModel *model = [HomeActivitModel objectWithKeyValues:dataArray[i]];
+                HomeActivitModel *model = [HomeActivitModel yy_modelWithDictionary:dataArray[i]];
                 [self.bannerArray addObject:model];
             }
             
@@ -516,7 +688,7 @@
                     [_JuDianqiPaoArray removeAllObjects];
                 }
     
-                _juDianChargingMess = [JuDianChargeModel objectArrayWithKeyValuesArray:array];
+                _juDianChargingMess = [JuDianChargeModel mj_objectArrayWithKeyValuesArray:array];
                 for (JuDianChargeModel *judiancharPointMes in _juDianChargingMess) {
                     
                     //百度坐标转高德坐标
@@ -558,8 +730,10 @@
                 // 网络访问失败
                 NSLog(@"error=%@",error);
               //  [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self.refreshImageView stopAnimating];
-                self.refreshBtnPro.userInteractionEnabled = YES;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.refreshImageView stopAnimating];
+                    self.refreshBtnPro.userInteractionEnabled = YES;
+                });
             }
         }];
         // 5.每一个任务默认都是挂起的，需要调用 resume 方法
@@ -592,38 +766,6 @@
     }];
 }
 
--(void)initMapView
-{
-    _mapview = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, XYScreenWidth, XYScreenHeight)];
-    _mapview.delegate = self;
-    _mapview.userTrackingMode = BMKUserTrackingModeNone;
-//    _mapview.mapType = BMKMapTypeStandard;
-    _mapview.showsUserLocation = YES;
-//    _mapview.zoomLevel = 12;
-//
-//    _mapview.zoomEnabled = YES;
-//    _mapview.showMapScaleBar=YES;
-    
-//    _mapview.minZoomLevel = 0;
-    [self.bgMapvView addSubview:_mapview];
-    
-    BMKLocationViewDisplayParam* testParam = [[BMKLocationViewDisplayParam alloc] init];
-    testParam.isRotateAngleValid = false;// 跟随态旋转角度是否生效
-    testParam.isAccuracyCircleShow = false;// 精度圈是否显示
-//    testParam.locationViewImgName = @"icon_compass";// 定位图标名称
-//    testParam.locationViewOffsetX = 10;//定位图标偏移量(经度)
-//    testParam.locationViewOffsetY = 0;// 定位图标偏移量(纬度)
-    [_mapview updateLocationViewWithParam:testParam];
-  //  初始化BMKLocationService
-    _locService = [[BMKLocationService alloc]init];
-    _locService.delegate = self;
-  //  启动LocationService
-    [_locService startUserLocationService];
-    
-   // 初始化检索对象
-    _searcher = [[BMKGeoCodeSearch alloc]init];
-    _searcher.delegate = self;
-}
 
 -(void)initSubVC
 {
@@ -780,6 +922,12 @@
         }];
 }
 
+
+
+
+
+
+
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
@@ -803,9 +951,9 @@
     
     //发起反向地理编码检索
     CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.LocationLatitude, self.LocationLongitude};
-    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[
-                                                            BMKReverseGeoCodeOption alloc]init];
-    reverseGeoCodeSearchOption.reverseGeoPoint = pt;
+    BMKReverseGeoCodeSearchOption *reverseGeoCodeSearchOption = [[
+                                                                  BMKReverseGeoCodeSearchOption alloc]init];
+    reverseGeoCodeSearchOption.location = pt;
     BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
     if(flag)
     {MYLog(@"反geo检索发送成功");}
@@ -814,11 +962,13 @@
     [_mapview updateLocationData:userLocation];
 //    NSArray *zoomLevelArr = @[@"2000000"];
 //    [_mapview showAnnotations:zoomLevelArr animated:YES];
-    [_locService stopUserLocationService];
+    [_locService stopUpdatingLocation];
 }
 
 
--(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+
+//百度检索的代理方法
+-(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeSearchResult *)result errorCode:(BMKSearchErrorCode)error{
    
     if (error == BMK_SEARCH_NO_ERROR) {
         _locationCitys = result.addressDetail.city;
@@ -853,7 +1003,7 @@
             
             if([responseObj[@"status"] intValue] == 0) {
                 MYLog(@"加载锚点成功");
-              _chargingMess = [ChargePointMesModel objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
+              _chargingMess = [ChargePointMesModel mj_objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
                 
                     for (ChargePointMesModel *charPointMes in _chargingMess) {
                         _qiPao = [[QiPaoBMKPointAnnotation alloc] init];
@@ -866,7 +1016,7 @@
                         [self.qiPaoArray addObject:_qiPao];
                     }
                     [_mapview setZoomLevel:12];
-//                    [_mapview addAnnotations:self.qiPaoArray];
+                    [_mapview addAnnotations:self.qiPaoArray];
              //   NSLog(@"qiPaoArray = %@",self.qiPaoArray);
                       [self addJuDianCharge];
             }
@@ -943,7 +1093,7 @@
                         //请求数据成功
                         MYLog(@"responseObj = %@",responseObj);
                         
-                        ChargingMessageModel *chargeMes = [ChargingMessageModel objectWithKeyValues:responseObj[@"result"]];
+                        ChargingMessageModel *chargeMes = [ChargingMessageModel yy_modelWithDictionary:responseObj[@"result"]];
                         if (chargeMes.pile_id == NULL && chargeMes.charging_power == NULL && chargeMes.start_time == NULL && chargeMes.charging_status == NULL) {
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                             [Config removeChargePay];//移除总电费
@@ -1102,7 +1252,7 @@
     //检测定位是否开启
     [self checkDingWei];
     //启动LocationService
-    [_locService startUserLocationService];
+    [_locService startUpdatingLocation];
     
 }
 
@@ -1435,7 +1585,7 @@ BOOL btnStatus = YES;
             //请求数据成功
             MYLog(@"responseObj = %@",responseObj);
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            ChargingMessageModel *chargeMes = [ChargingMessageModel objectWithKeyValues:responseObj[@"result"]];
+            ChargingMessageModel *chargeMes = [ChargingMessageModel yy_modelWithDictionary:responseObj[@"result"]];
             MYLog(@"pile_id = %@\n,charging_fee = %@\n,charging_power = %@\n,start_time = %@\n,charging_status = %@\n",chargeMes.pile_id,chargeMes.charging_fee,chargeMes.charging_power,chargeMes.start_time,chargeMes.charging_status);
             
             if (chargeMes.pile_id == NULL && chargeMes.charging_power == NULL && chargeMes.start_time == NULL && chargeMes.charging_status == NULL) {

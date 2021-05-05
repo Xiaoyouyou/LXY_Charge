@@ -59,7 +59,7 @@
 }
 
 //实现PoiSearchDeleage处理回调结果
-- (void)onGetPoiResult:(BMKPoiSearch*)searcher result:(BMKPoiResult*)poiResultList errorCode:(BMKSearchErrorCode)error
+- (void)onGetPoiResult:(BMKPoiSearch*)searcher result:(BMKPOISearchResult*)poiResultList errorCode:(BMKSearchErrorCode)error
 {
     if (error == BMK_SEARCH_NO_ERROR) {
         //在此处理正常结果
@@ -203,8 +203,8 @@
     _poisearch =[[BMKPoiSearch alloc]init];
     _poisearch.delegate = self;
     //发起检索
-    BMKCitySearchOption *option = [[BMKCitySearchOption alloc] init];
-    option.pageCapacity = 12;
+    BMKPOICitySearchOption *option = [[BMKPOICitySearchOption alloc] init];
+    option.pageSize = 12; //pageCapacity
     option.city = @"广州";
     option.keyword = _qiDianTextField.text;
     BOOL flag = [_poisearch poiSearchInCity:option];

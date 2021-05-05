@@ -19,16 +19,16 @@
 #define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 //#define BaseURL @"http://47.107.143.107:80/app/phone/"
-
 //#define BaseURL @"http://192.168.1.101:8082/app/phone/"
-#define BaseURL @"http://47.107.14.253:80/app/phone/"
-#define H5BaseURL @"http://47.107.14.253:80/app/app_h5"
 
 
 
+#define BaseURL @"http://47.107.14.253:80/app/phone/"//47.107.14.253:80 sys2.xgnet.com.cn
+#define H5BaseURL @"http://47.107.14.253:80/app/app_h5"//47.107.14.253:80
 
-//#define H5BaseURL @"http://192.168.1.101:8080/app/app_h5"
-//#define BaseURL @"http://120.77.146.167:88/app/phone/"
+//#define BaseURL @"https://systest.xgnet.com.cn/app/phone/"//
+//#define H5BaseURL @"https://systest.xgnet.com.cn/app/app_h5"//47.107.14.253:80
+
 
 #define RequestURL(string) [NSString stringWithFormat:@"%@%@",BaseURL,string]
 
@@ -111,5 +111,7 @@
 #define ChargeHomeBannerList RequestURL(@"getActivities.action") //首页轮播图
 #define ChargeGETMoney RequestURL(@"getChargeRet.action") //首页轮播图
 
+
+#define UniversalLink @"https://apple.xgnet.com.cn/charge/"
 
 #endif

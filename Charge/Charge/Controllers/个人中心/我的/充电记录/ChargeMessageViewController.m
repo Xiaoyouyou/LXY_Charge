@@ -52,7 +52,7 @@
     [WMNetWork get:ChargeMessageList parameters:paramer success:^(id responseObj) {
        NSMutableArray *array = [NSMutableArray arrayWithArray:responseObj[@"result"]];
         for (NSDictionary *dict in array ) {
-          ChargeMessageModel *model =  [ChargeMessageModel objectWithKeyValues:dict];
+          ChargeMessageModel *model =  [ChargeMessageModel yy_modelWithDictionary:dict];
             [self.dataSource addObject:model];
             [self.table reloadData];
         }

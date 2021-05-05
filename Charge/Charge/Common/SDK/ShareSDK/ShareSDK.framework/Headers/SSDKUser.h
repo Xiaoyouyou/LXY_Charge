@@ -6,7 +6,8 @@
 //  Copyright (c) 2015年 掌淘科技. All rights reserved.
 //
 
-#import <MOBFoundation/MOBFDataModel.h>
+#import <Foundation/Foundation.h>
+
 
 @class SSDKCredential;
 
@@ -32,7 +33,7 @@ typedef NS_ENUM(NSUInteger, SSDKGender)
 /**
  *  用户信息
  */
-@interface SSDKUser : MOBFDataModel
+@interface SSDKUser : SSDKDataModel
 
 /**
  *  平台类型
@@ -60,7 +61,7 @@ typedef NS_ENUM(NSUInteger, SSDKGender)
 @property (nonatomic, copy) NSString *icon;
 
 /**
- *  性别
+ *  性别 男-0 女-1 未知-2
  */
 @property (nonatomic) NSInteger gender;
 
@@ -123,6 +124,11 @@ typedef NS_ENUM(NSUInteger, SSDKGender)
  *  职业信息
  */
 @property (nonatomic, retain) NSArray *works;
+
+/**
+ *  标签
+ */
+@property (strong, nonatomic) NSArray *tags;
 
 /**
  *  原始数据

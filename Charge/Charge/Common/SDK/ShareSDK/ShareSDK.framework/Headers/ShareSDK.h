@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "SSDKRegister.h"
 #import "NSMutableDictionary+SSDKShare.h"
+#import "SSDKDataModel.h"
 #import "SSDKUser.h"
 #import "SSDKCredential.h"
 #import "SSDKSession.h"
@@ -17,6 +17,28 @@
 #import "SSDKContentEntity.h"
 #import "SSDKAuthViewStyle.h"
 #import "NSMutableDictionary+SSDKInit.h" //Deprecated
+#import "SSDKShareVideoModel.h"
+/**
+ 错误码
+ 
+ - 200000: 未知错误
+ - 200100: 未初始化平台
+ - 200101: 参数错误
+ - 200102: 不支持的分享类型
+ - 200103: 尚未设置URL Scheme
+ - 200104: 尚未安装客户端
+ - 200105: 不支持的功能
+ - 200201: SDK集成错误，缺少必要文件
+ - 200204: 授权Token过期
+ - 200205: 用户尚未授权
+ - 200300: 第三方SDK Api返回错误
+ - 200301: 第三方SDK 回调错误
+ - 200302: API请求失败
+ - 200303: try块捕捉到异常
+ - 200500: 权限拒绝
+
+ */
+
 
 /**
  *  ShareSDK APIs
@@ -87,6 +109,17 @@
             parameters:(NSMutableDictionary *)parameters
         onStateChanged:(SSDKShareStateChangedHandler)stateChangedHandler;
 
+/**
+ 以系统分享的样式分享内容(目前该方法为了解决Twitter分享时的授权权限问题)
+ 
+ @param platformType 平台类型
+ @param parameters 分享参数
+ @param stateChangedHandler 状态变更回调处理
+ @return 会话
+ */
++ (SSDKSession *)shareByActivityViewController:(SSDKPlatformType)platformType
+            parameters:(NSMutableDictionary *)parameters
+        onStateChanged:(SSDKShareStateChangedHandler)stateChangedHandler;
 
 #pragma mark - Deprecated
 

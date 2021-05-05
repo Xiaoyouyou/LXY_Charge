@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D84DF946FEDB66DB85A7EE82A973618F"
+               BlueprintIdentifier = "7578477CA77D98D8282C395822C4A93C"
+               BuildableName = "libsqlite3.a"
                BlueprintName = "sqlite3"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libsqlite3.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

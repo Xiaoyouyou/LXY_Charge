@@ -10,10 +10,10 @@
 #import "XFunction.h"
 #import "NavView.h"
 #import "Masonry.h"
+#import <WebKit/WebKit.h>
+@interface AppAgreementViewController ()<WKNavigationDelegate>
 
-@interface AppAgreementViewController ()<UIWebViewDelegate>
-
-@property (nonatomic,strong) UIWebView *webView;
+@property (nonatomic,strong) WKWebView *webView;
 
 @end
 
@@ -50,8 +50,8 @@
 
 -(void)creatUI
 {
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, StatusBarH + 44, XYScreenWidth, XYScreenHeight-64)];
-    _webView.delegate = self;
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, StatusBarH + 44, XYScreenWidth, XYScreenHeight-64)];
+    _webView.navigationDelegate = self;
     [self.view addSubview:_webView];
     
     NSString *filePath  = [[NSBundle mainBundle] pathForResource:@"protocol" ofType:@"html"];

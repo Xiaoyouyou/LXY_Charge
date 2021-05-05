@@ -7,7 +7,6 @@
 //
 
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
 #import "RecommendedViewController.h"
 #import "SearchChargeTableViewCell.h"
 #import "ChargeDetailViewController.h"
@@ -104,7 +103,7 @@
         
         if ([responseObj[@"status"] intValue] == 0) {
             //存数据
-            _chargingMess = [ZhouBianChargeModel objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
+            _chargingMess = [ZhouBianChargeModel mj_objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
             //MYLog(@"_chargingMess = %@",_chargingMess);
             
             //获取保存的经纬度
@@ -121,19 +120,19 @@
                 
             }
             //升序
-            [temparray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                return [obj1 floatValue] > [obj2 floatValue];
+            [temparray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                return [obj1 compare:obj2]; //升序
             }];
             //模型转字典，增加距离数据
             for (int i = 0; i < temparray.count; i++) {
                 
                 ZhouBianChargeModel *listmes = [tempdict objectForKey:temparray[i]];
-                NSMutableDictionary *dicts = listmes.keyValues;
+                NSMutableDictionary *dicts = listmes.mj_keyValues;
                 [dicts setObject:temparray[i] forKey:@"distance"];
                 [modelArray addObject:dicts];
                 
             }
-            _ZhouBianChargeModelArray = [ZhouBianChargeModel objectArrayWithKeyValuesArray:modelArray];
+            _ZhouBianChargeModelArray = [ZhouBianChargeModel mj_objectArrayWithKeyValuesArray:modelArray];
             
             for (ZhouBianChargeModel *zhouBian in _ZhouBianChargeModelArray) {
                 

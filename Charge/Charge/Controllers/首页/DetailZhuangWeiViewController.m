@@ -199,7 +199,7 @@
         Cell.textLabel.textAlignment = NSTextAlignmentCenter;
         Cell.detailTextLabel.numberOfLines = 0;
         NSString *str = _model.feeNote;
-        str = [str stringByReplacingOccurrencesOfString:@"，"withString:@"\n"];
+        str = [str stringByReplacingOccurrencesOfString:@"，" withString:@"\n"];
         NSLog(@"replaceStr=%@",str);
         Cell.detailTextLabel.text = str;
     }

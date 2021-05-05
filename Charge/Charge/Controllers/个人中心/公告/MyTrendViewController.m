@@ -191,7 +191,7 @@
         if ([responseObj[@"status"] intValue] == 0) {
             NSMutableArray *array = [NSMutableArray arrayWithObject:responseObj[@"list"]];
             for (NSDictionary *dict in array[0]) {
-                MyNoticationModel *model = [MyNoticationModel objectWithKeyValues:dict];
+                MyNoticationModel *model = [MyNoticationModel yy_modelWithDictionary:dict];
                 [self.MyTrendDataArray addObject:model];
                 NSLog(@"%@",model.subTitle);
             }

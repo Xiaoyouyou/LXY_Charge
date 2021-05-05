@@ -15,10 +15,10 @@
 @property (nonatomic, strong) NSArray *chargeNumber;//充电站个数
 @property (nonatomic, strong) NSMutableArray *zhuangID;//充电站ID
 
-@property (nonatomic, strong) NSArray *zhuangA;//充电站个数
+//@property (nonatomic, strong) NSArray *zhuangA;//充电站个数
 @property (nonatomic, strong) NSString *stationID;//充电站个数
 
-@property (nonatomic, strong) NSArray *zhzuangB;//充电站个数
+//@property (nonatomic, strong) NSArray *zhzuangB;//充电站个数
 @property(nonatomic, strong)  NSMutableDictionary *dict;//充电桩数量字典
 
 

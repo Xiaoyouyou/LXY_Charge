@@ -72,9 +72,9 @@
                                   @"stationId" :self.id
                                   };
         [WMNetWork get:ChargeCostList parameters:paramer success:^(id responseObj) {
-            NSMutableArray *array = [NSMutableArray objectArrayWithKeyValuesArray:responseObj[@"chargSubList"]];
+            NSMutableArray *array = [NSMutableArray mj_objectArrayWithKeyValuesArray:responseObj[@"chargSubList"]];
             for (NSDictionary *dict in array) {
-                ChargeInfoModel *infoModel = [ChargeInfoModel objectWithKeyValues:dict];
+                ChargeInfoModel *infoModel = [ChargeInfoModel yy_modelWithDictionary:dict];
                 [self.dataSource addObject:infoModel];
                 [self.tableView reloadData];
             }

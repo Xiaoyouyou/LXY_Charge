@@ -292,7 +292,8 @@
         pickView.dataSource = self;
         [pickView setShowsSelectionIndicator:YES];
         [pickView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.and.right.equalTo(self.view);
+            make.left.equalTo(self.view);
+            make.right.equalTo(self.view);
             make.bottom.equalTo(self.view.mas_bottom);
             make.height.mas_equalTo(150);
         }];

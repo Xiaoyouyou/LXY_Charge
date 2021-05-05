@@ -111,7 +111,7 @@ typedef enum{
 {
     int money = self.moneyFild.text.intValue;
     if(money < 50){
-        [MBProgressHUD showSuccess:@"输入金额不能小于50元"];
+//        [MBProgressHUD showSuccess:@"输入金额不能小于50元"];
          self.youhiMoneyText.attributedText = [self straaaaaaa:@"0"];
         self.sureBtn.enabled = NO;
     }else if(![self isPureInt:self.moneyFild.text]){
@@ -577,6 +577,11 @@ typedef enum{
 
 - (IBAction)SureBtnAction:(id)sender {
     
+    
+    
+    
+    
+    
     NSString *tempStr = @"";
     if (self.ChooseMonetyType == 0) {
         tempStr = @"50";
@@ -618,6 +623,9 @@ typedef enum{
 -(void)weChatPayAction:(NSString *)payMoney
 {
         //判断是否安装微信
+    NSString *string = [WXApi getApiVersion];
+    BOOL isapi =   [WXApi isWXAppSupportApi];
+//    BOOL isInstall = [WXApi openWXApp];
         if ([WXApi isWXAppInstalled]) {
             NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
             parmas[@"userId"] = [Config getOwnID];
@@ -652,7 +660,9 @@ typedef enum{
                     req.timeStamp = [dict[@"timestamp"] intValue];
                     req.package = [dict objectForKey:@"package"];
                     req.sign = [dict objectForKey:@"sign"];
-                    [WXApi sendReq:req];
+                    [WXApi sendReq:req completion:^(BOOL success) {
+                        
+                    }];
                     
                 }
             } failure:^(NSError *error) {

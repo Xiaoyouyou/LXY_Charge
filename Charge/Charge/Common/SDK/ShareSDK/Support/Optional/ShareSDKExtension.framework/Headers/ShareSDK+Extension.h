@@ -8,20 +8,26 @@
 
 #import <ShareSDK/ShareSDK.h>
 #import "SSETypeDefine.h"
+#import <ShareSDKExtension/SSERestoreSceneHeader.h>
 
 /**
- *  ShareSDK扩展类目
+ * ShareSDK扩展类目
  */
 @interface ShareSDK (Extension)
 
 /**
- *  是否安装客户端（支持平台：微博、微信、QQ、QZone、Facebook）
+ *  是否安装客户端（支持平台：微博、微信、QQ、QZone、Facebook、FBMessage、抖音、Twitter、AliSocial、instagram、whatsapp、Line、pinterest、kakao、kakaoStory、易信、钉钉、美拍、youube、telegram、VKontakte、Pocket）
  *
  *  @param platformType 平台类型
  *
  *  @return YES 已安装，NO 尚未安装
  */
 + (BOOL)isClientInstalled:(SSDKPlatformType)platformType;
+
+
+/// openurl的方式打开APP
+/// @param platformType 平台类型
++ (void)openAppUrl:(SSDKPlatformType)platformType;
 
 /**
  *  获取当前授权用户
@@ -71,7 +77,7 @@
  *  @param stateChangedHandler 状态变更回调处理
  */
 + (void)getFriends:(SSDKPlatformType)platformType
-            cursor:(NSUInteger)cursor
+            cursor:(NSInteger)cursor
               size:(NSUInteger)size
     onStateChanged:(SSDKGetFriendsStateChangedHandler)stateChangedHandler;
 
@@ -97,4 +103,30 @@
  onStateChanged:(SSDKCallApiStateChangedHandler)stateChangedHandler;
 
 
+
+
+/**
+ 场景还原功能
+
+ @param delegate 场景还原设置代理
+ */
++ (void)setRestoreSceneDelegate:(id<ISSERestoreSceneDelegate>)delegate;
+
+/**
+ *  口令分享功能
+ *
+ *  @param paramters 口令分享参数
+ *  @param completeHandler 完成回调处理
+ */
++ (void)getCommandText:(NSDictionary *_Nullable)paramters withComplete:(void (^_Nullable) (NSString * _Nullable text, NSError *_Nullable error, void (^ _Nullable complete)(NSString * _Nullable text)))completeHandler;
+
+/**
+ 视频分享功能
+ @param videoUrl 视频网络地址
+ @param model 参数模型
+ @param completeHandler 回调
+ */
+
+/// 务必先把视频下载到本地，再进行分享！！！
++ (void)shareVideoWithUrl:(NSURL *_Nullable)videoUrl model:(SSDKShareVideoModel *)model withComplete:(void (^_Nullable)(BOOL success, NSError *_Nullable error))completeHandler;
 @end

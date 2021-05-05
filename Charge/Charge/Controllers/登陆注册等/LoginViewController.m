@@ -369,7 +369,7 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
         req.scope = @"snsapi_userinfo";
         req.state =@"APP";
         
-        [WXApi sendReq:req];
+        [WXApi sendReq:req completion:nil];
         
         //微信第三方登陆回调
         AppDelegate *appDels = [UIApplication sharedApplication].delegate;
@@ -564,7 +564,7 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
       NSMutableDictionary *dict = responseObj[@"result"];
       MYLog(@"dict[id] = %@",dict[@"id"]);
       
-       loginModel *userInfo = [loginModel objectWithKeyValues:responseObj[@"result"]];
+       loginModel *userInfo = [loginModel yy_modelWithDictionary:responseObj[@"result"]];
        [Config saveOwnID:userInfo.id];//保存用户id
        [Config saveOwnAccount:account.text];
        [Config saveUseName:userInfo.nick];
@@ -574,7 +574,7 @@ NSString *const ExpirationDate = @"expirationDate";//QQ登陆expirationDate
        [Config saveUserInviteCode:userInfo.inviteCode];
       
        //加载个人信息缓存模型
-       PersonMessage  *per = [PersonMessage objectWithKeyValues:responseObj[@"result"]];
+       PersonMessage  *per = [PersonMessage yy_modelWithDictionary:responseObj[@"result"]];
        //保存用户缓存信息
        [self saveDataWithSex:per.sex andAge:per.age andNick:per.nick andMobile:per.mobile andAvatar:per.avatar andSignature:per.signature];
       

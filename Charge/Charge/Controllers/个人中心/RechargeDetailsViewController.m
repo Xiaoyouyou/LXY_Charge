@@ -60,7 +60,7 @@ typedef enum {
         
         [WMNetWork post:BalanceDetailList parameters:paramers success:^(id responseObj) {
             if ([responseObj[@"status"] intValue] == 0) {
-                NSMutableArray *tempArray = [UserBalanceModel objectArrayWithKeyValuesArray:responseObj[@"result"]];
+                NSMutableArray *tempArray = [UserBalanceModel mj_objectArrayWithKeyValuesArray:responseObj[@"result"]];
                 MYLog(@"tempArray = %@",tempArray);
                 for (int i = 0; i<tempArray.count; i++) {
                     MYLog(@"%@",tempArray[i]);
@@ -147,7 +147,7 @@ typedef enum {
         });
         
         if ([responseObj[@"status"] intValue] == 0 ) {
-            _dataArray = [UserBalanceModel objectArrayWithKeyValuesArray:responseObj[@"result"]];
+            _dataArray = [UserBalanceModel mj_objectArrayWithKeyValuesArray:responseObj[@"result"]];
             
             if (_dataArray.count == 0) {
                 MYLog(@"没有明细消费记录");

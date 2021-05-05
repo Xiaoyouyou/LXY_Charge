@@ -9,6 +9,7 @@
 #import "OpenChangeViewController.h"
 #import "ChargeingsViewController.h"
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>//引入搜索功能头文件
+#import <BMKLocationkit/BMKLocationComponent.h>
 #import "XFunction.h"
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+MJ.h"
@@ -24,7 +25,7 @@
 #define OUTP_TIME 70
 #define Check_OUTP_TIME 10
 
-@interface OpenChangeViewController ()<BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
+@interface OpenChangeViewController ()<BMKGeoCodeSearchDelegate,BMKGeoCodeSearchDelegate,BMKLocationManagerDelegate>
 {
     int time;//计时
     int checkTime;//检测超时
@@ -41,7 +42,7 @@
 }
 
 //地图相关
-@property (strong,nonatomic) BMKLocationService *locService;
+@property (strong,nonatomic) BMKLocationManager *locService;
 @property (nonatomic, strong) BMKGeoCodeSearch *searcher;//初始化检索对象
 
 @property (strong, nonatomic) IBOutlet UIView *containView;
@@ -199,10 +200,10 @@
     //初始化状态
     self.isUpdateLocation = 1;//加载1次位置更新的置位
     //初始化百度地图定位
-    _locService = [[BMKLocationService alloc] init];
+    _locService = [[BMKLocationManager alloc] init];
     _locService.delegate = self;
     //启动locationService
-    [_locService startUserLocationService];
+    [_locService startUpdatingLocation];
     //初始化检索对象
     _searcher = [[BMKGeoCodeSearch alloc]init];
     _searcher.delegate = self;
@@ -558,7 +559,7 @@
 
 #pragma mark - 百度地图位置更新代理方法
 
--(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+-(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeSearchResult *)result errorCode:(BMKSearchErrorCode)error{
     if (error == BMK_SEARCH_NO_ERROR) {
         
 //      MYLog(@"result = %@",result.addressDetail.city);
@@ -591,9 +592,9 @@
     
     //发起反向地理编码检索
     CLLocationCoordinate2D pt = (CLLocationCoordinate2D){[self.latitude doubleValue], [self.longitude doubleValue]};
-    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[
-                                                            BMKReverseGeoCodeOption alloc]init];
-    reverseGeoCodeSearchOption.reverseGeoPoint = pt;
+    BMKReverseGeoCodeSearchOption *reverseGeoCodeSearchOption = [[
+                                                                  BMKReverseGeoCodeSearchOption alloc]init];
+    reverseGeoCodeSearchOption.location = pt;
     BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
     if(flag)
     {
@@ -604,7 +605,7 @@
         MYLog(@"反geo检索发送失败");
     }
 
-    [_locService stopUserLocationService];
+    [_locService stopUpdatingLocation];
 }
 
 //上传经纬度方法

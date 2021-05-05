@@ -58,7 +58,7 @@
        
         if ([responseObj[@"status"] isEqualToString:@"0"]) {
             [self.tableView.mj_header endRefreshing];
-            NSMutableArray *muarr = [NSMutableArray objectArrayWithKeyValuesArray:responseObj[@"result"]];
+            NSMutableArray *muarr = [NSMutableArray arrayWithArray:responseObj[@"result"]];
             if (muarr.count == 0) {
                 //初始化nav
                 [self addNavigationBar:YES];
@@ -66,7 +66,7 @@
                 [self.dataSource removeAllObjects];
                 [self addNavigationBar:NO];
                 for (NSDictionary *dict in muarr ) {
-                    MyCarListModel *carListModel = [MyCarListModel objectWithKeyValues:dict];
+                    MyCarListModel *carListModel = [MyCarListModel yy_modelWithDictionary:dict];
                     [self.dataSource addObject:carListModel];
                 }
                 [self.tableView reloadData];
@@ -134,7 +134,7 @@
     tableView.rowHeight = 110;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //    [tableView registerNib:[UINib nibWithNibName:@"MyCarTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MyCarCell"];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         // 进入刷新状态后会自动调用这个block

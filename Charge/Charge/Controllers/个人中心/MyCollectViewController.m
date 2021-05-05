@@ -8,7 +8,7 @@
 
 #import "MyCollectViewController.h"
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
+#import <BMKLocationkit/BMKLocationComponent.h>//引入定位功能所有的头文件
 #import "MyCollectTableViewCell.h"
 #import "ChargeDetailViewController.h"
 #import "MBProgressHUD+MJ.h"
@@ -36,7 +36,7 @@
 
 @property (nonatomic, assign) BOOL isUpdateLocation;//是否更新地理位置
 //地图相关
-@property (strong,nonatomic) BMKLocationService *locService;
+@property (strong,nonatomic) BMKLocationManager *locService;
 
 @property (nonatomic, strong) NSMutableArray *distanceArray;//距离数组
 @property (nonatomic, strong) NSMutableArray *ChargeIdArray;//充电站id数组
@@ -89,7 +89,7 @@
         self.isUpdateLocation =0;
     }
     
-    [_locService stopUserLocationService];
+    [_locService stopUpdatingLocation];
 }
 
 
@@ -199,7 +199,7 @@
         
      //   MYLog(@"collect responseObj = %@",responseObj);
         if ([responseObj[@"status"] intValue] == 0) {
-            _dataArray = [UseCollectChargeModel objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
+            _dataArray = [UseCollectChargeModel mj_objectArrayWithKeyValuesArray:[responseObj objectForKey:@"result"]];
             //  MYLog(@"_dataArray = %@",_dataArray);
             
             if (_dataArray.count == 0) {

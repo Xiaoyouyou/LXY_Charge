@@ -412,7 +412,7 @@ typedef enum{
                     req.timeStamp = [dict[@"timestamp"] intValue];
                     req.package = [dict objectForKey:@"package"];
                     req.sign = [dict objectForKey:@"sign"];
-                    [WXApi sendReq:req];
+                    [WXApi sendReq:req completion:nil];
                     
                 }
             } failure:^(NSError *error) {

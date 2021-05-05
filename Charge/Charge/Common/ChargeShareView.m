@@ -141,7 +141,7 @@
 //}
 
 
--(void)shareRequestWithType:(NSInteger)type{
+-(void)shareRequestWithType:(SSDKPlatformType)type{
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     //通用参数设置
